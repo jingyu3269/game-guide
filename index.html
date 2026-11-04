@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>精品手游攻略站 - 海量攻略 · 客服直达</title>
+<meta name="description" content="精品手游攻略站：桃园将帅录、小小屠龙·冰雪复古、精灵永恒热门攻略与开服资讯，关键字一键搜索，加客服领下载链接与专属礼包。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%233DB8A0'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='14' font-weight='bold' fill='white' font-family='sans-serif'%3E游%3C/text%3E%3C/svg%3E">
 <style>
 /* ========== 基础与色板 ========== */
@@ -178,6 +179,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 
 /* ========== 通用区块 ========== */
 .section{padding:50px 20px}
+#games,#articles,#service{scroll-margin-top:64px}
 .section-title{text-align:center;margin-bottom:28px}
 .section-title .tag{
   display:inline-block;
@@ -284,11 +286,13 @@ button{font-family:inherit;cursor:pointer;border:none}
 
 /* ========== 客服福利区 ========== */
 .service{
-  background:linear-gradient(135deg,rgba(42,154,131,.35) 0%,rgba(31,107,88,.45) 100%);
+  background:linear-gradient(135deg,rgba(26,110,92,.62) 0%,rgba(18,78,63,.72) 100%);
   color:#fff;
   padding:50px 20px;
   text-align:center;
+  text-shadow:0 1px 6px rgba(0,0,0,.22);
 }
+.service .benefit{background:rgba(255,255,255,.14)}
 .service h2{
   font-size:26px;font-weight:900;margin-bottom:10px;
 }
@@ -359,7 +363,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 
 /* ========== 攻略搜索区 ========== */
 .search-box{
-  max-width:500px;margin:0 auto 28px;
+  max-width:500px;margin:0 auto 14px;
   position:relative;
 }
 .search-box input{
@@ -377,6 +381,34 @@ button{font-family:inherit;cursor:pointer;border:none}
   position:absolute;left:16px;top:50%;transform:translateY(-50%);
   width:18px;height:18px;color:var(--green);
 }
+.search-filters{
+  max-width:500px;margin:0 auto 12px;
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+}
+.filter-chip{
+  padding:6px 14px;border-radius:16px;
+  font-size:13px;font-weight:600;
+  background:rgba(255,255,255,.85);
+  border:1.5px solid var(--line);
+  color:var(--ink-soft);
+  transition:all .15s;
+}
+.filter-chip.active{
+  background:var(--green);border-color:var(--green);color:#fff;
+  box-shadow:0 2px 8px rgba(61,184,160,.35);
+}
+.filter-chip:active{transform:scale(.95)}
+.search-meta{
+  max-width:500px;margin:0 auto 18px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;color:var(--ink-soft);
+  padding:0 10px;
+}
+.search-clear{
+  font-size:12px;color:var(--red);
+  background:none;border:none;padding:2px 6px;
+}
+.search-clear:hover{text-decoration:underline}
 .article-list{
   max-width:760px;margin:0 auto;
   display:flex;flex-direction:column;gap:12px;
@@ -389,20 +421,115 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 .article-card.tulong{border-left-color:var(--orange-deep)}
 .article-card.jingling{border-left-color:#9B59B6}
+.article-top{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px;
+}
 .article-tag{
   display:inline-block;font-size:11px;font-weight:700;
-  padding:2px 8px;border-radius:8px;margin-bottom:6px;
+  padding:2px 8px;border-radius:8px;
 }
 .article-card .article-tag{background:var(--green-soft);color:var(--green-deep)}
 .article-card.tulong .article-tag{background:#FFF0D6;color:var(--orange-deep)}
 .article-card.jingling .article-tag{background:#F3E8FA;color:#9B59B6}
+.article-game{font-size:11px;color:#A8A29A}
 .article-title{font-size:15px;font-weight:700;margin-bottom:6px}
 .article-summary{font-size:13px;color:var(--ink-soft);line-height:1.6}
 .article-date{font-size:11px;color:#aaa;margin-top:8px}
+
+/* 展开全文 */
+.article-full{display:none}
+.article-card.open .article-full{
+  display:block;
+  animation:fullIn .26s ease both;
+}
+@keyframes fullIn{
+  from{opacity:0;transform:translateY(-4px)}
+  to{opacity:1;transform:none}
+}
+.article-full > .article-full-inner{overflow:hidden}
+.article-full h4{
+  font-size:13px;font-weight:800;color:var(--ink);
+  margin:14px 0 4px;padding-left:9px;position:relative;
+}
+.article-full h4::before{
+  content:"";position:absolute;left:0;top:4px;bottom:4px;
+  width:3px;border-radius:2px;background:var(--green);
+}
+.article-card.tulong .article-full h4::before{background:var(--orange-deep)}
+.article-card.jingling .article-full h4::before{background:#9B59B6}
+.article-full p{
+  font-size:13px;color:var(--ink-soft);
+  line-height:1.8;margin-bottom:2px;
+}
+.article-src{
+  font-size:11px;color:#B0AAA2;margin-top:12px;
+  padding-top:8px;border-top:1px dashed rgba(0,0,0,.06);
+}
+.article-src a{color:var(--green-deep);text-decoration:none}
+
+/* 相关攻略 */
+.article-related{
+  margin-top:12px;padding-top:10px;
+  border-top:1px dashed rgba(0,0,0,.08);
+  display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;
+}
+.rel-label{
+  font-size:11px;font-weight:700;color:#B0AAA2;letter-spacing:.5px;
+}
+.rel-link{
+  font-size:12px;color:var(--green-deep);
+  background:rgba(61,184,160,.09);
+  padding:3px 9px;border-radius:10px;
+  cursor:pointer;transition:background .15s;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.rel-link:hover{background:rgba(61,184,160,.18)}
+.article-card.tulong .rel-link{color:var(--orange-deep);background:rgba(240,154,46,.1)}
+.article-card.tulong .rel-link:hover{background:rgba(240,154,46,.2)}
+.article-card.jingling .rel-link{color:#9B59B6;background:rgba(155,89,182,.1)}
+.article-card.jingling .rel-link:hover{background:rgba(155,89,182,.2)}
+
+/* 跳转定位高亮 */
+.article-card.flash{
+  animation:cardFlash 1.8s ease;
+}
+@keyframes cardFlash{
+  0%,100%{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  20%,60%{box-shadow:0 0 0 3px rgba(255,181,71,.55),0 6px 20px rgba(240,154,46,.25)}
+}
+.article-toggle{
+  margin-top:10px;background:none;border:none;padding:0;
+  font-size:12px;font-weight:700;color:var(--green-deep);
+  display:inline-flex;align-items:center;gap:4px;
+}
+.article-card.tulong .article-toggle{color:var(--orange-deep)}
+.article-card.jingling .article-toggle{color:#9B59B6}
+.article-toggle .arrow{transition:transform .3s;display:inline-block}
+.article-card.open .article-toggle .arrow{transform:rotate(180deg)}
+mark{
+  background:linear-gradient(transparent 55%,rgba(255,181,71,.6) 55%);
+  color:inherit;padding:0;
+}
 .no-result{
   text-align:center;padding:40px;color:var(--ink-soft);font-size:14px;
   display:none;
 }
+
+/* ========== 回到顶部 ========== */
+.back-top{
+  position:fixed;right:18px;bottom:100px;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--ink);color:#fff;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s,transform .2s;
+  z-index:90;box-shadow:0 4px 14px rgba(0,0,0,.25);
+}
+.back-top.show{opacity:.92;pointer-events:auto}
+.back-top:active{transform:scale(.92)}
+
+/* ========== 移动端吸底客服条 ========== */
+.mobile-cta{display:none}
 
 /* ========== 桌面适配 ========== */
 @media (min-width:768px){
@@ -414,6 +541,38 @@ button{font-family:inherit;cursor:pointer;border:none}
   .section-title h2{font-size:32px}
   .game-grid{grid-template-columns:repeat(3,1fr);max-width:960px}
   .service-benefits{grid-template-columns:repeat(2,1fr);max-width:600px}
+}
+
+/* ========== 移动端专属 ========== */
+@media (max-width:767px){
+  .mobile-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:95;
+    display:flex;gap:10px;align-items:center;
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(255,246,233,.96);
+    backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);
+    transition:transform .3s;
+  }
+  .mobile-cta.hide{transform:translateY(110%)}
+  .mobile-cta .cta-text{flex:1;font-size:13px;color:var(--ink);line-height:1.4}
+  .mobile-cta .cta-text b{color:var(--red)}
+  .mobile-cta .cta-btn{
+    background:var(--red);color:#fff;
+    padding:10px 18px;border-radius:22px;
+    font-size:14px;font-weight:700;
+    box-shadow:0 2px 10px rgba(242,92,84,.35);
+  }
+  .mobile-cta .cta-btn:active{transform:scale(.95)}
+  body{padding-bottom:62px}
+  .back-top{bottom:82px}
+  .toast{bottom:96px}
+}
+
+/* ========== 动效减负（系统开启减弱动态效果时） ========== */
+@media (prefers-reduced-motion:reduce){
+  .petal,.sway{animation:none}
+  .petal-container{display:none}
 }
 </style>
 </head>
@@ -441,7 +600,7 @@ button{font-family:inherit;cursor:pointer;border:none}
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
       复制客服微信
     </button>
-    <button class="btn-ghost" onclick="document.getElementById('games').scrollIntoView()">浏览游戏</button>
+    <button class="btn-ghost" onclick="document.getElementById('articles').scrollIntoView()">搜攻略</button>
   </div>
 </header>
 
@@ -457,7 +616,7 @@ button{font-family:inherit;cursor:pointer;border:none}
     <!-- 桃园将帅录 -->
     <div class="game-card">
       <div class="game-cover">
-        <img src="assets/taoyuan.png" alt="桃园将帅录">
+        <img src="assets/taoyuan.png" alt="桃园将帅录" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">桃园将帅录</div>
@@ -480,7 +639,7 @@ button{font-family:inherit;cursor:pointer;border:none}
     <!-- 小小屠龙·冰雪复古 -->
     <div class="game-card">
       <div class="game-cover">
-        <img src="assets/legend.png" alt="小小屠龙·冰雪复古">
+        <img src="assets/legend.png" alt="小小屠龙·冰雪复古" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">小小屠龙·冰雪复古</div>
@@ -503,7 +662,7 @@ button{font-family:inherit;cursor:pointer;border:none}
     <!-- 精灵永恒 -->
     <div class="game-card">
       <div class="game-cover">
-        <img src="assets/jingling.jpg" alt="精灵永恒">
+        <img src="assets/jingling.jpg" alt="精灵永恒" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">精灵永恒</div>
@@ -531,18 +690,28 @@ button{font-family:inherit;cursor:pointer;border:none}
   <div class="section-title">
     <div class="tag">攻略大全</div>
     <h2>热门攻略文章</h2>
-    <p>输入关键字快速查找你需要的攻略</p>
+    <p>输入关键字搜全文，点「展开全文」直接看完整攻略</p>
   </div>
   <div class="search-box">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="搜索攻略，如：转生、升级、圣物、攻城..." oninput="filterArticles()">
+    <input type="search" id="searchInput" placeholder="搜索攻略，如：转生、升级、圣物、攻城..." oninput="debouncedFilter()">
+  </div>
+  <div class="search-filters" id="searchFilters">
+    <button class="filter-chip active" data-game="" onclick="setGameFilter(this)">全部</button>
+    <button class="filter-chip" data-game="桃园将帅录" onclick="setGameFilter(this)">桃园将帅录</button>
+    <button class="filter-chip" data-game="小小屠龙" onclick="setGameFilter(this)">小小屠龙</button>
+    <button class="filter-chip" data-game="精灵永恒" onclick="setGameFilter(this)">精灵永恒</button>
+  </div>
+  <div class="search-meta">
+    <span id="resultCount"></span>
+    <button class="search-clear" id="clearBtn" style="display:none" onclick="clearSearch()">清空搜索 ✕</button>
   </div>
   <div class="article-list" id="articleList"></div>
   <div class="no-result" id="noResult">没有找到相关攻略，试试其他关键词</div>
 </section>
 
 <!-- ===== 客服福利区 ===== -->
-<section class="service">
+<section class="service" id="service">
   <h2>加客服 · 领专属福利</h2>
   <p>下载链接、新手攻略、专属礼包、充值折扣，客服一对一服务</p>
 
@@ -571,6 +740,15 @@ button{font-family:inherit;cursor:pointer;border:none}
 
 <!-- 花瓣飘落容器 -->
 <div class="petal-container" id="petalContainer"></div>
+
+<!-- 回到顶部 -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+
+<!-- 移动端吸底客服条 -->
+<div class="mobile-cta" id="mobileCta">
+  <div class="cta-text">领下载链接 · 专属礼包<br><b>客服微信：LYLOVEZLL1314999</b></div>
+  <button class="cta-btn" onclick="copyWechat()">复制微信</button>
+</div>
 
 <!-- Toast -->
 <div class="toast" id="toast">微信号已复制</div>
@@ -633,48 +811,405 @@ function showToast(msg){
 })();
 
 // ===== 攻略文章数据 =====
+// full: 展开全文的分节内容；src: 来源（公众号原文）
 var ARTICLES = [
-  {game:'桃园将帅录', tag:'桃园', title:'开服公告：10月28日10点全服上线', summary:'三端互通安卓/iOS/PC同账号同步，新手养成资源返还，阵容随便试不浪费。', date:'2026-10-27'},
-  {game:'桃园将帅录', tag:'桃园', title:'赛季沙盘大地图，联盟攻城完整流程', summary:'赛季重置机制讲解，联盟攻占都城全过程，感受沙盘策略博弈的乐趣。', date:'2026-10-23'},
-  {game:'桃园将帅录', tag:'桃园', title:'日常任务玩法全梳理，每天不瞎忙', summary:'跟着主线走，日常任务高效完成，体力分配优先级，每天10分钟清完日常。', date:'2026-10-27'},
-  {game:'桃园将帅录', tag:'桃园', title:'ATB时序战斗详解：速度决定一切', summary:'真策略不挂机，谁先出手、谁打断全看速度条，合理搭配阵容打出连招。', date:'2026-10-28'},
-  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'升级攻略：最快速度冲级转生', summary:'主线任务一路推到底，土城激情泡点别停，前期最效率的升级路线。', date:'2026-10-22'},
-  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'转生攻略：转生转不对打宝全白费', summary:'转生决定你能进哪张图、能爆什么装备，转生等级和地图掉落对应关系。', date:'2026-11-02'},
-  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'新手开荒先学会"省"，零氪也能发育', summary:'省经验卷留关键等级用，省材料别乱合，省金币摆摊时用，四件事做到稳发育。', date:'2026-10-30'},
-  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'打金规则：装备不过商城，散人天堂', summary:'毕业装只能野外掉落，屠龙刀全靠打，自由交易无门槛，打金变现路线。', date:'2026-11-03'},
-  {game:'精灵永恒', tag:'精灵', title:'新手入门避坑指南，少走弯路', summary:'经济曲线跟随服务器进度，开荒期基础材料最值钱，别乱花前期资源。', date:'2026-10-22'},
-  {game:'精灵永恒', tag:'精灵', title:'前期升级全攻略：光速度过开荒期', summary:'1-30级主线无脑冲，30级后解锁副本和日常，升级节奏与等级压制关系。', date:'2026-10-22'},
-  {game:'精灵永恒', tag:'精灵', title:'战斗进阶：精灵切换+技能把控', summary:'战斗不是站桩输出，配队站位很重要，切换精灵打连招，技能释放时机。', date:'2026-10-21'},
-  {game:'精灵永恒', tag:'精灵', title:'第二赛季圣物系统解锁，战力飞跃', summary:'圣物系统全新上线，圣物获取途径与养成路线，战力大幅提升方法。', date:'2026-10-23'}
+  // ---------- 桃园将帅录 ----------
+  {game:'桃园将帅录', tag:'桃园', title:'开服公告：10月28日10点全服上线', date:'2026-10-27',
+   summary:'三端互通安卓/iOS/PC同账号同步，新手养成资源返还，阵容随便试不浪费。',
+   full:[
+     {h:'开服信息与福利', p:'10 月 28 日 10 点全服开服，预约奖励、七日签到、新手商店和礼包可以一次性领完，白嫖到的求贤令、桃子、突破石是开区前几天最值钱的东西。'},
+     {h:'三端互通，一个账号三处玩', p:'安卓、iOS、PC 三端同账号数据同步。通勤用手机推主线，回家开电脑打团本，进度不用重新追，也不用担心换设备重开号。'},
+     {h:'云职业体系：10 级一转、40 级进阶', p:'转职后等级不清零，已学技能永久保留。前期方向选错完全不用慌，副本打法和竞技场打法可以随时切换专精，试错成本极低。'},
+     {h:'开服首日流程', p:'跟着主线走到 10 级做转职任务，接着打完桃坞小苑副本解锁将军令（将星卡牌），然后刷武将列传拿免费武将卡。首日目标不是等级多高，而是把将星、阵法、将军令这几个系统先开出来。'},
+     {h:'首日最容易踩的坑', p:'野外挂机只会掉装备材料，不给角色经验，别一上线就去野外刷怪；过渡装备不要砸锻造材料，留着等紫装再说。'}
+   ]},
+  {game:'桃园将帅录', tag:'桃园', title:'赛季沙盘大地图，联盟攻城完整流程', date:'2026-10-23',
+   summary:'赛季重置机制讲解，联盟攻占都城全过程，感受沙盘策略博弈的乐趣。',
+   full:[
+     {h:'赛季玩法定位', p:'赛季是独立周期的玩法，包含赛季副本、沙盘攻城、赛季资源兑换几块。赛季资源有期限，到期作废，所以每个赛季都要按时把兑换额度用完。'},
+     {h:'沙盘大地图怎么运作', p:'大地图上分布城池与要道，联盟按周期宣战、集结、攻坚。谁在赛季结束前占住都城，谁就拿下这一赛季的归属权。'},
+     {h:'攻城完整流程', p:'宣战 → 集结兵力 → 破城门 → 占内城 → 守城到结算。每一步都卡时间点，指挥要提前统一开团时间，散人别单枪匹马往里冲，掉队就是白给。'},
+     {h:'阵容与分工', p:'前排带甲虎卫/禁卫扛伤拉仇恨，控弦和策士在后排输出，学士负责续航。集火目标由指挥统一标记，否则伤害分散连城门都打不动。'},
+     {h:'赛季结算与贡献', p:'赛季结束按联盟占领情况和个人贡献发奖励，贡献越高拿得越多。想拿满奖励就不能只挂机，集结、守城、拆建筑都要参与。'},
+     {h:'账号养成与赛季的配合', p:'赛季前把主力将星和主力装备堆起来，赛季里再靠赛季资源换突破材料补短板。开赛初期的资源兑换优先级最高，别等到赛季末才发现额度没用完。'}
+   ]},
+  {game:'桃园将帅录', tag:'桃园', title:'日常任务玩法全梳理，每天不瞎忙', date:'2026-10-27',
+   summary:'跟着主线走，日常任务高效完成，体力分配优先级，每天10分钟清完日常。',
+   full:[
+     {h:'上线第一件事：推主线', p:'主线是等级的主要来源，还会逐个解锁将星列传、日常副本、赛季玩法。主线卡住了再去清日常，别一上线就埋头刷本，系统没开等于白刷。'},
+     {h:'日常三件套', p:'官府悬赏、天行道、将星列传。前两个给活跃度奖励，活跃度是将星材料和突破石的稳定来源，每天尽量拉满；将星列传稳定出桃园四将碎片，是长期核心。'},
+     {h:'体力怎么花', p:'优先给装备副本和材料本，剩余体力再补主线进度。临近下线前把体力清空，别让它溢出，前期每一份材料都很紧张。'},
+     {h:'30 分钟日常节奏', p:'整套日常大约半小时：先领福利和签到，再清悬赏与天行道，然后刷将星列传，最后处理赛季副本和竞技场。顺序固定下来，每天不用想。'},
+     {h:'容易被忽略的白嫖点', p:'七日签到、开服福利、新手商店、每日活动都要点一遍，求贤令和桃子基本靠这些白嫖，抽卡的钱省下来就是优势。'}
+   ]},
+  {game:'桃园将帅录', tag:'桃园', title:'ATB时序战斗详解：速度决定一切', date:'2026-10-28',
+   summary:'真策略不挂机，谁先出手、谁打断全看速度条，合理搭配阵容打出连招。',
+   full:[
+     {h:'ATB 行动条怎么运作', p:'这不是传统轮流回合，而是时序行动条，速度决定行动条推进快慢。速度快的一轮能动两次，速度慢的可能刚出手就被打断。'},
+     {h:'五行克制是最容易忽略的加成', p:'金木水火土相生相克贯穿所有战斗，克制目标伤害会明显提升。卡关打不动 BOSS，第一件事不是加战力，而是核对双方五行属性再调阵容。'},
+     {h:'能量与技能释放', p:'技能要攒能量再放，不要空放大招。等敌方关键技能读条、或者己方需要爆发/抬血的瞬间再交，收益差好几倍。'},
+     {h:'阵眼机制', p:'高难副本有阵眼，阵眼被击破全队吃高额负面效果。打副本要优先保护阵眼，输出别一味往前冲。'},
+     {h:'三套阵法覆盖所有场景', p:'鱼鳞阵均衡增益，日常推图万能；方圆阵偏防守续航，打高难 BOSS 切过去；雁行阵全队提速，竞技场抢先手专用。前期资源有限，先把这三套升起来就够。'},
+     {h:'什么时候该手动', p:'日常推图可以全自动，遇到卡关 BOSS 一定要手动：调整出手顺序、换阵法、换五行克制的将星，很多关卡手动一次就过了。'}
+   ]},
+
+  // ---------- 小小屠龙·冰雪复古 ----------
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'升级攻略：最快速度冲级转生', date:'2026-10-22',
+   summary:'主线任务一路推到底，土城激情泡点别停，前期最效率的升级路线。',
+   full:[
+     {h:'主线 + 泡点，两条腿走路', p:'主线给的经验和基础套装足够撑过前期，卡级就回土城激情泡点。泡点有双倍、三倍经验，安全区内不会被攻击也不扣点卡，吃饭睡觉挂着就行。'},
+     {h:'30 级前别越级', p:'怪高你 10 级基本等于送人头，药水烧光、装备还爆不出来。想快就老实刷冰封平原、冰封矿洞、冰之雪崖这类低伤害高密度点位。'},
+     {h:'技能先点满一个主力', p:'战士优先横扫斩，法师优先火墙和冰咆哮，道士优先灵魂火符加神兽。其余技能后期慢慢补，前期摊平加点等于全都不强。'},
+     {h:'经验卷别一次吃完', p:'转生会掉等级，经验卷留到转生降级之后再吃，不然经验直接白费。这是老玩家最常用的一招，新手几乎都会踩。'},
+     {h:'首转比等级重要', p:'30 级之后第一件事不是继续刷级，而是看转生材料够不够。首转要等级加材料双达标，天精岩、地狱火、转生石见到就捡，别随手合掉，差三五个能卡你一晚上。'}
+   ]},
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'转生攻略：转生转不对打宝全白费', date:'2026-11-02',
+   summary:'转生决定你能进哪张图、能爆什么装备，转生等级和地图掉落对应关系。',
+   full:[
+     {h:'转生到底改什么', p:'转生提升等级上限、解锁高阶地图，同时给一大截基础属性。在冰雪体系里，等级是门票，转生才是底子，转生不够进了高级图也打不动、爆不出。'},
+     {h:'4 转是分水岭', p:'4 转后才能进二大陆冰雪之城，那里才稳定出高阶光柱、神魔结晶、高转材料和特装碎片。前期所有资源都要围绕尽快 4 转来规划。'},
+     {h:'材料去哪刷', p:'一转前刷冰封矿洞、比奇矿区；1-3 转刷狂徒之家、上古秘境、幽冥回廊、尸王殿，稳定出一二转转生材料和祖玛、沃玛过渡装。'},
+     {h:'进二大陆的正确姿势', p:'冰雪之城全程自由 PK，刚进去别冲地图深处，先在外围试强度，确认站得住再往里推，否则一路掉装备掉元宝。'},
+     {h:'转生后的装备目标', p:'优先凑冰雪征服者三件套，激活冰雪抗性降低地图怪物伤害，挂机生存能力直接上一个档，比单件高强化更实用。'},
+     {h:'转生材料也是钱', p:'多余的转生材料别自己合掉，开区前三天全区都在冲转生，材料价格最高，挂寄售行换元宝，正好形成打金循环。'}
+   ]},
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'新手开荒先学会"省"，零氪也能发育', date:'2026-10-30',
+   summary:'省经验卷留关键等级用，省材料别乱合，省金币摆摊时用，四件事做到稳发育。',
+   full:[
+     {h:'省经验卷', p:'经验卷留到转生掉级后再吃，这是零氪最容易忽略的一笔收益。转生一次掉好几级，卷子用在这时候效率最高。'},
+     {h:'省强化石', p:'过渡装强化到 +5 就够，白装留三件同品合成、蓝装留胚子。+7 以后一定要用保护符，掉级亏的材料比强化本身还贵。'},
+     {h:'省元宝', p:'元宝只花在三件事上：聚灵珠、药水、转生材料补给。抽奖、买外观都是纯消耗，元宝是散人的生命线。'},
+     {h:'省材料', p:'黑铁、矿石不要砸在 30 级套装上，真正要吃材料的是转生后的冰雪套、祖玛沃玛过渡装和 4 转后的二阶装备。'},
+     {h:'拾取过滤一定要设', p:'只勾转生材料、结晶、碎片、书页，白蓝低级装备全部自动回收换元宝。背包塞满，光柱刷出来都捡不到。'},
+     {h:'安全细节', p:'随机石、回城石放快捷栏靠前位置，被偷袭一秒飞；地图边缘挂机避开 BOSS 刷新中心，被清图的概率小很多。'}
+   ]},
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'打金规则：装备不过商城，散人天堂', date:'2026-11-03',
+   summary:'毕业装只能野外掉落，屠龙刀全靠打，自由交易无门槛，打金变现路线。',
+   full:[
+     {h:'核心设定：没有卖装备的商城', p:'毕业装只能野外和副本掉落，商城买不到顶级装备。这也是散人能翻身的原因，投入时间就能换来实打实的产出。'},
+     {h:'打金的时间窗口', p:'开区前 2-3 天物价最高，全区都在冲转生，转生材料、技能书页供不应求。这几天的产出直接决定你后面的发育速度，别浪费。'},
+     {h:'卖什么最赚', p:'按区服进度切换：前期转生材料，中期技能书页和祖玛火龙套，后期高阶装备与生肖残件。跟着需求走，别在贬值期囤货。'},
+     {h:'交易怎么走', p:'优先官方寄售行，全程可追溯；不建议私下交易，没有保障容易纠纷。晚上 20-22 点是收购高峰，这个点上架成交最快。'},
+     {h:'白装也是钱', p:'开自动回收，白装蓝装直接换元宝，只有高价值非绑定道具才上架，否则背包空间全被低价值物品占了。'},
+     {h:'别开狂暴乱 PK', p:'狂暴能提攻击和爆率，但阵亡后状态直接消失，前期装备差去高阶图开狂暴基本等于送。想稳定打金，先加入活跃行会，跟团比单干强。'}
+   ]},
+
+  // ---------- 精灵永恒 ----------
+  {game:'精灵永恒', tag:'精灵', title:'新手入门避坑指南，少走弯路', date:'2026-10-22',
+   summary:'经济曲线跟随服务器进度，开荒期基础材料最值钱，别乱花前期资源。',
+   full:[
+     {h:'先主线，后日常，再副本', p:'主线会依次解锁仓库、装备强化、副本、精灵、转职、摆摊。功能没开就去刷野怪，效率最低，还错过一堆赠送的过渡装备。'},
+     {h:'经济曲线跟着区服走', p:'开荒期最缺基础材料，价格也最高；随着区服进度推进，材料贬值、成品升值。买卖节奏要跟着变，别用一套思路打整季。'},
+     {h:'强化石留给紫装', p:'蓝绿过渡装简单强化就够，强化石、高阶宝石全部留给 30 级之后的紫色套装，前期砸进去的材料基本收不回来。'},
+     {h:'精灵只养一到两只', p:'前期升星材料稀缺，分散养三四只的结果是每只等级星级都上不去。低星精灵拉等级后吞噬成经验球喂主力，别直接丢。'},
+     {h:'两个免费但容易被忽略的点', p:'30 级前属性点可免费重置，加点先满足装备穿戴门槛；遗忘之塔每天免费次数必打，稳定出宝石、强化石、精灵碎片。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'前期升级全攻略：光速度过开荒期', date:'2026-10-22',
+   summary:'1-30级主线无脑冲，30级后解锁副本和日常，升级节奏与等级压制关系。',
+   full:[
+     {h:'1-30 级：只做主线', p:'这个阶段不用纠结装备和加点，主线给的经验和基础装备完全够用。唯一目标是以最快速度到 30 级，把转职和绝大部分玩法解锁。'},
+     {h:'组队做主线，进度共享', p:'同地图找玩家组队，击杀进度可以共享，升级效率明显提升，顺带还能凑齐后面下本的固定队。'},
+     {h:'卡级刷五星悬赏', p:'主线卡住先清支线，再刷每日悬赏。悬赏尽量刷到五星，星级越高经验和羽毛碎片奖励越丰厚，是卡级阶段最有效的经验来源。'},
+     {h:'30 级以后节奏变了', p:'经验来源从主线转到日常、副本、悬赏、限时活动。每天先看限时活动时间，再安排副本顺序，收益差很多。'},
+     {h:'等级压制不是玄学', p:'等级差会直接影响命中与伤害，落后太多连怪都打不动。所以前期升级优先级永远最高，装备可以晚点补，等级不能拖。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'战斗进阶：精灵切换+技能把控', date:'2026-10-21',
+   summary:'战斗不是站桩输出，配队站位很重要，切换精灵打连招，技能释放时机。',
+   full:[
+     {h:'别站桩硬刚', p:'这游戏的战斗靠走位和技能节奏，站着对拼只会被范围技能和持续伤害磨死，脆皮职业尤其明显。'},
+     {h:'配队与站位', p:'武士站前排拉仇恨，法师弓箭手后排输出，祭司站安全位持续治疗。站位错了，输出再高也活不到最后；输出职业别抢仇恨。'},
+     {h:'切精灵就是切节奏', p:'先手控住再切破坏精灵打爆发，比一只精灵从头用到尾强得多。打 BOSS 换破坏、挂机换经验、单刷换回复，这是最基础的三种切换。'},
+     {h:'技能时机比技能等级重要', p:'留关键技能应对 BOSS 大招和狂暴阶段，开局把技能全交是最常见的翻车原因。'},
+     {h:'高难本的三条纪律', p:'脆皮不贴脸、BOSS 读条时打断、血量掉到 60% 就补而不是见底再补。这三条做到，很多副本能少打一半次数。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'第二赛季圣物系统解锁，战力飞跃', date:'2026-10-23',
+   summary:'圣物系统全新上线，圣物获取途径与养成路线，战力大幅提升方法。',
+   full:[
+     {h:'圣物是什么', p:'第二赛季解锁的独立养成线，圣物提供生命、破坏力、魔法值等属性加成，是赛季阶段拉开战力差距的关键系统。'},
+     {h:'获取途径', p:'主要靠赛季玩法与专属副本产出，跟着赛季进度走，别错过限时活动。赛季结束相关产出会变，能拿的时候尽量拿满。'},
+     {h:'圣物羁绊才是重点', p:'不同圣物之间存在羁绊组合，凑齐组合能额外激活属性。优先凑羁绊，比把单件堆到高等级更划算。'},
+     {h:'升级消耗怎么分', p:'升级要对应材料，优先把主力常用的两三件拉起来，别平均分配。材料不够时先保输出位，再补生存位。'},
+     {h:'和精灵系统的配合', p:'圣物加的是人物本体属性，换出战精灵不会消失，所以它和精灵养成是两条互不冲突的线，两条都推战力涨得最快。'}
+   ]},
+
+  // ---------- 精灵永恒 · 微信公众号攻略 ----------
+  {game:'精灵永恒', tag:'精灵', title:'精灵养成攻略：少走弯路，稳步提升', date:'2026-11-03',
+   summary:'精灵分破坏/回复/经验三类，开荒别死磕SSR，集中资源养一到两只主力，按场景切换才是正解。',
+   src:{name:'微信公众号', url:'http://mp.weixin.qq.com/s?__biz=MzkyMTQ5NTY5Ng==&mid=2247488236&idx=2&sn=fdffd9993d51e5652d008b2cb7484a7b'},
+   full:[
+     {h:'先认清精灵的三个类型', p:'精灵大致分为破坏、回复、经验三种实用类型。开荒阶段不用一门心思死磕 SSR 高阶精灵，新手开局用过渡精灵就够，B 级精灵培养消耗低，非常适合产出经验球。'},
+     {h:'资源集中，只养一到两只主力', p:'多余的低级精灵不要丢，优先拉高等级再遣散吞噬，转化成经验球喂养主力。千万不要同时养三四只主力，资源分散后每只等级和星级都上不去。'},
+     {h:'按场景切换，不要一只用到底', p:'野外挂机冲等级带经验精灵，额外拿经验加成；组队下副本打 BOSS 切换破坏精灵，拉高输出；弓箭手、魔法师这类脆皮职业单刷时换回复精灵持续补血，能省下一大笔红蓝药水。祭司组队打秘境用回复精灵，也能缓解治疗压力。'},
+     {h:'升星与精灵装备', p:'精灵最高可升到五星，消耗对应精灵碎片，碎片主要来自日常副本、遗忘之塔和野外 BOSS。优先把主力精灵星级往上堆，别给过渡精灵浪费升星材料。等级星级提上来后，去混沌大陆、风之大陆挂机刷精灵装备，拔高攻击和生命。'},
+     {h:'别漏掉十二星座精灵之路', p:'消耗精灵之血逐步解锁十二星座节点，每点亮一个点位就给角色永久属性加成，直接加在人物本体上，更换出战精灵也不会消失。精灵之血来自组队秘境、遗忘之塔和野外精英怪，属于细水长流的养成，开荒期就要有意识收集。'},
+     {h:'两个高频误区', p:'一是精灵等级不能超过人物等级，角色等级上不去精灵就卡住；二是刚抽到品质更高的精灵就立刻放弃原主力、全部资源重新投入，反复横跳只会白白消耗经验球和升星碎片，确定主力后尽量长期培养。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'转职试炼通关攻略：不是拉高战力就能过', date:'2026-10-18',
+   summary:'试炼分小怪与首领两阶段，先清召唤物再打BOSS；血量25%进狂暴，技能留到这时候用才是通关关键。',
+   src:{name:'微信公众号', url:'http://mp.weixin.qq.com/s?__biz=MzY4NjQ0MjAzNg==&mid=2247484572&idx=2&sn=d06355cdc312589984c8b837cf40b0bd'},
+   full:[
+     {h:'读懂试炼机制', p:'转职试炼和普通副本完全不同，关卡分小怪阶段与首领阶段，BOSS 自带专属被动。进入地图后不能无脑挂机：小怪会持续为 BOSS 叠加增伤 buff，要优先清理召唤小怪再集中攻击首领。地图还会周期性刷新 debuff 区域，站在范围内持续降低防御，要留意地面特效及时走位。'},
+     {h:'战前技能调配', p:'不要沿用野外挂机的技能组合。输出职业舍弃持续类挂机技能，换成爆发和打断技能，在 BOSS 放大招时打断；坦克带减伤与嘲讽稳住仇恨；辅助保留净化与群体回血，及时清掉负面效果。提前预留冷却，别开局把技能全交完。'},
+     {h:'补给道具规划', p:'推荐携带中型生命药水、净化药剂，少量复活卷轴备用。复活卷轴不要频繁使用，多次复活会让 BOSS 属性小幅上涨，越打越难。血量降到 60% 就开回血道具，维持稳定血线，别等见底才喝药。'},
+     {h:'狂暴阶段应对', p:'BOSS 血量降到 25% 会进入狂暴，攻击力大幅提升、技能释放加快，这是最容易翻车的阶段。此时全队减少贪输出，输出职业不要强行贴脸，坦克开满减伤稳仇恨，辅助优先驱散持续掉血 debuff，保持分散站位躲 AOE。'},
+     {h:'过不去的替补方案', p:'试炼是等级门槛上的硬考核，战力差一点就打不动。实在卡住可以先补装备与铭文，或者约上队友一起进本，硬耗药水是最不划算的选择。'},
+     {h:'转职之后', p:'通关后解锁全新转职天赋，但转职只是新起点。先熟悉新技能的输出节奏，重新调整装备与铭文搭配，把新天赋的优势发挥出来，不要转完就立刻挑战高难度地图。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'萌新入门：赛季玩法详解（上篇）', date:'2026-11-02',
+   summary:'领地最多占两块、榜单季中季末各结算一次；新赛季战功军衔天赋全清零，被低军衔击败扣战功更多。',
+   src:{name:'微信公众号', url:'http://mp.weixin.qq.com/s?__biz=MzE5MTYyMTc5OA==&mid=2247491122&idx=2&sn=69174e3772d970f8c148f87d0f108300'},
+   full:[
+     {h:'赛季四大内容', p:'赛季拥有独立周期，包含领地争夺、榜单排行、限时任务、赛季事件四大内容，同时附带世界等级与赛季重置规则，是规划整个赛季行动的基础。'},
+     {h:'领地玩法', p:'领地支持开荒占领与互相争夺。同一个公会领地最多占领两个且占领后无法放弃；其他公会宣战拿下后，要等下一次宣战日期才能继续申请宣战，公会必须谨慎规划名额。宣战每天有固定开放时段，错过就要等第二天。'},
+     {h:'排行榜与限时任务', p:'赛季内置公会积分、战功、荣誉三类榜单，季中与季末各结算一次。赛季划分多个阶段，每阶段刷新专属限时任务，有严格时间限制，上线优先查看。'},
+     {h:'重置规则（重点）', p:'每个新赛季开启时，战功积分、战功币、军衔等级、天赋技能等级全部清零，所有玩家回到同一起跑线。赛季事件在阶段最后一天开启，限时参与，超时无法领奖。'},
+     {h:'军衔与战功', p:'高阶军衔玩家受到低军衔玩家攻击时按军衔差值获得伤害减免；被低军衔玩家击败，自身扣除的战功更多。战功来自竞技区击杀、领地战击杀、达成战场点数目标和赛季任务，每日获取与扣除都有上限，军衔奖励每天可领，等级越高品质越好。'},
+     {h:'战功衰减机制', p:'击杀者与被击杀者等级差距越大，获得战功越少；击杀者等级高出世界等级越多，获得战功越少；单日重复击杀同一目标战功持续衰减，达到阈值后不再获得战功。所以刷战功要换目标、换地点，蹲一个人杀是无效操作。'},
+     {h:'赛季结算', p:'分公会结算与个人战功结算两套。公会结算按个人公会贡献排名发放，与公会整体排名无关，哪怕公会排名靠后，只要贡献靠前照样拿高额奖励；个人战功结算奖励含战功币、中级强化保底锤、精灵之血、金币，排名越靠后逐级递减。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'日常周常怎么清最快，奖励还能拿满', date:'2026-10-21',
+   summary:'登录+世界聊天+补药水就拿一半活跃，再2次组队副本+8次悬赏即满；精灵神殿和遗忘之塔可以不做。',
+   src:{name:'微信公众号', url:'http://mp.weixin.qq.com/s?__biz=MzY4NTM3ODE1NA==&mid=2247485437&idx=1&sn=89ea958db87bfc5c227d902593926c45'},
+   full:[
+     {h:'日常活跃不用全做也能满', p:'日常活跃不需要完成全部任务就能拿满活跃度奖励，但每个活跃任务也有独立奖励，时间充裕时可以全部做完。'},
+     {h:'最快的一半', p:'日常登录游戏、世界聊天一次、补充药水，这三件小事就能拿到日常活跃度要求的一半，几乎不花时间。'},
+     {h:'补满另一半', p:'再完成两次组队副本和八次悬赏任务，日常活跃度奖励就全拿了。悬赏每天有次数上限，记得按上限刷满。'},
+     {h:'哪些可以跳过', p:'精灵神殿和遗忘之塔不做，也不影响拿满日常的钻石奖励，时间紧就优先放弃这两项；但如果要刷宝石和精灵碎片，遗忘之塔的免费次数还是建议打。'},
+     {h:'周常的前提', p:'想拿满周常奖励，需要每周至少登录六天，且这六天基本要完成除精灵神殿和遗忘之塔以外的日常任务。周常需要连续投入，不是哪天补能补回来的。'},
+     {h:'顺手做的三件事', p:'活跃领完再看限时活动时间表；挂机顺手收精灵之血；摆摊前先看行情再上架。日常之外的时间就用在这三处，收益最稳。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'八大职业怎么选，开荒选错真的会难受', date:'2026-11-01',
+   summary:'坦普物理、魔灵法系两大种族八个职业：武士抗揍、弓箭手安全、魔法师清怪最快、祭司组队刚需，影刺要等第二赛季。',
+   src:{name:'攻略站整理'},
+   full:[
+     {h:'先认清两条种族线', p:'游戏分坦普（物理）与魔灵（法系）两大种族，一共八条职业路线。影刺要等第二赛季才开放，开局创建不了，别在捏人界面纠结太久。'},
+     {h:'武士：新手第一选择', p:'近战前排，主力量，血厚防高，副本负责拉仇恨，单刷容错率最高，开荒期不用频繁补给。缺点是群攻偏弱，清小怪速度一般。'},
+     {h:'弓箭手：散人零氪首选', p:'敏捷远程，靠拉扯打怪，挂机刷野效率高，野外刷宝体验舒服。短板是身板脆，被近身很容易暴毙，挂机要挑怪物稀疏的点位。'},
+     {h:'魔法师：清怪速度天花板', p:'法系大范围 AOE，跑图升级最快，冲等级榜首选。但防御极低，非常依赖队友保护，单人在野外容易被精英怪偷袭。'},
+     {h:'祭司：组队永远不缺位置', p:'全游戏唯一的专职治疗，副本、世界 BOSS、公会战都刚需。单人升级偏慢，可以走纯奶或输出版两条路线，新手先走纯奶更稳。'},
+     {h:'剩下几个怎么定位', p:'枪兵是万金油近战，攻防均衡、群攻不错；机械兵架炮台自动打怪，适合挂机党，但前期偏弱后期发力；游侠机动性强，抢 BOSS、野外 PK 手感好，吃操作；影刺是高爆发刺客，极度吃装备。'},
+     {h:'怎么选才不后悔', p:'上班族挂机党选机械兵或弓箭手，喜欢组队选祭司或武士，打算打宝搬砖选弓箭手、魔法师、枪兵。30 级前属性点可以免费重置，选错职业也能先玩起来。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'0-30 级开荒路线：主线、悬赏、加点一次讲清', date:'2026-10-26',
+   summary:'开局别泡野外刷怪，主线才解锁仓库、强化、副本、精灵、转职；卡级去支线+五星悬赏，加点先满足装备门槛。',
+   src:{name:'攻略站整理'},
+   full:[
+     {h:'开局只做一件事：推主线', p:'主线会逐步解锁仓库、装备强化、副本、精灵、转职、摆摊等全部核心系统，还送成套过渡装备和金币。开局直接泡野外刷怪，会错过大量系统解锁与奖励。'},
+     {h:'组队做主线更快', p:'同地图找玩家组队，击杀进度可以共享，升级效率明显提升，顺便还能认识后面一起下本的队友。'},
+     {h:'卡级了怎么办', p:'先清支线，再刷每日悬赏。悬赏尽量刷五星，星级越高经验和羽毛碎片奖励越丰厚，是卡级阶段最重要的经验来源。'},
+     {h:'加点别一步到位', p:'30 级前属性点可免费重置。加点先满足装备穿戴门槛，剩余点数再堆输出或生存，无脑全点攻击会出现等级到了却穿不上装备的尴尬。'},
+     {h:'技能怎么点', p:'不要平均分配，优先点满核心输出技能，被动按定位选增伤或生存，辅助类技能最后补。'},
+     {h:'30 级以后', p:'转职解锁大部分玩法。遗忘之塔每天免费次数务必打完，稳定产出宝石、强化石、精灵碎片；诅咒神殿、没落都市组队副本是高阶装备主要来源。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'散人打宝与摆摊变现：哪些东西真能换钱', date:'2026-10-30',
+   summary:'紫装看遗忘之塔，橙装看组队副本，顶级货看世界BOSS最后一击；摆摊不抽税、交易行30分钟自动下架，宝石不能交易。',
+   src:{name:'攻略站整理'},
+   full:[
+     {h:'先搞清装备从哪来', p:'野外小怪有概率掉装备和材料，适合挂机顺带攒；真正值钱的紫装前期主要靠遗忘之塔低层，以及诅咒神殿、没落都市这类多人副本；顶级货基本出自定时刷新的世界首领。'},
+     {h:'散人别一上来就盯世界 BOSS', p:'刷不动的时候，把遗忘之塔每日清了、能单刷的野外精英打了，产出反而比蹲 BOSS 等人捡漏更稳。'},
+     {h:'背包和站位这两个细节', p:'挂机前先清背包，垃圾白装直接分解或卖店，别等极品掉了才发现捡不起来；野外尽量贴着安全区刷，非安全区开自由 PK，红名会掉攻防、被击杀还会掉金币。'},
+     {h:'世界 BOSS 只认最后一击', p:'世界首领全服共享，谁打掉最后一下掉落归谁。一个人蹲点意义不大，加个活跃公会提前集合，混在队伍里既安全又能分产出。'},
+     {h:'摆摊 vs 交易行', p:'摆摊面对面挂货，权限解锁后不用抽税；交易行省事但单次上架只有三十分钟，超时自动下架需要重新挂，没解锁权限前还要收交易税，激活福卡能降下来。'},
+     {h:'两条硬规则', p:'宝石不能交易；面对面交易每天有次数上限，别指望靠它走量。'}
+   ]},
+  {game:'精灵永恒', tag:'精灵', title:'遗忘之塔与副本：每天该刷哪几个', date:'2026-10-25',
+   summary:'遗忘之塔免费次数必打，稳定出宝石与精灵碎片；诅咒神殿、没落都市才是高阶装备产地，别硬冲高层。',
+   src:{name:'攻略站整理'},
+   full:[
+     {h:'遗忘之塔：稳收益的日常', p:'每天免费次数务必打完，稳定产出宝石、强化石、精灵碎片，是平民最稳的资源来源。新手不要强行挑战高层，保证稳定通关比冲层更划算。'},
+     {h:'诅咒神殿、没落都市', p:'多人组队副本，高阶紫装、橙装的稳定产地。建议武士承伤拉仇恨、祭司续航、法师弓箭手后排输出，配置不齐很容易团灭。'},
+     {h:'精灵神殿与限时玩法', p:'精灵神殿偏团队本，BOSS 会放范围技能，躲不好全队翻车。魔族入侵、世界 BOSS 这类限时活动怪物密集、产出丰厚，能组队就别单刷。'},
+     {h:'日常顺序建议', p:'上线先看限时活动时间，其次清悬赏与日常活跃，再打遗忘之塔，最后组队下高阶副本。顺序对了，同样的时间收益能差一倍。'},
+     {h:'副本里的两个通用技巧', p:'进本前切好精灵（破坏精灵打输出、回复精灵保续航），开打前把药水和净化备齐。BOSS 读条时打断，比多打几万伤害更有效。'}
+   ]}
 ];
 
-function renderArticles(list){
+// ===== 搜索状态 =====
+var activeGame = '';
+var searchTimer = null;
+var searchInput = document.getElementById('searchInput');
+
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// 关键字高亮（多段匹配）
+function highlight(text, kw){
+  var safe = esc(text);
+  if(!kw) return safe;
+  var lower = safe.toLowerCase();
+  var k = esc(kw).toLowerCase();
+  var out = '', pos = 0, idx;
+  while((idx = lower.indexOf(k, pos)) >= 0){
+    out += safe.slice(pos, idx) + '<mark>' + safe.slice(idx, idx + k.length) + '</mark>';
+    pos = idx + k.length;
+  }
+  return out + safe.slice(pos);
+}
+
+// 展开状态：手动展开状态长期保留；搜索命中的全文自动展开（仅搜索期间）
+var expanded = {};
+var autoOpen = {};
+
+function articleKey(a){ return a.game + '|' + a.title; }
+
+function renderArticles(list, kw){
   var html = '';
   for(var i = 0; i < list.length; i++){
     var a = list[i];
+    var key = articleKey(a);
     var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : '');
-    html += '<div class="article-card ' + cls + '">';
-    html += '<span class="article-tag">' + a.tag + '</span>';
-    html += '<div class="article-title">' + a.title + '</div>';
-    html += '<div class="article-summary">' + a.summary + '</div>';
-    html += '<div class="article-date">' + a.date + '</div>';
+    var isOpen = !!expanded[key] || !!(kw && autoOpen[key]);
+    html += '<div class="article-card ' + cls + (isOpen ? ' open' : '') + '" data-key="' + esc(key) + '">';
+    html += '<div class="article-top"><span class="article-tag">' + esc(a.tag) + '</span><span class="article-game">' + esc(a.game) + ' · ' + a.date + '</span></div>';
+    html += '<div class="article-title">' + highlight(a.title, kw) + '</div>';
+    html += '<div class="article-summary">' + highlight(a.summary, kw) + '</div>';
+    html += '<div class="article-full"><div class="article-full-inner">';
+    for(var j = 0; j < a.full.length; j++){
+      html += '<h4>' + highlight(a.full[j].h, kw) + '</h4>';
+      html += '<p>' + highlight(a.full[j].p, kw) + '</p>';
+    }
+    if(a.src){
+      html += '<div class="article-src">来源：' + esc(a.src.name);
+      if(a.src.url){
+        html += ' · <a href="' + esc(a.src.url) + '" target="_blank" rel="noopener">阅读原文</a>';
+      }
+      html += '</div>';
+    }
+    var rel = relatedOf(a);
+    if(rel.length){
+      html += '<div class="article-related"><span class="rel-label">相关攻略</span>';
+      for(var r = 0; r < rel.length; r++){
+        html += '<a class="rel-link" data-target="' + esc(articleKey(rel[r])) + '">' + esc(rel[r].title) + '</a>';
+      }
+      html += '</div>';
+    }
+    html += '</div></div>';
+    html += '<button class="article-toggle" onclick="toggleArticle(this)"><span class="toggle-text">' + (isOpen ? '收起全文' : '展开全文') + '</span><span class="arrow">▾</span></button>';
     html += '</div>';
   }
   document.getElementById('articleList').innerHTML = html;
 }
 
+function toggleArticle(btn){
+  var card = btn.closest('.article-card');
+  var key = card.getAttribute('data-key');
+  var open = card.classList.toggle('open');
+  expanded[key] = open;
+  if(!open) delete autoOpen[key];
+  btn.querySelector('.toggle-text').textContent = open ? '收起全文' : '展开全文';
+}
+
+// 相关攻略：优先同游戏，最多 3 条
+function relatedOf(a){
+  var key = articleKey(a), same = [], other = [];
+  for(var i = 0; i < ARTICLES.length; i++){
+    var b = ARTICLES[i];
+    if(articleKey(b) === key) continue;
+    if(b.game === a.game) same.push(b); else other.push(b);
+  }
+  var out = same.slice(0, 3);
+  for(var j = 0; j < other.length && out.length < 3; j++) out.push(other[j]);
+  return out;
+}
+
+function jumpToArticle(key){
+  var target = null;
+  for(var i = 0; i < ARTICLES.length; i++){
+    if(articleKey(ARTICLES[i]) === key){ target = ARTICLES[i]; break; }
+  }
+  if(!target) return;
+  if(searchInput.value.trim() || activeGame) clearSearch();
+  expanded[key] = true;
+  filterArticles();
+  var card = document.querySelector('.article-card[data-key="' + key.replace(/"/g, '\\"') + '"]');
+  if(!card) return;
+  card.scrollIntoView({behavior:'smooth', block:'center'});
+  card.classList.add('flash');
+  setTimeout(function(){ card.classList.remove('flash'); }, 1800);
+}
+
+document.getElementById('articleList').addEventListener('click', function(e){
+  var link = e.target.closest ? e.target.closest('.rel-link') : null;
+  if(!link) return;
+  e.preventDefault();
+  jumpToArticle(link.getAttribute('data-target'));
+});
+
+function haystack(a){
+  var t = a.title + a.summary + a.game + a.tag;
+  for(var i = 0; i < a.full.length; i++){
+    t += a.full[i].h + a.full[i].p;
+  }
+  return t.toLowerCase();
+}
+
 function filterArticles(){
-  var kw = document.getElementById('searchInput').value.trim().toLowerCase();
+  var kw = searchInput.value.trim().toLowerCase();
+  autoOpen = {};
   var list = ARTICLES.filter(function(a){
-    var text = (a.title + a.summary + a.game + a.tag).toLowerCase();
-    return !kw || text.indexOf(kw) >= 0;
+    if(activeGame && a.game.indexOf(activeGame) < 0) return false;
+    if(!kw) return true;
+    return haystack(a).indexOf(kw) >= 0;
   });
-  renderArticles(list);
+  // 关键字只在全文里命中时，自动展开，让用户直接看到命中的段落
+  if(kw){
+    for(var i = 0; i < list.length; i++){
+      var a = list[i];
+      var basic = (a.title + a.summary + a.game + a.tag).toLowerCase();
+      if(basic.indexOf(kw) < 0) autoOpen[articleKey(a)] = true;
+    }
+  }
+  renderArticles(list, kw);
   document.getElementById('noResult').style.display = list.length === 0 ? 'block' : 'none';
+  document.getElementById('resultCount').textContent =
+    (kw || activeGame) ? ('找到 ' + list.length + ' 篇相关攻略') : ('共 ' + ARTICLES.length + ' 篇攻略，可展开看全文');
+  document.getElementById('clearBtn').style.display = (kw || activeGame) ? 'inline-block' : 'none';
+}
+
+// 输入防抖，避免每次按键都重渲染
+function debouncedFilter(){
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(filterArticles, 150);
+}
+
+function setGameFilter(btn){
+  var chips = document.querySelectorAll('.filter-chip');
+  for(var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+  btn.classList.add('active');
+  activeGame = btn.getAttribute('data-game');
+  filterArticles();
+}
+
+function clearSearch(){
+  searchInput.value = '';
+  activeGame = '';
+  var chips = document.querySelectorAll('.filter-chip');
+  for(var i = 0; i < chips.length; i++){
+    chips[i].classList.toggle('active', !chips[i].getAttribute('data-game'));
+  }
+  filterArticles();
 }
 
 // 初始渲染
-renderArticles(ARTICLES);
+filterArticles();
+
+// ===== 回到顶部按钮 =====
+var backTop = document.getElementById('backTop');
+window.addEventListener('scroll', function(){
+  backTop.classList.toggle('show', window.scrollY > 500);
+}, {passive:true});
+
+// ===== 移动端吸底客服条：客服区可见时自动隐藏 =====
+(function(){
+  var cta = document.getElementById('mobileCta');
+  var service = document.getElementById('service');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      cta.classList.toggle('hide', entries[0].isIntersecting);
+    }, {threshold:.15}).observe(service);
+  }
+})();
 </script>
 
 </body>
