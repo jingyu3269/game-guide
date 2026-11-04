@@ -357,6 +357,53 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* ========== 攻略搜索区 ========== */
+.search-box{
+  max-width:500px;margin:0 auto 28px;
+  position:relative;
+}
+.search-box input{
+  width:100%;padding:12px 16px 12px 44px;
+  border:2px solid var(--green);border-radius:24px;
+  font-size:14px;font-family:inherit;
+  background:rgba(255,255,255,.9);
+  outline:none;
+  transition:box-shadow .2s;
+}
+.search-box input:focus{
+  box-shadow:0 0 0 4px rgba(61,184,160,.2);
+}
+.search-box svg{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;color:var(--green);
+}
+.article-list{
+  max-width:760px;margin:0 auto;
+  display:flex;flex-direction:column;gap:12px;
+}
+.article-card{
+  background:rgba(255,255,255,.92);
+  border-radius:12px;padding:16px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  border-left:4px solid var(--green);
+}
+.article-card.tulong{border-left-color:var(--orange-deep)}
+.article-card.jingling{border-left-color:#9B59B6}
+.article-tag{
+  display:inline-block;font-size:11px;font-weight:700;
+  padding:2px 8px;border-radius:8px;margin-bottom:6px;
+}
+.article-card .article-tag{background:var(--green-soft);color:var(--green-deep)}
+.article-card.tulong .article-tag{background:#FFF0D6;color:var(--orange-deep)}
+.article-card.jingling .article-tag{background:#F3E8FA;color:#9B59B6}
+.article-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.article-summary{font-size:13px;color:var(--ink-soft);line-height:1.6}
+.article-date{font-size:11px;color:#aaa;margin-top:8px}
+.no-result{
+  text-align:center;padding:40px;color:var(--ink-soft);font-size:14px;
+  display:none;
+}
+
 /* ========== 桌面适配 ========== */
 @media (min-width:768px){
   .hero{padding:60px 20px}
@@ -479,6 +526,21 @@ button{font-family:inherit;cursor:pointer;border:none}
   </div>
 </section>
 
+<!-- ===== 攻略搜索区 ===== -->
+<section class="section" id="articles">
+  <div class="section-title">
+    <div class="tag">攻略大全</div>
+    <h2>热门攻略文章</h2>
+    <p>输入关键字快速查找你需要的攻略</p>
+  </div>
+  <div class="search-box">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="搜索攻略，如：转生、升级、圣物、攻城..." oninput="filterArticles()">
+  </div>
+  <div class="article-list" id="articleList"></div>
+  <div class="no-result" id="noResult">没有找到相关攻略，试试其他关键词</div>
+</section>
+
 <!-- ===== 客服福利区 ===== -->
 <section class="service">
   <h2>加客服 · 领专属福利</h2>
@@ -569,6 +631,50 @@ function showToast(msg){
     container.appendChild(p);
   }
 })();
+
+// ===== 攻略文章数据 =====
+var ARTICLES = [
+  {game:'桃园将帅录', tag:'桃园', title:'开服公告：10月28日10点全服上线', summary:'三端互通安卓/iOS/PC同账号同步，新手养成资源返还，阵容随便试不浪费。', date:'2026-10-27'},
+  {game:'桃园将帅录', tag:'桃园', title:'赛季沙盘大地图，联盟攻城完整流程', summary:'赛季重置机制讲解，联盟攻占都城全过程，感受沙盘策略博弈的乐趣。', date:'2026-10-23'},
+  {game:'桃园将帅录', tag:'桃园', title:'日常任务玩法全梳理，每天不瞎忙', summary:'跟着主线走，日常任务高效完成，体力分配优先级，每天10分钟清完日常。', date:'2026-10-27'},
+  {game:'桃园将帅录', tag:'桃园', title:'ATB时序战斗详解：速度决定一切', summary:'真策略不挂机，谁先出手、谁打断全看速度条，合理搭配阵容打出连招。', date:'2026-10-28'},
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'升级攻略：最快速度冲级转生', summary:'主线任务一路推到底，土城激情泡点别停，前期最效率的升级路线。', date:'2026-10-22'},
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'转生攻略：转生转不对打宝全白费', summary:'转生决定你能进哪张图、能爆什么装备，转生等级和地图掉落对应关系。', date:'2026-11-02'},
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'新手开荒先学会"省"，零氪也能发育', summary:'省经验卷留关键等级用，省材料别乱合，省金币摆摊时用，四件事做到稳发育。', date:'2026-10-30'},
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'打金规则：装备不过商城，散人天堂', summary:'毕业装只能野外掉落，屠龙刀全靠打，自由交易无门槛，打金变现路线。', date:'2026-11-03'},
+  {game:'精灵永恒', tag:'精灵', title:'新手入门避坑指南，少走弯路', summary:'经济曲线跟随服务器进度，开荒期基础材料最值钱，别乱花前期资源。', date:'2026-10-22'},
+  {game:'精灵永恒', tag:'精灵', title:'前期升级全攻略：光速度过开荒期', summary:'1-30级主线无脑冲，30级后解锁副本和日常，升级节奏与等级压制关系。', date:'2026-10-22'},
+  {game:'精灵永恒', tag:'精灵', title:'战斗进阶：精灵切换+技能把控', summary:'战斗不是站桩输出，配队站位很重要，切换精灵打连招，技能释放时机。', date:'2026-10-21'},
+  {game:'精灵永恒', tag:'精灵', title:'第二赛季圣物系统解锁，战力飞跃', summary:'圣物系统全新上线，圣物获取途径与养成路线，战力大幅提升方法。', date:'2026-10-23'}
+];
+
+function renderArticles(list){
+  var html = '';
+  for(var i = 0; i < list.length; i++){
+    var a = list[i];
+    var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : '');
+    html += '<div class="article-card ' + cls + '">';
+    html += '<span class="article-tag">' + a.tag + '</span>';
+    html += '<div class="article-title">' + a.title + '</div>';
+    html += '<div class="article-summary">' + a.summary + '</div>';
+    html += '<div class="article-date">' + a.date + '</div>';
+    html += '</div>';
+  }
+  document.getElementById('articleList').innerHTML = html;
+}
+
+function filterArticles(){
+  var kw = document.getElementById('searchInput').value.trim().toLowerCase();
+  var list = ARTICLES.filter(function(a){
+    var text = (a.title + a.summary + a.game + a.tag).toLowerCase();
+    return !kw || text.indexOf(kw) >= 0;
+  });
+  renderArticles(list);
+  document.getElementById('noResult').style.display = list.length === 0 ? 'block' : 'none';
+}
+
+// 初始渲染
+renderArticles(ARTICLES);
 </script>
 
 </body>
