@@ -201,7 +201,27 @@ button{font-family:inherit;cursor:pointer;border:none}
 .game-tag.hot{background:var(--red-soft);color:var(--red)}
 .game-desc{
   font-size:13px;color:var(--ink-soft);
-  line-height:1.5;margin-bottom:12px;
+  line-height:1.5;margin-bottom:10px;
+}
+.game-tips{
+  list-style:none;
+  margin:0 0 12px;
+  padding:10px 12px;
+  background:var(--bg);
+  border-radius:8px;
+  font-size:12px;
+  color:var(--ink-soft);
+  line-height:1.8;
+}
+.game-tips li{
+  padding-left:14px;
+  position:relative;
+}
+.game-tips li::before{
+  content:"";
+  position:absolute;left:0;top:9px;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--green);
 }
 .game-btn{
   width:100%;
@@ -350,6 +370,12 @@ button{font-family:inherit;cursor:pointer;border:none}
           <span class="game-tag">回合制</span>
         </div>
         <p class="game-desc">幻想三国ATB半即时回合制，云职业转职，将星收集，三端互通。</p>
+        <ul class="game-tips">
+          <li>三端互通，安卓/iOS/PC同账号同步</li>
+          <li>ATB时序战斗，速度决定出手与打断</li>
+          <li>新手资源返还，阵容随便试不浪费</li>
+          <li>赛季沙盘攻城，联盟占都城定天下</li>
+        </ul>
         <button class="game-btn" onclick="copyWechat('桃园将帅录')">领取下载与攻略</button>
       </div>
     </div>
@@ -367,6 +393,12 @@ button{font-family:inherit;cursor:pointer;border:none}
           <span class="game-tag">高爆率</span>
         </div>
         <p class="game-desc">经典冰雪复古传奇，装备全靠打，散人打金天堂，自由交易。</p>
+        <ul class="game-tips">
+          <li>主线推到底+土城泡点，前期升级最快</li>
+          <li>转生决定进图与爆装，转错打宝全白费</li>
+          <li>装备不过商城，毕业装全靠野外掉落</li>
+          <li>散人自由交易，打金变现无门槛</li>
+        </ul>
         <button class="game-btn" onclick="copyWechat('小小屠龙·冰雪复古')">领取下载与攻略</button>
       </div>
     </div>
