@@ -479,19 +479,33 @@ button{font-family:inherit;cursor:pointer;border:none}
   50%{transform:translateY(-14px) rotate(10deg)}
 }
 /* 卡通客服小猫 */
-.mascot-wrap{width:128px;margin:0 auto 4px;animation:svcBob 2.8s ease-in-out infinite}
+.mascot-wrap{
+  position:relative;width:142px;margin:0 auto 4px;
+  animation:svcBob 2.8s ease-in-out infinite;
+}
+/* 吉祥物背后的暖光 */
+.mascot-wrap::before{
+  content:"";position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:170px;height:170px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,205,120,.42) 0%,rgba(255,150,90,.18) 45%,transparent 70%);
+  animation:svcHalo 3.2s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes svcHalo{
+  0%{opacity:.65;transform:translate(-50%,-50%) scale(.9)}
+  100%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}
+}
 @keyframes svcBob{
   0%,100%{transform:translateY(0) rotate(-1.6deg)}
   50%{transform:translateY(-7px) rotate(1.6deg)}
 }
-.mascot{width:118px;display:block;margin:0 auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
-.mascot .eyes{
-  transform-box:fill-box;transform-origin:center;
-  animation:svcBlink 4.2s infinite;
-}
-@keyframes svcBlink{
-  0%,93%,100%{transform:scaleY(1)}
-  96.5%{transform:scaleY(.12)}
+.mascot{
+  position:relative;z-index:1;
+  width:136px;height:auto;display:block;margin:0 auto;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.42));
+  -webkit-mask-image:linear-gradient(180deg,#000 82%,rgba(0,0,0,.5) 95%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 82%,rgba(0,0,0,.5) 95%,transparent 100%);
 }
 /* 气泡提示 */
 .svc-bubble{
@@ -639,7 +653,7 @@ button{font-family:inherit;cursor:pointer;border:none}
   .perk .ico{width:29px;height:29px;border-radius:10px;font-size:15px}
 }
 @media (prefers-reduced-motion:reduce){
-  .svc-star,.svc-coin,.mascot-wrap,.mascot .eyes,.svc-bubble,
+  .svc-star,.svc-coin,.mascot-wrap,.mascot-wrap::before,.svc-bubble,
   .svc-title,.svc-ticket,.perk,.svc-btn,.svc-btn::after,
   .svc-title::before,.svc-title::after{animation:none}
   .svc-btn::after{display:none}
@@ -917,8 +931,9 @@ mark{
   .game-grid{grid-template-columns:repeat(3,1fr);max-width:960px}
   .svc-perks{grid-template-columns:repeat(3,1fr);max-width:640px}
   .svc-title{font-size:34px}
-  .mascot-wrap{width:150px}
-  .mascot{width:140px}
+  .mascot-wrap{width:164px}
+  .mascot-wrap::before{width:196px;height:196px}
+  .mascot{width:156px}
   .svc-bubble{font-size:13.5px}
 }
 
@@ -1153,34 +1168,7 @@ mark{
 
   <!-- 卡通客服小猫 -->
   <div class="mascot-wrap">
-    <svg class="mascot" viewBox="0 0 120 118" aria-hidden="true">
-      <ellipse cx="60" cy="110" rx="30" ry="6.5" fill="rgba(0,0,0,.22)"/>
-      <path d="M34 95 C34 79 46 72 60 72 C74 72 86 79 86 95 L86 105 C86 109 82 111 78 111 L42 111 C38 111 34 109 34 105 Z" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3"/>
-      <ellipse cx="60" cy="101" rx="15" ry="8.5" fill="#fff6df"/>
-      <ellipse cx="38" cy="104" rx="6.5" ry="5.2" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3"/>
-      <ellipse cx="82" cy="104" rx="6.5" ry="5.2" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3"/>
-      <path d="M33 34 L26 10 L50 24 Z" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M87 34 L94 10 L70 24 Z" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M35 28 L31 16 L43 23 Z" fill="#ffb3c7"/>
-      <path d="M85 28 L89 16 L77 23 Z" fill="#ffb3c7"/>
-      <circle cx="60" cy="50" r="31" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3"/>
-      <g class="eyes">
-        <circle cx="47" cy="50" r="4.6" fill="#3b2b20"/>
-        <circle cx="73" cy="50" r="4.6" fill="#3b2b20"/>
-        <circle cx="48.6" cy="48.4" r="1.6" fill="#fff"/>
-        <circle cx="74.6" cy="48.4" r="1.6" fill="#fff"/>
-      </g>
-      <ellipse cx="39" cy="60" rx="6" ry="3.6" fill="#ffb3c7" opacity=".85"/>
-      <ellipse cx="81" cy="60" rx="6" ry="3.6" fill="#ffb3c7" opacity=".85"/>
-      <path d="M57 58 L63 58 L60 61.5 Z" fill="#ff8aa0"/>
-      <path d="M54 66 Q60 71 66 66" stroke="#3b2b20" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-      <path d="M29 46 A32 32 0 0 1 91 46" fill="none" stroke="#ff4f8b" stroke-width="7" stroke-linecap="round"/>
-      <rect x="19" y="42" width="13" height="20" rx="6.5" fill="#ff4f8b" stroke="#d63a6e" stroke-width="2.5"/>
-      <rect x="88" y="42" width="13" height="20" rx="6.5" fill="#ff4f8b" stroke="#d63a6e" stroke-width="2.5"/>
-      <path d="M94 60 Q90 74 75 73" fill="none" stroke="#ff4f8b" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="72" cy="73" r="4.6" fill="#ffd23f" stroke="#d69e00" stroke-width="2.2"/>
-      <path d="M60 78 L47 84 L47 91 L60 86 L73 91 L73 84 Z" fill="#ff4f8b" stroke="#d63a6e" stroke-width="2" stroke-linejoin="round"/>
-    </svg>
+    <img class="mascot" src="assets/mascot-sheep.png" alt="客服懒羊羊在吃青草" width="320" height="297">
   </div>
   <div class="svc-bubble">🎧 客服小姐姐在线秒回~</div>
 
