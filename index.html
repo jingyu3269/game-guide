@@ -1363,7 +1363,7 @@ function copyWechat(gameName){
   // 尝试写入剪贴板
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(WECHAT_ID).then(function(){
-      showToast(gameName ? '已复制客服微信，请发送「'+gameName+'」' : '客服微信已复制：'+WECHAT_ID);
+      showToast(gameName ? '已复制客服微信，添加后直接发送「'+gameName+'」即可' : '客服微信已复制：'+WECHAT_ID);
     }).catch(function(){
       fallbackCopy(gameName);
     });
@@ -1381,7 +1381,7 @@ function fallbackCopy(gameName){
   ta.select();
   try{ document.execCommand('copy'); }catch(e){}
   document.body.removeChild(ta);
-  showToast(gameName ? '请复制微信号：'+WECHAT_ID+'（备注：'+gameName+'）' : '请复制微信号：'+WECHAT_ID);
+  showToast(gameName ? '请复制微信号：'+WECHAT_ID+'，添加后发送「'+gameName+'」即可' : '请复制微信号：'+WECHAT_ID);
 }
 
 function showToast(msg){
