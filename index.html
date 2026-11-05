@@ -1394,7 +1394,7 @@ function renderArticles(list, kw){
     var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : '');
     var isOpen = !!expanded[key] || !!(kw && autoOpen[key]);
     html += '<div class="article-card ' + cls + (isOpen ? ' open' : '') + '" data-key="' + esc(key) + '">';
-    html += '<div class="article-top"><span class="article-tag">' + esc(a.tag) + '</span><span class="article-game">' + esc(a.game) + ' · ' + a.date + '</span></div>';
+    html += '<div class="article-top"><span class="article-tag">' + esc(a.tag) + '</span><span class="article-game">' + esc(a.game) + '</span></div>';
     html += '<div class="article-title">' + highlight(a.title, kw) + '</div>';
     html += '<div class="article-summary">' + highlight(a.summary, kw) + '</div>';
     html += '<div class="article-full"><div class="article-full-inner">';
