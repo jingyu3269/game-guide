@@ -484,18 +484,27 @@ button{font-family:inherit;cursor:pointer;border:none}
   position:relative;width:146px;margin:0 auto 4px;
   animation:svcBob 2.8s ease-in-out infinite;
 }
-/* 吉祥物背后的暖光 */
+/* 吉祥物背后的圆圆月亮 */
 .mascot-wrap::before{
   content:"";position:absolute;left:50%;top:50%;
   transform:translate(-50%,-50%);
-  width:170px;height:170px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,205,120,.42) 0%,rgba(255,150,90,.18) 45%,transparent 70%);
+  width:190px;height:190px;border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 39%,rgba(226,168,96,.5) 0 6%,transparent 7%),
+    radial-gradient(circle at 65% 64%,rgba(226,168,96,.42) 0 4.8%,transparent 5.8%),
+    radial-gradient(circle at 57% 23%,rgba(226,168,96,.34) 0 3.6%,transparent 4.6%),
+    radial-gradient(circle at 46% 42%,#fffdf4 0%,#fff7dd 40%,#ffedb9 68%,#ffd98f 90%,#ffcb78 100%);
+  box-shadow:
+    0 0 22px 8px rgba(255,220,155,.55),
+    0 0 66px 26px rgba(255,196,120,.24),
+    inset -8px -10px 24px rgba(232,150,80,.24),
+    inset 3px 4px 14px rgba(255,255,255,.7);
   animation:svcHalo 3.2s ease-in-out infinite alternate;
   pointer-events:none;
 }
 @keyframes svcHalo{
-  0%{opacity:.65;transform:translate(-50%,-50%) scale(.9)}
-  100%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}
+  0%{opacity:.94;transform:translate(-50%,-50%) scale(.97)}
+  100%{opacity:1;transform:translate(-50%,-50%) scale(1.035)}
 }
 @keyframes svcBob{
   0%,100%{transform:translateY(0) rotate(-1.6deg)}
@@ -504,7 +513,6 @@ button{font-family:inherit;cursor:pointer;border:none}
 .mascot{
   position:relative;z-index:1;
   width:138px;height:auto;display:block;margin:0 auto;
-  filter:drop-shadow(0 8px 16px rgba(0,0,0,.42));
   -webkit-mask-image:linear-gradient(180deg,#000 90%,rgba(0,0,0,.45) 97%,transparent 100%);
   mask-image:linear-gradient(180deg,#000 90%,rgba(0,0,0,.45) 97%,transparent 100%);
   transform-origin:50% 88%;
@@ -959,7 +967,7 @@ mark{
   .svc-perks{grid-template-columns:repeat(3,1fr);max-width:640px}
   .svc-title{font-size:34px}
   .mascot-wrap{width:166px}
-  .mascot-wrap::before{width:210px;height:210px}
+  .mascot-wrap::before{width:232px;height:232px}
   .mascot{width:158px}
   .svc-bubble{font-size:13.5px}
 }
