@@ -123,24 +123,22 @@ button{font-family:inherit;cursor:pointer;border:none}
   padding:4px 12px;border-radius:12px;
   margin-bottom:14px;
 }
-.hero h1,
-.hero h1 em{
-  background:linear-gradient(100deg,#d40048 0%,#ff2d87 16%,#ff8fc0 30%,#ff3d93 46%,#d40048 62%,#ff6fb0 78%,#ff2d87 88%,#d40048 100%);
-  background-size:260% 100%;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  animation:titleFlow 5s linear infinite;
-}
 .hero h1{
   font-size:36px;font-weight:900;
   letter-spacing:2px;
-  margin-bottom:10px;
+  width:fit-content;
+  margin:0 auto 10px;
   line-height:1.2;
-  filter:drop-shadow(0 2px 5px rgba(200,0,70,.22));
+  background:linear-gradient(90deg,#ff2d2d 0%,#ff7a00 16%,#ffcc00 30%,#3ecf5a 46%,#29c5e5 60%,#3b6cff 74%,#8a4dff 88%,#a63bff 100%);
+  background-size:100% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:hueFlow 9s linear infinite;
+  filter:drop-shadow(0 2px 5px rgba(60,40,110,.2)) hue-rotate(0deg);
 }
-@keyframes titleFlow{
-  0%{background-position:0% 0}
-  100%{background-position:260% 0}
+@keyframes hueFlow{
+  0%{filter:drop-shadow(0 2px 5px rgba(60,40,110,.2)) hue-rotate(0deg)}
+  100%{filter:drop-shadow(0 2px 5px rgba(60,40,110,.2)) hue-rotate(360deg)}
 }
 .hero h1 em{
   font-style:normal;
@@ -148,7 +146,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 .hero h1 em::after{
   content:"";position:absolute;left:0;right:0;bottom:2px;
-  height:8px;background:#ff5fa8;opacity:.35;z-index:-1;
+  height:8px;background:rgba(255,255,255,.35);opacity:.5;z-index:-1;
   border-radius:4px;
 }
 .hero-slogan{
