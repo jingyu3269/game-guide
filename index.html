@@ -412,6 +412,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 .gc-pink{--g1:#FF8FB8;--g2:#FF4D94;--acc:#F5297F;--shadow:rgba(255,77,148,.42)}
 .gc-blue{--g1:#54C7FF;--g2:#2E7BFF;--acc:#1E62E0;--shadow:rgba(46,123,255,.4)}
 .gc-violet{--g1:#B388FF;--g2:#7C4DFF;--acc:#6A3CE8;--shadow:rgba(124,77,255,.42)}
+.gc-gold{--bullet:#7A3E00;--g1:#FFC61A;--g2:#F08500;--acc:#B85E00;--shadow:rgba(240,133,0,.45)}
 .game-cover{
   height:118px;border-radius:16px;overflow:hidden;
   position:relative;
@@ -440,7 +441,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 .game-tag:nth-child(2n){transform:rotate(2deg)}
 .game-tag.hot{
-  background:#FFF176;color:#D84315;
+  background:#FF4444;color:#fff;
   animation:hotPulse 1.6s ease-in-out infinite;
 }
 @keyframes hotPulse{
@@ -470,7 +471,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 .game-tips li::before{
   content:"✦";
   position:absolute;left:0;top:0;
-  color:#FFF176;font-weight:900;
+  color:var(--bullet,#FFF176);font-weight:900;
 }
 .game-btn{
   width:100%;
@@ -1189,7 +1190,7 @@ mark{
     </div>
 
     <!-- 小小屠龙·冰雪复古 -->
-    <div class="game-card gc-blue">
+    <div class="game-card gc-gold">
       <span class="gc-sticker">❄️</span>
       <div class="game-cover">
         <img src="assets/cover-legend.webp" alt="小小屠龙·冰雪复古" loading="lazy" decoding="async">
