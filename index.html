@@ -45,7 +45,7 @@ body{
 /* ===== 花瓣飘落 ===== */
 .petal-container{
   position:fixed;top:0;left:0;width:100%;height:100%;
-  pointer-events:none;z-index:5;overflow:hidden;
+  pointer-events:none;z-index:90;overflow:hidden;
 }
 .petal{
   position:absolute;top:-30px;
@@ -54,6 +54,7 @@ body{
   border-radius:150% 0 150% 0;
   opacity:.8;
   animation:petalFall linear infinite;
+  filter:drop-shadow(0 1px 2px rgba(240,104,136,.35));
 }
 @keyframes petalFall{
   0%{
@@ -1392,15 +1393,15 @@ function openKuaishou(e){
 // 生成桃花花瓣
 (function(){
   var container = document.getElementById('petalContainer');
-  var petalCount = 18;
+  var petalCount = 32;
   for(var i = 0; i < petalCount; i++){
     var p = document.createElement('div');
     p.className = 'petal';
-    var size = 10 + Math.random() * 12;
+    var size = 9 + Math.random() * 13;
     p.style.width = size + 'px';
     p.style.height = size + 'px';
     p.style.left = Math.random() * 100 + '%';
-    p.style.animationDuration = (8 + Math.random() * 10) + 's';
+    p.style.animationDuration = (7 + Math.random() * 10) + 's';
     p.style.animationDelay = (Math.random() * 12) + 's';
     p.style.opacity = 0.5 + Math.random() * 0.4;
     container.appendChild(p);
