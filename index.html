@@ -480,7 +480,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 /* 卡通客服小猫 */
 .mascot-wrap{
-  position:relative;width:142px;margin:0 auto 4px;
+  position:relative;width:140px;margin:0 auto 4px;
   animation:svcBob 2.8s ease-in-out infinite;
 }
 /* 吉祥物背后的暖光 */
@@ -502,10 +502,35 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 .mascot{
   position:relative;z-index:1;
-  width:136px;height:auto;display:block;margin:0 auto;
+  width:132px;height:auto;display:block;margin:0 auto;
   filter:drop-shadow(0 8px 16px rgba(0,0,0,.42));
-  -webkit-mask-image:linear-gradient(180deg,#000 82%,rgba(0,0,0,.5) 95%,transparent 100%);
-  mask-image:linear-gradient(180deg,#000 82%,rgba(0,0,0,.5) 95%,transparent 100%);
+  -webkit-mask-image:linear-gradient(180deg,#000 90%,rgba(0,0,0,.45) 97%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 90%,rgba(0,0,0,.45) 97%,transparent 100%);
+  transform-origin:50% 88%;
+  animation:svcChew 1s ease-in-out infinite;
+}
+/* 咀嚼：整体轻微起伏，像在一口口啃蛋糕 */
+@keyframes svcChew{
+  0%,56%,100%{transform:translateY(0) rotate(0deg) scale(1,1)}
+  14%{transform:translateY(2px) rotate(-.8deg) scale(1.022,.968)}
+  28%{transform:translateY(-2px) rotate(.6deg) scale(.99,1.014)}
+  42%{transform:translateY(1px) rotate(-.4deg) scale(1.012,.982)}
+}
+/* 吃到蛋糕冒出的爱心 */
+.mascot-wrap .yum{
+  position:absolute;z-index:2;
+  font-size:12px;line-height:1;color:#ff8fc0;
+  text-shadow:0 0 6px rgba(255,120,180,.85),0 1px 0 rgba(150,40,90,.25);
+  opacity:0;pointer-events:none;
+  animation:yumFloat 2.9s ease-out infinite;
+}
+.mascot-wrap .yum:nth-of-type(2){font-size:9px;color:#ffd0e2;animation-delay:.9s}
+.mascot-wrap .yum:nth-of-type(3){font-size:13px;color:#ff7ab5;animation-delay:1.8s}
+@keyframes yumFloat{
+  0%{opacity:0;transform:translate(0,8px) scale(.4) rotate(-10deg)}
+  18%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg)}
+  72%{opacity:.9}
+  100%{opacity:0;transform:translate(var(--dx,7px),-40px) scale(1.08) rotate(14deg)}
 }
 /* 气泡提示 */
 .svc-bubble{
@@ -653,9 +678,10 @@ button{font-family:inherit;cursor:pointer;border:none}
   .perk .ico{width:29px;height:29px;border-radius:10px;font-size:15px}
 }
 @media (prefers-reduced-motion:reduce){
-  .svc-star,.svc-coin,.mascot-wrap,.mascot-wrap::before,.svc-bubble,
+  .svc-star,.svc-coin,.mascot-wrap,.mascot,.mascot-wrap::before,.svc-bubble,
   .svc-title,.svc-ticket,.perk,.svc-btn,.svc-btn::after,
   .svc-title::before,.svc-title::after{animation:none}
+  .mascot-wrap .yum{display:none}
   .svc-btn::after{display:none}
 }
 
@@ -931,9 +957,9 @@ mark{
   .game-grid{grid-template-columns:repeat(3,1fr);max-width:960px}
   .svc-perks{grid-template-columns:repeat(3,1fr);max-width:640px}
   .svc-title{font-size:34px}
-  .mascot-wrap{width:164px}
-  .mascot-wrap::before{width:196px;height:196px}
-  .mascot{width:156px}
+  .mascot-wrap{width:160px}
+  .mascot-wrap::before{width:210px;height:210px}
+  .mascot{width:152px}
   .svc-bubble{font-size:13.5px}
 }
 
@@ -1168,7 +1194,10 @@ mark{
 
   <!-- 卡通客服小猫 -->
   <div class="mascot-wrap">
-    <img class="mascot" src="assets/mascot-sheep.png" alt="客服懒羊羊在吃青草" width="320" height="297">
+    <img class="mascot" src="assets/mascot-cake.png" alt="客服懒羊羊在吃草莓蛋糕" width="420" height="551">
+    <span class="yum" style="left:73%;bottom:52%;--dx:10px">♥</span>
+    <span class="yum" style="left:79%;bottom:44%;--dx:12px">♥</span>
+    <span class="yum" style="left:19%;bottom:47%;--dx:-9px">♥</span>
   </div>
   <div class="svc-bubble">🎧 客服小姐姐在线秒回~</div>
 
