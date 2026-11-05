@@ -141,7 +141,12 @@ button{font-family:inherit;cursor:pointer;border:none}
   background-size:100% 100%;
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;color:transparent;
-  filter:drop-shadow(0 2px 5px rgba(60,40,110,.2));
+  animation:hueFlow 9s linear infinite;
+  filter:drop-shadow(0 2px 5px rgba(60,40,110,.2)) hue-rotate(0deg);
+}
+@keyframes hueFlow{
+  0%{filter:drop-shadow(0 2px 5px rgba(60,40,110,.2)) hue-rotate(0deg)}
+  100%{filter:drop-shadow(0 2px 5px rgba(60,40,110,.2)) hue-rotate(360deg)}
 }
 .hero h1 em{
   font-style:normal;
