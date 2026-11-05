@@ -493,18 +493,35 @@ button{font-family:inherit;cursor:pointer;border:none}
     radial-gradient(circle at 30% 39%,rgba(226,168,96,.5) 0 6%,transparent 7%),
     radial-gradient(circle at 65% 64%,rgba(226,168,96,.42) 0 4.8%,transparent 5.8%),
     radial-gradient(circle at 57% 23%,rgba(226,168,96,.34) 0 3.6%,transparent 4.6%),
-    radial-gradient(circle at 46% 42%,#fffdf4 0%,#fff7dd 40%,#ffedb9 68%,#ffd98f 90%,#ffcb78 100%);
+    radial-gradient(circle at 46% 42%,#fffdf6 0%,#fffaea 42%,#fff0c6 70%,#ffe2ab 90%,#ffd79a 100%);
   box-shadow:
     0 0 22px 8px rgba(255,220,155,.55),
     0 0 66px 26px rgba(255,196,120,.24),
     inset -8px -10px 24px rgba(232,150,80,.24),
     inset 3px 4px 14px rgba(255,255,255,.7);
-  animation:svcHalo 3.2s ease-in-out infinite alternate;
+  animation:svcHalo 4.6s ease-in-out infinite alternate;
   pointer-events:none;
 }
+/* 月亮呼吸：变大变亮 <-> 缩小变暗（靠光晕强弱，月面不发灰） */
 @keyframes svcHalo{
-  0%{opacity:.94;transform:translate(-50%,-50%) scale(.97)}
-  100%{opacity:1;transform:translate(-50%,-50%) scale(1.035)}
+  0%{
+    transform:translate(-50%,-50%) scale(.9);
+    filter:brightness(.96);
+    box-shadow:
+      0 0 12px 4px rgba(255,216,150,.32),
+      0 0 34px 12px rgba(255,190,120,.12),
+      inset -8px -10px 24px rgba(232,150,80,.2),
+      inset 3px 4px 14px rgba(255,255,255,.45);
+  }
+  100%{
+    transform:translate(-50%,-50%) scale(1.07);
+    filter:brightness(1.06);
+    box-shadow:
+      0 0 34px 14px rgba(255,228,172,.8),
+      0 0 96px 44px rgba(255,196,120,.34),
+      inset -8px -10px 24px rgba(232,150,80,.26),
+      inset 3px 4px 14px rgba(255,255,255,.8);
+  }
 }
 @keyframes svcBob{
   0%,100%{transform:translateY(0) rotate(-1.6deg)}
