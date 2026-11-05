@@ -434,61 +434,216 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 .game-btn:active{opacity:.8}
 
-/* ========== 客服福利区 ========== */
+/* ========== 客服福利区（卡通游戏风） ========== */
 .service{
-  background:linear-gradient(135deg,rgba(26,110,92,.62) 0%,rgba(18,78,63,.72) 100%);
-  color:#fff;
-  padding:50px 20px;
-  text-align:center;
-  text-shadow:0 1px 6px rgba(0,0,0,.22);
+  position:relative;overflow:hidden;
+  color:#fff;text-align:center;
+  padding:50px 20px 62px;
+  background:
+    radial-gradient(900px 420px at 50% -80px, rgba(255,196,88,.30), transparent 62%),
+    linear-gradient(180deg,#31175f 0%,#5b24a8 46%,#9c36bd 76%,#ff5e8e 102%);
 }
-.service .benefit{background:rgba(255,255,255,.14)}
-.service h2{
-  font-size:26px;font-weight:900;margin-bottom:10px;
+/* 底部奶油扇形波浪边，与米色页脚衔接 */
+.service::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:22px;
+  pointer-events:none;
+  background:radial-gradient(circle at 11px 22px,#FFF6E9 10.5px,transparent 11px) repeat-x 0 0/22px 22px;
 }
-.service p{
-  font-size:14px;opacity:.9;margin-bottom:24px;
-  line-height:1.8;
+/* 顶部粉金发光边，界定区块起点 */
+.service::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:5px;
+  background:linear-gradient(90deg,#ff5e8e,#ffb547 45%,#ff5e8e);
+  box-shadow:0 0 20px rgba(255,130,140,.75);
 }
-.service-wechat{
-  background:rgba(255,255,255,.15);
-  border:2px dashed rgba(255,255,255,.5);
-  border-radius:16px;
-  padding:20px;
-  max-width:360px;margin:0 auto 20px;
-  backdrop-filter:blur(6px);
+/* 闪烁星星 */
+.svc-star{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#fff;opacity:.75;pointer-events:none;
+  animation:svcTwinkle 2.6s ease-in-out infinite;
 }
-.service-wechat .label{
-  font-size:13px;opacity:.8;margin-bottom:6px;
+@keyframes svcTwinkle{
+  0%,100%{opacity:.15;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.3)}
 }
-.service-wechat .id{
-  font-size:24px;font-weight:900;
-  letter-spacing:2px;
-  font-family:"Courier New",monospace;
+/* 飘动金币 */
+.svc-coin{
+  position:absolute;width:26px;height:26px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 35% 30%,#fff3b0,#ffc400 62%,#d99000);
+  box-shadow:0 3px 10px rgba(0,0,0,.3), inset 0 0 0 3px rgba(255,255,255,.4);
+  display:flex;align-items:center;justify-content:center;
+  animation:svcCoin 3.8s ease-in-out infinite;
 }
-.service-benefits{
-  display:grid;grid-template-columns:1fr;
-  gap:10px;max-width:360px;margin:0 auto 24px;
-  text-align:left;
+.svc-coin::after{content:"★";font-size:13px;font-weight:900;color:#9c6a00}
+@keyframes svcCoin{
+  0%,100%{transform:translateY(0) rotate(-10deg)}
+  50%{transform:translateY(-14px) rotate(10deg)}
 }
-.benefit{
-  display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.1);
-  padding:10px 14px;border-radius:10px;
+/* 卡通客服小猫 */
+.mascot-wrap{width:128px;margin:0 auto 4px;animation:svcBob 2.8s ease-in-out infinite}
+@keyframes svcBob{
+  0%,100%{transform:translateY(0) rotate(-1.6deg)}
+  50%{transform:translateY(-7px) rotate(1.6deg)}
+}
+.mascot{width:118px;display:block;margin:0 auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+.mascot .eyes{
+  transform-box:fill-box;transform-origin:center;
+  animation:svcBlink 4.2s infinite;
+}
+@keyframes svcBlink{
+  0%,93%,100%{transform:scaleY(1)}
+  96.5%{transform:scaleY(.12)}
+}
+/* 气泡提示 */
+.svc-bubble{
+  display:flex;width:fit-content;
+  align-items:center;gap:6px;
+  background:#fff;color:#e9347f;
+  font-size:12.5px;font-weight:800;
+  padding:7px 16px;border-radius:999px;
+  box-shadow:0 5px 16px rgba(0,0,0,.28);
+  margin:0 auto 14px;
+  animation:svcBubble 2.4s ease-in-out infinite;
+}
+@keyframes svcBubble{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+}
+/* 标题 */
+.svc-title{
+  position:relative;display:inline-block;max-width:100%;
+  font-size:28px;font-weight:900;letter-spacing:2px;
+  margin:0 0 14px;
+  text-shadow:0 2px 0 #c22a63,0 5px 0 rgba(0,0,0,.18),0 0 24px rgba(255,130,190,.9);
+  animation:svcTitle 2.6s ease-in-out infinite;
+}
+.svc-title::before,.svc-title::after{
+  content:"✨";position:absolute;top:-2px;font-size:15px;
+  animation:svcSparkle 2s ease-in-out infinite;
+}
+.svc-title::before{left:-18px}
+.svc-title::after{right:-18px;animation-delay:.6s}
+@keyframes svcSparkle{
+  0%,100%{opacity:.3;transform:scale(.7) rotate(-12deg)}
+  50%{opacity:1;transform:scale(1.15) rotate(12deg)}
+}
+@keyframes svcTitle{
+  0%,100%{transform:translateY(0) rotate(-.5deg)}
+  50%{transform:translateY(-4px) rotate(.5deg)}
+}
+.svc-sub{
+  display:flex;width:fit-content;
+  align-items:center;gap:6px;
   font-size:13px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28);
+  padding:7px 18px;border-radius:999px;
+  margin:0 auto 26px;
 }
-.benefit-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--orange);flex-shrink:0;
+/* 微信号优惠券 */
+.svc-ticket{
+  position:relative;width:100%;max-width:370px;margin:0 auto 24px;
+  background:linear-gradient(135deg,#fffdf6 0%,#fff0f6 100%);
+  color:#3b2b20;border-radius:18px;
+  padding:16px 20px 12px;text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,.32);
+  cursor:pointer;transition:transform .18s;
+  animation:svcTilt 4.2s ease-in-out infinite;
 }
-.service-copy-btn{
-  background:var(--orange);color:#fff;
-  padding:14px 36px;border-radius:28px;
-  font-size:16px;font-weight:700;
-  box-shadow:0 6px 20px rgba(0,0,0,.2);
-  transition:transform .15s;
+.svc-ticket:active{transform:scale(.96)}
+@keyframes svcTilt{
+  0%,100%{transform:rotate(-.7deg)}
+  50%{transform:rotate(.7deg)}
 }
-.service-copy-btn:active{transform:scale(.95)}
+.svc-ticket .label{
+  font-size:12px;color:#b06a8f;margin-bottom:6px;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+}
+.svc-ticket .id{
+  font-size:23px;font-weight:900;letter-spacing:2px;
+  font-family:"Courier New",monospace;color:#ff3d8a;
+  text-shadow:0 0 14px rgba(255,90,160,.45);
+}
+.svc-ticket .tip{
+  margin-top:9px;padding-top:8px;
+  border-top:2px dashed #f3b6cf;
+  font-size:11px;color:#c98aa8;letter-spacing:1px;
+}/* 福利清单 */
+.svc-perks{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  width:100%;max-width:400px;margin:0 auto 28px;
+}
+.perk{
+  display:flex;align-items:center;gap:9px;
+  text-align:left;font-size:12.5px;font-weight:600;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.24);
+  padding:9px 10px;border-radius:14px;
+  animation:svcPerk 3.2s ease-in-out infinite;
+}
+.perk:nth-child(2){animation-delay:.2s}
+.perk:nth-child(3){animation-delay:.4s}
+.perk:nth-child(4){animation-delay:.6s}
+.perk:nth-child(5){animation-delay:.8s}
+.perk:nth-child(6){animation-delay:1s}
+@keyframes svcPerk{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+.perk .ico{
+  width:32px;height:32px;flex:none;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18);
+}
+.ico-1{background:linear-gradient(160deg,#ff8a5c,#ff5470)}
+.ico-2{background:linear-gradient(160deg,#5cc9ff,#3b7bff)}
+.ico-3{background:linear-gradient(160deg,#ffd25c,#ff9d2e)}
+.ico-4{background:linear-gradient(160deg,#7be08a,#2eb85c)}
+.ico-5{background:linear-gradient(160deg,#c78bff,#8a4dff)}
+.ico-6{background:linear-gradient(160deg,#ff9ec2,#ff5f9e)}
+/* 果冻大按钮 */
+.svc-btn{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(180deg,#ffd94f 0%,#ffb020 100%);
+  color:#5a2600;font-size:17px;font-weight:900;letter-spacing:1px;
+  padding:15px 46px;border:none;border-radius:999px;cursor:pointer;
+  box-shadow:0 6px 0 #d97a00,0 14px 26px rgba(0,0,0,.35);
+  overflow:hidden;transition:transform .12s,box-shadow .12s;
+  animation:svcBtn 3.4s ease-in-out infinite;
+}
+@keyframes svcBtn{
+  0%,86%,100%{transform:scale(1)}
+  90%{transform:scale(1.06) rotate(-1.2deg)}
+  95%{transform:scale(1.04) rotate(1.2deg)}
+}
+.svc-btn::after{
+  content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);
+  transform:skewX(-20deg);
+  animation:svcShine 2.8s ease-in-out infinite;
+}
+@keyframes svcShine{
+  0%,55%{left:-80%}
+  100%{left:130%}
+}
+.svc-btn:active{
+  transform:translateY(5px);
+  box-shadow:0 1px 0 #d97a00,0 6px 14px rgba(0,0,0,.3);
+}
+@media (max-width:420px){
+  .svc-title{font-size:25px;letter-spacing:1px}
+  .svc-title::before,.svc-title::after{font-size:13px}
+  .svc-title::before{left:-14px}
+  .svc-title::after{right:-14px}
+  .svc-perks{gap:8px}
+  .perk{font-size:12px;padding:8px 8px;gap:7px}
+  .perk .ico{width:29px;height:29px;border-radius:10px;font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){
+  .svc-star,.svc-coin,.mascot-wrap,.mascot .eyes,.svc-bubble,
+  .svc-title,.svc-ticket,.perk,.svc-btn,.svc-btn::after,
+  .svc-title::before,.svc-title::after{animation:none}
+  .svc-btn::after{display:none}
+}
 
 /* ========== 底部 ========== */
 .footer{
@@ -760,7 +915,11 @@ mark{
   .section{padding:70px 20px}
   .section-title h2{font-size:32px}
   .game-grid{grid-template-columns:repeat(3,1fr);max-width:960px}
-  .service-benefits{grid-template-columns:repeat(2,1fr);max-width:600px}
+  .svc-perks{grid-template-columns:repeat(3,1fr);max-width:640px}
+  .svc-title{font-size:34px}
+  .mascot-wrap{width:150px}
+  .mascot{width:140px}
+  .svc-bubble{font-size:13.5px}
 }
 
 /* ========== 移动端专属 ========== */
@@ -975,26 +1134,77 @@ mark{
   <div class="no-result" id="noResult">没有找到相关攻略，试试其他关键词</div>
 </section>
 
-<!-- ===== 客服福利区 ===== -->
+<!-- ===== 客服福利区（卡通游戏风） ===== -->
 <section class="service" id="service">
-  <h2>加客服 · 领专属福利</h2>
-  <p>下载链接、新手攻略、专属礼包、充值折扣，客服一对一服务</p>
+  <!-- 星星装饰 -->
+  <i class="svc-star" style="left:7%;top:10%"></i>
+  <i class="svc-star" style="left:16%;top:30%;animation-delay:.4s"></i>
+  <i class="svc-star" style="left:10%;top:56%;animation-delay:.9s"></i>
+  <i class="svc-star" style="left:22%;top:78%;animation-delay:1.3s"></i>
+  <i class="svc-star" style="right:9%;top:16%;animation-delay:.6s"></i>
+  <i class="svc-star" style="right:18%;top:38%;animation-delay:1.1s"></i>
+  <i class="svc-star" style="right:12%;top:62%;animation-delay:.2s"></i>
+  <i class="svc-star" style="right:24%;top:84%;animation-delay:.8s"></i>
+  <!-- 金币装饰 -->
+  <span class="svc-coin" style="left:5%;top:20%;animation-delay:.3s"></span>
+  <span class="svc-coin" style="right:6%;top:44%;animation-delay:1.2s"></span>
+  <span class="svc-coin" style="left:9%;bottom:14%;animation-delay:2s"></span>
+  <span class="svc-coin" style="right:6%;bottom:30%;animation-delay:1.6s"></span>
 
-  <div class="service-wechat">
-    <div class="label">客服微信号（长按复制）</div>
+  <!-- 卡通客服小猫 -->
+  <div class="mascot-wrap">
+    <svg class="mascot" viewBox="0 0 120 118" aria-hidden="true">
+      <ellipse cx="60" cy="110" rx="30" ry="6.5" fill="rgba(0,0,0,.22)"/>
+      <path d="M34 95 C34 79 46 72 60 72 C74 72 86 79 86 95 L86 105 C86 109 82 111 78 111 L42 111 C38 111 34 109 34 105 Z" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3"/>
+      <ellipse cx="60" cy="101" rx="15" ry="8.5" fill="#fff6df"/>
+      <ellipse cx="38" cy="104" rx="6.5" ry="5.2" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3"/>
+      <ellipse cx="82" cy="104" rx="6.5" ry="5.2" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3"/>
+      <path d="M33 34 L26 10 L50 24 Z" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M87 34 L94 10 L70 24 Z" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M35 28 L31 16 L43 23 Z" fill="#ffb3c7"/>
+      <path d="M85 28 L89 16 L77 23 Z" fill="#ffb3c7"/>
+      <circle cx="60" cy="50" r="31" fill="#ffe9b8" stroke="#8a5a2b" stroke-width="3"/>
+      <g class="eyes">
+        <circle cx="47" cy="50" r="4.6" fill="#3b2b20"/>
+        <circle cx="73" cy="50" r="4.6" fill="#3b2b20"/>
+        <circle cx="48.6" cy="48.4" r="1.6" fill="#fff"/>
+        <circle cx="74.6" cy="48.4" r="1.6" fill="#fff"/>
+      </g>
+      <ellipse cx="39" cy="60" rx="6" ry="3.6" fill="#ffb3c7" opacity=".85"/>
+      <ellipse cx="81" cy="60" rx="6" ry="3.6" fill="#ffb3c7" opacity=".85"/>
+      <path d="M57 58 L63 58 L60 61.5 Z" fill="#ff8aa0"/>
+      <path d="M54 66 Q60 71 66 66" stroke="#3b2b20" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M29 46 A32 32 0 0 1 91 46" fill="none" stroke="#ff4f8b" stroke-width="7" stroke-linecap="round"/>
+      <rect x="19" y="42" width="13" height="20" rx="6.5" fill="#ff4f8b" stroke="#d63a6e" stroke-width="2.5"/>
+      <rect x="88" y="42" width="13" height="20" rx="6.5" fill="#ff4f8b" stroke="#d63a6e" stroke-width="2.5"/>
+      <path d="M94 60 Q90 74 75 73" fill="none" stroke="#ff4f8b" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="72" cy="73" r="4.6" fill="#ffd23f" stroke="#d69e00" stroke-width="2.2"/>
+      <path d="M60 78 L47 84 L47 91 L60 86 L73 91 L73 84 Z" fill="#ff4f8b" stroke="#d63a6e" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="svc-bubble">🎧 客服小姐姐在线秒回~</div>
+
+  <h2 class="svc-title">加客服 · 领专属福利</h2>
+  <div class="svc-sub">🎉 下载链接 · 攻略指导 · 礼包码 · 充值折扣</div>
+
+  <!-- 微信号优惠券 -->
+  <div class="svc-ticket" onclick="copyWechat()" role="button" aria-label="复制客服微信号">
+    <div class="label">🎫 客服微信号（点一下就复制）</div>
     <div class="id">LYLOVEZLL1314999</div>
+    <div class="tip">点我一下 · 自动复制到剪贴板</div>
   </div>
 
-  <div class="service-benefits">
-    <div class="benefit"><div class="benefit-dot"></div>最新版下载链接直达</div>
-    <div class="benefit"><div class="benefit-dot"></div>新手开荒攻略指导</div>
-    <div class="benefit"><div class="benefit-dot"></div>专属福利礼包码</div>
-    <div class="benefit"><div class="benefit-dot"></div>充值折扣与返利</div>
-    <div class="benefit"><div class="benefit-dot"></div>开服时间表提醒</div>
-    <div class="benefit"><div class="benefit-dot"></div>问题售后快速响应</div>
+  <!-- 福利清单 -->
+  <div class="svc-perks">
+    <div class="perk"><span class="ico ico-1">🚀</span>最新版下载直达</div>
+    <div class="perk"><span class="ico ico-2">📖</span>新手开荒指导</div>
+    <div class="perk"><span class="ico ico-3">🎁</span>专属福利礼包码</div>
+    <div class="perk"><span class="ico ico-4">💰</span>充值折扣返利</div>
+    <div class="perk"><span class="ico ico-5">⏰</span>开服时间提醒</div>
+    <div class="perk"><span class="ico ico-6">💬</span>售后快速响应</div>
   </div>
 
-  <button class="service-copy-btn" onclick="copyWechat()">一键复制微信号</button>
+  <button class="svc-btn" onclick="copyWechat()">🎁 一键复制微信号</button>
 </section>
 
 <!-- ===== 底部 ===== -->
