@@ -174,6 +174,26 @@ button{font-family:inherit;cursor:pointer;border:none}
   width:100%;
   height:auto;
 }
+/* 游戏封面淡入淡出轮播（4 张，3 秒一张） */
+.hero-img-wrap{aspect-ratio:2.1/1;background:#120b1e}
+.hero-track{position:absolute;top:0;left:0;right:0;bottom:0}
+.hero-img-wrap .hero-slide{
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  opacity:0;
+  animation:heroCycle 12s ease-in-out infinite;
+  will-change:opacity,transform;
+}
+.hero-img-wrap .hero-slide:nth-child(1){animation-delay:0s}
+.hero-img-wrap .hero-slide:nth-child(2){animation-delay:3s}
+.hero-img-wrap .hero-slide:nth-child(3){animation-delay:6s}
+.hero-img-wrap .hero-slide:nth-child(4){animation-delay:9s}
+@keyframes heroCycle{
+  0%{opacity:0;transform:scale(1.05)}
+  4%,23%{opacity:1;transform:scale(1)}
+  28%,100%{opacity:0;transform:scale(1.05)}
+}
 .hero-cta-row{
   display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
 }
@@ -399,8 +419,9 @@ button{font-family:inherit;cursor:pointer;border:none}
   box-shadow:0 5px 14px rgba(0,0,0,.22);
 }
 .game-cover img{
-  width:100%;height:100%;object-fit:cover;display:block;
+  width:100%;height:100%;object-fit:cover;object-position:center;display:block;
 }
+.game-card:nth-child(3) .game-cover img{object-position:center 16%}
 .game-body{padding:12px 8px 4px;position:relative;z-index:1}
 .game-name{
   font-size:18px;font-weight:900;color:#fff;
@@ -1071,6 +1092,9 @@ mark{
 @media (prefers-reduced-motion:reduce){
   .petal,.sway{animation:none}
   .petal-container{display:none}
+  .hero-track{animation:none}
+  .hero-track .hero-slide{animation:none}
+  .hero-track .hero-slide:first-child{opacity:1}
   .bubble-pop{display:none}
   .follow-icons .app-ico,.follow-go i{animation:none}
   .hero h1{animation:none}
@@ -1093,8 +1117,13 @@ mark{
   <div class="hero-badge">海量手游攻略 · 一手福利 · 客服直达</div>
   <h1>精品手游<em>攻略站</em></h1>
   <p class="hero-slogan">汇聚传奇、三国、回合制热门手游，攻略礼包客服一站式</p>
-  <div class="hero-img-wrap">
-    <img src="assets/hero-sakura-v2.jpg" alt="樱花灵兽 · 精灵永恒">
+  <div class="hero-img-wrap" id="heroSlide">
+    <div class="hero-track">
+      <img class="hero-slide" src="assets/cover-taoyuan.webp" alt="桃园将帅录">
+      <img class="hero-slide" src="assets/cover-jingling.webp" alt="精灵永恒">
+      <img class="hero-slide" src="assets/cover-legend.webp" alt="小小屠龙·冰雪复古">
+      <img class="hero-slide" src="assets/cover-jingling2.webp" alt="精灵永恒·法师">
+    </div>
   </div>
   <div class="hero-cta-row">
     <button class="btn-primary" onclick="copyWechat()">
@@ -1139,7 +1168,7 @@ mark{
     <div class="game-card gc-pink">
       <span class="gc-sticker">🌸</span>
       <div class="game-cover">
-        <img src="assets/taoyuan-cover.webp" alt="桃园将帅录" loading="lazy" decoding="async">
+        <img src="assets/cover-taoyuan.webp" alt="桃园将帅录" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">桃园将帅录</div>
@@ -1163,7 +1192,7 @@ mark{
     <div class="game-card gc-blue">
       <span class="gc-sticker">❄️</span>
       <div class="game-cover">
-        <img src="assets/legend-cover.webp" alt="小小屠龙·冰雪复古" loading="lazy" decoding="async">
+        <img src="assets/cover-legend.webp" alt="小小屠龙·冰雪复古" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">小小屠龙·冰雪复古</div>
@@ -1187,7 +1216,7 @@ mark{
     <div class="game-card gc-violet">
       <span class="gc-sticker">🧚</span>
       <div class="game-cover">
-        <img src="assets/jingling-cover.webp" alt="精灵永恒" loading="lazy" decoding="async">
+        <img src="assets/cover-jingling2.webp" alt="精灵永恒" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">精灵永恒</div>
