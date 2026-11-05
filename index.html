@@ -129,6 +129,7 @@ button{font-family:inherit;cursor:pointer;border:none}
   width:fit-content;
   margin:0 auto 10px;
   line-height:1.2;
+  white-space:nowrap;
   /* 七字彩虹固定排列：精品手游=红橙黄绿，攻略站=青蓝紫 */
   background:linear-gradient(90deg,
     #ff2d2d 0%,#ff2d2d 6%,
@@ -623,6 +624,10 @@ mark{
 }
 .back-top.show{opacity:.92;pointer-events:auto}
 .back-top:active{transform:scale(.92)}
+
+@media (max-width:380px){
+  .hero h1{font-size:30px}
+}
 
 /* ========== 移动端吸底客服条 ========== */
 .mobile-cta{display:none}
