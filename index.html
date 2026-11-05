@@ -343,97 +343,128 @@ button{font-family:inherit;cursor:pointer;border:none}
 .section-title h2{font-size:26px;font-weight:800;color:var(--ink)}
 .section-title p{font-size:14px;color:var(--ink-soft);margin-top:8px}
 
-/* ========== 游戏列表 ========== */
+/* ========== 游戏列表（多巴胺糖果风） ========== */
 .game-grid{
   display:grid;
   grid-template-columns:1fr;
-  gap:14px;
+  gap:20px;
   max-width:480px;margin:0 auto;
 }
 .game-card{
-  background:var(--card);
-  border-radius:16px;
+  --g1:#FF8FB8;--g2:#FF4D94;--acc:#F5297F;--shadow:rgba(255,77,148,.42);
+  position:relative;
+  background:linear-gradient(160deg,var(--g1) 0%,var(--g2) 100%);
+  border-radius:24px;
+  padding:8px 8px 10px;
+  box-shadow:0 12px 26px -8px var(--shadow),inset 0 0 0 2px rgba(255,255,255,.35);
+  transform:rotate(var(--tilt,-1.2deg));
+  transition:transform .25s ease;
   overflow:hidden;
-  box-shadow:0 4px 16px rgba(45,58,46,.08);
-  transition:transform .2s;
 }
+.game-card:nth-child(2){--tilt:1.1deg}
+.game-card:nth-child(3){--tilt:-1.3deg}
+.game-card:hover{transform:rotate(0deg) translateY(-4px)}
 .game-card:active{transform:scale(.98)}
+/* 卡片里的装饰泡泡 */
+.game-card::before{
+  content:"";position:absolute;right:-34px;top:-38px;
+  width:110px;height:110px;border-radius:50%;
+  background:rgba(255,255,255,.22);pointer-events:none;
+}
+.game-card::after{
+  content:"";position:absolute;left:-26px;bottom:56px;
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(255,255,255,.14);pointer-events:none;
+}
+/* 角上的浮动小贴纸 */
+.gc-sticker{
+  position:absolute;z-index:3;top:4px;right:12px;
+  font-size:26px;line-height:1;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.28));
+  pointer-events:none;
+  animation:gcFloat 2.6s ease-in-out infinite;
+}
+@keyframes gcFloat{
+  0%,100%{transform:rotate(10deg) translateY(0)}
+  50%{transform:rotate(20deg) translateY(-5px)}
+}
+/* 三张卡各自的多巴胺配色 */
+.gc-pink{--g1:#FF8FB8;--g2:#FF4D94;--acc:#F5297F;--shadow:rgba(255,77,148,.42)}
+.gc-blue{--g1:#54C7FF;--g2:#2E7BFF;--acc:#1E62E0;--shadow:rgba(46,123,255,.4)}
+.gc-violet{--g1:#B388FF;--g2:#7C4DFF;--acc:#6A3CE8;--shadow:rgba(124,77,255,.42)}
 .game-cover{
-  height:110px;
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-}
-.game-cover.taoyuan{
-  background:linear-gradient(135deg,#FFB5C5 0%,#FF8FA3 100%);
-}
-.game-cover.snow{
-  background:linear-gradient(135deg,#6DD5FA 0%,#2980B9 100%);
-}
-.game-cover.legend{
-  background:linear-gradient(135deg,#F25C54 0%,#B71C1C 100%);
-}
-.game-cover.strategy{
-  background:linear-gradient(135deg,#3DB8A0 0%,#1B5E20 100%);
-}
-.game-cover.mmo{
-  background:linear-gradient(135deg,#9B6DD6 0%,#4A148C 100%);
-}
-.game-cover.rpg{
-  background:linear-gradient(135deg,#FFB547 0%,#E65100 100%);
+  height:118px;border-radius:16px;overflow:hidden;
+  position:relative;
+  border:3px solid rgba(255,255,255,.9);
+  box-shadow:0 5px 14px rgba(0,0,0,.22);
 }
 .game-cover img{
-  width:100%;height:100%;object-fit:cover;
+  width:100%;height:100%;object-fit:cover;display:block;
 }
-.game-cover-icon{
-  font-size:40px;font-weight:900;color:rgba(255,255,255,.9);
-  text-shadow:0 2px 8px rgba(0,0,0,.2);
-}
-.game-body{padding:14px 16px}
+.game-body{padding:12px 8px 4px;position:relative;z-index:1}
 .game-name{
-  font-size:17px;font-weight:800;
-  margin-bottom:4px;
+  font-size:18px;font-weight:900;color:#fff;
+  letter-spacing:.5px;margin-bottom:6px;
+  text-shadow:0 2px 0 rgba(0,0,0,.16);
 }
 .game-tags{
   display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;
 }
 .game-tag{
-  font-size:11px;font-weight:600;
-  padding:2px 8px;border-radius:8px;
-  background:var(--green-soft);color:var(--green-deep);
+  font-size:11px;font-weight:800;
+  padding:3px 10px;border-radius:999px;
+  background:rgba(255,255,255,.92);color:var(--acc);
+  transform:rotate(-2deg);
+  box-shadow:0 2px 5px rgba(0,0,0,.15);
 }
-.game-tag.hot{background:var(--red-soft);color:var(--red)}
+.game-tag:nth-child(2n){transform:rotate(2deg)}
+.game-tag.hot{
+  background:#FFF176;color:#D84315;
+  animation:hotPulse 1.6s ease-in-out infinite;
+}
+@keyframes hotPulse{
+  0%,100%{transform:rotate(-3deg) scale(1)}
+  50%{transform:rotate(3deg) scale(1.1)}
+}
 .game-desc{
-  font-size:13px;color:var(--ink-soft);
-  line-height:1.5;margin-bottom:10px;
+  font-size:13px;color:rgba(255,255,255,.96);
+  line-height:1.55;margin-bottom:10px;
+  text-shadow:0 1px 2px rgba(0,0,0,.14);
 }
 .game-tips{
   list-style:none;
   margin:0 0 12px;
   padding:10px 12px;
-  background:var(--bg);
-  border-radius:8px;
+  background:rgba(255,255,255,.24);
+  border:1.5px dashed rgba(255,255,255,.65);
+  border-radius:14px;
   font-size:12px;
-  color:var(--ink-soft);
-  line-height:1.8;
+  color:#fff;
+  line-height:1.85;
 }
 .game-tips li{
-  padding-left:14px;
+  padding-left:18px;
   position:relative;
 }
 .game-tips li::before{
-  content:"";
-  position:absolute;left:0;top:9px;
-  width:5px;height:5px;border-radius:50%;
-  background:var(--green);
+  content:"✦";
+  position:absolute;left:0;top:0;
+  color:#FFF176;font-weight:900;
 }
 .game-btn{
   width:100%;
-  background:var(--ink);color:#fff;
-  padding:10px;border-radius:10px;
-  font-size:14px;font-weight:600;
-  transition:opacity .15s;
+  background:#fff;color:var(--acc);
+  padding:11px;border-radius:999px;
+  font-size:14.5px;font-weight:900;letter-spacing:1px;
+  box-shadow:0 5px 0 rgba(0,0,0,.15),0 8px 18px rgba(0,0,0,.16);
+  transition:transform .15s;
+  animation:btnJelly 2.4s ease-in-out infinite;
 }
-.game-btn:active{opacity:.8}
+@keyframes btnJelly{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.035)}
+}
+.game-btn:active{transform:scale(.95)}
 
 /* ========== 客服福利区（卡通游戏风） ========== */
 .service{
@@ -706,7 +737,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 @media (prefers-reduced-motion:reduce){
   .svc-star,.svc-coin,.mascot-wrap,.mascot,.mascot-wrap::before,.svc-bubble,
   .svc-title,.svc-ticket,.perk,.svc-btn,.svc-btn::after,
-  .svc-title::before,.svc-title::after{animation:none}
+  .svc-title::before,.svc-title::after,.game-card,.game-btn,.gc-sticker,.game-tag.hot{animation:none}
   .mascot-wrap .yum{display:none}
   .svc-btn::after{display:none}
 }
@@ -1105,9 +1136,10 @@ mark{
   <div class="game-grid">
 
     <!-- 桃园将帅录 -->
-    <div class="game-card">
+    <div class="game-card gc-pink">
+      <span class="gc-sticker">🌸</span>
       <div class="game-cover">
-        <img src="assets/taoyuan.png" alt="桃园将帅录" loading="lazy" decoding="async">
+        <img src="assets/taoyuan-cover.webp" alt="桃园将帅录" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">桃园将帅录</div>
@@ -1123,14 +1155,15 @@ mark{
           <li>新手资源返还，阵容随便试不浪费</li>
           <li>赛季沙盘攻城，联盟占都城定天下</li>
         </ul>
-        <button class="game-btn" onclick="copyWechat('桃园将帅录')">领取下载与攻略</button>
+        <button class="game-btn" onclick="copyWechat('桃园将帅录')">🎁 领取下载与攻略</button>
       </div>
     </div>
 
     <!-- 小小屠龙·冰雪复古 -->
-    <div class="game-card">
+    <div class="game-card gc-blue">
+      <span class="gc-sticker">❄️</span>
       <div class="game-cover">
-        <img src="assets/legend.png" alt="小小屠龙·冰雪复古" loading="lazy" decoding="async">
+        <img src="assets/legend-cover.webp" alt="小小屠龙·冰雪复古" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">小小屠龙·冰雪复古</div>
@@ -1146,14 +1179,15 @@ mark{
           <li>装备不过商城，毕业装全靠野外掉落</li>
           <li>散人自由交易，打金变现无门槛</li>
         </ul>
-        <button class="game-btn" onclick="copyWechat('小小屠龙·冰雪复古')">领取下载与攻略</button>
+        <button class="game-btn" onclick="copyWechat('小小屠龙·冰雪复古')">🎁 领取下载与攻略</button>
       </div>
     </div>
 
     <!-- 精灵永恒 -->
-    <div class="game-card">
+    <div class="game-card gc-violet">
+      <span class="gc-sticker">🧚</span>
       <div class="game-cover">
-        <img src="assets/jingling.jpg" alt="精灵永恒" loading="lazy" decoding="async">
+        <img src="assets/jingling-cover.webp" alt="精灵永恒" loading="lazy" decoding="async">
       </div>
       <div class="game-body">
         <div class="game-name">精灵永恒</div>
@@ -1169,7 +1203,7 @@ mark{
           <li>开荒期基础材料最值钱，摆摊低买高卖</li>
           <li>第二赛季圣物系统解锁，战力大幅提升</li>
         </ul>
-        <button class="game-btn" onclick="copyWechat('精灵永恒')">领取下载与攻略</button>
+        <button class="game-btn" onclick="copyWechat('精灵永恒')">🎁 领取下载与攻略</button>
       </div>
     </div>
 
