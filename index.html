@@ -922,21 +922,12 @@ button{font-family:inherit;cursor:pointer;border:none}
   letter-spacing:1.5px;
 }
 #articles .section-title h2{
-  display:inline-block;
+  display:block;width:fit-content;margin:0 auto;
+  padding:4px 22px;border-radius:999px;
   background:linear-gradient(135deg,#FF5FA2 0%,#FF9E3D 58%,#8B5CF6 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-#articles .section-title h2::before,
-#articles .section-title h2::after{
-  content:"";display:inline-block;width:26px;height:26px;margin:0 8px;
-  vertical-align:-3px;background-size:contain;background-repeat:no-repeat;
-}
-#articles .section-title h2::before{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3l2.6 5.7 6.4.7-4.7 4.3 1.3 6.1L12 16.9 6.4 19.8l1.3-6.1L3 9.4l6.4-.7z' fill='%23FFC61A'/%3E%3C/svg%3E");
-}
-#articles .section-title h2::after{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3l2.6 5.7 6.4.7-4.7 4.3 1.3 6.1L12 16.9 6.4 19.8l1.3-6.1L3 9.4l6.4-.7z' fill='%23FF8FB8'/%3E%3C/svg%3E");
+  color:#fff;-webkit-text-fill-color:#fff;
+  box-shadow:0 6px 16px rgba(214,46,116,.32),inset 0 0 0 2px rgba(255,255,255,.35);
+  text-shadow:0 1px 2px rgba(0,0,0,.18);
 }
 #articles .search-box input{
   border:2.5px dashed #FFB0CD;border-radius:999px;background:#fff;
@@ -988,8 +979,25 @@ button{font-family:inherit;cursor:pointer;border:none}
   0%,100%{transform:rotate(12deg) translateY(0)}
   50%{transform:rotate(24deg) translateY(-4px)}
 }
+/* 游戏图标 + 标题头部 */
+.article-head{display:flex;gap:11px;align-items:flex-start;margin-bottom:8px}
+.article-icon{
+  flex:0 0 auto;width:42px;height:42px;border-radius:12px;
+  overflow:hidden;display:block;position:relative;
+  background:#fff;
+  box-shadow:0 3px 9px rgba(0,0,0,.16),0 0 0 2px rgba(255,255,255,.92);
+  transition:transform .2s ease;
+}
+.article-icon img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transform:scale(1.07);
+}
+.article-card:hover .article-icon{transform:rotate(-3deg) scale(1.04)}
+.article-head-main{min-width:0;flex:1}
+.article-head-main .article-title{margin-bottom:0}
+
 .article-top{
-  display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px;
 }
 .article-tag{
   display:inline-block;font-size:11px;font-weight:800;
@@ -1848,6 +1856,13 @@ function highlight(text, kw){
 var expanded = {};
 var autoOpen = {};
 
+var GAME_ICONS = {
+  tulong: 'assets/icon-tulong.png',
+  jingling: 'assets/icon-jingling.png',
+  taoyuan: 'assets/icon-taoyuan.png'
+};
+function iconOf(cls){ return GAME_ICONS[cls] || GAME_ICONS.taoyuan; }
+
 function articleKey(a){ return a.game + '|' + a.title; }
 
 function renderArticles(list, kw){
@@ -1858,8 +1873,12 @@ function renderArticles(list, kw){
     var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : '');
     var isOpen = !!expanded[key] || !!(kw && autoOpen[key]);
     html += '<div class="article-card ' + cls + (isOpen ? ' open' : '') + '" data-key="' + esc(key) + '">';
+    html += '<div class="article-head">';
+    html += '<span class="article-icon"><img src="' + iconOf(cls) + '" alt="' + esc(a.game) + '图标" loading="lazy" width="42" height="42"></span>';
+    html += '<div class="article-head-main">';
     html += '<div class="article-top"><span class="article-tag">' + esc(a.tag) + '</span><span class="article-game">' + esc(a.game) + '</span></div>';
     html += '<div class="article-title">' + highlight(a.title, kw) + '</div>';
+    html += '</div></div>';
     html += '<div class="article-summary">' + highlight(a.summary, kw) + '</div>';
     html += '<div class="article-full"><div class="article-full-inner">';
     for(var j = 0; j < a.full.length; j++){
