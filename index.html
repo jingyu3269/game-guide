@@ -26,11 +26,21 @@
 html{scroll-behavior:smooth}
 body{
   font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
-  background:linear-gradient(rgba(255,250,240,.45),rgba(255,248,235,.55)),url('assets/bg.jpg') center top/cover no-repeat scroll;
+  background:#FFFBF3;
   color:var(--ink);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+}
+
+/* ===== 固定背景图层（按视口铺满，滚动时始终可见） ===== */
+.bg-fixed{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:url('assets/bg.jpg') center top/cover no-repeat;
+}
+.bg-fixed::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,250,242,.34) 0%,rgba(255,249,240,.42) 55%,rgba(255,249,240,.44) 100%);
 }
 
 /* ===== 竹林桃花背景装饰 ===== */
@@ -360,8 +370,8 @@ button{font-family:inherit;cursor:pointer;border:none}
   padding:3px 12px;border-radius:10px;
   margin-bottom:10px;letter-spacing:1px;
 }
-.section-title h2{font-size:26px;font-weight:800;color:var(--ink)}
-.section-title p{font-size:14px;color:var(--ink-soft);margin-top:8px}
+.section-title h2{font-size:26px;font-weight:800;color:var(--ink);text-shadow:0 1px 0 rgba(255,255,255,.9),0 0 14px rgba(255,255,255,.85)}
+.section-title p{font-size:14px;color:var(--ink-soft);margin-top:8px;text-shadow:0 1px 0 rgba(255,255,255,.85),0 0 10px rgba(255,255,255,.8)}
 
 /* ========== 游戏列表（多巴胺糖果风） ========== */
 .game-grid{
@@ -1176,6 +1186,7 @@ mark{
 </style>
 </head>
 <body>
+<div class="bg-fixed" aria-hidden="true"></div>
 
 <!-- ===== 导航 ===== -->
 <nav class="nav">
