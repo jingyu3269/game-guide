@@ -215,7 +215,7 @@ button{font-family:inherit;cursor:pointer;border:none}
   background:rgba(255,255,255,.85);
   border:1px solid rgba(255,150,200,.5);
   border-radius:20px;
-  padding:15px 18px;
+  padding:15px 18px 30px;
   box-shadow:0 6px 24px rgba(233,84,152,.18);
   backdrop-filter:blur(6px);
   position:relative;
@@ -234,7 +234,7 @@ button{font-family:inherit;cursor:pointer;border:none}
   background:radial-gradient(circle,rgba(255,170,80,.22),transparent 70%);
   pointer-events:none;
 }
-.follow-icons{display:flex;gap:14px;flex:none;position:relative;z-index:1}
+.follow-icons{display:flex;gap:14px;flex:none;position:relative;z-index:1;transform:translateY(28px)}
 .follow-txt{
   flex:1;min-width:0;position:relative;z-index:1;
   display:flex;flex-direction:column;
@@ -2009,6 +2009,37 @@ function clearSearch(){
 
 // 初始渲染
 filterArticles();
+
+// ===== 关注卡片：让「→」箭头正对抖音/快手图标的垂直中心 =====
+// 箭头在胶囊里、图标在右侧一列，两者不在同一 flex 线上；
+// 胶囊换行（窄屏）后中心会往下走，所以按实测差值平移图标列，而不是写死像素。
+function alignFollowIcons(){
+  var card = document.querySelector('.follow-card');
+  var icons = document.querySelector('.follow-icons');
+  var go = document.querySelector('.follow-go');
+  if(!card || !icons || !go) return;
+  icons.style.transform = 'none';
+  var cr = card.getBoundingClientRect();
+  var ir = icons.getBoundingClientRect();
+  // 锚点取箭头本身，而不是胶囊：胶囊中心含内边距与箭头字形偏差，会差几个像素
+  var arrow = go.querySelector('i') || go;
+  var gr = arrow.getBoundingClientRect();
+  var shift = Math.round((gr.top + gr.height / 2) - (ir.top + ir.height / 2));
+  // 平移后不能顶出卡片内边距（上下各留 4px）
+  var maxShift = Math.floor((cr.bottom - 4) - ir.bottom);
+  var minShift = Math.ceil((cr.top + 4) - ir.top);
+  shift = Math.max(minShift, Math.min(shift, maxShift));
+  icons.style.transform = 'translateY(' + shift + 'px)';
+}
+alignFollowIcons();
+window.addEventListener('load', alignFollowIcons);
+window.addEventListener('resize', alignFollowIcons);
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(alignFollowIcons); }
+// 卡片高度/宽度变化（字体、图片加载、折行变化）时重新对齐
+if(window.ResizeObserver){
+  var followCard = document.querySelector('.follow-card');
+  if(followCard){ new ResizeObserver(alignFollowIcons).observe(followCard); }
+}
 
 // ===== 回到顶部按钮 =====
 var backTop = document.getElementById('backTop');
