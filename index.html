@@ -79,11 +79,12 @@ body{
 .petal{
   position:absolute;top:-30px;
   width:14px;height:14px;
-  background:radial-gradient(ellipse at 50% 30%,#FFB7C5 0%,#FF8FA8 60%,#F06888 100%);
-  border-radius:150% 0 150% 0;
+  /* 樱花花瓣贴图：形状与配色取自背景插画的花瓣 */
+  background:url('assets/petal-1.png') center/contain no-repeat;
   opacity:.8;
   animation:petalFall linear infinite;
-  filter:drop-shadow(0 1px 2px rgba(240,104,136,.35));
+  filter:drop-shadow(0 1px 2px rgba(226,104,140,.22));
+  will-change:transform;
 }
 @keyframes petalFall{
   0%{
@@ -1624,17 +1625,20 @@ function openKuaishou(e){
 // 生成桃花花瓣
 (function(){
   var container = document.getElementById('petalContainer');
-  var petalCount = 32;
+  var petalCount = 24;
   for(var i = 0; i < petalCount; i++){
     var p = document.createElement('div');
     p.className = 'petal';
-    var size = 9 + Math.random() * 13;
+    var size = 16 + Math.random() * 10;                // 16~26px，近大远小
+    var srcs = ['assets/petal-1.png','assets/petal-2.png','assets/petal-3.png'];
     p.style.width = size + 'px';
     p.style.height = size + 'px';
+    p.style.backgroundImage = "url('" + srcs[Math.floor(Math.random() * 3)] + "')";
     p.style.left = Math.random() * 100 + '%';
     p.style.animationDuration = (7 + Math.random() * 10) + 's';
     p.style.animationDelay = (Math.random() * 12) + 's';
-    p.style.opacity = 0.5 + Math.random() * 0.4;
+    p.style.opacity = 0.6 + Math.random() * 0.35;
+    if(size < 19){ p.style.filter = 'blur(.35px) drop-shadow(0 1px 1px rgba(226,104,140,.16))'; }  // 小的当远处，稍虚
     container.appendChild(p);
   }
 })();
