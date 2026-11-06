@@ -1212,30 +1212,6 @@ mark{
   100%{transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,-40px))) scale(1.15);opacity:0}
 }
 
-/* ========== 轮播指示点 ========== */
-.hero-dots{
-  position:absolute;left:0;right:0;bottom:11px;
-  display:flex;justify-content:center;gap:7px;z-index:3;
-}
-.hero-dot{
-  width:8px;height:8px;padding:0;border:0;border-radius:999px;
-  background:rgba(255,255,255,.62);
-  box-shadow:0 1px 4px rgba(0,0,0,.4);
-  cursor:pointer;-webkit-appearance:none;appearance:none;
-  transition:width .25s,background .25s,transform .2s;
-}
-.hero-dot.active{width:22px;background:#fff}
-.hero-dot:hover{background:#fff;transform:scale(1.1)}
-/* 鼠标悬停 / 手指按住时暂停自动轮播，方便看清封面 */
-.hero-img-wrap:hover .hero-slide,
-.hero-img-wrap.is-paused .hero-slide{animation-play-state:paused}
-/* 点了指示点就固定看这一张 */
-.hero-img-wrap[data-active] .hero-slide{animation:none;opacity:0;transform:none}
-.hero-img-wrap[data-active="1"] .hero-slide:nth-child(1),
-.hero-img-wrap[data-active="2"] .hero-slide:nth-child(2),
-.hero-img-wrap[data-active="3"] .hero-slide:nth-child(3),
-.hero-img-wrap[data-active="4"] .hero-slide:nth-child(4){opacity:1}
-
 /* ========== 加载更多 ========== */
 .load-more{
   display:block;margin:20px auto 8px;
@@ -1252,7 +1228,6 @@ mark{
 
 /* ========== 键盘焦点可见 ========== */
 :focus-visible{outline:3px solid #2A9A83;outline-offset:3px;border-radius:8px}
-.hero-dot:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .article-card :focus-visible,.game-card :focus-visible{outline-color:#B0447C}
 
 /* ========== 动效减负（系统开启减弱动态效果时） ========== */
@@ -1291,12 +1266,6 @@ mark{
       <img class="hero-slide" data-src="assets/cover-jingling.webp" alt="精灵永恒" decoding="async">
       <img class="hero-slide" data-src="assets/cover-legend.webp" alt="小小屠龙·冰雪复古" decoding="async">
       <img class="hero-slide" data-src="assets/cover-jingling2.webp" alt="精灵永恒·法师" decoding="async">
-    </div>
-    <div class="hero-dots" id="heroDots">
-      <button type="button" class="hero-dot active" aria-label="看第1张封面：桃园将帅录"></button>
-      <button type="button" class="hero-dot" aria-label="看第2张封面：精灵永恒"></button>
-      <button type="button" class="hero-dot" aria-label="看第3张封面：小小屠龙"></button>
-      <button type="button" class="hero-dot" aria-label="看第4张封面：精灵永恒·法师"></button>
     </div>
   </div>
   <div class="hero-cta-row">
@@ -2340,59 +2309,13 @@ window.addEventListener('scroll', function(){
       lazy[i].removeAttribute('data-src');
     }
   }
-  if(document.readyState === 'complete'){ setTimeout(loadRest, 400); }
-  else { window.addEventListener('load', function(){ setTimeout(loadRest, 400); }); }
-})();
-
-// ===== 轮播指示点：跟着节奏高亮，点一下固定看这张 =====
-(function(){
-  var wrap = document.getElementById('heroSlide');
-  var dots = document.getElementById('heroDots');
-  if(!wrap || !dots) return;
-  var list = dots.querySelectorAll('.hero-dot');
-  var idx = 0, timer = null, pinned = false, paused = false;
-
-  function paint(n){
-    for(var i = 0; i < list.length; i++){
-      list[i].classList.toggle('active', i === n);
-      list[i].setAttribute('aria-current', i === n ? 'true' : 'false');
-    }
-  }
-  function tick(){
-    if(pinned || paused) return;
-    idx = (idx + 1) % list.length;
-    paint(idx);
-  }
-  function start(){ if(!timer) timer = setInterval(tick, 3000); }
-  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
-
-  for(var i = 0; i < list.length; i++){
-    (function(n){
-      list[i].addEventListener('click', function(){
-        // 再点一次当前这张 → 取消固定，恢复自动轮播
-        if(pinned && wrap.getAttribute('data-active') === String(n + 1)){
-          pinned = false;
-          wrap.removeAttribute('data-active');
-          start();
-          return;
-        }
-        pinned = true; stop();
-        wrap.setAttribute('data-active', String(n + 1));
-        paint(n);
-      });
-    })(i);
-  }
-  function pause(){ paused = true; wrap.classList.add('is-paused'); }
-  function resume(){ paused = false; wrap.classList.remove('is-paused'); }
-  wrap.addEventListener('mouseenter', pause);
-  wrap.addEventListener('mouseleave', resume);
-  wrap.addEventListener('touchstart', pause, {passive:true});
-  wrap.addEventListener('touchend', function(){ setTimeout(resume, 2500); }, {passive:true});
-  document.addEventListener('visibilitychange', function(){
-    if(document.hidden){ stop(); }
-    else if(!pinned){ stop(); start(); }
-  });
-  paint(0); start();
+  // 首图加载完再补后 3 张：既不抢首屏带宽，也不会在第一轮切换时出现空帧
+  var first = document.querySelector('.hero-slide');
+  function schedule(){ setTimeout(loadRest, 200); }
+  if(first && !first.complete){
+    first.addEventListener('load', schedule, {once:true});
+    first.addEventListener('error', schedule, {once:true});
+  } else { schedule(); }
 })();
 
 // ===== 筛选胶囊：同步 aria-pressed，读屏能知道当前筛了哪个游戏 =====
