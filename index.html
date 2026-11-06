@@ -107,10 +107,16 @@ button{font-family:inherit;cursor:pointer;border:none}
   display:flex;align-items:center;justify-content:space-between;
 }
 .nav-logo{
-  font-size:18px;font-weight:800;color:var(--green-deep);
+  font-size:18px;font-weight:800;
   letter-spacing:1px;
+  background:linear-gradient(90deg,
+    #ff2d2d,#ff8a00,#ffcc00,#4fce3d,
+    #29c5e5,#3b6cff,#8a4dff,#a63bff,#ff2d2d);
+  background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:titleFlow 8s linear infinite;
 }
-.nav-logo span{color:var(--orange-deep)}
 .nav-cta{
   background:var(--red);color:#fff;
   padding:8px 16px;border-radius:20px;
@@ -141,15 +147,21 @@ button{font-family:inherit;cursor:pointer;border:none}
   margin:0 auto 10px;
   line-height:1.2;
   white-space:nowrap;
-  /* 七字固定彩虹：精品手游=红橙黄绿，攻略站=青蓝紫 */
+  /* 彩虹渐变首尾同色成环，色带在文字上循环流动 */
   background:linear-gradient(90deg,
-    #ff2d2d 0%,#ff2d2d 6%,#ff8a00 20%,#ffcc00 34%,#4fce3d 48%,
-    #29c5e5 62%,#3b6cff 76%,#8a4dff 90%,#a63bff 100%);
-  background-size:100% 100%;
+    #ff2d2d,#ff8a00,#ffcc00,#4fce3d,
+    #29c5e5,#3b6cff,#8a4dff,#a63bff,#ff2d2d);
+  background-size:200% 100%;
+  background-repeat:repeat;
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;color:transparent;
-  animation:titlePulse 4s ease-in-out infinite alternate;
-  will-change:transform;
+  animation:titlePulse 4s ease-in-out infinite alternate,
+            titleFlow 8s linear infinite;
+  will-change:transform,background-position;
+}
+@keyframes titleFlow{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
 }
 @keyframes titlePulse{
   0%{transform:scale(1) translateY(0)}
@@ -1190,7 +1202,7 @@ mark{
   .hero-track .hero-slide:first-child{opacity:1}
   .bubble-pop{display:none}
   .follow-icons .app-ico,.follow-go i{animation:none}
-  .hero h1{animation:none}
+  .hero h1,.nav-logo{animation:none}
 }
 </style>
 </head>
