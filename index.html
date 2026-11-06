@@ -527,16 +527,18 @@ button{font-family:inherit;cursor:pointer;border:none}
 /* ========== 客服福利区（卡通糖果风） ========== */
 .service{
   position:relative;overflow:hidden;text-align:center;
-  padding:90px 16px 66px;
-  color:var(--ink);
-  border-radius:46px 46px 0 0;
-  margin-top:-14px;
+  padding:100px 16px 66px;
+  color:#fff;
   background:
-    radial-gradient(360px 220px at 6% 0%, rgba(255,196,222,.62), transparent 72%),
-    radial-gradient(380px 240px at 96% 2%, rgba(176,232,220,.55), transparent 74%),
-    radial-gradient(520px 320px at 50% 106%, rgba(255,214,170,.5), transparent 72%),
-    linear-gradient(180deg,#FFF6EA 0%,#FFEEF4 50%,#FBE7F4 100%);
-  box-shadow:0 -4px 0 rgba(255,255,255,.95),0 -18px 40px rgba(190,140,160,.12);
+    radial-gradient(900px 420px at 50% -80px, rgba(255,196,88,.30), transparent 62%),
+    linear-gradient(180deg,#31175f 0%,#5b24a8 46%,#9c36bd 76%,#ff5e8e 102%);
+}
+/* 顶部粉金发光边，界定区块起点 */
+.service::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:5px;
+  pointer-events:none;
+  background:linear-gradient(90deg,#ff5e8e,#ffb547 45%,#ff5e8e);
+  box-shadow:0 0 20px rgba(255,130,140,.75);
 }
 /* 底部奶油扇形波浪边，与米色页脚衔接 */
 .service::after{
@@ -547,7 +549,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 /* 飘云 */
 .svc-cloud{
   position:absolute;width:74px;height:25px;border-radius:999px;
-  background:rgba(255,255,255,.85);pointer-events:none;
+  background:rgba(255,255,255,.20);pointer-events:none;
   animation:svcCloud 9s ease-in-out infinite;
 }
 .svc-cloud::before,.svc-cloud::after{content:"";position:absolute;border-radius:50%;background:inherit}
@@ -559,20 +561,19 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 /* 闪烁星星 */
 .svc-star{
-  position:absolute;width:5px;height:5px;border-radius:50%;
-  background:#FFB347;box-shadow:0 0 8px rgba(255,180,80,.9);
-  opacity:.7;pointer-events:none;
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#fff;box-shadow:0 0 6px rgba(255,255,255,.85);
+  opacity:.75;pointer-events:none;
   animation:svcTwinkle 2.6s ease-in-out infinite;
 }
-.svc-star::before{content:"";position:absolute;inset:1.4px;border-radius:50%;background:#fff}
 @keyframes svcTwinkle{
   0%,100%{opacity:.22;transform:scale(.55)}
   50%{opacity:1;transform:scale(1.2)}
 }
 /* 飘心 */
 .svc-heart{
-  position:absolute;font-size:14px;color:#FF9CC4;line-height:1;
-  text-shadow:0 1px 0 #fff;pointer-events:none;
+  position:absolute;font-size:14px;color:#FFB6D5;line-height:1;
+  text-shadow:0 0 8px rgba(255,120,180,.8);pointer-events:none;
   animation:svcHeart 4.4s ease-in-out infinite;
 }
 @keyframes svcHeart{
@@ -601,9 +602,9 @@ button{font-family:inherit;cursor:pointer;border:none}
   border:3px solid #FFD2E3;border-radius:34px;
   padding:92px 18px 24px;
   box-shadow:
-    0 9px 0 #FFE3EE,
-    0 12px 0 #F7CCDC,
-    0 26px 46px rgba(180,110,140,.18),
+    0 9px 0 rgba(255,203,229,.55),
+    0 12px 0 rgba(255,150,200,.22),
+    0 26px 48px rgba(24,4,44,.42),
     inset 0 0 0 5px #fff;
 }
 .svc-card::before{
@@ -622,22 +623,44 @@ button{font-family:inherit;cursor:pointer;border:none}
   position:absolute;top:-60px;left:50%;margin-left:-60px;width:120px;z-index:3;
   animation:svcBob 2.8s ease-in-out infinite;
 }
-/* 吉祥物背后的奶油小太阳 */
+/* 吉祥物背后的圆圆月亮 */
 .mascot-wrap::before{
   content:"";position:absolute;left:50%;top:50%;
   transform:translate(-50%,-50%);
-  width:136px;height:136px;border-radius:50%;
-  background:radial-gradient(circle at 34% 30%,#fff 0%,#FFF8E4 38%,#FFEFC6 72%,#FFE2A8 100%);
+  width:154px;height:154px;border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 39%,rgba(226,168,96,.5) 0 6%,transparent 7%),
+    radial-gradient(circle at 65% 64%,rgba(226,168,96,.42) 0 4.8%,transparent 5.8%),
+    radial-gradient(circle at 57% 23%,rgba(226,168,96,.34) 0 3.6%,transparent 4.6%),
+    radial-gradient(circle at 46% 42%,#fffdf6 0%,#fffaea 42%,#fff0c6 70%,#ffe2ab 90%,#ffd79a 100%);
   box-shadow:
-    0 0 0 6px rgba(255,255,255,.92),
-    0 8px 20px rgba(226,166,88,.3),
-    inset -6px -8px 16px rgba(226,160,80,.16);
+    0 0 22px 8px rgba(255,220,155,.55),
+    0 0 66px 26px rgba(255,196,120,.24),
+    inset -8px -10px 24px rgba(232,150,80,.24),
+    inset 3px 4px 14px rgba(255,255,255,.7);
   animation:svcHalo 4.6s ease-in-out infinite alternate;
   pointer-events:none;
 }
+/* 月亮呼吸：变大变亮 <-> 缩小变暗（靠光晕强弱，月面不发灰） */
 @keyframes svcHalo{
-  0%{transform:translate(-50%,-50%) scale(.94)}
-  100%{transform:translate(-50%,-50%) scale(1.06)}
+  0%{
+    transform:translate(-50%,-50%) scale(.9);
+    filter:brightness(.96);
+    box-shadow:
+      0 0 12px 4px rgba(255,216,150,.32),
+      0 0 34px 12px rgba(255,190,120,.12),
+      inset -8px -10px 24px rgba(232,150,80,.2),
+      inset 3px 4px 14px rgba(255,255,255,.45);
+  }
+  100%{
+    transform:translate(-50%,-50%) scale(1.07);
+    filter:brightness(1.06);
+    box-shadow:
+      0 0 34px 14px rgba(255,228,172,.8),
+      0 0 96px 44px rgba(255,196,120,.34),
+      inset -8px -10px 24px rgba(232,150,80,.26),
+      inset 3px 4px 14px rgba(255,255,255,.8);
+  }
 }
 @keyframes svcBob{
   0%,100%{transform:translateY(0) rotate(-1.6deg)}
@@ -1242,7 +1265,7 @@ mark{
   .svc-perks{grid-template-columns:repeat(3,1fr);max-width:540px}
   .svc-title{font-size:33px}
   .mascot-wrap{width:148px;margin-left:-74px;top:-68px}
-  .mascot-wrap::before{width:168px;height:168px}
+  .mascot-wrap::before{width:196px;height:196px}
   .mascot{width:144px}
   .svc-bubble{font-size:12.5px}
   .svc-tline{width:196px}
