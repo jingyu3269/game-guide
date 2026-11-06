@@ -36,7 +36,7 @@ body{
 /* ===== 固定背景图层（按视口铺满，滚动时始终可见） ===== */
 .bg-fixed{
   position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:url('assets/bg.jpg') center top/cover no-repeat;
+  background:url('assets/bg.webp') center top/cover no-repeat;
 }
 .bg-fixed::after{
   content:"";position:absolute;inset:0;
@@ -1016,6 +1016,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 .article-title{font-size:16px;font-weight:900;margin-bottom:6px;letter-spacing:.3px}
 .article-summary{font-size:13px;color:var(--ink-soft);line-height:1.6}
 .article-date{font-size:11px;color:#aaa;margin-top:8px}
+.article-top .article-date{margin-top:0;color:#8d7a68;font-weight:700;letter-spacing:.2px;white-space:nowrap}
 
 /* 展开全文 */
 .article-full{display:none}
@@ -1212,7 +1213,7 @@ mark{
   <p class="hero-slogan">汇聚传奇、三国、回合制热门手游，攻略礼包客服一站式</p>
   <div class="hero-img-wrap" id="heroSlide">
     <div class="hero-track">
-      <img class="hero-slide" src="assets/cover-taoyuan.webp" alt="桃园将帅录">
+      <img class="hero-slide" src="assets/cover-taoyuan.webp" alt="桃园将帅录" fetchpriority="high" decoding="async">
       <img class="hero-slide" src="assets/cover-jingling.webp" alt="精灵永恒">
       <img class="hero-slide" src="assets/cover-legend.webp" alt="小小屠龙·冰雪复古">
       <img class="hero-slide" src="assets/cover-jingling2.webp" alt="精灵永恒·法师">
@@ -1876,7 +1877,7 @@ function renderArticles(list, kw){
     html += '<div class="article-head">';
     html += '<span class="article-icon"><img src="' + iconOf(cls) + '" alt="' + esc(a.game) + '图标" loading="lazy" width="42" height="42"></span>';
     html += '<div class="article-head-main">';
-    html += '<div class="article-top"><span class="article-tag">' + esc(a.tag) + '</span><span class="article-game">' + esc(a.game) + '</span></div>';
+    html += '<div class="article-top"><span class="article-tag">' + esc(a.tag) + '</span><span class="article-game">' + esc(a.game) + '</span>' + (a.date ? '<span class="article-date">更新 ' + esc(a.date.slice(5)) + '</span>' : '') + '</div>';
     html += '<div class="article-title">' + highlight(a.title, kw) + '</div>';
     html += '</div></div>';
     html += '<div class="article-summary">' + highlight(a.summary, kw) + '</div>';
@@ -1967,6 +1968,10 @@ function filterArticles(){
     if(activeGame && a.game.indexOf(activeGame) < 0) return false;
     if(!kw) return true;
     return haystack(a).indexOf(kw) >= 0;
+  }).sort(function(a, b){
+    // 新的排前面，同日期保持原顺序
+    if(a.date === b.date) return 0;
+    return a.date < b.date ? 1 : -1;
   });
   // 关键字只在全文里命中时，自动展开，让用户直接看到命中的段落
   if(kw){
