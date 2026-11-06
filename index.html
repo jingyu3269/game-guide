@@ -1222,97 +1222,222 @@ mark{
 .load-more .lm-count{opacity:.85;font-weight:700;margin-left:4px}
 
 /*LUCK-CSS-START*/
-/* ========== 今日幸运游戏抽签 ========== */
+/* ========== 今日幸运游戏抽签（卡通风） ========== */
 .luck-card{
   position:relative;max-width:540px;margin:0 auto;
-  padding:20px 22px 16px;border-radius:24px;
-  border:3px solid transparent;
-  background:linear-gradient(#fff,#fff) padding-box,
-             linear-gradient(135deg,#FFC46B,#FF7FA8 48%,#9B6BFF) border-box;
-  box-shadow:0 12px 30px rgba(233,84,152,.16);
+  padding:22px 24px 15px;border-radius:30px;
+  background:
+    radial-gradient(circle,rgba(255,198,104,.30) 0 3px,transparent 4px) 22px 28px/104px 88px,
+    radial-gradient(circle,rgba(255,146,186,.22) 0 2.5px,transparent 3.5px) 62px 54px/122px 98px,
+    linear-gradient(180deg,#FFFDF9,#FFF6F1);
+  border:3px solid #FFD2E2;
+  box-shadow:
+    0 6px 0 rgba(244,146,184,.18),
+    0 18px 36px rgba(232,120,158,.14),
+    inset 0 0 0 3px rgba(255,255,255,.92);
+  transition:transform .35s cubic-bezier(.2,1.2,.4,1),box-shadow .35s;
+}
+.luck-card:hover{transform:translateY(-3px)}
+/* 右上角旋转小樱花 */
+.luck-flower{
+  position:absolute;right:-6px;top:-8px;width:78px;height:78px;z-index:0;
+  pointer-events:none;opacity:.95;transform-origin:50% 50%;
+  animation:flowerSpin 26s linear infinite;
+}
+@keyframes flowerSpin{to{transform:rotate(360deg)}}
+
+.luck-idle{display:flex;align-items:center;gap:18px;position:relative;z-index:2}
+
+/* 签筒：整只轻轻上下浮 */
+.luck-tube{
+  width:104px;height:136px;flex:none;position:relative;
+  transform-origin:50% 94%;
+  animation:tubFloat 3.8s ease-in-out infinite;
+}
+@keyframes tubFloat{
+  0%,100%{transform:translateY(0) rotate(-1.6deg)}
+  50%{transform:translateY(-6px) rotate(1.6deg)}
+}
+.luck-tube svg{width:100%;height:100%;display:block;overflow:visible}
+/* 眨眼 */
+.tube-eyes{transform-box:fill-box;transform-origin:center;animation:tubeBlink 4.8s ease-in-out infinite}
+@keyframes tubeBlink{
+  0%,90%,100%{transform:scaleY(1)}
+  93%{transform:scaleY(.1)}
+  96%{transform:scaleY(1)}
+}
+/* 飘带轻摆 */
+.tube-ribbon{transform-box:fill-box;transform-origin:0% 50%;animation:ribbonWave 2.8s ease-in-out infinite}
+@keyframes ribbonWave{
+  0%,100%{transform:rotate(-4deg)}
+  50%{transform:rotate(6deg)}
+}
+
+.luck-q{flex:1;min-width:0}
+.luck-q b{display:block;font-size:17px;font-weight:800;color:#3b2b20;line-height:1.35;letter-spacing:.2px}
+.luck-q span{display:block;margin-top:5px;font-size:12px;color:#8a7a6e}
+
+/* 卡通凸起按钮 */
+.luck-btn{
+  position:relative;flex:none;padding:12px 22px 13px;border-radius:999px;
+  border:3px solid #fff;
+  font-size:14px;font-weight:800;color:#fff;letter-spacing:.6px;
+  background:linear-gradient(180deg,#FFA2C7,#FF6E9E 58%,#F0578E);
+  box-shadow:0 5px 0 #D93F73,0 10px 18px rgba(255,106,155,.30);
+  transition:transform .14s,box-shadow .14s;
   overflow:hidden;
 }
-.luck-card::before{
-  content:"";position:absolute;right:-46px;top:-56px;width:160px;height:160px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,180,90,.22),transparent 70%);pointer-events:none;
+.luck-btn::after{
+  content:"";position:absolute;left:16%;right:16%;top:3px;height:36%;border-radius:99px;
+  background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,0));
+  pointer-events:none;
 }
-.luck-idle{display:flex;align-items:center;gap:16px;position:relative;z-index:1}
-.luck-tube{width:76px;height:94px;flex:none}
-.luck-tube svg{width:100%;height:100%;display:block;overflow:visible}
-.luck-q{flex:1;min-width:0}
-.luck-q b{display:block;font-size:16px;font-weight:800;color:#3b2b20;line-height:1.35}
-.luck-q span{display:block;margin-top:4px;font-size:12px;color:#8a7a6e}
-.luck-btn{
-  flex:none;padding:11px 20px;border-radius:999px;border:0;
-  font-size:14px;font-weight:800;color:#fff;letter-spacing:.5px;
-  background:linear-gradient(135deg,#FF8FBF,#FF6A9B 55%,#F0578E);
-  box-shadow:0 6px 16px rgba(255,106,155,.36),inset 0 -2px 0 rgba(0,0,0,.08);
-  transition:transform .16s,box-shadow .16s;
+.luck-btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #D93F73,0 14px 22px rgba(255,106,155,.34);animation:btnWiggle .55s ease-in-out}
+@keyframes btnWiggle{
+  0%,100%{rotate:0deg}
+  30%{rotate:-2.5deg}
+  65%{rotate:2deg}
 }
-.luck-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(255,106,155,.44)}
-.luck-btn:active{transform:scale(.96)}
-.luck-btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}
-/* 摇签筒 */
-.luck-card.rolling .luck-tube svg{animation:tubeShake .3s ease-in-out infinite}
-.luck-card.rolling .tube-sticks{transform-box:fill-box;transform-origin:50% 100%;animation:stickJitter .16s linear infinite}
+.luck-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #D93F73,0 4px 10px rgba(255,106,155,.28)}
+.luck-btn[disabled]{opacity:.72;cursor:not-allowed;transform:none;box-shadow:0 3px 0 #D93F73}
+
+/* 摇签中：卡片 + 签筒 + 签子 三层抖动 */
+.luck-card.rolling{animation:cardWobble .42s ease-in-out infinite}
+@keyframes cardWobble{
+  0%,100%{transform:rotate(-.6deg) translateY(0)}
+  50%{transform:rotate(.6deg) translateY(-3px)}
+}
+.luck-card.rolling .luck-tube{animation:none}
+.luck-card.rolling .luck-tube svg{animation:tubeShake .24s ease-in-out infinite;transform-origin:50% 92%}
 @keyframes tubeShake{
-  0%,100%{transform:rotate(-6deg) translateY(0)}
-  50%{transform:rotate(7deg) translateY(-3px)}
+  0%,100%{transform:rotate(-12deg) translateY(0)}
+  25%{transform:rotate(10deg) translateY(-7px)}
+  50%{transform:rotate(-8deg) translateY(-2px)}
+  75%{transform:rotate(13deg) translateY(-8px)}
+}
+.luck-card.rolling .tube-sticks{
+  transform-box:fill-box;transform-origin:50% 100%;
+  animation:stickJitter .14s linear infinite;
 }
 @keyframes stickJitter{
-  0%{transform:translate(0,0) rotate(-2deg)}
-  50%{transform:translate(1px,-2px) rotate(2.5deg)}
-  100%{transform:translate(0,0) rotate(-2deg)}
+  0%{transform:translate(0,0) rotate(-3deg)}
+  50%{transform:translate(1.4px,-3px) rotate(3deg)}
+  100%{transform:translate(0,0) rotate(-3deg)}
 }
+
 /* 结果 */
-.luck-result{display:none;align-items:center;gap:14px;position:relative;z-index:1}
+.luck-result{display:none;align-items:center;gap:15px;position:relative;z-index:2}
 .luck-card.done .luck-idle{display:none}
-.luck-card.done .luck-result{display:flex;animation:luckPop .55s cubic-bezier(.18,1.4,.42,1) both}
+.luck-card.done .luck-result{display:flex;animation:luckPop .5s cubic-bezier(.18,1.4,.42,1) both}
 @keyframes luckPop{
-  0%{opacity:0;transform:scale(.92) translateY(8px)}
+  0%{opacity:.3;transform:scale(.94) translateY(8px)}
   100%{opacity:1;transform:scale(1) translateY(0)}
 }
+/* 图标：贴纸感，歪一点 */
 .luck-icon{
-  width:58px;height:58px;border-radius:16px;flex:none;
-  box-shadow:0 4px 12px rgba(0,0,0,.18);
+  width:64px;height:64px;border-radius:19px;flex:none;
+  border:3px solid #fff;background:#fff;
+  box-shadow:0 5px 0 rgba(180,120,150,.16),0 9px 18px rgba(90,60,80,.16);
+  animation:iconPop .62s cubic-bezier(.2,1.6,.4,1) both;
+}
+@keyframes iconPop{
+  0%{transform:rotate(-20deg) scale(.45)}
+  62%{transform:rotate(3deg) scale(1.12)}
+  100%{transform:rotate(-4deg) scale(1)}
 }
 .luck-info{flex:1;min-width:0}
 .luck-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.luck-name{font-size:16px;font-weight:800;color:#3b2b20}
+.luck-name{font-size:17px;font-weight:800;color:#3b2b20}
 .luck-lv{
-  font-size:11px;font-weight:800;color:#fff;padding:2px 9px;border-radius:999px;
-  background:linear-gradient(135deg,#FFB03A,#FF7A3D);
-  box-shadow:0 2px 6px rgba(255,138,60,.35);
+  display:inline-block;font-size:11px;font-weight:800;color:#fff;padding:3px 10px;border-radius:999px;
+  border:2px solid #fff;box-shadow:0 3px 0 rgba(0,0,0,.10);
+  animation:badgePop .5s .1s cubic-bezier(.2,1.7,.4,1) both;
 }
-.luck-score-row{font-size:12px;color:#8a7a6e;margin-top:5px}
+@keyframes badgePop{
+  0%{transform:rotate(-16deg) scale(.55)}
+  62%{transform:rotate(2deg) scale(1.1)}
+  100%{transform:rotate(-3deg) scale(1)}
+}
+.luck-score-row{font-size:12px;color:#8a7a6e;margin-top:6px;display:flex;align-items:baseline;gap:2px}
 .luck-score-row b{
-  font-size:24px;line-height:1;margin:0 1px;vertical-align:-3px;
+  display:inline-block;font-size:31px;font-weight:900;line-height:1;margin:0 2px;vertical-align:-4px;
+  font-variant-numeric:tabular-nums;
   background:linear-gradient(100deg,#FF5FA2,#FF9E3D 55%,#8B5CF6);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:scorePop .5s .08s cubic-bezier(.2,1.6,.4,1) both;
+}
+@keyframes scorePop{
+  0%{transform:scale(.5) rotate(-9deg)}
+  100%{transform:scale(1) rotate(0)}
 }
 .luck-score-row em{font-style:normal;font-size:11px;color:#b3a79b}
+/* 渐变进度条 + 高光扫过 */
 .luck-bar{
-  height:7px;border-radius:99px;margin-top:7px;overflow:hidden;
-  background:#F6EEE4;box-shadow:inset 0 1px 2px rgba(0,0,0,.05);
+  position:relative;height:10px;border-radius:99px;margin-top:8px;overflow:hidden;
+  background:#F8EEE3;border:2px solid #fff;
+  box-shadow:inset 0 2px 4px rgba(150,110,90,.12);
 }
 .luck-bar i{
   display:block;height:100%;width:0;border-radius:99px;
   background:linear-gradient(90deg,#FFD36B,#FF8FB8 55%,#9B6BFF);
-  transition:width .9s cubic-bezier(.2,.9,.3,1);
+  transition:width 1s cubic-bezier(.2,1.05,.3,1);
+  position:relative;overflow:hidden;
 }
-.luck-tip{font-size:12px;color:#6b5b4d;margin-top:7px;line-height:1.5}
+.luck-bar i::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+  transform:translateX(-110%);
+  animation:barShine 2.4s ease-in-out 1s infinite;
+}
+@keyframes barShine{
+  0%{transform:translateX(-110%)}
+  55%,100%{transform:translateX(230%)}
+}
+.luck-tip{font-size:12px;color:#6b5b4d;margin-top:9px;line-height:1.6;display:flex;align-items:flex-start;gap:6px}
+.luck-yi{
+  flex:none;font-style:normal;font-size:10px;font-weight:800;color:#fff;line-height:1;
+  padding:3px 5px 2px;border-radius:6px;margin-top:1px;
+  background:linear-gradient(180deg,#FF8FB8,#F0578E);
+  box-shadow:0 2px 0 rgba(217,63,115,.35);
+  transform:rotate(-4deg);
+}
 .luck-foot{
-  margin-top:12px;padding-top:10px;border-top:1px dashed #F0E2D2;
-  font-size:11px;color:#a8988a;text-align:center;position:relative;z-index:1;
+  margin-top:13px;padding-top:10px;border-top:2px dashed #F4E4D4;
+  font-size:11px;color:#a8988a;text-align:center;position:relative;z-index:2;
 }
+
+/* 抽签爆开的小星星 */
+.luck-spark{
+  position:absolute;left:50%;top:56%;width:10px;height:10px;z-index:3;
+  pointer-events:none;background:var(--c,#FFC24B);
+  clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);
+  transform:translate(-50%,-50%) scale(.3);
+  animation:sparkFly .9s cubic-bezier(.15,.85,.35,1) forwards;
+  animation-delay:var(--delay,0s);
+}
+@keyframes sparkFly{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.3) rotate(0)}
+  18%{opacity:1}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.05) rotate(var(--r,180deg))}
+}
+
 @media (max-width:520px){
-  .luck-card{padding:16px 16px 14px}
-  .luck-idle{flex-wrap:wrap}
-  .luck-tube{width:54px;height:68px}
-  .luck-q{flex:1 1 60%}
-  .luck-btn{width:100%;order:3;padding:11px 0}
-  .luck-icon{width:50px;height:50px;border-radius:14px}
-  .luck-score-row b{font-size:21px}
+  .luck-card{padding:16px 16px 13px;border-radius:24px}
+  .luck-idle{flex-wrap:wrap;gap:12px}
+  .luck-tube{width:76px;height:100px}
+  .luck-q{flex:1 1 58%}
+  .luck-q b{font-size:15px}
+  .luck-btn{width:100%;order:3;padding:11px 0 12px;margin-top:2px}
+  .luck-icon{width:54px;height:54px;border-radius:16px}
+  .luck-name{font-size:15.5px}
+  .luck-score-row b{font-size:27px}
+  .luck-flower{width:60px;height:60px;right:-4px;top:-6px}
+}
+@media (prefers-reduced-motion: reduce){
+  .luck-tube,.luck-flower,.tube-eyes,.tube-ribbon,.luck-bar i::after,
+  .luck-card.rolling,.luck-card.rolling .luck-tube svg,.luck-card.rolling .tube-sticks,
+  .luck-icon,.luck-lv,.luck-score-row b{animation:none}
+  .luck-spark{display:none}
 }
 /*LUCK-CSS-END*/
 
@@ -1481,53 +1606,91 @@ mark{
     <p>每天一次，抽一款今日幸运手游，讨个好彩头</p>
   </div>
   <div class="luck-card" id="luckCard">
+    <svg class="luck-flower" viewBox="0 0 80 80" aria-hidden="true">
+      <g transform="translate(40 42)">
+        <ellipse cx="0" cy="-16" rx="9.4" ry="13" fill="#FFC9DB" stroke="#FFA0C0" stroke-width="2.2"/>
+        <ellipse cx="0" cy="-16" rx="9.4" ry="13" fill="#FFD3E2" stroke="#FFA0C0" stroke-width="2.2" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-16" rx="9.4" ry="13" fill="#FFC9DB" stroke="#FFA0C0" stroke-width="2.2" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-16" rx="9.4" ry="13" fill="#FFD3E2" stroke="#FFA0C0" stroke-width="2.2" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-16" rx="9.4" ry="13" fill="#FFC9DB" stroke="#FFA0C0" stroke-width="2.2" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="7.6" fill="#FFE59A" stroke="#F3BC45" stroke-width="2.4"/>
+      </g>
+    </svg>
     <div class="luck-idle">
       <div class="luck-tube" aria-hidden="true">
-        <svg viewBox="0 0 78 100" fill="none">
+        <svg viewBox="0 0 90 130" fill="none">
           <defs>
             <linearGradient id="tubeBody" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#3F7F52"/>
-              <stop offset=".38" stop-color="#7CBE68"/>
-              <stop offset=".62" stop-color="#AEDC84"/>
-              <stop offset=".86" stop-color="#5C9E62"/>
-              <stop offset="1" stop-color="#356B46"/>
+              <stop offset="0" stop-color="#3B7850"/>
+              <stop offset=".2" stop-color="#7EC36A"/>
+              <stop offset=".46" stop-color="#BCE492"/>
+              <stop offset=".74" stop-color="#6CB066"/>
+              <stop offset="1" stop-color="#31643F"/>
             </linearGradient>
             <linearGradient id="tubeRim" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#E1F3B6"/>
-              <stop offset="1" stop-color="#4E8F5C"/>
+              <stop offset="0" stop-color="#F3FDDA"/>
+              <stop offset=".6" stop-color="#9BD07A"/>
+              <stop offset="1" stop-color="#57975C"/>
             </linearGradient>
             <linearGradient id="stickG" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#FFF6E4"/>
-              <stop offset="1" stop-color="#EBD2A6"/>
+              <stop offset="0" stop-color="#FFF9EC"/>
+              <stop offset="1" stop-color="#F0DBB3"/>
             </linearGradient>
           </defs>
+          <!-- 签子：只露出小半截，高低错落 -->
           <g class="tube-sticks">
-            <rect x="28" y="6" width="8" height="52" rx="4" fill="url(#stickG)" transform="rotate(-9 32 58)"/>
-            <rect x="44" y="10" width="8" height="48" rx="4" fill="url(#stickG)" transform="rotate(12 48 58)"/>
-            <rect x="36" y="1" width="8.6" height="57" rx="4.3" fill="#FFF9EC"/>
-            <circle cx="40.3" cy="4" r="4" fill="#F4465F"/>
-            <circle cx="30.4" cy="9.4" r="3.4" fill="#F4465F" transform="rotate(-9 30 9)"/>
-            <circle cx="50.2" cy="13.2" r="3.4" fill="#F4465F" transform="rotate(12 50 13)"/>
-            <rect x="32.4" y="16" width="2.6" height="12" rx="1.3" fill="#C79A5B" opacity=".55" transform="rotate(-9 33 22)"/>
-            <rect x="47.6" y="20" width="2.6" height="11" rx="1.3" fill="#C79A5B" opacity=".55" transform="rotate(12 49 25)"/>
+            <g transform="rotate(-19 34 70)">
+              <rect x="31" y="38" width="6.4" height="36" rx="3.2" fill="url(#stickG)" stroke="#C68F57" stroke-width="1.7"/>
+              <rect x="30.2" y="35" width="8" height="7" rx="2.6" fill="#FF6E86" stroke="#D63E5C" stroke-width="1.6"/>
+            </g>
+            <g transform="rotate(18 56 70)">
+              <rect x="53" y="42" width="6.4" height="32" rx="3.2" fill="url(#stickG)" stroke="#C68F57" stroke-width="1.7"/>
+              <rect x="52.2" y="39" width="8" height="7" rx="2.6" fill="#FF6E86" stroke="#D63E5C" stroke-width="1.6"/>
+            </g>
+            <g transform="rotate(-7 45 70)">
+              <rect x="41.8" y="32" width="6" height="42" rx="3" fill="url(#stickG)" stroke="#C68F57" stroke-width="1.7"/>
+              <rect x="41" y="29" width="7.6" height="6.6" rx="2.4" fill="#FF88A0" stroke="#D63E5C" stroke-width="1.6"/>
+            </g>
+            <rect x="41.6" y="26" width="7.2" height="48" rx="3.6" fill="#FFFBEF" stroke="#C68F57" stroke-width="1.9"/>
+            <rect x="40.9" y="23" width="8.6" height="8" rx="3" fill="#FF6E86" stroke="#D63E5C" stroke-width="1.8"/>
+            <path d="M42.5 25.4h4.6" stroke="#FFD6DF" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M45.2 44v10M45.2 58v6" stroke="#D9A96B" stroke-opacity=".45" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <path d="M13 50h52l-3.4 41.4A6 6 0 0 1 55.6 97H22.4a6 6 0 0 1-6-5.6L13 50Z" fill="url(#tubeBody)"/>
-          <path d="M24 66h30M25.6 80h26.8" stroke="#2E6B45" stroke-opacity=".22" stroke-width="2.4" stroke-linecap="round"/>
-          <rect x="11.4" y="44.6" width="55.2" height="10.4" rx="5.2" fill="url(#tubeRim)"/>
-          <rect x="11.4" y="44.6" width="55.2" height="10.4" rx="5.2" stroke="#356B46" stroke-opacity=".3"/>
-          <rect x="13" y="70" width="52" height="8" rx="4" fill="#F0578E"/>
-          <path d="M39 70v8" stroke="#FFD9E4" stroke-opacity=".7" stroke-width="1.6"/>
-          <path d="M39 78l-5 8 5-3 5 3-5-8Z" fill="#F0578E"/>
+          <!-- 筒身：细长竹筒 -->
+          <path d="M25 72h40l-2.6 42.4a7 7 0 0 1-7 6.6H34.6a7 7 0 0 1-7-6.6L25 72Z"
+                fill="url(#tubeBody)" stroke="#2F6B45" stroke-width="2.8" stroke-linejoin="round"/>
+          <path d="M27 106h36M28.2 116h33.6" stroke="#2E6B45" stroke-opacity=".28" stroke-width="2.4" stroke-linecap="round"/>
+          <!-- 筒口 -->
+          <ellipse cx="45" cy="72" rx="20" ry="8" fill="url(#tubeRim)" stroke="#2F6B45" stroke-width="2.8"/>
+          <ellipse cx="45" cy="72" rx="10.6" ry="3.5" fill="#34694A"/>
+          <!-- 表情 -->
+          <g class="tube-eyes">
+            <ellipse cx="36.4" cy="90" rx="4.4" ry="5.4" fill="#25402C"/>
+            <ellipse cx="53.6" cy="90" rx="4.4" ry="5.4" fill="#25402C"/>
+            <circle cx="37.9" cy="88" r="1.6" fill="#fff"/>
+            <circle cx="55.1" cy="88" r="1.6" fill="#fff"/>
+          </g>
+          <ellipse cx="28.6" cy="98.6" rx="5.2" ry="3.4" fill="#FF9DB8" opacity=".7"/>
+          <ellipse cx="61.4" cy="98.6" rx="5.2" ry="3.4" fill="#FF9DB8" opacity=".7"/>
+          <path d="M41.2 99c1.8 2.7 4.8 2.7 6.6 0" stroke="#25402C" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+          <!-- 口沿上的小飘带 -->
+          <g class="tube-ribbon">
+            <path d="M63.6 65.4c5.6-4.6 11.2-5 14.4-2.4" stroke="#F0578E" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+            <path d="M63.6 66.6c6 1.2 10 4.4 11 8.8" stroke="#FF8FB8" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+            <circle cx="63.4" cy="66" r="3.2" fill="#F0578E" stroke="#D93F73" stroke-width="1.4"/>
+          </g>
+          <!-- 落地投影 -->
+          <ellipse cx="45" cy="124" rx="21" ry="4.2" fill="#2E6B45" opacity=".13"/>
         </svg>
       </div>
       <div class="luck-q">
-        <b>摇一摇签筒，看看今天该肝哪款</b>
+        <b>摇一摇，今天该肝哪款？</b>
         <span>每人每天 1 次 · 次日 0 点刷新</span>
       </div>
       <button class="luck-btn" id="luckBtn" type="button" aria-describedby="luckFoot">抽今日幸运</button>
     </div>
     <div class="luck-result" aria-live="polite">
-      <img class="luck-icon" id="luckIcon" src="assets/icon-taoyuan.webp" alt="" width="58" height="58">
+      <img class="luck-icon" id="luckIcon" src="assets/icon-taoyuan.webp" alt="" width="64" height="64">
       <div class="luck-info">
         <div class="luck-top">
           <span class="luck-name" id="luckName">桃园将帅录</span>
@@ -1535,7 +1698,7 @@ mark{
         </div>
         <div class="luck-score-row">今日运势 <b id="luckScore">88</b><em>/100</em></div>
         <div class="luck-bar"><i id="luckBarFill" style="width:88%"></i></div>
-        <p class="luck-tip" id="luckTip">—</p>
+        <p class="luck-tip"><i class="luck-yi">宜</i><span id="luckTip">—</span></p>
       </div>
     </div>
     <div class="luck-foot" id="luckFoot">每人每天 1 次 · 抽完明天 0 点再来</div>
@@ -2557,6 +2720,7 @@ window.addEventListener('scroll', function(){
   var card = document.getElementById('luckCard');
   if(!card) return;
   var btn = document.getElementById('luckBtn');
+  var sparkColors = ['#FFC24B','#FF8FB8','#9B6BFF','#7FD6A8','#FF6E86'];
 
   function todayKey(){
     var d = new Date();
@@ -2579,17 +2743,52 @@ window.addEventListener('scroll', function(){
     if(n >= 68) return {t:'小有惊喜', c:'linear-gradient(135deg,#9B8BFF,#7A63F0)'};
     return {t:'稳中带喜', c:'linear-gradient(135deg,#7FC9A8,#4FA97F)'};
   }
+
+  /* 抽签时从卡片里炸开一圈小星星 */
+  function burst(n, spread){
+    spread = spread || 78;
+    for(var i = 0; i < n; i++){
+      var s = document.createElement('span');
+      s.className = 'luck-spark';
+      var a = Math.random() * Math.PI * 2;
+      var d = 42 + Math.random() * spread;
+      s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px');
+      s.style.setProperty('--dy', (Math.sin(a) * d * 0.72).toFixed(1) + 'px');
+      s.style.setProperty('--r', (Math.random() * 360 | 0) + 'deg');
+      s.style.setProperty('--delay', (Math.random() * 0.12).toFixed(2) + 's');
+      s.style.setProperty('--c', sparkColors[i % sparkColors.length]);
+      s.style.left = (46 + Math.random() * 12) + '%';
+      s.style.top = (48 + Math.random() * 14) + '%';
+      card.appendChild(s);
+      (function(el){
+        setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 1250);
+      })(s);
+    }
+  }
+
+  /* 分数从 0 滚到目标值：先写终值兜底，再用定时器逐帧滚动 */
+  function countTo(el, target, dur){
+    if(!el) return;
+    el.textContent = target;
+    var t0 = Date.now();
+    (function tick(){
+      var p = Math.min(1, (Date.now() - t0) / dur);
+      el.textContent = p >= 1 ? target : Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if(p < 1) setTimeout(tick, 24);
+    })();
+  }
+
   function render(o){
     var g = GAMES[o.gi] || GAMES[0];
     var lv = levelOf(o.luck);
-    document.getElementById('luckIcon').src = g.icon;
+    var icon = document.getElementById('luckIcon');
+    icon.src = g.icon;
     document.getElementById('luckName').textContent = g.name;
-    document.getElementById('luckScore').textContent = o.luck;
     document.getElementById('luckLv').textContent = lv.t;
     document.getElementById('luckLv').style.background = lv.c;
     document.getElementById('luckTip').textContent = o.tip;
     card.classList.add('done');
-    // 下一帧再设宽度，保证进度条有过渡动画
+    countTo(document.getElementById('luckScore'), o.luck, 700);
     requestAnimationFrame(function(){
       requestAnimationFrame(function(){
         document.getElementById('luckBarFill').style.width = o.luck + '%';
@@ -2597,11 +2796,14 @@ window.addEventListener('scroll', function(){
     });
     document.getElementById('luckFoot').textContent = '今天的签已经抽过啦 · 明天 0 点再来';
   }
+
   function draw(){
     if(card.classList.contains('done') || card.classList.contains('rolling')) return;
     card.classList.add('rolling');
     btn.disabled = true;
     btn.textContent = '摇签中…';
+    burst(7, 52);
+    setTimeout(function(){ burst(6, 64); }, 520);
     var gi = Math.floor(Math.random() * GAMES.length);
     var luck = 58 + Math.floor(Math.random() * 41);   // 58 ~ 98
     setTimeout(function(){
@@ -2613,11 +2815,13 @@ window.addEventListener('scroll', function(){
       save(rec);
       card.classList.remove('rolling');
       render(rec);
+      burst(16, 96);
       if(typeof showToast === 'function'){
         showToast('今日幸运：' + g.name + ' · 运势 ' + luck + ' 分');
       }
     }, 1000);
   }
+
   btn.addEventListener('click', draw);
   var saved = readToday();
   if(saved) render(saved);
