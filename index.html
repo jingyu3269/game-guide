@@ -1536,7 +1536,24 @@ button{font-family:inherit;cursor:pointer;border:none}
 .food-wheel:hover .fw-disc{filter:brightness(1.06) saturate(1.06)}
 .food-wheel:active .fw-disc{filter:brightness(.94)}
 .food-wheel:focus-visible{outline:2px dashed #FF6FA8;outline-offset:4px;border-radius:50%}
-.article-card.open .food-wheel{display:none}
+/* 底部一行：按钮 + 转盘。foot 不定位，折叠时转盘仍相对卡片右下角浮着 */
+.article-card > .article-foot{position:static;z-index:auto}
+/* 展开后：转盘挪到「收起全文」右边的一行里，照样能点开转 */
+.article-card.open .article-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-top:8px;
+}
+.article-card.open .food-wheel{
+  position:relative;right:auto;bottom:auto;
+  flex:0 0 auto;
+  width:80px;height:80px;--fr:27px;
+  margin:0;
+  animation:fwIdle 4.6s ease-in-out infinite;
+}
+.article-card.open .fw-hub{width:36px;height:36px;font-size:8.5px}
+.article-card.open .fw-hub.hit em{font-size:6px;margin-bottom:1px}
+.article-card.open .fw-hub.hit b{font-size:10.5px}
+.article-card.open .fw-disc i{font-size:9px;width:12px;height:12px;margin:-6px 0 0 -6px}
 /* 折叠时给右边腾出转盘位置，正文不钻进转盘底下 */
 .article-card:not(.open) .article-summary{padding-right:114px}
 
@@ -1607,6 +1624,12 @@ button{font-family:inherit;cursor:pointer;border:none}
 @media (max-width:430px){
   .food-wheel{width:78px;height:78px;--fr:27px;right:8px;bottom:9px}
   .article-card:not(.open) .article-summary{padding-right:94px}
+  .article-card.open .article-foot{padding-top:14px}
+  .article-card.open .food-wheel{width:72px;height:72px;--fr:24px;margin:0}
+  .article-card.open .fw-hub{width:33px;height:33px;font-size:7.5px}
+  .article-card.open .fw-hub.hit em{font-size:5.8px;margin-bottom:1px}
+  .article-card.open .fw-hub.hit b{font-size:10px}
+  .article-card.open .fw-disc i{font-size:8px;width:11px;height:11px;margin:-5.5px 0 0 -5.5px}
   .fw-hub{width:36px;height:36px;font-size:8px}
   .fw-hub.hit em{font-size:6px;margin-bottom:1px}
   .fw-hub.hit b{font-size:10.5px}
@@ -2960,8 +2983,10 @@ function renderArticles(list, kw){
       html += '</div>';
     }
     html += '</div></div>';
+    html += '<div class="article-foot">';
     html += '<button class="article-toggle" aria-expanded="' + (isOpen ? 'true' : 'false') + '" onclick="toggleArticle(this)"><span class="toggle-text">' + (isOpen ? '收起全文' : '展开全文') + '</span><span class="arrow">▾</span></button>';
     html += wheelHTML();
+    html += '</div>';
     html += '</div>';
   }
   if(list.length > visibleCount){
