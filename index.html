@@ -1517,6 +1517,27 @@ button{font-family:inherit;cursor:pointer;border:none}
 .article-toggle .arrow{transition:transform .3s;display:inline-block}
 .article-card.open .article-toggle .arrow{transform:rotate(180deg)}
 
+/* ===== 卡片操作行：展开全文 + 分享这篇 ===== */
+.article-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.article-actions .article-toggle{margin-top:0}
+.article-share{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:7px 14px;border-radius:999px;cursor:pointer;
+  font-size:12px;font-weight:900;letter-spacing:.6px;
+  color:var(--acc);background:#fff;
+  border:2px solid var(--acc);
+  box-shadow:0 3px 0 var(--ashadow);
+  transition:transform .15s,background .2s,color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.article-share svg{width:13px;height:13px;flex:0 0 auto}
+.article-share:active{transform:scale(.94)}
+.article-share:focus-visible{outline:2px dashed var(--acc);outline-offset:3px}
+.article-share.copied{
+  color:#fff;background:linear-gradient(135deg,#63E2A6,#16A96F);
+  border-color:#16A96F;box-shadow:0 3px 0 rgba(16,140,100,.35);
+}
+
 /* ===== 折叠态右下角：今晚吃什么小转盘 ===== */
 .food-wheel{
   position:absolute;right:14px;bottom:12px;z-index:3;
@@ -1536,26 +1557,10 @@ button{font-family:inherit;cursor:pointer;border:none}
 .food-wheel:hover .fw-disc{filter:brightness(1.06) saturate(1.06)}
 .food-wheel:active .fw-disc{filter:brightness(.94)}
 .food-wheel:focus-visible{outline:2px dashed #FF6FA8;outline-offset:4px;border-radius:50%}
-/* 底部一行：按钮 + 转盘。foot 不定位，折叠时转盘仍相对卡片右下角浮着 */
-.article-card > .article-foot{position:static;z-index:auto}
-/* 展开后：转盘挪到「收起全文」右边的一行里，照样能点开转 */
-.article-card.open .article-foot{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding-top:8px;
-}
-.article-card.open .food-wheel{
-  position:relative;right:auto;bottom:auto;
-  flex:0 0 auto;
-  width:80px;height:80px;--fr:27px;
-  margin:0;
-  animation:fwIdle 4.6s ease-in-out infinite;
-}
-.article-card.open .fw-hub{width:36px;height:36px;font-size:8.5px}
-.article-card.open .fw-hub.hit em{font-size:6px;margin-bottom:1px}
-.article-card.open .fw-hub.hit b{font-size:10.5px}
-.article-card.open .fw-disc i{font-size:9px;width:12px;height:12px;margin:-6px 0 0 -6px}
+.article-card.open .food-wheel{display:none}
 /* 折叠时给右边腾出转盘位置，正文不钻进转盘底下 */
 .article-card:not(.open) .article-summary{padding-right:114px}
+.article-card:not(.open) .article-actions{padding-right:110px}
 
 .fw-disc{
   position:absolute;inset:0;border-radius:50%;
@@ -1624,12 +1629,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 @media (max-width:430px){
   .food-wheel{width:78px;height:78px;--fr:27px;right:8px;bottom:9px}
   .article-card:not(.open) .article-summary{padding-right:94px}
-  .article-card.open .article-foot{padding-top:14px}
-  .article-card.open .food-wheel{width:72px;height:72px;--fr:24px;margin:0}
-  .article-card.open .fw-hub{width:33px;height:33px;font-size:7.5px}
-  .article-card.open .fw-hub.hit em{font-size:5.8px;margin-bottom:1px}
-  .article-card.open .fw-hub.hit b{font-size:10px}
-  .article-card.open .fw-disc i{font-size:8px;width:11px;height:11px;margin:-5.5px 0 0 -5.5px}
+  .article-card:not(.open) .article-actions{padding-right:90px}
   .fw-hub{width:36px;height:36px;font-size:8px}
   .fw-hub.hit em{font-size:6px;margin-bottom:1px}
   .fw-hub.hit b{font-size:10.5px}
@@ -1640,9 +1640,99 @@ mark{
   color:inherit;padding:0;
 }
 .no-result{
-  text-align:center;padding:40px;color:var(--ink-soft);font-size:14px;
+  text-align:center;padding:34px 22px 30px;color:var(--ink-soft);font-size:14px;
   display:none;
+  background:rgba(255,255,255,.92);
+  border:2px dashed #FFD3E2;border-radius:22px;
+  box-shadow:0 10px 24px -14px rgba(255,77,148,.4);
+  animation:nrIn .3s ease both;
 }
+@keyframes nrIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.no-result .nr-face{display:block;width:52px;height:52px;margin:0 auto 10px}
+.no-result .nr-title{font-size:15px;font-weight:900;color:var(--ink)}
+.no-result .nr-title b{color:#F5297F;font-weight:900}
+.no-result .nr-sub{font-size:12.5px;color:#8C7B70;line-height:1.7;margin-top:6px}
+.nr-btn{
+  display:inline-flex;align-items:center;gap:6px;margin-top:15px;
+  padding:10px 22px;border:none;border-radius:999px;cursor:pointer;
+  font-family:inherit;font-size:13px;font-weight:900;letter-spacing:.5px;color:#fff;
+  background:linear-gradient(135deg,#FF8FB8,#FF4D94);
+  box-shadow:0 4px 0 rgba(255,77,148,.4),0 8px 18px rgba(255,77,148,.3);
+  transition:transform .15s;
+}
+.nr-btn:active{transform:scale(.95)}
+.nr-btn svg{width:15px;height:15px;flex:0 0 auto}
+
+/* ========== 常见问题 ========== */
+.faq-list{
+  max-width:680px;margin:0 auto;
+  display:flex;flex-direction:column;gap:11px;
+}
+.faq-item{
+  background:rgba(255,255,255,.96);
+  border:2px solid #FFE3EE;border-radius:18px;
+  box-shadow:0 5px 0 rgba(255,143,184,.16);
+  overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.faq-item[open]{
+  border-color:#FFB3D0;
+  box-shadow:0 5px 0 rgba(255,143,184,.28),0 12px 26px -16px rgba(255,77,148,.5);
+}
+.faq-item summary{
+  list-style:none;cursor:pointer;
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px;
+  font-size:14px;font-weight:900;color:var(--ink);
+  -webkit-tap-highlight-color:transparent;
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:focus-visible{outline:2px dashed #FF4D94;outline-offset:-4px;border-radius:14px}
+.faq-q{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+  display:grid;place-items:center;
+  font-size:11px;font-weight:900;color:#fff;
+  background:linear-gradient(135deg,#FF9EC4,#FF4D94);
+  box-shadow:0 2px 0 rgba(255,77,148,.32);
+}
+.faq-arrow{
+  width:15px;height:15px;
+  margin-left:auto;flex:0 0 auto;
+  color:#FF4D94;
+  transition:transform .25s;
+}
+.faq-item[open] .faq-arrow{transform:rotate(180deg)}
+.faq-item summary::marker{content:""}
+.faq-a{
+  padding:0 16px 15px 48px;
+  font-size:13px;line-height:1.78;color:var(--ink-soft);
+}
+.faq-a b{color:#E01E75;font-weight:900}
+.faq-a .faq-wx{
+  display:inline-block;margin-top:2px;padding:1px 7px;border-radius:6px;
+  background:#FFF0F6;color:#E01E75;font-weight:900;letter-spacing:.2px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,sans-serif;
+}
+.faq-item[open] .faq-a{animation:faqIn .26s ease both}
+@keyframes faqIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.faq-cta{
+  max-width:680px;margin:16px auto 0;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 18px;border-radius:18px;
+  background:linear-gradient(135deg,#FFF4F9,#FFEAF3);
+  border:2px solid #FFD9E8;
+}
+.faq-cta p{flex:1 1 190px;font-size:12.5px;color:#8C6A7C;line-height:1.6}
+.faq-cta p b{color:#E01E75}
+.faq-cta button{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+  padding:10px 20px;border:none;border-radius:999px;cursor:pointer;
+  font-family:inherit;font-size:13px;font-weight:900;color:#fff;
+  background:linear-gradient(135deg,#FF8FB8,#FF4D94);
+  box-shadow:0 4px 0 rgba(255,77,148,.4);
+  transition:transform .15s;
+}
+.faq-cta button:active{transform:scale(.95)}
 
 /* ========== 回到顶部 ========== */
 .back-top{
@@ -2257,7 +2347,54 @@ mark{
     <button class="search-clear" id="clearBtn" style="display:none" onclick="clearSearch()">清空搜索 ✕</button>
   </div>
   <div class="article-list" id="articleList"></div>
-  <div class="no-result" id="noResult">没有找到相关攻略，试试其他关键词</div>
+  <div class="no-result" id="noResult">
+    <svg class="nr-face" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="27" cy="27" r="17" stroke="#FFA6C8" stroke-width="6"/><path d="M40 40 53 53" stroke="#FF4D94" stroke-width="7" stroke-linecap="round"/></svg>
+    <p class="nr-title">没有找到<b id="nrKw"></b>相关攻略</p>
+    <p class="nr-sub">换个关键词试试（比如「开荒」「转生」「礼包」），<br>或者直接问客服——想要哪款游戏的什么内容，可以按需补上</p>
+    <button class="nr-btn" type="button" onclick="copyWechat()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      复制客服微信，直接问
+    </button>
+  </div>
+</section>
+
+<!-- ===== 常见问题 ===== -->
+<section class="section" id="faq">
+  <div class="section-title">
+    <div class="tag">新手必看</div>
+    <h2>常见问题</h2>
+    <p>加微信前先看这几条，能省一半来回</p>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary><span class="faq-q">Q</span>游戏怎么下载？苹果安卓都能装吗？<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-a">加客服微信后，把游戏名发过去（比如「桃园将帅录」），客服会发对应的下载链接和安装步骤。安卓直接装安装包就行；苹果装完如果提示「未受信任的开发者」，去「设置 → 通用 → VPN 与设备管理」里点一下信任即可，客服会带着你走。</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-q">Q</span>礼包怎么领？要不要花钱？<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-a">不用花钱。<b>同一个微信</b>报「游戏名 + 区服 + 角色名」，客服核对后发兑换码，进游戏在福利/设置里兑换即可。一个新号限领一次，老区新区都能领。</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-q">Q</span>加了微信一直没通过怎么办？<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-a">客服消息多的时候会集中处理，一般 <b>2 小时内</b>通过。超过 24 小时没反应，多半是加错号或被折叠了，核对一下是不是 <span class="faq-wx">LYLOVEZLL1314999</span>，再加一次并在验证消息里写上游戏名。</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-q">Q</span>攻略多久更新一次？<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-a">每天更新。开服、版本改动、活动上线当天就会补。每篇标题旁边的「更新 MM-DD」是最后一次校对的时间，看到日期比较旧的，说明那篇的机制还没变。</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-q">Q</span>换手机、换游戏还能领吗？<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-a">换设备不影响，<b>同一个微信就是同一个号</b>。换游戏可以再领对应游戏的礼包，不用换微信，也不用重新加。</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-q">Q</span>攻略里没写的问题去哪问？<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-a">直接发给客服就行，问得多的问题我们会整理成新攻略发在站里——你问的那条，可能下一篇就是答案。</div>
+    </details>
+  </div>
+  <div class="faq-cta">
+    <p>还有别的问题？<b>直接问客服</b>，游戏怎么选、区服怎么进、礼包怎么用，都能问。</p>
+    <button type="button" onclick="copyWechat()">复制客服微信</button>
+  </div>
 </section>
 
 <!-- ===== 客服福利区（卡通糖果风） ===== -->
@@ -2411,6 +2548,31 @@ function fallbackCopy(gameName){
   try{ document.execCommand('copy'); }catch(e){}
   document.body.removeChild(ta);
   showToast(gameName ? '已复制客服微信，添加后直接发送「'+gameName+'」即可' : '已复制客服微信：'+WECHAT_ID);
+}
+
+// 复制任意文本（分享链接用）：先试异步剪贴板，失败退回 execCommand
+function legacyCopyText(str){
+  var ta = document.createElement('textarea');
+  ta.value = str;
+  ta.setAttribute('readonly', '');
+  ta.style.position = 'fixed';
+  ta.style.top = '-1000px';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try{ ta.setSelectionRange(0, str.length); }catch(e){}
+  var ok = false;
+  try{ ok = document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
+  return ok;
+}
+
+function copyText(str){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    return navigator.clipboard.writeText(str).then(function(){ return true; })
+      .catch(function(){ return legacyCopyText(str); });
+  }
+  return Promise.resolve(legacyCopyText(str));
 }
 
 function showToast(msg){
@@ -2943,6 +3105,108 @@ function spinWheel(wheel){
 
 function articleKey(a){ return a.game + '|' + a.title; }
 
+/* ===== 单篇攻略的固定链接：?a=<短 id> =====
+   用「游戏+标题」算 32 位哈希得到稳定短码，新增文章不会让旧链接失效 */
+function articleId(a){
+  var s = a.game + '|' + a.title, h = 5381;
+  for(var i = 0; i < s.length; i++){ h = ((h << 5) + h + s.charCodeAt(i)) | 0; }
+  return (h >>> 0).toString(36);
+}
+
+function articlePermalink(a){
+  return location.origin + location.pathname + '?a=' + articleId(a);
+}
+
+function currentArticleParam(){
+  var m = location.search.match(/[?&]a=([^&#]+)/);
+  if(m) return m[1];
+  var h = location.hash.match(/^#a=(.+)$/);
+  return h ? h[1] : '';
+}
+
+function findArticleByParam(v){
+  if(!v) return null;
+  var i, dec = v;
+  try{ dec = decodeURIComponent(v); }catch(e){}
+  for(i = 0; i < ARTICLES.length; i++){ if(articleId(ARTICLES[i]) === dec) return ARTICLES[i]; }
+  for(i = 0; i < ARTICLES.length; i++){ if(articleKey(ARTICLES[i]) === dec) return ARTICLES[i]; }
+  for(i = 0; i < ARTICLES.length; i++){ if(ARTICLES[i].title === dec) return ARTICLES[i]; }
+  return null;
+}
+
+function setMetaContent(sel, val){
+  var el = document.querySelector(sel);
+  if(el) el.setAttribute('content', val);
+}
+
+/* 打开单篇链接时，页面标题与分享卡片跟着换成这一篇 */
+function applyArticleMeta(a){
+  var title = a.title + '｜' + a.game + '攻略 - 精品手游攻略站';
+  var url = articlePermalink(a);
+  document.title = title;
+  setMetaContent('meta[name="description"]', a.summary);
+  setMetaContent('meta[property="og:title"]', title);
+  setMetaContent('meta[property="og:description"]', a.summary);
+  setMetaContent('meta[property="og:url"]', url);
+  setMetaContent('meta[name="twitter:title"]', title);
+  setMetaContent('meta[name="twitter:description"]', a.summary);
+  var c = document.querySelector('link[rel="canonical"]');
+  if(c) c.setAttribute('href', url);
+}
+
+function shareArticle(btn){
+  var card = btn.closest ? btn.closest('.article-card') : null;
+  if(!card) return;
+  var a = findArticleByParam(card.getAttribute('data-key'));
+  if(!a) return;
+  var url = articlePermalink(a);
+  copyText(url).then(function(){
+    var t = btn.querySelector('.share-text');
+    btn.classList.add('copied');
+    if(t) t.textContent = '已复制';
+    showToast('链接已复制，发给朋友可直接打开这篇');
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      if(t) t.textContent = '分享';
+    }, 1800);
+  });
+}
+
+/* 从微信/朋友点进来：自动展开、定位并高亮那一篇 */
+function initDeepLink(){
+  var p = currentArticleParam();
+  if(!p) return;
+  var a = findArticleByParam(p);
+  if(!a) return;
+  expanded[articleKey(a)] = true;
+  // 目标文章可能排在「加载更多」之后：先把它所在的那一页放出来，其余保持不变
+  var ordered = ARTICLES.slice().sort(function(x, y){
+    if(x.date === y.date) return 0;
+    return x.date < y.date ? 1 : -1;
+  });
+  var pos = ordered.indexOf(a);
+  if(pos >= visibleCount) visibleCount = Math.min(ARTICLES.length, pos + 1);
+  filterArticles(true);
+  applyArticleMeta(a);
+  setTimeout(function(){
+    var key = articleKey(a).replace(/"/g, '\\"');
+    var card = document.querySelector('.article-card[data-key="' + key + '"]');
+    if(!card) return;
+    // 从链接进来就展开了，也算读过
+    markRead(articleKey(a), card);
+    // 展开后卡片很高，从标题处开始读；减掉吸顶导航的高度。
+    // 这里直接定位而不是平滑滚动：从分享链接进来时，让用户立刻停在文章上
+    var y = card.getBoundingClientRect().top + window.pageYOffset - 78;
+    var root = document.documentElement;
+    var oldBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, y > 0 ? y : 0);
+    root.style.scrollBehavior = oldBehavior;
+    card.classList.add('flash');
+    setTimeout(function(){ card.classList.remove('flash'); }, 1900);
+  }, 120);
+}
+
 var PAGE_SIZE = 8, visibleCount = PAGE_SIZE, currentList = [], currentKw = '';
 
 function renderArticles(list, kw){
@@ -2983,10 +3247,13 @@ function renderArticles(list, kw){
       html += '</div>';
     }
     html += '</div></div>';
-    html += '<div class="article-foot">';
+    html += '<div class="article-actions">';
     html += '<button class="article-toggle" aria-expanded="' + (isOpen ? 'true' : 'false') + '" onclick="toggleArticle(this)"><span class="toggle-text">' + (isOpen ? '收起全文' : '展开全文') + '</span><span class="arrow">▾</span></button>';
-    html += wheelHTML();
+    html += '<button class="article-share" type="button" onclick="shareArticle(this)" aria-label="复制这篇攻略的链接">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg>' +
+            '<span class="share-text">分享</span></button>';
     html += '</div>';
+    html += wheelHTML();
     html += '</div>';
   }
   if(list.length > visibleCount){
@@ -3104,7 +3371,7 @@ function haystack(a){
   return t.toLowerCase();
 }
 
-function filterArticles(){
+function filterArticles(keepCount){
   var kw = searchInput.value.trim().toLowerCase();
   autoOpen = {};
   var list = ARTICLES.filter(function(a){
@@ -3124,8 +3391,12 @@ function filterArticles(){
       if(basic.indexOf(kw) < 0) autoOpen[articleKey(a)] = true;
     }
   }
-  currentList = list; currentKw = kw; visibleCount = PAGE_SIZE;
+  currentList = list; currentKw = kw;
+  // keepCount：深链进来时保留已经放出的条数，别把用户要的那篇又收回去
+  if(!keepCount) visibleCount = PAGE_SIZE;
   renderArticles(list, kw);
+  var nrKw = document.getElementById('nrKw');
+  if(nrKw) nrKw.textContent = kw ? ('「' + searchInput.value.trim() + '」') : '';
   document.getElementById('noResult').style.display = list.length === 0 ? 'block' : 'none';
   document.getElementById('resultCount').textContent =
     (kw || activeGame) ? ('找到 ' + list.length + ' 篇相关攻略') : ('共 ' + ARTICLES.length + ' 篇攻略，可展开看全文');
@@ -3160,6 +3431,8 @@ function clearSearch(){
 
 // 初始渲染
 filterArticles();
+// 若是单篇链接（?a=xxx），展开并定位到那篇
+initDeepLink();
 
 // ===== 关注卡片：让「→」箭头正对抖音/快手图标的垂直中心 =====
 // 箭头在胶囊里、图标在右侧一列，两者不在同一 flex 线上；
