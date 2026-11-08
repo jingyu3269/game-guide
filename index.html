@@ -1179,6 +1179,99 @@ button{font-family:inherit;cursor:pointer;border:none}
 .foot-div b{font-size:12px;color:#FF9CC4;line-height:1;font-weight:400}
 .foot-note{font-size:11px;color:#B7A597;letter-spacing:.3px}
 
+/* ========== 页脚分享面板 ========== */
+.share-layer{
+  position:fixed;inset:0;z-index:100150;
+  display:flex;align-items:flex-end;justify-content:center;
+  background:transparent;border:0;
+  opacity:0;pointer-events:none;
+  transition:opacity .24s;
+}
+.share-layer::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(26,10,18,.56);
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+}
+.share-layer.show{opacity:1;pointer-events:auto}
+.share-card{position:relative;z-index:1}
+.share-card{
+  width:100%;max-width:420px;
+  background:linear-gradient(180deg,#FFFDFB,#FFF3F7);
+  border-radius:26px 26px 0 0;
+  padding:26px 20px calc(18px + env(safe-area-inset-bottom));
+  box-shadow:0 -14px 42px rgba(120,20,60,.24);
+  transform:translateY(28px) scale(.985);
+  transition:transform .32s cubic-bezier(.2,1.3,.4,1);
+}
+.share-layer.show .share-card{transform:none}
+@media (min-width:560px){
+  .share-layer{align-items:center;padding:24px}
+  .share-card{border-radius:26px;padding-bottom:20px;box-shadow:0 24px 64px rgba(60,10,40,.32)}
+}
+.sc-head{text-align:center;margin-bottom:22px}
+.sc-head b{display:block;font-size:17px;font-weight:900;color:#4A3229;letter-spacing:.6px}
+.sc-head span{display:block;margin-top:7px;font-size:12px;color:#B39F91;letter-spacing:.4px}
+.sc-row{display:flex;justify-content:center;gap:6px}
+.sc-item{
+  flex:1;max-width:112px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:none;border:0;padding:6px 0 4px;
+  font-family:inherit;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.sc-item span{font-size:12px;font-weight:900;color:#6E5548;letter-spacing:.3px}
+.sc-ico{
+  width:56px;height:56px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+  transition:transform .22s cubic-bezier(.3,1.5,.5,1),box-shadow .22s;
+}
+.sc-ico svg{width:31px;height:31px;display:block}
+.sc-ico.wx{background:linear-gradient(160deg,#4FE08C,#0EAE58);box-shadow:0 6px 15px rgba(14,174,88,.34)}
+.sc-ico.qq{background:linear-gradient(160deg,#5FCFFF,#0F9FE8);box-shadow:0 6px 15px rgba(15,159,232,.34)}
+.sc-ico.cp{background:linear-gradient(160deg,#FFA9C7,#FF5E97);box-shadow:0 6px 15px rgba(255,94,151,.36)}
+.sc-item:hover .sc-ico{transform:translateY(-3px) scale(1.05)}
+.sc-item:active .sc-ico{transform:scale(.93)}
+.sc-item:focus-visible{outline:2px dashed #FF5B96;outline-offset:2px;border-radius:14px}
+.sc-cancel{
+  display:block;width:100%;margin-top:20px;padding:13px;
+  font-family:inherit;font-size:13px;font-weight:900;letter-spacing:.6px;
+  color:#9A7F72;background:#fff;
+  border:2px solid #FFE3EE;border-radius:14px;cursor:pointer;
+  transition:background .18s,border-color .18s;
+}
+.sc-cancel:hover{background:#FFF7FA;border-color:#FFD2E3}
+.sc-cancel:active{background:#FFEFF5}
+html.share-open,html.share-open body{overflow:hidden}
+
+/* 微信内置浏览器：引导右上角分享 */
+.wx-share-tip{
+  position:fixed;inset:0;z-index:100190;
+  background:rgba(16,8,12,.82);
+  opacity:0;pointer-events:none;
+  transition:opacity .25s;
+}
+.wx-share-tip.show{opacity:1;pointer-events:auto}
+.wst-arrow{
+  position:absolute;top:52px;right:12px;
+  width:84px;height:84px;
+  filter:drop-shadow(0 2px 7px rgba(0,0,0,.5));
+  animation:wstNudge 1.5s ease-in-out infinite;
+}
+@keyframes wstNudge{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(3px,-3px)}
+}
+.wst-txt{
+  position:absolute;top:40%;left:50%;
+  transform:translate(-50%,-50%);
+  width:78%;max-width:320px;text-align:center;
+  color:#fff;font-size:14.5px;line-height:1.85;letter-spacing:.4px;
+  text-shadow:0 2px 10px rgba(0,0,0,.4);
+}
+.wst-txt b{color:#FFC2DA;font-size:16px;padding:0 2px}
+.wst-txt i{display:block;margin-top:12px;font-style:normal;font-size:12px;color:rgba(255,255,255,.62)}
+
 /* 页脚：分享本站 */
 .foot-share{
   position:relative;
@@ -2702,7 +2795,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
   <div class="foot-chip"><span>🐾</span>精品手游攻略站<span>🐾</span></div>
   <p class="foot-sub">海量攻略 · 客服直达 · 每天上新</p>
   <div class="foot-div"><i></i><b>♡</b><i></i></div>
-  <button class="foot-share" id="footShare" type="button" onclick="shareSite(this)" aria-label="分享这个网站">
+  <button class="foot-share" id="footShare" type="button" onclick="openShareSheet()" aria-haspopup="dialog" aria-expanded="false" aria-label="分享这个网站">
     <span class="fs-spark l">✦</span>
     <span class="fs-spark r">✦</span>
     <svg class="fs-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5.4" r="2.9"/><circle cx="6" cy="12" r="2.9"/><circle cx="18" cy="18.6" r="2.9"/><path d="M8.7 10.6 15.3 7M8.7 13.4 15.3 17"/></svg>
@@ -2713,6 +2806,46 @@ html.poster-open,html.poster-open body{overflow:hidden}
 
 <!-- 花瓣飘落容器 -->
 <div class="petal-container" id="petalContainer"></div>
+
+<!--SHARE-SHEET-START-->
+<div class="share-layer" id="shareLayer" aria-hidden="true" onclick="if(event.target===this)closeShareSheet()">
+  <div class="share-card" role="dialog" aria-modal="true" aria-label="分享这个网站">
+    <div class="sc-head">
+      <b>分享这个网站</b>
+      <span>发给朋友，攻略一起看</span>
+    </div>
+    <div class="sc-row">
+      <button class="sc-item" type="button" onclick="shareToWx(this)">
+        <i class="sc-ico wx">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.2 3.3C5.1 3.3 1.8 6.1 1.8 9.5c0 1.9 1.1 3.6 2.9 4.8l-.8 2.5 2.9-1.4c.8.2 1.6.3 2.4.3.33 0 .65 0 .96-.06a5.5 5.5 0 0 1-.26-1.7c0-2.9 2.8-5.2 6.3-5.2.24 0 .47 0 .7.04-.94-2.9-3.9-5.18-7.7-5.18z"/><path d="M22.2 13.2c0-2.5-2.4-4.5-5.4-4.5s-5.4 2-5.4 4.5 2.4 4.5 5.4 4.5c.7 0 1.4-.1 2-.4l2.2 1.1-.6-2c1.1-.8 1.8-2 1.8-3.2z"/><circle cx="6.5" cy="8.3" r="1" fill="#16B45E"/><circle cx="11.6" cy="8.3" r="1" fill="#16B45E"/><circle cx="14.9" cy="12.2" r=".85" fill="#16B45E"/><circle cx="19.2" cy="12.2" r=".85" fill="#16B45E"/></svg>
+        </i>
+        <span>微信</span>
+      </button>
+      <button class="sc-item" type="button" onclick="shareToQq(this)">
+        <i class="sc-ico qq">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c-3.5 0-5.95 2.65-5.95 6.1 0 .9-.2 1.75-.62 2.55C4.7 12.1 3.9 13.3 3.9 14.5c0 .8.5 1.35 1.25 1.35.5 0 1-.19 1.4-.5.5 1.03 1.05 1.9 1.72 2.55-.4.19-.66.52-.66.88 0 .72.92 1.15 2.2 1.15h4.38c1.28 0 2.2-.43 2.2-1.15 0-.36-.26-.69-.66-.88.67-.65 1.22-1.52 1.72-2.55.4.31.9.5 1.4.5.75 0 1.25-.55 1.25-1.35 0-1.2-.8-2.4-1.53-3.65-.42-.8-.62-1.65-.62-2.55 0-3.45-2.45-6.1-5.95-6.1z"/><circle cx="9.5" cy="8.3" r="1.25" fill="#12A6EA"/><circle cx="14.5" cy="8.3" r="1.25" fill="#12A6EA"/><path d="M12 10.3 13.75 12.05H10.25z" fill="#FFB020"/><path d="M6.75 15.15h10.5a.85.85 0 0 1 .85.85v1.15a.85.85 0 0 1-.85.85H6.75a.85.85 0 0 1-.85-.85V16a.85.85 0 0 1 .85-.85z" fill="#FF5252"/></svg>
+        </i>
+        <span>QQ</span>
+      </button>
+      <button class="sc-item" type="button" onclick="shareToCopy(this)">
+        <i class="sc-ico cp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </i>
+        <span>复制链接</span>
+      </button>
+    </div>
+    <button class="sc-cancel" type="button" onclick="closeShareSheet()">取消</button>
+  </div>
+</div>
+
+<div class="wx-share-tip" id="wxShareTip" aria-hidden="true" onclick="hideWxShareTip()">
+  <svg class="wst-arrow" viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M14 102C56 98 92 72 96 34" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <path d="M78 48 L98 26 L110 52" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="wst-txt">点右上角 <b>···</b> 发给朋友<br>或分享到朋友圈<i>点任意位置关闭</i></div>
+</div>
+<!--SHARE-SHEET-END-->
 
 <!--POSTER-HTML-START-->
 <div class="poster-layer" id="posterLayer" aria-hidden="true" onclick="if(event.target===this)closePoster()">
@@ -4758,5 +4891,160 @@ window.closePoster = function(){ window.Poster.close(); };
 })();
 </script>
 <!--MOTION-JS-END-->
+<!--SHARE-SHEET-JS-START-->
+<script>
+/* ===== 页脚：分享到微信 / QQ / 复制链接 ===== */
+function shareLayerEl(){
+  return document.getElementById('shareLayer');
+}
+
+function openShareSheet(){
+  var l = shareLayerEl();
+  if(!l) return;
+  l.classList.add('show');
+  l.setAttribute('aria-hidden', 'false');
+  document.documentElement.classList.add('share-open');
+  var b = document.getElementById('footShare');
+  if(b) b.setAttribute('aria-expanded', 'true');
+  if(window.SFX) window.SFX('pop');
+  clearTimeout(window._ssT);
+  window._ssT = setTimeout(function(){
+    document.addEventListener('keydown', shareSheetKey);
+  }, 30);
+}
+
+function closeShareSheet(){
+  var l = shareLayerEl();
+  if(!l) return;
+  l.classList.remove('show');
+  l.setAttribute('aria-hidden', 'true');
+  document.documentElement.classList.remove('share-open');
+  var b = document.getElementById('footShare');
+  if(b) b.setAttribute('aria-expanded', 'false');
+  document.removeEventListener('keydown', shareSheetKey);
+}
+
+function shareSheetKey(e){
+  if(e.key === 'Escape') closeShareSheet();
+}
+
+function ssMobile(){
+  return /Android|iPhone|iPad|iPod|HarmonyOS|Mobile/i.test(navigator.userAgent);
+}
+
+function ssWechat(){
+  return /MicroMessenger/i.test(navigator.userAgent);
+}
+
+function ssCover(){
+  var m = document.querySelector('meta[property="og:image"]');
+  return m ? m.getAttribute('content') : '';
+}
+
+/* scheme / 外部协议跳转：用隐藏 a 触发，失败不污染当前页面 */
+function ssJump(url){
+  try{
+    var a = document.createElement('a');
+    a.href = url;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ if(a.parentNode) a.parentNode.removeChild(a); }, 900);
+  }catch(e){}
+}
+
+function ssMarkCopied(){
+  var btn = document.getElementById('footShare');
+  if(!btn) return;
+  var t = btn.querySelector('.fs-text');
+  btn.classList.add('copied');
+  if(t) t.textContent = '链接已复制';
+  clearTimeout(btn._fsTimer);
+  btn._fsTimer = setTimeout(function(){
+    btn.classList.remove('copied');
+    if(t) t.textContent = '分享这个网站';
+  }, 2200);
+}
+
+/* 微信 */
+function shareToWx(){
+  var url = siteHomeUrl();
+  if(ssWechat()){
+    closeShareSheet();
+    setTimeout(showWxShareTip, 200);
+    return;
+  }
+  copyText(url);
+  ssMarkCopied();
+  ssJump('weixin://');
+  closeShareSheet();
+  showToast('链接已复制，打开微信粘贴给好友');
+  if(window.SFX) window.SFX('ding');
+}
+
+/* QQ */
+function shareToQq(){
+  var url   = siteHomeUrl();
+  var title = document.title || '精品手游攻略站';
+  var desc  = '海量攻略 · 客服直达 · 每天上新';
+  var pic   = ssCover();
+  closeShareSheet();
+
+  if(ssMobile()){
+    copyText(url);
+    ssMarkCopied();
+    ssJump('mqqapi://share/to_fri?src_type=web&version=1&file_type=news&share_type=0'
+      + '&url=' + encodeURIComponent(url)
+      + '&title=' + encodeURIComponent(title)
+      + '&description=' + encodeURIComponent(desc)
+      + '&summary=' + encodeURIComponent(desc)
+      + '&source_name=' + encodeURIComponent('精品手游攻略站')
+      + '&pics=' + encodeURIComponent(pic));
+    showToast('正在唤起 QQ，没反应就粘贴链接给好友');
+    if(window.SFX) window.SFX('ding');
+    return;
+  }
+
+  var w = window.open('https://connect.qq.com/widget/shareqq/index.html'
+    + '?url=' + encodeURIComponent(url)
+    + '&title=' + encodeURIComponent(title)
+    + '&summary=' + encodeURIComponent(desc)
+    + '&pics=' + encodeURIComponent(pic)
+    + '&style=203&width=660&height=460', '_blank', 'width=660,height=520');
+  if(!w){
+    copyText(url);
+    ssMarkCopied();
+    showToast('弹窗被拦截，链接已复制，粘贴给 QQ 好友');
+  }
+  if(window.SFX) window.SFX('ding');
+}
+
+/* 复制链接 */
+function shareToCopy(){
+  var url = siteHomeUrl();
+  copyText(url).then(function(){
+    ssMarkCopied();
+    closeShareSheet();
+    showToast('本站链接已复制，发给朋友就行');
+    if(window.SFX) window.SFX('ding');
+  });
+}
+
+/* 微信内置浏览器：右上角分享引导 */
+function showWxShareTip(){
+  var t = document.getElementById('wxShareTip');
+  if(!t) return;
+  t.classList.add('show');
+  t.setAttribute('aria-hidden', 'false');
+}
+
+function hideWxShareTip(){
+  var t = document.getElementById('wxShareTip');
+  if(!t) return;
+  t.classList.remove('show');
+  t.setAttribute('aria-hidden', 'true');
+}
+</script>
+<!--SHARE-SHEET-JS-END-->
 </body>
 </html>
