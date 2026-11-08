@@ -1142,7 +1142,8 @@ button{font-family:inherit;cursor:pointer;border:none}
 @media (prefers-reduced-motion:reduce){
   .svc-star,.svc-coin,.svc-heart,.svc-cloud,.mascot-wrap,.mascot,.mascot-wrap::before,
   .svc-bubble,.b-title,.sky-balloon,.svc-title,.svc-ticket,.perk,.svc-btn,.svc-btn::after,
-  .svc-title::before,.svc-title::after,.game-card,.game-btn,.gc-sticker,.game-tag.hot,.article-card::after{animation:none}
+  .svc-title::before,.svc-title::after,.game-card,.game-btn,.gc-sticker,.game-tag.hot,.article-card::after,.food-wheel{animation:none}
+  .fw-disc{transition:none}
   .mascot-wrap .yum{display:none}
   .svc-btn::after{display:none}
   .mascot-wrap::after{animation:none}
@@ -1515,6 +1516,102 @@ button{font-family:inherit;cursor:pointer;border:none}
 .article-toggle:active{transform:scale(.94)}
 .article-toggle .arrow{transition:transform .3s;display:inline-block}
 .article-card.open .article-toggle .arrow{transform:rotate(180deg)}
+
+/* ===== 折叠态右下角：今晚吃什么小转盘 ===== */
+.food-wheel{
+  position:absolute;right:14px;bottom:12px;z-index:3;
+  --fr:34px;
+  width:96px;height:96px;
+  display:grid;place-items:center;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .18s ease;
+  animation:fwIdle 5.4s ease-in-out infinite;
+}
+@keyframes fwIdle{
+  0%,86%,100%{transform:rotate(0)}
+  90%{transform:rotate(-4deg)}
+  95%{transform:rotate(3deg)}
+}
+.food-wheel:hover .fw-disc{filter:brightness(1.06) saturate(1.06)}
+.food-wheel:active .fw-disc{filter:brightness(.94)}
+.food-wheel:focus-visible{outline:2px dashed #FF6FA8;outline-offset:4px;border-radius:50%}
+.article-card.open .food-wheel{display:none}
+/* 折叠时给右边腾出转盘位置，正文不钻进转盘底下 */
+.article-card:not(.open) .article-summary{padding-right:114px}
+
+.fw-disc{
+  position:absolute;inset:0;border-radius:50%;
+  transform:rotate(0deg);
+  transition:transform 2.5s cubic-bezier(.13,.82,.18,1),filter .16s ease;
+  will-change:transform;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.95),0 6px 16px rgba(214,46,116,.22);
+  background:conic-gradient(
+    #FF9EC4 0deg 45deg,
+    #FFC85C 45deg 90deg,
+    #7FD0FF 90deg 135deg,
+    #A88CFF 135deg 180deg,
+    #6BE0B8 180deg 225deg,
+    #FFA883 225deg 270deg,
+    #FFC0E2 270deg 315deg,
+    #AFC4FF 315deg 360deg);
+}
+.fw-disc::after{
+  content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 32% 20%,rgba(255,255,255,.55),rgba(255,255,255,0) 42%);
+}
+.fw-disc i{
+  position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;
+  display:flex;align-items:center;justify-content:center;
+  font-style:normal;font-size:9.5px;line-height:1;
+  transform:rotate(calc(var(--a) * 1deg)) translateY(calc(var(--fr) * -1)) rotate(calc(var(--a) * -1deg));
+  filter:drop-shadow(0 1px 1px rgba(120,40,70,.18));
+}
+.fw-hub{
+  position:relative;z-index:2;
+  width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;text-align:center;
+  padding:2px;
+  background:linear-gradient(180deg,#FFFFFF,#FFF3F9);
+  box-shadow:0 2px 7px rgba(120,30,70,.22),inset 0 0 0 2px rgba(255,255,255,.95);
+  font-size:9px;font-weight:900;letter-spacing:.5px;line-height:1.05;
+  color:#B4527C;
+}
+.fw-hub.hit{animation:hubPop .5s cubic-bezier(.2,1.6,.4,1) both}
+.fw-hub.hit em{
+  display:block;font-style:normal;font-weight:800;
+  font-size:6.5px;line-height:1;letter-spacing:0;
+  color:#C57C9E;margin-bottom:2px;
+}
+.fw-hub.hit b{
+  display:block;font-size:11.5px;line-height:1;font-weight:900;
+  letter-spacing:0;color:#E01E75;
+}
+@keyframes hubPop{
+  0%{transform:scale(.5);opacity:.4}
+  60%{transform:scale(1.16)}
+  100%{transform:scale(1);opacity:1}
+}
+.fw-pointer{
+  position:absolute;left:50%;top:-7px;z-index:3;
+  width:0;height:0;transform:translateX(-50%);
+  border-left:7px solid transparent;border-right:7px solid transparent;
+  border-top:12px solid #FF4D94;
+  filter:drop-shadow(0 2px 3px rgba(200,30,110,.45));
+}
+.fw-pointer::after{
+  content:"";position:absolute;left:-4px;top:-9px;
+  width:8px;height:8px;border-radius:50%;
+  background:#FF4D94;box-shadow:0 1px 2px rgba(200,30,110,.4);
+}
+@media (max-width:430px){
+  .food-wheel{width:78px;height:78px;--fr:27px;right:8px;bottom:9px}
+  .article-card:not(.open) .article-summary{padding-right:94px}
+  .fw-hub{width:36px;height:36px;font-size:8px}
+  .fw-hub.hit em{font-size:6px;margin-bottom:1px}
+  .fw-hub.hit b{font-size:10.5px}
+  .fw-disc i{font-size:8.5px;width:12px;height:12px;margin:-6px 0 0 -6px}
+}
 mark{
   background:linear-gradient(transparent 55%,rgba(255,181,71,.6) 55%);
   color:inherit;padding:0;
@@ -2764,6 +2861,63 @@ var GAME_ICONS = {
 };
 function iconOf(cls){ return GAME_ICONS[cls] || GAME_ICONS.taoyuan; }
 
+// 今晚吃什么：折叠态右下角的小转盘
+var FOODS = [
+  {n:'火锅', e:'\uD83C\uDF72'},
+  {n:'烧烤', e:'\uD83C\uDF62'},
+  {n:'日料', e:'\uD83C\uDF63'},
+  {n:'炸鸡', e:'\uD83C\uDF57'},
+  {n:'面条', e:'\uD83C\uDF5C'},
+  {n:'盖饭', e:'\uD83C\uDF5B'},
+  {n:'烤鱼', e:'\uD83D\uDC1F'},
+  {n:'寿司', e:'\uD83C\uDF59'}
+];
+var FOOD_SEG = 360 / FOODS.length;
+var WHEEL_SLICES = (function(){
+  var s = '';
+  for(var i = 0; i < FOODS.length; i++){
+    var a = (i * FOOD_SEG + FOOD_SEG / 2).toFixed(1);
+    s += '<i style="--a:' + a + '">' + FOODS[i].e + '</i>';
+  }
+  return s;
+})();
+
+function wheelHTML(){
+  return '<div class="food-wheel" role="button" tabindex="0" aria-label="今晚吃什么小转盘，点一下开转">' +
+           '<div class="fw-disc">' + WHEEL_SLICES + '</div>' +
+           '<div class="fw-hub">点我</div>' +
+           '<div class="fw-pointer"></div>' +
+         '</div>';
+}
+
+function spinWheel(wheel){
+  if(wheel.classList.contains('spinning')) return;
+  var disc = wheel.querySelector('.fw-disc');
+  var hub = wheel.querySelector('.fw-hub');
+  if(!disc || !hub) return;
+  wheel.classList.add('spinning');
+  hub.classList.remove('hit');
+  hub.textContent = '\u00B7\u00B7\u00B7';
+
+  var idx = Math.floor(Math.random() * FOODS.length);
+  var target = idx * FOOD_SEG + FOOD_SEG / 2;          // 该格的圆心角（盘面坐标）
+  var jitter = (Math.random() * 2 - 1) * FOOD_SEG * 0.12;
+  var need = (360 - target + jitter + 360) % 360;      // 让这格转到顶部指针处
+  var base = parseFloat(disc.getAttribute('data-rot')) || 0;
+  var delta = ((need - (base % 360)) + 360) % 360 + (5 + Math.floor(Math.random() * 2)) * 360;
+  var deg = base + delta;
+  disc.setAttribute('data-rot', deg);
+  disc.style.transform = 'rotate(' + deg + 'deg)';
+
+  setTimeout(function(){
+    wheel.classList.remove('spinning');
+    var f = FOODS[idx];
+    hub.innerHTML = '<em>今晚吃</em><b>' + f.n + '</b>';
+    hub.classList.add('hit');
+    wheel.setAttribute('aria-label', '今晚吃' + f.n + '，再点一下重转');
+  }, 2560);
+}
+
 function articleKey(a){ return a.game + '|' + a.title; }
 
 var PAGE_SIZE = 8, visibleCount = PAGE_SIZE, currentList = [], currentKw = '';
@@ -2807,6 +2961,7 @@ function renderArticles(list, kw){
     }
     html += '</div></div>';
     html += '<button class="article-toggle" aria-expanded="' + (isOpen ? 'true' : 'false') + '" onclick="toggleArticle(this)"><span class="toggle-text">' + (isOpen ? '收起全文' : '展开全文') + '</span><span class="arrow">▾</span></button>';
+    html += wheelHTML();
     html += '</div>';
   }
   if(list.length > visibleCount){
@@ -2899,6 +3054,21 @@ document.getElementById('articleList').addEventListener('click', function(e){
   if(!link) return;
   e.preventDefault();
   jumpToArticle(link.getAttribute('data-target'));
+});
+
+// 小转盘：点一下开转，转到今晚吃什么
+document.getElementById('articleList').addEventListener('click', function(e){
+  var w = e.target.closest ? e.target.closest('.food-wheel') : null;
+  if(!w) return;
+  e.preventDefault();
+  spinWheel(w);
+});
+document.getElementById('articleList').addEventListener('keydown', function(e){
+  if(e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+  var w = e.target.closest ? e.target.closest('.food-wheel') : null;
+  if(!w) return;
+  e.preventDefault();
+  spinWheel(w);
 });
 
 function haystack(a){
