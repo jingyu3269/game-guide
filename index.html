@@ -871,92 +871,187 @@ button{font-family:inherit;cursor:pointer;border:none}
   font-size:11.5px;color:rgba(255,255,255,.55);letter-spacing:.5px;
 }
 
-/* 福利清单：六只缓缓漂浮的夜空小气球 */
+/* 福利清单：六只缓缓漂浮的小气球（可点击爆开） */
 .svc-perks{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:34px 9px;
-  width:100%;max-width:366px;margin:0 auto 42px;
+  gap:30px 10px;
+  width:100%;max-width:318px;margin:0 auto 40px;
 }
 .perk{
-  --bc:170,123,255;--bb:30,12,60;
-  position:relative;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:5px;
-  aspect-ratio:1 / 1.1;
-  padding:9px 7px 19px;
-  border-radius:50% 50% 47% 47% / 45% 45% 55% 55%;
-  text-align:center;
-  font-size:11.6px;line-height:1.2;font-weight:900;letter-spacing:.2px;
-  color:#FFFDF7;
-  text-shadow:0 1px 6px rgba(10,2,28,.75);
-  background:
-    radial-gradient(58% 40% at 30% 16%, rgba(255,255,255,.30), rgba(255,255,255,0) 66%),
-    radial-gradient(122% 98% at 50% 118%, rgba(var(--bc),.72), rgba(var(--bc),0) 58%),
-    linear-gradient(166deg, rgba(var(--bc),.70) 0%, rgba(var(--bc),.38) 52%, rgba(var(--bb),.62) 100%);
-  box-shadow:
-    inset 0 0 0 1.5px rgba(255,255,255,.28),
-    inset 0 7px 16px rgba(255,255,255,.14),
-    inset -14px -18px 34px rgba(8,2,24,.30),
-    0 14px 30px rgba(6,2,20,.34),
-    0 0 34px rgba(var(--bc),.32);
+  --bc:176,130,255;--bb:30,12,60;
+  position:relative;aspect-ratio:1 / 1.06;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
   animation:perkFloat 8.6s ease-in-out infinite;
   animation-delay:-.8s;
-  transition:box-shadow .2s,filter .2s;
 }
+.perk:focus-visible{outline:2px solid #FFD86B;outline-offset:4px}
+/* —— 气球本体 —— */
+.balloon{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  padding:7px 4px 13px;
+  border-radius:50%;
+  text-align:center;
+  font-size:10.8px;line-height:1.18;font-weight:900;letter-spacing:0;
+  color:#FFFDF7;
+  text-shadow:0 1px 5px rgba(10,2,28,.72);
+  background:
+    radial-gradient(62% 44% at 30% 15%, rgba(255,255,255,.40), rgba(255,255,255,0) 68%),
+    radial-gradient(94% 56% at 50% 106%, rgba(255,255,255,.22), rgba(255,255,255,0) 62%),
+    radial-gradient(122% 98% at 50% 116%, rgba(var(--bc),.74), rgba(var(--bc),0) 58%),
+    linear-gradient(166deg, rgba(var(--bc),.74) 0%, rgba(var(--bc),.40) 52%, rgba(var(--bb),.64) 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.30),
+    inset 0 7px 16px rgba(255,255,255,.16),
+    inset -12px -16px 30px rgba(8,2,24,.28),
+    0 12px 26px rgba(6,2,20,.32),
+    0 0 30px rgba(var(--bc),.34);
+  transition:filter .2s;
+}
+.perk:hover .balloon{filter:brightness(1.08) saturate(1.06)}
 /* 球面大高光 */
-.perk::before{
-  content:"";position:absolute;left:22%;top:11%;width:27%;height:21%;
+.balloon::before{
+  content:"";position:absolute;left:19%;top:9%;width:34%;height:26%;
   border-radius:50%;transform:rotate(-22deg);
-  background:radial-gradient(closest-side, rgba(255,255,255,.72), rgba(255,255,255,0) 74%);
+  background:radial-gradient(closest-side, rgba(255,255,255,.78), rgba(255,255,255,0) 76%);
   pointer-events:none;
 }
 /* 一点锐利反光 */
-.perk::after{
-  content:"";position:absolute;left:31%;top:21%;width:5.5%;height:4.5%;
-  border-radius:50%;background:rgba(255,255,255,.92);
+.balloon::after{
+  content:"";position:absolute;left:29%;top:20%;width:7%;height:5.5%;
+  border-radius:50%;background:rgba(255,255,255,.95);
   filter:blur(.3px);pointer-events:none;
 }
 /* 气球结与细线 */
-.perk .knot{
+.balloon .knot{
   left:50%;bottom:-5px;margin-left:-4px;width:0;height:0;border:0;
   border-left:4px solid transparent;border-right:4px solid transparent;
-  border-top:8px solid rgba(var(--bc),.85);
+  border-top:7px solid rgba(var(--bc),.9);
   filter:drop-shadow(0 1px 2px rgba(6,2,20,.55));
 }
-.perk .knot::after{
-  content:"";position:absolute;left:4px;top:6px;width:12px;height:30px;
-  border-left:1.6px solid rgba(255,255,255,.30);
+.balloon .knot::after{
+  content:"";position:absolute;left:4px;top:5px;width:11px;height:26px;
+  border-left:1.5px solid rgba(255,255,255,.28);
   border-radius:0 0 0 78%;
   transform:rotate(-7deg);
 }
 /* 六只不同颜色、不同节奏 */
-.perk:nth-child(1){--bc:170,123,255;animation-duration:8.6s;animation-delay:-.8s}
-.perk:nth-child(2){--bc:104,196,255;animation-duration:9.4s;animation-delay:-2.4s;margin-top:16px}
-.perk:nth-child(3){--bc:255,116,178;animation-duration:8.2s;animation-delay:-4.1s;margin-top:5px}
-.perk:nth-child(4){--bc:255,196,96;--bb:68,30,6;animation-duration:10.4s;animation-delay:-1.2s;margin-top:5px;
-  background:/n    radial-gradient(58% 40% at 30% 16%, rgba(255,255,255,.42), rgba(255,255,255,0) 66%),
-    radial-gradient(122% 98% at 50% 118%, rgba(255,168,70,.85), rgba(255,168,70,0) 58%),
-    linear-gradient(166deg, rgba(255,206,110,.92) 0%, rgba(246,166,72,.74) 50%, rgba(104,44,10,.86) 100%);
-  box-shadow:/n    inset 0 0 0 1.5px rgba(255,236,190,.46),
-    inset 0 7px 16px rgba(255,255,255,.22),
-    inset -14px -18px 34px rgba(60,20,0,.34),
-    0 14px 30px rgba(6,2,20,.34),
-    0 0 38px rgba(255,170,70,.40);
+.perk:nth-child(1){--bc:176,130,255;animation-duration:8.6s;animation-delay:-.8s}
+.perk:nth-child(2){--bc:118,206,255;animation-duration:9.4s;animation-delay:-2.4s;margin-top:13px}
+.perk:nth-child(3){--bc:255,124,184;animation-duration:8.2s;animation-delay:-4.1s;margin-top:4px}
+.perk:nth-child(4){--bc:255,200,104;--bb:70,32,8;animation-duration:10.4s;animation-delay:-1.2s;margin-top:4px}
+.perk:nth-child(5){--bc:116,234,200;animation-duration:8.8s;animation-delay:-6.3s;margin-top:13px}
+.perk:nth-child(6){--bc:216,146,255;animation-duration:9.8s;animation-delay:-3.5s}
+/* 金色那只用更实的暖底，避免在深紫上发闷 */
+.perk:nth-child(4) .balloon{
+  background:
+    radial-gradient(62% 44% at 30% 15%, rgba(255,255,255,.42), rgba(255,255,255,0) 68%),
+    radial-gradient(94% 56% at 50% 106%, rgba(255,224,158,.24), rgba(255,255,255,0) 62%),
+    radial-gradient(122% 98% at 50% 116%, rgba(255,166,66,.88), rgba(255,166,66,0) 58%),
+    linear-gradient(166deg, rgba(255,204,104,.94) 0%, rgba(246,164,68,.78) 52%, rgba(106,46,10,.88) 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,240,200,.48),
+    inset 0 7px 16px rgba(255,255,255,.24),
+    inset -12px -16px 30px rgba(60,20,0,.30),
+    0 12px 26px rgba(6,2,20,.32),
+    0 0 34px rgba(255,172,70,.42);
 }
-.perk:nth-child(5){--bc:104,226,188;animation-duration:8.8s;animation-delay:-6.3s;margin-top:16px}
-.perk:nth-child(6){--bc:210,138,255;animation-duration:9.8s;animation-delay:-3.5s}
-.perk b{font:inherit;display:block;max-width:76%;margin:0 auto}
-.perk .ico{
-  width:28px;height:28px;flex:none;border-radius:50%;
+.perk b{font:inherit;display:block;max-width:92%;margin:0 auto}
+.balloon .ico{
+  width:24px;height:24px;flex:none;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:14px;
-  background:radial-gradient(circle at 34% 28%, rgba(255,255,255,.38), rgba(255,255,255,.08) 72%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 2px 7px rgba(6,2,20,.30);
+  font-size:12.5px;
+  background:radial-gradient(circle at 34% 28%, rgba(255,255,255,.44), rgba(255,255,255,.10) 72%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.26),0 2px 6px rgba(6,2,20,.28);
 }
 @keyframes perkFloat{
   0%,100%{transform:translate3d(0,0,0) rotate(-1.6deg)}
   26%{transform:translate3d(4px,-8px,0) rotate(.6deg)}
   52%{transform:translate3d(-2px,-13px,0) rotate(1.8deg)}
   76%{transform:translate3d(-5px,-5px,0) rotate(-.4deg)}
+}
+
+/* ===== 点一下：气球爆开 ===== */
+.perk.popping{cursor:default;pointer-events:none}
+.perk.pop{animation:none}
+.perk.pop .balloon{animation:perkBurst .42s cubic-bezier(.3,.9,.35,1.25) forwards}
+@keyframes perkBurst{
+  0%{transform:scale(1)}
+  18%{transform:scale(1.14) rotate(-3deg)}
+  34%{transform:scale(1.2) rotate(-5deg)}
+  58%{transform:scale(.72) rotate(5deg);opacity:.92}
+  100%{transform:scale(.03) rotate(12deg);opacity:0}
+}
+.perk.pop .balloon::before,.perk.pop .balloon::after{opacity:0}
+.perk.pop .balloon b,.perk.pop .balloon .ico,.perk.pop .balloon .knot{opacity:0;transition:opacity .1s}
+/* 重新鼓起来 */
+.perk.reborn{animation:perkPopIn .5s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes perkPopIn{
+  0%{transform:scale(.06);opacity:0}
+  58%{transform:scale(1.07);opacity:1}
+  80%{transform:scale(.98)}
+  100%{transform:scale(1);opacity:1}
+}
+/* 碎片层 */
+.perk .burst{position:absolute;inset:0;pointer-events:none;z-index:3}
+.perk .burst i{
+  position:absolute;left:50%;top:50%;display:block;
+  animation:ptGo var(--dur,720ms) cubic-bezier(.18,.72,.32,1) forwards;
+  animation-delay:var(--dl,0ms);
+}
+@keyframes ptGo{
+  0%{transform:translate(-50%,-50%) scale(.25);opacity:0}
+  16%{opacity:1}
+  100%{
+    transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)))
+              scale(var(--sc,1)) rotate(var(--rot,0deg));
+    opacity:0;
+  }
+}
+.perk .burst i.spark{
+  width:7px;height:7px;border-radius:50%;background:#fff;
+  box-shadow:0 0 13px 4px rgba(255,255,255,.95);
+}
+.perk .burst i.star{
+  width:auto;height:auto;background:none;color:#FFE79A;line-height:1;
+  font-size:17px;text-shadow:0 0 14px rgba(255,220,140,.95);
+}
+.perk .burst i.coin{
+  width:15px;height:15px;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#FFF6C2,#FFC61A 62%,#DB9708);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.5),0 2px 8px rgba(220,150,20,.5);
+}
+.perk .burst i.conf{width:8px;height:13px;border-radius:2px}
+.perk .burst i.heart{
+  width:auto;height:auto;background:none;color:#FF7BB0;line-height:1;
+  font-size:18px;text-shadow:0 0 14px rgba(255,110,170,.9);
+}
+.perk .burst i.ring{
+  width:22px;height:22px;border-radius:50%;background:none;
+  border:3px solid rgba(190,240,255,.95);
+  box-shadow:0 0 12px rgba(150,220,255,.7);
+}
+.perk .burst i.rocket{
+  width:auto;height:auto;background:none;line-height:1;font-size:20px;
+  filter:drop-shadow(0 0 9px rgba(255,220,160,.95));
+}
+/* 惊喜小标签 */
+.perk .surprise{
+  position:absolute;left:50%;top:50%;z-index:4;
+  transform:translate(-50%,-50%);
+  padding:5px 10px;border-radius:999px;
+  font-size:10.5px;font-weight:900;line-height:1;white-space:nowrap;
+  color:#3A1266;background:rgba(255,255,255,.95);
+  text-shadow:none;
+  box-shadow:0 7px 18px rgba(10,2,30,.45),0 0 0 2px rgba(255,255,255,.55);
+  opacity:0;pointer-events:none;
+}
+.perk.tip .surprise{animation:tipUp 1.5s cubic-bezier(.2,.9,.3,1) forwards}
+@keyframes tipUp{
+  0%{opacity:0;transform:translate(-50%,-38%) scale(.65)}
+  22%{opacity:1;transform:translate(-50%,-52%) scale(1)}
+  70%{opacity:1;transform:translate(-50%,-62%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-98%) scale(.94)}
 }
 
 /* 果冻大按钮 */
@@ -1001,11 +1096,11 @@ button{font-family:inherit;cursor:pointer;border:none}
   .svc-title::before{left:-15px}
   .svc-title::after{right:-15px}
   .svc-ticket .id{font-size:18.5px;letter-spacing:1px}
-  .svc-perks{gap:32px 6px;max-width:100%;margin-bottom:36px}
-  .perk{font-size:11.2px;padding:9px 7px 11px}
-  .perk .ico{width:26px;height:26px;font-size:13px}
-  .perk:nth-child(2),.perk:nth-child(5){margin-top:14px}
-  .perk:nth-child(3),.perk:nth-child(4){margin-top:4px}
+  .svc-perks{gap:26px 8px;max-width:300px;margin-bottom:34px}
+  .balloon{font-size:10.5px;padding:6px 4px 12px}
+  .balloon .ico{width:22px;height:22px;font-size:11.5px}
+  .perk:nth-child(2),.perk:nth-child(5){margin-top:11px}
+  .perk:nth-child(3),.perk:nth-child(4){margin-top:3px}
   .svc-btn{font-size:15.5px;padding:12px 28px}
 }
 @media (max-width:600px){
@@ -1016,11 +1111,11 @@ button{font-family:inherit;cursor:pointer;border:none}
   .svc-title::before,.svc-title::after{display:none}
   .svc-sub{gap:5px}
   .svc-sub i{padding:2px 8px;font-size:11px}
-  .svc-perks{grid-template-columns:1fr 1fr;gap:36px 16px;max-width:296px;margin-bottom:40px}
-  .perk{font-size:12px;padding:10px 10px 18px}
-  .perk .ico{width:28px;height:28px;font-size:14px}
+  .svc-perks{grid-template-columns:1fr 1fr;gap:30px 14px;max-width:262px;margin-bottom:36px}
+  .balloon{font-size:11.4px;padding:8px 8px 15px}
+  .balloon .ico{width:26px;height:26px;font-size:13px}
   .perk:nth-child(n){margin-top:0}
-  .perk:nth-child(2n){margin-top:16px}
+  .perk:nth-child(2n){margin-top:14px}
   .svc-ticket .id{font-size:17px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -1030,6 +1125,8 @@ button{font-family:inherit;cursor:pointer;border:none}
   .mascot-wrap .yum{display:none}
   .svc-btn::after{display:none}
   .mascot-wrap::after{animation:none}
+  .perk .burst{display:none}
+  .perk.pop .balloon{animation:none;opacity:0}
 }
 
 /* ========== 底部 ========== */
@@ -1407,11 +1504,11 @@ mark{
   .svc-card{max-width:600px;padding:264px 10px 44px}
   .mascot-wrap::after{width:460px;height:460px;margin:-230px 0 0 -230px}
   .sky-balloon{display:block}
-  .svc-perks{grid-template-columns:repeat(3,1fr);max-width:540px;gap:44px 22px;margin-bottom:52px}
-  .perk{font-size:14px;padding:16px 12px 20px;gap:7px}
-  .perk .ico{width:34px;height:34px;font-size:17px}
-  .perk:nth-child(2),.perk:nth-child(5){margin-top:24px}
-  .perk:nth-child(3),.perk:nth-child(4){margin-top:8px}
+  .svc-perks{grid-template-columns:repeat(3,1fr);max-width:412px;gap:36px 18px;margin-bottom:48px}
+  .balloon{font-size:12.2px;padding:9px 6px 16px;gap:4px}
+  .balloon .ico{width:29px;height:29px;font-size:14px}
+  .perk:nth-child(2),.perk:nth-child(5){margin-top:20px}
+  .perk:nth-child(3),.perk:nth-child(4){margin-top:6px}
   .svc-title{font-size:33px}
   .mascot-wrap{width:148px;margin-left:-74px;top:34px}
   .mascot-wrap::before{width:196px;height:196px}
@@ -2060,12 +2157,12 @@ mark{
 
     <!-- 福利清单 -->
     <div class="svc-perks">
-      <div class="perk"><span class="ico ico-1">🚀</span><b>最新版下载直达</b><i class="knot" aria-hidden="true"></i></div>
-      <div class="perk"><span class="ico ico-2">📖</span><b>新手开荒指导</b><i class="knot" aria-hidden="true"></i></div>
-      <div class="perk"><span class="ico ico-3">🎁</span><b>专属福利礼包码</b><i class="knot" aria-hidden="true"></i></div>
-      <div class="perk"><span class="ico ico-4">💰</span><b>充值折扣返利</b><i class="knot" aria-hidden="true"></i></div>
-      <div class="perk"><span class="ico ico-5">⏰</span><b>开服时间提醒</b><i class="knot" aria-hidden="true"></i></div>
-      <div class="perk"><span class="ico ico-6">💬</span><b>售后快速响应</b><i class="knot" aria-hidden="true"></i></div>
+      <div class="perk" role="button" tabindex="0" aria-label="最新版下载直达，点开有惊喜"><div class="balloon"><span class="ico ico-1">🚀</span><b>最新版下载直达</b><i class="knot" aria-hidden="true"></i></div><span class="burst" aria-hidden="true"></span><span class="surprise" aria-hidden="true"></span></div>
+      <div class="perk" role="button" tabindex="0" aria-label="新手开荒指导，点开有惊喜"><div class="balloon"><span class="ico ico-2">📖</span><b>新手开荒指导</b><i class="knot" aria-hidden="true"></i></div><span class="burst" aria-hidden="true"></span><span class="surprise" aria-hidden="true"></span></div>
+      <div class="perk" role="button" tabindex="0" aria-label="专属福利礼包码，点开有惊喜"><div class="balloon"><span class="ico ico-3">🎁</span><b>专属福利礼包码</b><i class="knot" aria-hidden="true"></i></div><span class="burst" aria-hidden="true"></span><span class="surprise" aria-hidden="true"></span></div>
+      <div class="perk" role="button" tabindex="0" aria-label="充值折扣返利，点开有惊喜"><div class="balloon"><span class="ico ico-4">💰</span><b>充值折扣返利</b><i class="knot" aria-hidden="true"></i></div><span class="burst" aria-hidden="true"></span><span class="surprise" aria-hidden="true"></span></div>
+      <div class="perk" role="button" tabindex="0" aria-label="开服时间提醒，点开有惊喜"><div class="balloon"><span class="ico ico-5">⏰</span><b>开服时间提醒</b><i class="knot" aria-hidden="true"></i></div><span class="burst" aria-hidden="true"></span><span class="surprise" aria-hidden="true"></span></div>
+      <div class="perk" role="button" tabindex="0" aria-label="售后快速响应，点开有惊喜"><div class="balloon"><span class="ico ico-6">💬</span><b>售后快速响应</b><i class="knot" aria-hidden="true"></i></div><span class="burst" aria-hidden="true"></span><span class="surprise" aria-hidden="true"></span></div>
     </div>
 
     <button class="svc-btn" onclick="copyWechat()">🎁 一键复制微信号</button>
@@ -3122,6 +3219,105 @@ window.addEventListener('scroll', function(){
 })();
 /*LUCK-JS-END*/
 </script>
+
+<!--PERKPOP-START-->
+<script>
+(function(){
+  var TIPS = ['咻——直达最新版','攻略心法 +1','礼包码已到手','折扣券 +1','开服提醒已开启','客服小姐姐在线'];
+  var KINDS = ['rocket','sparkle','confetti','coins','ring','hearts'];
+  var CONF = ['#FF6FA5','#FFD166','#8FD9FF','#A78BFA','#7BE7C4','#FF9E6D'];
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function rnd(a,b){ return a + Math.random()*(b-a); }
+  function mk(host, cls, txt, st){
+    var el = document.createElement('i');
+    el.className = cls;
+    for(var k in st) el.style.setProperty(k, st[k]);
+    if(txt) el.textContent = txt;
+    host.appendChild(el);
+    return el;
+  }
+
+  function burst(host, kind){
+    var i, a, d;
+    mk(host,'ring',null,{'--dx':'0px','--dy':'0px','--sc':'5.4','--dur':'500ms','--dl':'0ms','--rot':'0deg',
+      'border-color':'rgba(255,255,255,.92)','border-width':'3px','box-shadow':'0 0 20px rgba(255,255,255,.85)'});
+    if(kind === 'rocket'){
+      for(i=0;i<11;i++) mk(host,'star','\u2726',{'--dx':rnd(-26,26)+'px','--dy':-rnd(56,98)+'px','--dur':rnd(640,860)+'ms','--dl':(i*16)+'ms','--rot':rnd(-25,25)+'deg','--sc':rnd(.9,1.25)});
+      for(i=0;i<9;i++) mk(host,'spark',null,{'--dx':rnd(-34,34)+'px','--dy':-rnd(6,46)+'px','--dur':rnd(520,720)+'ms','--dl':rnd(0,70)+'ms'});
+      mk(host,'rocket','\uD83D\uDE80',{'--dx':'0px','--dy':'-86px','--dur':'820ms','--sc':'1.3','--rot':'0deg'});
+
+    } else if(kind === 'sparkle'){
+      for(i=0;i<16;i++){
+        a = (i/16)*Math.PI*2 + rnd(-.16,.16); d = rnd(38,64);
+        mk(host,'star', i%3 ? '\u2726' : '\u2727',
+           {'--dx':(Math.cos(a)*d)+'px','--dy':(Math.sin(a)*d-8)+'px','--dur':rnd(580,800)+'ms','--dl':(i*14)+'ms','--rot':rnd(-40,40)+'deg','--sc':rnd(.85,1.2)});
+      }
+      for(i=0;i<7;i++) mk(host,'spark',null,{'--dx':rnd(-24,24)+'px','--dy':rnd(-30,12)+'px','--dur':rnd(480,660)+'ms','--dl':rnd(0,90)+'ms'});
+
+    } else if(kind === 'confetti'){
+      for(i=0;i<18;i++){
+        a = rnd(-Math.PI, 0); d = rnd(30,64);
+        mk(host,'conf',null,{
+          '--dx':(Math.cos(a)*d)+'px','--dy':(Math.sin(a)*d*1.1+30)+'px',
+          '--dur':rnd(700,940)+'ms','--dl':(i*11)+'ms',
+          '--rot':rnd(-280,280)+'deg','--sc':rnd(.85,1.35),
+          'background':CONF[i%CONF.length]
+        });
+      }
+      for(i=0;i<5;i++) mk(host,'coin',null,{'--dx':rnd(-34,34)+'px','--dy':rnd(14,50)+'px','--dur':rnd(720,900)+'ms','--dl':rnd(40,170)+'ms','--rot':rnd(-200,200)+'deg'});
+
+    } else if(kind === 'coins'){
+      for(i=0;i<12;i++) mk(host,'coin',null,{
+        '--dx':rnd(-40,40)+'px','--dy':rnd(20,62)+'px','--dur':rnd(680,900)+'ms',
+        '--dl':rnd(0,120)+'ms','--rot':rnd(-220,220)+'deg','--sc':rnd(.85,1.2)
+      });
+      for(i=0;i<6;i++) mk(host,'spark',null,{'--dx':rnd(-16,16)+'px','--dy':rnd(-34,-6)+'px','--dur':rnd(460,640)+'ms','--dl':rnd(0,90)+'ms'});
+
+    } else if(kind === 'ring'){
+      for(i=0;i<3;i++) mk(host,'ring',null,{'--dx':'0px','--dy':'0px','--sc':(3.4+i*1.8),'--dur':(680+i*140)+'ms','--dl':(i*100)+'ms','--rot':'0deg'});
+      for(i=0;i<10;i++){
+        a = rnd(0, Math.PI*2); d = rnd(32,58);
+        mk(host,'spark',null,{'--dx':(Math.cos(a)*d)+'px','--dy':(Math.sin(a)*d)+'px','--dur':rnd(540,720)+'ms','--dl':(i*16)+'ms','--sc':rnd(.7,1.25)});
+      }
+
+    } else {
+      for(i=0;i<9;i++) mk(host,'heart', i%2 ? '\u2665' : '\u2661', {
+        '--dx':rnd(-30,30)+'px','--dy':-rnd(38,70)+'px','--dur':rnd(720,940)+'ms',
+        '--dl':(i*38)+'ms','--rot':rnd(-22,22)+'deg','--sc':rnd(.9,1.4)
+      });
+    }
+  }
+
+  function pop(el, idx){
+    if(el.classList.contains('popping')) return;
+    el.classList.add('popping','pop');
+    var host = el.querySelector('.burst');
+    var tip = el.querySelector('.surprise');
+    host.innerHTML = '';
+    if(!reduce) burst(host, KINDS[idx % KINDS.length]);
+    tip.textContent = TIPS[idx % TIPS.length];
+    setTimeout(function(){ el.classList.add('tip'); }, 310);
+    setTimeout(function(){
+      el.classList.remove('pop','tip');
+      host.innerHTML = '';
+      el.classList.add('reborn');
+      setTimeout(function(){ el.classList.remove('reborn','popping'); }, 520);
+    }, 1600);
+  }
+
+  var perks = document.querySelectorAll('.svc-perks .perk');
+  for(var i=0;i<perks.length;i++){
+    (function(el, idx){
+      el.addEventListener('click', function(){ pop(el, idx); });
+      el.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pop(el, idx); }
+      });
+    })(perks[i], i);
+  }
+})();
+</script>
+<!--PERKPOP-END-->
 
 </body>
 </html>
