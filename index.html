@@ -1780,6 +1780,126 @@ mark{
 .faq-cta button:active{transform:scale(.95)}
 
 /* ========== 回到顶部 ========== */
+/* ========== 分享海报弹层 ========== */
+.poster-layer{
+  position:fixed;inset:0;z-index:100200;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  background:rgba(18,8,28,.84);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;pointer-events:none;
+  transition:opacity .26s;
+}
+.poster-layer.show{opacity:1;pointer-events:auto}
+.poster-box{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  max-width:min(92vw,352px);
+  transform:translateY(16px) scale(.96);
+  transition:transform .32s cubic-bezier(.2,1.4,.4,1);
+}
+.poster-layer.show .poster-box{transform:none}
+.poster-img{
+  display:block;width:100%;max-height:68vh;object-fit:contain;
+  border-radius:18px;
+  box-shadow:0 20px 54px rgba(0,0,0,.55),0 0 0 3px rgba(255,255,255,.14);
+  background:#2B1148;
+}
+.poster-hint{margin:0;font-size:11.5px;color:rgba(255,255,255,.7);letter-spacing:.3px;text-align:center}
+.poster-dl{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:11px 30px;border-radius:999px;
+  font-size:14px;font-weight:900;letter-spacing:.6px;color:#fff;text-decoration:none;
+  background:linear-gradient(180deg,#FF8FBE,#FF4D94);
+  box-shadow:0 4px 0 #E23E7B,0 10px 22px rgba(255,77,148,.34);
+  transition:transform .16s,box-shadow .16s;
+}
+.poster-dl:active{transform:translateY(2px);box-shadow:0 2px 0 #E23E7B}
+.poster-x{
+  position:absolute;top:-44px;right:-2px;
+  width:34px;height:34px;border-radius:50%;border:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.18);color:#fff;
+  font-size:15px;line-height:1;cursor:pointer;padding:0;
+  transition:background .2s,transform .16s;
+}
+.poster-x:hover{background:rgba(255,255,255,.3)}
+.poster-x:active{transform:scale(.9)}
+html.poster-open,html.poster-open body{overflow:hidden}
+
+/* 抽签区的「存成图片」 */
+.luck-share{
+  display:none;align-items:center;gap:6px;
+  margin:14px auto 0;padding:9px 20px;
+  border:0;border-radius:999px;cursor:pointer;
+  font-family:inherit;font-size:12.5px;font-weight:900;letter-spacing:.4px;
+  color:#7B3F6B;
+  background:#fff;
+  box-shadow:0 3px 0 #F3D2E2,0 0 0 2px #FFE1EF;
+  transition:transform .16s,box-shadow .16s,color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.luck-share svg{width:14px;height:14px}
+.luck-card.done .luck-share{display:flex;justify-content:center;margin:14px auto 0;width:max-content}
+.luck-share:hover{color:#D62E74;box-shadow:0 3px 0 #F3D2E2,0 0 0 2px #FFC2DE}
+.luck-share:active{transform:translateY(2px);box-shadow:0 1px 0 #F3D2E2,0 0 0 2px #FFC2DE}
+
+/* 转盘里的「存图」小胶囊（结果出来才出现） */
+.fw-save{
+  position:absolute;left:50%;bottom:6px;z-index:5;
+  transform:translateX(-50%);
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:3px 9px;border:0;border-radius:999px;cursor:pointer;
+  font-family:inherit;font-size:9px;font-weight:900;letter-spacing:.4px;line-height:1.2;
+  color:#fff;background:linear-gradient(180deg,#FF86B8,#F8438A);
+  box-shadow:0 2px 0 #D62E74,0 4px 10px rgba(214,46,116,.35);
+  animation:fwSaveIn .34s cubic-bezier(.2,1.6,.4,1) both;
+  -webkit-tap-highlight-color:transparent;
+}
+@keyframes fwSaveIn{
+  0%{opacity:0;transform:translateX(-50%) translateY(5px) scale(.8)}
+  100%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+}
+.fw-save:active{transform:translateX(-50%) scale(.92)}
+.article-card.open .fw-save{bottom:0}
+
+/* ========== 音效开关 ========== */
+.sound-toggle{
+  position:fixed;right:18px;bottom:154px;z-index:91;
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;
+  border:2.5px solid #FFD2E3;color:#AB8598;
+  box-shadow:0 5px 16px rgba(255,77,148,.22),inset 0 1px 0 #fff;
+  cursor:pointer;padding:0;
+  transition:transform .18s cubic-bezier(.3,1.4,.5,1),color .2s,background .2s,box-shadow .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.sound-toggle svg{width:22px;height:22px;display:block}
+.sound-toggle .wv,.sound-toggle .wv2{transition:opacity .2s}
+.sound-toggle .wv,.sound-toggle .wv2{opacity:0}
+.sound-toggle.on{color:#FF4D94;background:#fff;border-color:#FFB8D2;box-shadow:0 5px 18px rgba(255,77,148,.34)}
+.sound-toggle.on::after{
+  content:"";position:absolute;inset:-5px;border-radius:50%;
+  border:2px solid rgba(255,77,148,.34);
+  animation:soundRing 2.4s ease-out infinite;pointer-events:none;
+}
+@keyframes soundRing{
+  0%{transform:scale(.86);opacity:.9}
+  70%{transform:scale(1.22);opacity:0}
+  100%{transform:scale(1.22);opacity:0}
+}
+.sound-toggle.on .wv,.sound-toggle.on .wv2{opacity:1}
+.sound-toggle:active{transform:scale(.92)}
+.sound-toggle:focus-visible{outline:2px dashed #FF4D94;outline-offset:3px}
+@media (max-width:767px){
+  .sound-toggle{right:13px;bottom:138px;width:42px;height:42px}
+  .sound-toggle svg{width:21px;height:21px}
+}
+@media (prefers-reduced-motion:reduce){
+  .sound-toggle{transition:color .2s}
+}
+
 .back-top{
   position:fixed;right:18px;bottom:100px;
   width:44px;height:44px;border-radius:50%;
@@ -2120,6 +2240,56 @@ mark{
   .follow-icons .app-ico,.follow-go i{animation:none}
   .hero h1,.nav-logo{animation:none}
 }
+/* ========== 阅读进度条 ========== */
+.read-bar{
+  position:fixed;top:0;left:0;right:0;height:4px;
+  z-index:101;pointer-events:none;
+  background:transparent;
+}
+.read-bar i{
+  display:block;height:100%;width:0;
+  border-radius:0 3px 3px 0;
+  background:linear-gradient(90deg,#FFD166,#FF7AB6 52%,#A78BFA);
+  box-shadow:0 0 10px rgba(255,122,182,.55);
+  transition:width .12s linear;
+}
+
+/* ========== 桌面：卡片跟随鼠标轻微倾斜 + 光泽 ========== */
+.card-shine{
+  position:absolute;inset:0;z-index:6;
+  border-radius:inherit;
+  pointer-events:none;opacity:0;
+  background:radial-gradient(220px circle at var(--sx,50%) var(--sy,0%),
+    rgba(255,255,255,.5),rgba(255,255,255,.12) 44%,rgba(255,255,255,0) 70%);
+  mix-blend-mode:screen;
+  transition:opacity .3s;
+}
+.card-hover .card-shine{opacity:1}
+@media (hover:hover) and (pointer:fine){
+  :root .game-card,:root .article-card{
+    transform:perspective(1000px)
+              rotate(var(--tilt,-1.2deg))
+              rotateX(var(--rx,0deg))
+              rotateY(var(--ry,0deg))
+              translateY(var(--ty,0px)) scale(var(--sc,1));
+    transition:transform .2s cubic-bezier(.2,.8,.3,1);
+    will-change:transform;
+  }
+  :root .game-card:hover,:root .article-card:hover{--ty:-4px}
+  :root .game-card:active,:root .article-card:active{--sc:.985}
+}
+
+/* ========== 区块滚入浮现 ========== */
+.reveal-ready section.section{opacity:0;transform:translateY(18px)}
+.reveal-ready section.section.in{
+  opacity:1;transform:none;
+  transition:opacity .55s ease,transform .62s cubic-bezier(.2,.8,.3,1);
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal-ready section.section{opacity:1;transform:none}
+  .read-bar i{transition:none}
+  .card-shine{display:none}
+}
 </style>
 </head>
 <body>
@@ -2365,6 +2535,10 @@ mark{
         <p class="luck-tip"><i class="luck-yi">宜</i><span id="luckTip">—</span></p>
       </div>
     </div>
+    <button class="luck-share" id="luckShare" type="button" aria-label="把今日运势存成图片">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="3.2"/><circle cx="8.6" cy="9.6" r="1.7"/><path d="m3.6 16.4 4.6-4.2 4.2 3.6 3-2.6 5 4.4"/></svg>
+      <span>存成图片</span>
+    </button>
     <div class="luck-foot" id="luckFoot">每人每天 1 次 · 抽完明天 0 点再来</div>
   </div>
 </section>
@@ -2540,6 +2714,31 @@ mark{
 <!-- 花瓣飘落容器 -->
 <div class="petal-container" id="petalContainer"></div>
 
+<!--POSTER-HTML-START-->
+<div class="poster-layer" id="posterLayer" aria-hidden="true" onclick="if(event.target===this)closePoster()">
+  <div class="poster-box" role="dialog" aria-modal="true" aria-label="分享图片">
+    <button class="poster-x" type="button" onclick="closePoster()" aria-label="关闭">&#10005;</button>
+    <img class="poster-img" id="posterImg" alt="分享图片">
+    <p class="poster-hint">手机长按图片保存 · 电脑点下面按钮</p>
+    <a class="poster-dl" id="posterDl" download="share.jpg">保存图片</a>
+  </div>
+</div>
+<!--POSTER-HTML-END-->
+
+<!--SFX-START-->
+<!--MOTION-START-->
+<div class="read-bar" aria-hidden="true"><i id="readBar"></i></div>
+<!--MOTION-END-->
+
+<button class="sound-toggle" id="soundToggle" type="button" aria-label="开启音效" aria-pressed="false" title="开启音效" onclick="toggleSound()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11.2 4.6 6.3 8.7H2.5v6.6h3.8l4.9 4.1z" fill="currentColor" stroke="none"/>
+    <path class="wv" d="M15.6 9a4.4 4.4 0 0 1 0 6"/>
+    <path class="wv2" d="M18.3 6.4a8 8 0 0 1 0 11.2"/>
+  </svg>
+</button>
+<!--SFX-END-->
+
 <!-- 回到顶部 -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
 
@@ -2580,6 +2779,7 @@ function copyWechat(gameName){
   // 尝试写入剪贴板
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(WECHAT_ID).then(function(){
+      if(window.SFX) window.SFX('ding');
       showToast(gameName ? '已复制客服微信，添加后直接发送「'+gameName+'」即可' : '客服微信已复制：'+WECHAT_ID);
     }).catch(function(){
       fallbackCopy(gameName);
@@ -2598,7 +2798,8 @@ function fallbackCopy(gameName){
   ta.select();
   try{ document.execCommand('copy'); }catch(e){}
   document.body.removeChild(ta);
-  showToast(gameName ? '已复制客服微信，添加后直接发送「'+gameName+'」即可' : '已复制客服微信：'+WECHAT_ID);
+  if(window.SFX) window.SFX('ding');
+  showToast(gameName ? '已复制客服微信，添加后直接发送「'+gameName+'」即可' : '客服微信已复制：'+WECHAT_ID);
 }
 
 // 复制任意文本（分享链接用）：先试异步剪贴板，失败退回 execCommand
@@ -3132,6 +3333,9 @@ function spinWheel(wheel){
   var hub = wheel.querySelector('.fw-hub');
   if(!disc || !hub) return;
   wheel.classList.add('spinning');
+  var staleSave = wheel.querySelector('.fw-save');
+  if(staleSave) staleSave.remove();
+  if(window.SFX) window.SFX('whoosh');
   hub.classList.remove('hit');
   hub.textContent = '\u00B7\u00B7\u00B7';
 
@@ -3150,6 +3354,21 @@ function spinWheel(wheel){
     var f = FOODS[idx];
     hub.innerHTML = '<em>今晚吃</em><b>' + f.n + '</b>';
     hub.classList.add('hit');
+    if(window.SFX) window.SFX('ding');
+    if(window.Poster){
+      var sv = document.createElement('button');
+      sv.type = 'button';
+      sv.className = 'fw-save';
+      sv.textContent = '存图';
+      sv.setAttribute('aria-label', '把今晚吃的存成图片');
+      sv.addEventListener('click', function(ev){
+        ev.stopPropagation();
+        ev.preventDefault();
+        if(window.SFX) window.SFX('ding');
+        window.Poster.open(window.Poster.food({ name: f.n, emoji: f.e }), 'meal-' + f.n + '.jpg');
+      });
+      wheel.appendChild(sv);
+    }
     wheel.setAttribute('aria-label', '今晚吃' + f.n + '，再点一下重转');
   }, 2560);
 }
@@ -3216,6 +3435,7 @@ function shareSite(btn){
   var done = function(){
     btn.classList.add('copied');
     if(txtEl) txtEl.textContent = '链接已复制';
+    if(window.SFX) window.SFX('ding');
     showToast('本站链接已复制，发给朋友就行');
     clearTimeout(btn._fsTimer);
     btn._fsTimer = setTimeout(function(){
@@ -3249,6 +3469,7 @@ function shareArticle(btn){
     var t = btn.querySelector('.share-text');
     btn.classList.add('copied');
     if(t) t.textContent = '已复制';
+    if(window.SFX) window.SFX('ding');
     showToast('链接已复制，发给朋友可直接打开这篇');
     setTimeout(function(){
       btn.classList.remove('copied');
@@ -3860,6 +4081,7 @@ window.addEventListener('scroll', function(){
     card.classList.add('rolling');
     btn.disabled = true;
     btn.textContent = '摇签中…';
+    if(window.SFX) window.SFX('shuffle');
     burst(7, 52);
     setTimeout(function(){ burst(6, 64); }, 520);
     var gi = Math.floor(Math.random() * GAMES.length);
@@ -3874,10 +4096,26 @@ window.addEventListener('scroll', function(){
       card.classList.remove('rolling');
       render(rec);
       burst(16, 96);
+      if(window.SFX) window.SFX('ding');
       if(typeof showToast === 'function'){
         showToast('今日幸运：' + g.name + ' · 运势 ' + luck + ' 分');
       }
     }, 1000);
+  }
+
+  var shareBtn = document.getElementById('luckShare');
+  if(shareBtn && window.Poster){
+    shareBtn.addEventListener('click', function(){
+      var rec = readToday();
+      if(!rec) return;
+      var g = GAMES[rec.gi] || GAMES[0];
+      var lv = levelOf(rec.luck);
+      if(window.SFX) window.SFX('ding');
+      window.Poster.open(
+        window.Poster.luck({ luck: rec.luck, lv: lv.t, game: g.name, tip: rec.tip }),
+        'luck-' + rec.date + '.jpg'
+      );
+    });
   }
 
   btn.addEventListener('click', draw);
@@ -3958,6 +4196,7 @@ window.addEventListener('scroll', function(){
 
   function pop(el, idx){
     if(el.classList.contains('popping')) return;
+    if(window.SFX) window.SFX('pop');
     el.classList.add('popping','pop');
     var host = el.querySelector('.burst');
     var tip = el.querySelector('.surprise');
@@ -3990,5 +4229,534 @@ window.addEventListener('scroll', function(){
 </script>
 <!--PERKPOP-END-->
 
+<!--SFX-JS-START-->
+<script>
+/* 音效：WebAudio 现场合成，零文件体积。默认静音，开关状态记在本地 */
+(function(){
+  var KEY = 'jy_sound_v1';
+  var on = false;
+  try{ on = localStorage.getItem(KEY) === '1'; }catch(e){}
+
+  var ctx = null;
+  function ac(){
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return null;
+    if(!ctx) ctx = new AC();
+    if(ctx.state === 'suspended'){ try{ ctx.resume(); }catch(e){} }
+    return ctx;
+  }
+
+  function noiseBuf(c, dur){
+    var n = Math.max(1, Math.floor(c.sampleRate * dur));
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for(var i = 0; i < n; i++){
+      // 前重后轻的噪声，听起来更像真实气声
+      d[i] = (Math.random() * 2 - 1) * (1 - i / n) * 0.7;
+    }
+    return b;
+  }
+
+  var VOICES = {
+    /* 气球被戳爆：啵 */
+    pop: function(c){
+      var t = c.currentTime;
+      var o = c.createOscillator(), g = c.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(680, t);
+      o.frequency.exponentialRampToValueAtTime(140, t + 0.085);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.2, t + 0.006);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+      o.connect(g).connect(c.destination);
+      o.start(t); o.stop(t + 0.18);
+
+      var n = c.createBufferSource(), bp = c.createBiquadFilter(), ng = c.createGain();
+      n.buffer = noiseBuf(c, 0.09);
+      bp.type = 'bandpass'; bp.frequency.value = 1500; bp.Q.value = 1.1;
+      ng.gain.setValueAtTime(0.09, t);
+      ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
+      n.connect(bp).connect(ng).connect(c.destination);
+      n.start(t); n.stop(t + 0.1);
+    },
+    /* 转盘咔哒 */
+    tick: function(c){
+      var t = c.currentTime;
+      var o = c.createOscillator(), g = c.createGain();
+      o.type = 'square';
+      o.frequency.setValueAtTime(1180, t);
+      o.frequency.exponentialRampToValueAtTime(760, t + 0.025);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.06, t + 0.004);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+      o.connect(g).connect(c.destination);
+      o.start(t); o.stop(t + 0.06);
+    },
+    /* 抽签：竹签哗啦 */
+    shuffle: function(c){
+      var t = c.currentTime;
+      for(var k = 0; k < 3; k++){
+        var st = t + k * 0.085;
+        var n = c.createBufferSource(), bp = c.createBiquadFilter(), g = c.createGain();
+        n.buffer = noiseBuf(c, 0.13);
+        bp.type = 'bandpass';
+        bp.frequency.setValueAtTime(1500 + k * 420, st);
+        bp.Q.value = 1.6;
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(0.075, st + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + 0.12);
+        n.connect(bp).connect(g).connect(c.destination);
+        n.start(st); n.stop(st + 0.14);
+      }
+    },
+    /* 成功：叮（C6 + G6 小三度） */
+    ding: function(c){
+      var t = c.currentTime;
+      [1046.5, 1568].forEach(function(f, i){
+        var st = t + i * 0.055;
+        var o = c.createOscillator(), g = c.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(f, st);
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(i ? 0.075 : 0.11, st + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + 0.55);
+        o.connect(g).connect(c.destination);
+        o.start(st); o.stop(st + 0.6);
+      });
+    },
+    /* 转盘起飞：whoosh */
+    whoosh: function(c){
+      var t = c.currentTime;
+      var n = c.createBufferSource(), lp = c.createBiquadFilter(), g = c.createGain();
+      n.buffer = noiseBuf(c, 0.42);
+      lp.type = 'lowpass';
+      lp.frequency.setValueAtTime(420, t);
+      lp.frequency.exponentialRampToValueAtTime(2600, t + 0.36);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.1, t + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
+      n.connect(lp).connect(g).connect(c.destination);
+      n.start(t); n.stop(t + 0.44);
+    }
+  };
+
+  function sfx(name){
+    if(!on) return;
+    var c = ac();
+    if(!c) return;
+    try{ (VOICES[name] || VOICES.tick)(c); }catch(e){}
+  }
+  window.SFX = sfx;
+
+  var btn = document.getElementById('soundToggle');
+  function paint(){
+    if(!btn) return;
+    btn.classList.toggle('on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.setAttribute('aria-label', on ? '关闭音效' : '开启音效');
+    btn.title = on ? '关闭音效' : '开启音效';
+  }
+  paint();
+
+  window.toggleSound = function(){
+    on = !on;
+    try{ localStorage.setItem(KEY, on ? '1' : '0'); }catch(e){}
+    paint();
+    if(on){
+      sfx('ding');
+      if(typeof showToast === 'function') showToast('音效已开启 · 点气球、转盘都有声音');
+    } else if(typeof showToast === 'function'){
+      showToast('音效已关闭');
+    }
+  };
+})();
+</script>
+<!--SFX-JS-END-->
+<!--POSTER-JS-START-->
+<script>
+/* 结果变图片：canvas 画 640x880 竖版海报，纯前端合成 */
+window.Poster = (function(){
+  var W = 640, H = 880;
+  var F = '"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif';
+  var E = '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+
+  var DPR = 1.5;
+  function pair(){
+    var c = document.createElement('canvas');
+    c.width = Math.round(W * DPR); c.height = Math.round(H * DPR);
+    var x = c.getContext('2d');
+    x.scale(DPR, DPR);
+    x.textAlign = 'center';
+    x.textBaseline = 'middle';
+    return { c: c, x: x };
+  }
+
+  function rr(x, x0, y0, w, hh, r){
+    x.beginPath();
+    x.moveTo(x0 + r, y0);
+    x.lineTo(x0 + w - r, y0);
+    x.quadraticCurveTo(x0 + w, y0, x0 + w, y0 + r);
+    x.lineTo(x0 + w, y0 + hh - r);
+    x.quadraticCurveTo(x0 + w, y0 + hh, x0 + w - r, y0 + hh);
+    x.lineTo(x0 + r, y0 + hh);
+    x.quadraticCurveTo(x0, y0 + hh, x0, y0 + hh - r);
+    x.lineTo(x0, y0 + r);
+    x.quadraticCurveTo(x0, y0, x0 + r, y0);
+    x.closePath();
+  }
+
+  /* 逐字绘制，模拟字间距 */
+  function spaced(x, text, cx, cy, gap){
+    var chars = text.split(''), ws = [], total = 0, i;
+    for(i = 0; i < chars.length; i++){
+      ws.push(x.measureText(chars[i]).width);
+      total += ws[i];
+    }
+    total += gap * (chars.length - 1);
+    var px = cx - total / 2;
+    var align = x.textAlign;
+    x.textAlign = 'left';
+    for(i = 0; i < chars.length; i++){
+      x.fillText(chars[i], px, cy);
+      px += ws[i] + gap;
+    }
+    x.textAlign = align;
+  }
+
+  /* 自动换行（按字符） */
+  function wrap(x, text, cx, cy, maxW, lh){
+    var line = '', lines = [], i;
+    for(i = 0; i < text.length; i++){
+      var t = line + text[i];
+      if(x.measureText(t).width > maxW && line){ lines.push(line); line = text[i]; }
+      else line = t;
+    }
+    if(line) lines.push(line);
+    for(i = 0; i < lines.length; i++) x.fillText(lines[i], cx, cy + i * lh);
+    return lines.length;
+  }
+
+  function bg(x){
+    var g = x.createLinearGradient(0, 0, W * 0.35, H);
+    g.addColorStop(0, '#2A0F45');
+    g.addColorStop(.5, '#341858');
+    g.addColorStop(1, '#43206F');
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+
+    var r1 = x.createRadialGradient(W * .26, H * .14, 0, W * .26, H * .14, 330);
+    r1.addColorStop(0, 'rgba(255,120,190,.3)');
+    r1.addColorStop(1, 'rgba(255,120,190,0)');
+    x.fillStyle = r1; x.fillRect(0, 0, W, H);
+
+    var r2 = x.createRadialGradient(W * .82, H * .86, 0, W * .82, H * .86, 360);
+    r2.addColorStop(0, 'rgba(140,110,255,.28)');
+    r2.addColorStop(1, 'rgba(140,110,255,0)');
+    x.fillStyle = r2; x.fillRect(0, 0, W, H);
+
+    // 星点（固定伪随机，保证同一张海报稳定）
+    var seed = 20261108;
+    function rnd(){
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      return seed / 0x7fffffff;
+    }
+    for(var i = 0; i < 78; i++){
+      var sx = rnd() * W, sy = rnd() * H, sr = rnd() * 1.5 + .35;
+      x.globalAlpha = .2 + rnd() * .65;
+      x.fillStyle = '#fff';
+      x.beginPath(); x.arc(sx, sy, sr, 0, Math.PI * 2); x.fill();
+    }
+    x.globalAlpha = 1;
+
+    // 角上的大光斑
+    x.globalAlpha = .1;
+    x.fillStyle = '#fff';
+    x.beginPath(); x.arc(-20, H - 40, 150, 0, Math.PI * 2); x.fill();
+    x.beginPath(); x.arc(W + 30, 60, 120, 0, Math.PI * 2); x.fill();
+    x.globalAlpha = 1;
+  }
+
+  function chip(x, text, cy){
+    x.font = '700 13px ' + F;
+    var tw = 0;
+    for(var i = 0; i < text.length; i++) tw += x.measureText(text[i]).width;
+    tw += 5 * (text.length - 1);
+    var w = tw + 46, x0 = (W - w) / 2;
+    rr(x, x0, cy - 19, w, 38, 19);
+    x.fillStyle = 'rgba(255,255,255,.13)';
+    x.fill();
+    x.strokeStyle = 'rgba(255,255,255,.24)';
+    x.lineWidth = 1.4;
+    x.stroke();
+    x.fillStyle = 'rgba(255,255,255,.9)';
+    spaced(x, text, W / 2, cy + 1, 5);
+  }
+
+  function footer(x){
+    x.save();
+    x.strokeStyle = 'rgba(255,255,255,.16)';
+    x.lineWidth = 1.6;
+    x.setLineDash([5, 7]);
+    x.beginPath(); x.moveTo(90, 754); x.lineTo(W - 90, 754); x.stroke();
+    x.restore();
+
+    x.font = '800 17px ' + F;
+    x.fillStyle = 'rgba(255,255,255,.86)';
+    x.fillText('精灵永恒 · 手游攻略站', W / 2, 788);
+
+    x.font = '400 12px ' + F;
+    x.fillStyle = 'rgba(255,255,255,.46)';
+    x.fillText('jingyu3269.github.io/game-guide', W / 2, 816);
+    x.fillText('客服微信 LYLOVEZLL1314999', W / 2, 840);
+  }
+
+  /* 抽签海报 */
+  function luckPoster(d){
+    var pr = pair(), x = pr.x;
+    bg(x);
+    chip(x, '今日运势', 68);
+
+    // 分数
+    var g = x.createLinearGradient(0, 130, 0, 290);
+    g.addColorStop(0, '#FFEBB8');
+    g.addColorStop(.55, '#FFB8D2');
+    g.addColorStop(1, '#FF7FB5');
+    x.font = '900 152px ' + F;
+    x.fillStyle = g;
+    x.fillText(String(d.luck), W / 2, 232);
+
+    x.font = '600 14px ' + F;
+    x.fillStyle = 'rgba(255,255,255,.42)';
+    x.fillText('满 分  100', W / 2, 320);
+
+    // 运势等级
+    var lvColor = d.luck >= 90 ? '#FF9A3C' : d.luck >= 78 ? '#FF5F9E' : d.luck >= 68 ? '#7A63F0' : '#4FA97F';
+    x.font = '900 18px ' + F;
+    var lvW = x.measureText(d.lv).width + 52;
+    rr(x, (W - lvW) / 2, 352, lvW, 42, 21);
+    x.fillStyle = lvColor;
+    x.fill();
+    x.fillStyle = '#fff';
+    spaced(x, d.lv, W / 2, 374, 2);
+
+    // 游戏名
+    x.font = '700 13px ' + F;
+    x.fillStyle = 'rgba(255,255,255,.45)';
+    spaced(x, '今日幸运手游', W / 2, 442, 3);
+
+    x.font = '900 42px ' + F;
+    x.fillStyle = '#fff';
+    x.fillText(d.game, W / 2, 490);
+
+    // 宜
+    x.font = '900 15px ' + F;
+    rr(x, W / 2 - 21, 540, 42, 28, 14);
+    x.fillStyle = 'rgba(255,255,255,.16)';
+    x.fill();
+    x.fillStyle = 'rgba(255,255,255,.9)';
+    x.fillText('宜', W / 2, 555);
+
+    x.font = '600 19px ' + F;
+    x.fillStyle = 'rgba(233,220,255,.94)';
+    wrap(x, d.tip, W / 2, 604, 456, 36);
+
+    footer(x);
+    return pr.c.toDataURL('image/jpeg', 0.92);
+  }
+
+  /* 转盘海报 */
+  function foodPoster(d){
+    var pr = pair(), x = pr.x;
+    bg(x);
+    chip(x, '今晚吃什么', 68);
+
+    // 背景光环
+    var halo = x.createRadialGradient(W / 2, 268, 10, W / 2, 268, 190);
+    halo.addColorStop(0, 'rgba(255,190,225,.24)');
+    halo.addColorStop(1, 'rgba(255,190,225,0)');
+    x.fillStyle = halo; x.fillRect(0, 60, W, 420);
+
+    x.save();
+    x.strokeStyle = 'rgba(255,255,255,.16)';
+    x.lineWidth = 1.6;
+    x.setLineDash([5, 9]);
+    x.beginPath(); x.arc(W / 2, 292, 128, 0, Math.PI * 2); x.stroke();
+    x.setLineDash([2, 14]);
+    x.strokeStyle = 'rgba(255,255,255,.22)';
+    x.beginPath(); x.arc(W / 2, 292, 158, 0, Math.PI * 2); x.stroke();
+    x.restore();
+
+    x.font = '150px ' + E;
+    x.fillText(d.emoji, W / 2, 292);
+
+    x.font = '700 24px ' + F;
+    x.fillStyle = 'rgba(255,255,255,.55)';
+    spaced(x, '今晚吃', W / 2, 432, 9);
+
+    var g = x.createLinearGradient(0, 440, 0, 560);
+    g.addColorStop(0, '#FFEFC2');
+    g.addColorStop(.5, '#FFC2DC');
+    g.addColorStop(1, '#FF85BC');
+    x.font = '900 104px ' + F;
+    x.fillStyle = g;
+    x.fillText(d.name, W / 2, 530);
+
+    x.font = '600 20px ' + F;
+    x.fillStyle = 'rgba(255,255,255,.62)';
+    x.fillText('别纠结了 · 就它', W / 2, 626);
+
+    // 三颗小星星
+    var pts = [[150, 672], [W - 150, 672], [W / 2, 696]];
+    x.fillStyle = 'rgba(255,255,255,.32)';
+    for(var i = 0; i < pts.length; i++){
+      x.beginPath();
+      x.arc(pts[i][0], pts[i][1], i === 2 ? 2.6 : 3.6, 0, Math.PI * 2);
+      x.fill();
+    }
+
+    footer(x);
+    return pr.c.toDataURL('image/jpeg', 0.92);
+  }
+
+  function open(url, name){
+    var layer = document.getElementById('posterLayer');
+    var img = document.getElementById('posterImg');
+    var dl = document.getElementById('posterDl');
+    if(!layer) return;
+    img.src = url;
+    dl.href = url;
+    dl.setAttribute('download', name || 'share.jpg');
+    layer.classList.add('show');
+    layer.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('poster-open');
+  }
+
+  function close(){
+    var layer = document.getElementById('posterLayer');
+    if(!layer) return;
+    layer.classList.remove('show');
+    layer.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('poster-open');
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+  });
+
+  return { luck: luckPoster, food: foodPoster, open: open, close: close };
+})();
+
+window.closePoster = function(){ window.Poster.close(); };
+</script>
+<!--POSTER-JS-END-->
+<!--MOTION-JS-START-->
+<script>
+/* ===== 阅读进度条 + 花瓣轻微视差 ===== */
+(function(){
+  var bar = document.getElementById('readBar');
+  var petals = document.getElementById('petalContainer');
+  function upd(){
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var y = window.pageYOffset || doc.scrollTop || 0;
+    if(bar) bar.style.width = (max > 0 ? Math.max(0, Math.min(1, y / max)) * 100 : 0).toFixed(2) + '%';
+    if(petals) petals.style.transform = 'translate3d(0,' + (y * 0.035).toFixed(1) + 'px,0)';
+  }
+  window.addEventListener('scroll', upd, {passive:true});
+  window.addEventListener('resize', upd);
+  window.addEventListener('load', upd);
+  upd();
+})();
+
+/* ===== 区块滚入时依次浮现 ===== */
+(function(){
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(!('IntersectionObserver' in window)) return;
+  var els = [].slice.call(document.querySelectorAll('section.section'));
+  if(!els.length) return;
+  document.documentElement.classList.add('reveal-ready');
+  var io = new IntersectionObserver(function(entries){
+    for(var i = 0; i < entries.length; i++){
+      var en = entries[i];
+      if(!en.isIntersecting) continue;
+      show(en.target);
+    }
+  }, {rootMargin: '0px 0px -6% 0px', threshold: 0.05});
+  function show(el){
+    if(el.classList.contains('in')) return;
+    el.style.transitionDelay = (Math.min(2, els.indexOf(el)) * 70) + 'ms';
+    el.classList.add('in');
+    if(io) io.unobserve(el);
+  }
+  /* 兜底：任何情况下只要进了视口就一定显示，绝不让内容被藏住 */
+  function sweep(){
+    var vh = window.innerHeight || 800;
+    for(var i = 0; i < els.length; i++){
+      var r = els[i].getBoundingClientRect();
+      if(r.top < vh * 0.96 && r.bottom > 0) show(els[i]);
+    }
+  }
+  els.forEach(function(el){ io.observe(el); });
+  sweep();
+  window.addEventListener('scroll', sweep, {passive:true});
+  window.addEventListener('resize', sweep);
+  window.addEventListener('load', sweep);
+  setTimeout(sweep, 900);
+})();
+
+/* ===== 桌面：卡片 3D 倾斜 + 光扫 ===== */
+(function(){
+  if(!(window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches)) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(!window.PointerEvent) return;
+
+  var MAX = 5.5;          // 最大倾斜角度
+  var cur = null, frame = 0, lastEv = null;
+
+  function ensureShine(card){
+    if(card.querySelector(':scope > .card-shine')) return;
+    var i = document.createElement('i');
+    i.className = 'card-shine';
+    i.setAttribute('aria-hidden', 'true');
+    card.appendChild(i);
+  }
+
+  function reset(card){
+    card.classList.remove('card-hover');
+    card.style.removeProperty('--rx');
+    card.style.removeProperty('--ry');
+  }
+
+  function paint(){
+    frame = 0;
+    if(!cur || !lastEv) return;
+    var r = cur.getBoundingClientRect();
+    if(!r.width || !r.height) return;
+    var px = (lastEv.clientX - r.left) / r.width - .5;
+    var py = (lastEv.clientY - r.top) / r.height - .5;
+    px = Math.max(-.5, Math.min(.5, px));
+    py = Math.max(-.5, Math.min(.5, py));
+    cur.style.setProperty('--ry', (px * MAX * 2).toFixed(2) + 'deg');
+    cur.style.setProperty('--rx', (-py * MAX * 2).toFixed(2) + 'deg');
+    cur.style.setProperty('--sx', ((px + .5) * 100).toFixed(1) + '%');
+    cur.style.setProperty('--sy', ((py + .5) * 100).toFixed(1) + '%');
+  }
+
+  document.addEventListener('pointermove', function(e){
+    if(e.pointerType === 'touch') return;
+    var card = e.target && e.target.closest ? e.target.closest('.game-card, .article-card') : null;
+    if(card !== cur){
+      if(cur) reset(cur);
+      cur = card;
+      if(cur){ ensureShine(cur); cur.classList.add('card-hover'); }
+    }
+    lastEv = e;
+    if(!frame) frame = requestAnimationFrame(paint);
+  }, {passive:true});
+
+  window.addEventListener('scroll', function(){
+    if(cur){ reset(cur); cur = null; }
+  }, {passive:true});
+})();
+</script>
+<!--MOTION-JS-END-->
 </body>
 </html>
