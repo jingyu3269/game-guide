@@ -737,7 +737,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 
 /* ---- 气球：玻璃质感的夜空球体 ---- */
-.svc-bubble,.b-title,.svc-ticket,.perk{
+.svc-bubble,.b-title,.svc-ticket{
   background:
     radial-gradient(130% 84% at 20% -8%, rgba(255,255,255,.17), rgba(255,255,255,0) 58%),
     linear-gradient(168deg, rgba(150,112,225,.24) 0%, rgba(74,40,136,.32) 60%, rgba(48,24,96,.44) 100%);
@@ -871,31 +871,92 @@ button{font-family:inherit;cursor:pointer;border:none}
   font-size:11.5px;color:rgba(255,255,255,.55);letter-spacing:.5px;
 }
 
-/* 福利清单 */
+/* 福利清单：六只缓缓漂浮的夜空小气球 */
 .svc-perks{
-  display:grid;grid-template-columns:1fr 1fr;gap:9px;
-  width:100%;max-width:412px;margin:0 auto 20px;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:34px 9px;
+  width:100%;max-width:366px;margin:0 auto 42px;
 }
 .perk{
-  display:flex;align-items:center;gap:8px;
-  text-align:left;font-size:12.5px;font-weight:700;color:#F2E6FF;
-  padding:8px 11px;
-  border-radius:24px 24px 18px 18px / 18px 18px 14px 14px;
-  animation:balloonFloat 8.6s ease-in-out infinite;
+  --bc:170,123,255;--bb:30,12,60;
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:5px;
+  aspect-ratio:1 / 1.1;
+  padding:9px 7px 19px;
+  border-radius:50% 50% 47% 47% / 45% 45% 55% 55%;
+  text-align:center;
+  font-size:11.6px;line-height:1.2;font-weight:900;letter-spacing:.2px;
+  color:#FFFDF7;
+  text-shadow:0 1px 6px rgba(10,2,28,.75);
+  background:
+    radial-gradient(58% 40% at 30% 16%, rgba(255,255,255,.30), rgba(255,255,255,0) 66%),
+    radial-gradient(122% 98% at 50% 118%, rgba(var(--bc),.72), rgba(var(--bc),0) 58%),
+    linear-gradient(166deg, rgba(var(--bc),.70) 0%, rgba(var(--bc),.38) 52%, rgba(var(--bb),.62) 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255,255,255,.28),
+    inset 0 7px 16px rgba(255,255,255,.14),
+    inset -14px -18px 34px rgba(8,2,24,.30),
+    0 14px 30px rgba(6,2,20,.34),
+    0 0 34px rgba(var(--bc),.32);
+  animation:perkFloat 8.6s ease-in-out infinite;
   animation-delay:-.8s;
-  transition:box-shadow .18s;
+  transition:box-shadow .2s,filter .2s;
 }
-.perk:nth-child(2){animation-duration:9.2s;animation-delay:-2.4s}
-.perk:nth-child(3){animation-duration:8.2s;animation-delay:-4.1s}
-.perk:nth-child(4){animation-duration:10.4s;animation-delay:-1.2s}
-.perk:nth-child(5){animation-duration:8.8s;animation-delay:-6.3s}
-.perk:nth-child(6){animation-duration:9.6s;animation-delay:-3.5s}
+/* 球面大高光 */
+.perk::before{
+  content:"";position:absolute;left:22%;top:11%;width:27%;height:21%;
+  border-radius:50%;transform:rotate(-22deg);
+  background:radial-gradient(closest-side, rgba(255,255,255,.72), rgba(255,255,255,0) 74%);
+  pointer-events:none;
+}
+/* 一点锐利反光 */
+.perk::after{
+  content:"";position:absolute;left:31%;top:21%;width:5.5%;height:4.5%;
+  border-radius:50%;background:rgba(255,255,255,.92);
+  filter:blur(.3px);pointer-events:none;
+}
+/* 气球结与细线 */
+.perk .knot{
+  left:50%;bottom:-5px;margin-left:-4px;width:0;height:0;border:0;
+  border-left:4px solid transparent;border-right:4px solid transparent;
+  border-top:8px solid rgba(var(--bc),.85);
+  filter:drop-shadow(0 1px 2px rgba(6,2,20,.55));
+}
+.perk .knot::after{
+  content:"";position:absolute;left:4px;top:6px;width:12px;height:30px;
+  border-left:1.6px solid rgba(255,255,255,.30);
+  border-radius:0 0 0 78%;
+  transform:rotate(-7deg);
+}
+/* 六只不同颜色、不同节奏 */
+.perk:nth-child(1){--bc:170,123,255;animation-duration:8.6s;animation-delay:-.8s}
+.perk:nth-child(2){--bc:104,196,255;animation-duration:9.4s;animation-delay:-2.4s;margin-top:16px}
+.perk:nth-child(3){--bc:255,116,178;animation-duration:8.2s;animation-delay:-4.1s;margin-top:5px}
+.perk:nth-child(4){--bc:255,196,96;--bb:68,30,6;animation-duration:10.4s;animation-delay:-1.2s;margin-top:5px;
+  background:/n    radial-gradient(58% 40% at 30% 16%, rgba(255,255,255,.42), rgba(255,255,255,0) 66%),
+    radial-gradient(122% 98% at 50% 118%, rgba(255,168,70,.85), rgba(255,168,70,0) 58%),
+    linear-gradient(166deg, rgba(255,206,110,.92) 0%, rgba(246,166,72,.74) 50%, rgba(104,44,10,.86) 100%);
+  box-shadow:/n    inset 0 0 0 1.5px rgba(255,236,190,.46),
+    inset 0 7px 16px rgba(255,255,255,.22),
+    inset -14px -18px 34px rgba(60,20,0,.34),
+    0 14px 30px rgba(6,2,20,.34),
+    0 0 38px rgba(255,170,70,.40);
+}
+.perk:nth-child(5){--bc:104,226,188;animation-duration:8.8s;animation-delay:-6.3s;margin-top:16px}
+.perk:nth-child(6){--bc:210,138,255;animation-duration:9.8s;animation-delay:-3.5s}
+.perk b{font:inherit;display:block;max-width:76%;margin:0 auto}
 .perk .ico{
-  width:26px;height:26px;flex:none;border-radius:50%;
+  width:28px;height:28px;flex:none;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:14px;background:rgba(255,255,255,.13);
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:inset 0 -4px 9px rgba(10,2,28,.28);
+  font-size:14px;
+  background:radial-gradient(circle at 34% 28%, rgba(255,255,255,.38), rgba(255,255,255,.08) 72%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 2px 7px rgba(6,2,20,.30);
+}
+@keyframes perkFloat{
+  0%,100%{transform:translate3d(0,0,0) rotate(-1.6deg)}
+  26%{transform:translate3d(4px,-8px,0) rotate(.6deg)}
+  52%{transform:translate3d(-2px,-13px,0) rotate(1.8deg)}
+  76%{transform:translate3d(-5px,-5px,0) rotate(-.4deg)}
 }
 
 /* 果冻大按钮 */
@@ -940,18 +1001,26 @@ button{font-family:inherit;cursor:pointer;border:none}
   .svc-title::before{left:-15px}
   .svc-title::after{right:-15px}
   .svc-ticket .id{font-size:18.5px;letter-spacing:1px}
-  .svc-perks{gap:7px}
-  .perk{font-size:11.5px;padding:6px 7px;gap:6px}
-  .perk .ico{width:26px;height:26px;font-size:14px}
+  .svc-perks{gap:32px 6px;max-width:100%;margin-bottom:36px}
+  .perk{font-size:11.2px;padding:9px 7px 11px}
+  .perk .ico{width:26px;height:26px;font-size:13px}
+  .perk:nth-child(2),.perk:nth-child(5){margin-top:14px}
+  .perk:nth-child(3),.perk:nth-child(4){margin-top:4px}
   .svc-btn{font-size:15.5px;padding:12px 28px}
+}
+@media (max-width:600px){
+  .svc-heart,.svc-coin{display:none}
 }
 @media (max-width:360px){
   .svc-title{font-size:21px}
   .svc-title::before,.svc-title::after{display:none}
   .svc-sub{gap:5px}
   .svc-sub i{padding:2px 8px;font-size:11px}
-  .perk{font-size:11px;gap:5px;padding:6px 6px}
-  .perk .ico{width:24px;height:24px;font-size:13px}
+  .svc-perks{grid-template-columns:1fr 1fr;gap:36px 16px;max-width:296px;margin-bottom:40px}
+  .perk{font-size:12px;padding:10px 10px 18px}
+  .perk .ico{width:28px;height:28px;font-size:14px}
+  .perk:nth-child(n){margin-top:0}
+  .perk:nth-child(2n){margin-top:16px}
   .svc-ticket .id{font-size:17px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -1338,7 +1407,11 @@ mark{
   .svc-card{max-width:600px;padding:264px 10px 44px}
   .mascot-wrap::after{width:460px;height:460px;margin:-230px 0 0 -230px}
   .sky-balloon{display:block}
-  .svc-perks{grid-template-columns:repeat(3,1fr);max-width:540px}
+  .svc-perks{grid-template-columns:repeat(3,1fr);max-width:540px;gap:44px 22px;margin-bottom:52px}
+  .perk{font-size:14px;padding:16px 12px 20px;gap:7px}
+  .perk .ico{width:34px;height:34px;font-size:17px}
+  .perk:nth-child(2),.perk:nth-child(5){margin-top:24px}
+  .perk:nth-child(3),.perk:nth-child(4){margin-top:8px}
   .svc-title{font-size:33px}
   .mascot-wrap{width:148px;margin-left:-74px;top:34px}
   .mascot-wrap::before{width:196px;height:196px}
@@ -1987,12 +2060,12 @@ mark{
 
     <!-- 福利清单 -->
     <div class="svc-perks">
-      <div class="perk"><span class="ico ico-1">🚀</span>最新版下载直达</div>
-      <div class="perk"><span class="ico ico-2">📖</span>新手开荒指导</div>
-      <div class="perk"><span class="ico ico-3">🎁</span>专属福利礼包码</div>
-      <div class="perk"><span class="ico ico-4">💰</span>充值折扣返利</div>
-      <div class="perk"><span class="ico ico-5">⏰</span>开服时间提醒</div>
-      <div class="perk"><span class="ico ico-6">💬</span>售后快速响应</div>
+      <div class="perk"><span class="ico ico-1">🚀</span><b>最新版下载直达</b><i class="knot" aria-hidden="true"></i></div>
+      <div class="perk"><span class="ico ico-2">📖</span><b>新手开荒指导</b><i class="knot" aria-hidden="true"></i></div>
+      <div class="perk"><span class="ico ico-3">🎁</span><b>专属福利礼包码</b><i class="knot" aria-hidden="true"></i></div>
+      <div class="perk"><span class="ico ico-4">💰</span><b>充值折扣返利</b><i class="knot" aria-hidden="true"></i></div>
+      <div class="perk"><span class="ico ico-5">⏰</span><b>开服时间提醒</b><i class="knot" aria-hidden="true"></i></div>
+      <div class="perk"><span class="ico ico-6">💬</span><b>售后快速响应</b><i class="knot" aria-hidden="true"></i></div>
     </div>
 
     <button class="svc-btn" onclick="copyWechat()">🎁 一键复制微信号</button>
