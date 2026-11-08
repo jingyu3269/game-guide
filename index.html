@@ -1413,6 +1413,37 @@ button{font-family:inherit;cursor:pointer;border:none}
 .article-summary{font-size:13px;color:var(--ink-soft);line-height:1.6}
 .article-date{font-size:12px;color:#8d7a68;margin-top:8px}
 .article-top .article-date{margin-top:0;color:#8d7a68;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+/* 已读标识：展开全文后出现，localStorage 记住 */
+.read-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  margin-left:auto;
+  font-size:11px;font-weight:800;letter-spacing:.4px;line-height:1;
+  color:#fff;
+  padding:3px 9px 3px 7px;border-radius:999px;
+  background:linear-gradient(180deg,#63E2A6,#16A96F);
+  box-shadow:0 2px 6px rgba(16,140,100,.3),inset 0 1px 0 rgba(255,255,255,.45);
+  transform:rotate(-2deg);
+  animation:readPop .36s cubic-bezier(.2,1.6,.4,1) both;
+  white-space:nowrap;
+}
+.read-badge i{
+  font-style:normal;flex:none;
+  width:11px;height:11px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:900;color:#0E8A62;
+  background:rgba(255,255,255,.92);
+}
+@keyframes readPop{
+  0%{opacity:0;transform:rotate(-2deg) scale(.35)}
+  70%{opacity:1;transform:rotate(-2deg) scale(1.12)}
+  100%{opacity:1;transform:rotate(-2deg) scale(1)}
+}
+/* 已读卡片：标题稍微收一点亮度，一眼能看出看过 */
+.article-card.read .article-title{color:#5C4A3E}
+.article-card.read .article-toggle{
+  background:linear-gradient(135deg,#9BE7C4,#3FC98D);
+  box-shadow:0 3px 0 rgba(20,150,105,.34),0 6px 14px rgba(20,150,105,.28);
+}
 
 /* 展开全文 */
 .article-full{display:none}
@@ -2430,7 +2461,32 @@ var ARTICLES = [
    ],
    src:{name:'微信公众号 · 精灵永恒攻略站'}},
 
+  // ---------- 11-08 新增：冰雪换装指南 ----------
+  {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'换装指南：先定标准，别把过渡装当毕业装养', date:'2026-11-08',
+   summary:'先判断缺的是「能站」还是「能打」，再按武器→防具→续航的顺序补；过渡装不强化不改造，元宝只花在两个信号上。',
+   full:[
+     {h:'先看清问题：不在装备少，在补错了方向', p:'在装备方面，新手最爱干两件事：见一件换一件，见一件强一件。最后元宝花光了，图还是站不住。问题不在装备少，在补错了方向。'},
+     {h:'一、先定标准：用三个问题判断缺什么', p:'一问：这张图你能待满几分钟吗？待不住，就是防御和血量不够，要补的方向是「能站」。二问：一只怪你要磨很久吗？输出不够，方向是「能打」。三问：一小时的收获，抵得过药钱和点卡吗？抵不过，就是白干。三个问题对应三种缺口，别混着补——多数人卡住是补错了方向，装备少并非主因。'},
+     {h:'二、顺序别搞反：先能打，再能站，最后能久待', p:'先补武器。输出上不去，什么图都打得难受，药也下得快。武器够用了再补防具，这一步目标只有一个：进图不躺。最后才轮到吸血、血上限这类续航件，它们不提升伤害，决定的是你能不能在图里连刷两小时。'},
+     {h:'三、过渡装的三条纪律', p:'不强化：过渡装的寿命只有几级，这笔钱收不回来。不改造：一次改造的材料，够你换掉好几件同级的。不心疼：淘汰了直接回收换元宝，别堆在仓库里当纪念品。新手最大的浪费，就是把过渡装当毕业装养。'},
+     {h:'四、什么时候值得把元宝砸进装备', p:'只有两个信号。一是这张图你已经站得住，但收益明显到顶，这时升级装备是为了进下一张图；二是你踩到新的门槛，比如四转才能进的二大陆，不达标就进不去。不在这两个信号里，任何「看着属性更高」的换装，都是花钱买心理安慰。'},
+     {h:'五、别忽略最便宜的那一项', p:'装备之外，还有两件几乎不花钱、但影响很大的事。一是该点的技能先点满，很多号不是装备差，是该点的没点；二是站位，被多只怪围住时往角落退半步，比多一件装备管用。这两件事不用元宝，只需要花五分钟看一眼面板。'},
+     {h:'写在最后', p:'关于装备，其实只有一句话：够用就换，能站就停。你的元宝应该留给「进不去的地方」，而不是「看起来更强的地方」。'}
+   ]},
+
   // ---------- 桃园将帅录 ----------
+  // ---------- 11-08 新增：桃园战场三个细节 ----------
+  {game:'桃园将帅录', tag:'桃园', title:'打不动不一定是战力低：三个战场细节', date:'2026-11-08',
+   summary:'五行、站位、行动条——卡关时先核对这三样，比回去刷级更快；进本前三十秒看说明，隐藏条件才给稀有奖励。',
+   full:[
+     {h:'先换个思路：卡关不一定缺等级', p:'卡关之后，很多人的第一反应是回去刷级。但多数时候真正缺的可能是三样东西没对上：五行、站位、行动条。'},
+     {h:'一、五行：先看清标签，再决定打不打', p:'高难副本的 BOSS 有固定的五行标签，有的甚至带双五行。用被克制的属性硬打，伤害会打折、承伤还会增加；换成克制它的属性，伤害乘区直接拉开。五行是独立乘区，会和攻防、暴击叠加生效，所以配置更低的队伍靠克制也能赢过配置更高的队伍。卡关时先打开资料看五行，再调整装备和将星属性，这比多刷几天等级更快。宠物同样带五行，抓宠时留意一下属性，有一只来补克制位就行，前期不必深度培养。'},
+     {h:'二、站位：15 个格子，站错就白打', p:'战场是 3 行 5 列，最多上阵 5 名角色，每人还能带 1 只宠物。近战刀剑只够得着前排，打不到后排；弓弩才能自由点后排。范围技能有十字、单行这类判定，站位直接决定你能同时命中几个目标；三个人挤在一横排，就相当于把目标排成一排让对方打。开荒的常规站位是两名近战顶在第一行，三名远程错开站在第二、三行。战斗中能换位，挪到前排重甲身后获得保护，或者退到战场边缘躲大范围技能，但位移会占用当回合的攻击机会，不要随意挪动。'},
+     {h:'三、行动条：看懂行动条的玩家能先占优势', p:'ATB 是半即时机制，每个单位都有独立行动条，速度决定行动条填充快慢，没有固定的我方回合、敌方回合。所以加速、减速、眩晕、封技都能直接改动时序：对面奶妈要出手前，先把输出打进去；我方辅助要抢在对面主 C 之前挂上增伤或治疗。堆速度要适度，如果把资源全投在速度上，前排还没开出嘲讽就被集火秒掉，节奏一样会崩。高难本不要全程挂机，手动盯着 BOSS 的蓄力节点去打断，一轮大招就能这样躲掉。'},
+     {h:'四、进本前的三十秒', p:'阵法要根据对手来换：雁行提速抢节奏，鱼鳞、方圆走耐力。另外，高难本有隐藏通关条件，评级分基础奖励和完美奖励；只击杀 BOSS 拿基础奖励，达成隐藏条件才给稀有材料、桃子、将军令碎片。进本前花一分钟看关卡说明，收益可能比多刷三次本还高。'},
+     {h:'写在最后', p:'战力决定你能不能进门，五行、站位和时序决定你出门时消耗有多大。'}
+   ]},
+
   {game:'桃园将帅录', tag:'桃园', title:'开服公告：10月28日10点全服上线', date:'2026-10-27',
    summary:'三端互通安卓/iOS/PC同账号同步，新手养成资源返还，阵容随便试不浪费。',
    full:[
@@ -2668,6 +2724,39 @@ function highlight(text, kw){
 var expanded = {};
 var autoOpen = {};
 
+// 已读记录：点过「展开全文」就记为已读，存在 localStorage 里，下次打开还在
+var READ_STORE = 'jy_read_articles_v1';
+var readSet = (function(){
+  try{
+    var raw = localStorage.getItem(READ_STORE);
+    var obj = raw ? JSON.parse(raw) : null;
+    return (obj && typeof obj === 'object') ? obj : {};
+  }catch(e){ return {}; }
+})();
+
+function saveReads(){
+  try{ localStorage.setItem(READ_STORE, JSON.stringify(readSet)); }catch(e){}
+}
+
+function markRead(key, card){
+  if(!key) return;
+  if(!readSet[key]){
+    readSet[key] = 1;
+    saveReads();
+  }
+  if(card){
+    card.classList.add('read');
+    var top = card.querySelector('.article-top');
+    if(top && !top.querySelector('.read-badge')){
+      var sp = document.createElement('span');
+      sp.className = 'read-badge';
+      sp.setAttribute('title', '这篇攻略你已经展开过了');
+      sp.innerHTML = '<i>\u2713</i>已读';
+      top.appendChild(sp);
+    }
+  }
+}
+
 var GAME_ICONS = {
   tulong: 'assets/icon-tulong.webp',
   jingling: 'assets/icon-jingling.webp',
@@ -2687,11 +2776,12 @@ function renderArticles(list, kw){
     var key = articleKey(a);
     var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : '');
     var isOpen = !!expanded[key] || !!(kw && autoOpen[key]);
-    html += '<div class="article-card ' + cls + (isOpen ? ' open' : '') + '" data-key="' + esc(key) + '">';
+    var isRead = !!readSet[key];
+    html += '<div class="article-card ' + cls + (isOpen ? ' open' : '') + (isRead ? ' read' : '') + '" data-key="' + esc(key) + '">';
     html += '<div class="article-head">';
     html += '<span class="article-icon"><img src="' + iconOf(cls) + '" alt="' + esc(a.game) + '图标" loading="lazy" width="42" height="42"></span>';
     html += '<div class="article-head-main">';
-    html += '<div class="article-top"><span class="article-tag">' + esc(a.tag) + '</span><span class="article-game">' + esc(a.game) + '</span>' + (a.date ? '<span class="article-date">更新 ' + esc(a.date.slice(5)) + '</span>' : '') + '</div>';
+    html += '<div class="article-top"><span class="article-tag">' + esc(a.tag) + '</span><span class="article-game">' + esc(a.game) + '</span>' + (a.date ? '<span class="article-date">更新 ' + esc(a.date.slice(5)) + '</span>' : '') + (isRead ? '<span class="read-badge" title="这篇攻略你已经展开过了"><i>\u2713</i>已读</span>' : '') + '</div>';
     html += '<div class="article-title">' + highlight(a.title, kw) + '</div>';
     html += '</div></div>';
     html += '<div class="article-summary">' + highlight(a.summary, kw) + '</div>';
@@ -2744,6 +2834,8 @@ function toggleArticle(btn){
   if(!open) delete autoOpen[key];
   btn.querySelector('.toggle-text').textContent = open ? '收起全文' : '展开全文';
   btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  // 点开就算读过：立刻打上「已读」标识并记住
+  if(open) markRead(key, card);
   // 手风琴：展开新的同时收起其它，避免整页被拉得过长
   if(open){
     var others = document.querySelectorAll('.article-card.open');
@@ -2796,6 +2888,7 @@ function jumpToArticle(key){
   }
   var card = document.querySelector('.article-card[data-key="' + key.replace(/"/g, '\\"') + '"]');
   if(!card) return;
+  markRead(key, card);
   card.scrollIntoView({behavior:'smooth', block:'center'});
   card.classList.add('flash');
   setTimeout(function(){ card.classList.remove('flash'); }, 1800);
