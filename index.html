@@ -1035,23 +1035,44 @@ button{font-family:inherit;cursor:pointer;border:none}
   width:auto;height:auto;background:none;line-height:1;font-size:20px;
   filter:drop-shadow(0 0 9px rgba(255,220,160,.95));
 }
-/* 惊喜小标签 */
+/* 惊喜小卡片：上排惊喜文案，下排「客服微信号已复制」 */
 .perk .surprise{
-  position:absolute;left:50%;top:50%;z-index:4;
+  position:absolute;left:50%;top:50%;z-index:6;
   transform:translate(-50%,-50%);
-  padding:5px 10px;border-radius:999px;
-  font-size:10.5px;font-weight:900;line-height:1;white-space:nowrap;
-  color:#3A1266;background:rgba(255,255,255,.95);
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:7px 10px 8px;border-radius:14px;
+  font-size:10px;font-weight:900;line-height:1.15;white-space:nowrap;
+  color:#3A1266;background:rgba(255,255,255,.97);
   text-shadow:none;
-  box-shadow:0 7px 18px rgba(10,2,30,.45),0 0 0 2px rgba(255,255,255,.55);
+  box-shadow:0 8px 20px rgba(10,2,30,.46),0 0 0 2px rgba(255,255,255,.55),0 0 22px rgba(255,214,140,.45);
   opacity:0;pointer-events:none;
+}
+.perk .surprise .s1{
+  font-size:10px;font-weight:900;letter-spacing:0;color:#3A1266;
+  text-shadow:0 1px 0 rgba(255,255,255,.9);
+}
+.perk .surprise .s2{
+  display:flex;align-items:center;gap:3px;
+  width:100%;justify-content:center;
+  font-size:9.5px;font-weight:800;letter-spacing:.1px;
+  color:#0B8A62;
+  padding-top:5px;
+  border-top:1px dashed rgba(58,18,102,.22);
+}
+.perk .surprise .s2 i{
+  font-style:normal;flex:none;
+  width:11px;height:11px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:7.5px;line-height:1;color:#fff;font-weight:900;
+  background:linear-gradient(180deg,#5FE3A1,#10A96C);
+  box-shadow:0 2px 5px rgba(10,150,100,.42),inset 0 1px 0 rgba(255,255,255,.55);
 }
 .perk.tip .surprise{animation:tipUp 1.5s cubic-bezier(.2,.9,.3,1) forwards}
 @keyframes tipUp{
-  0%{opacity:0;transform:translate(-50%,-38%) scale(.65)}
-  22%{opacity:1;transform:translate(-50%,-52%) scale(1)}
-  70%{opacity:1;transform:translate(-50%,-62%) scale(1)}
-  100%{opacity:0;transform:translate(-50%,-98%) scale(.94)}
+  0%{opacity:0;transform:translate(-50%,-30%) scale(.62)}
+  20%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  72%{opacity:1;transform:translate(-50%,-62%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-104%) scale(.94)}
 }
 
 /* 果冻大按钮 */
@@ -3296,11 +3317,15 @@ window.addEventListener('scroll', function(){
     var tip = el.querySelector('.surprise');
     host.innerHTML = '';
     if(!reduce) burst(host, KINDS[idx % KINDS.length]);
-    tip.textContent = TIPS[idx % TIPS.length];
+    // 点开气球顺手把客服微信号复制进剪贴板（底部同时弹提示）
+    try{ copyWechat(); }catch(e){}
+    tip.innerHTML = '<em class="s1">' + TIPS[idx % TIPS.length] + '</em>' +
+                    '<em class="s2"><i>\u2713</i>客服微信号已复制</em>';
     setTimeout(function(){ el.classList.add('tip'); }, 310);
     setTimeout(function(){
       el.classList.remove('pop','tip');
       host.innerHTML = '';
+      tip.innerHTML = '';
       el.classList.add('reborn');
       setTimeout(function(){ el.classList.remove('reborn','popping'); }, 520);
     }, 1600);
