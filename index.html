@@ -529,16 +529,34 @@ button{font-family:inherit;cursor:pointer;border:none}
   position:relative;overflow:hidden;text-align:center;
   padding:100px 16px 66px;
   color:#fff;
-  background:
-    radial-gradient(900px 420px at 50% -80px, rgba(255,196,88,.30), transparent 62%),
-    linear-gradient(180deg,#31175f 0%,#5b24a8 46%,#9c36bd 76%,#ff5e8e 102%);
+  background-image:
+    radial-gradient(1.6px 1.6px at 24px 38px, rgba(255,255,255,.85), transparent 100%),
+    radial-gradient(1.2px 1.2px at 118px 96px, rgba(255,255,255,.55), transparent 100%),
+    radial-gradient(1.8px 1.8px at 186px 168px, rgba(255,255,255,.7), transparent 100%),
+    radial-gradient(1px 1px at 62px 196px, rgba(255,255,255,.45), transparent 100%),
+    radial-gradient(1.3px 1.3px at 156px 26px, rgba(255,255,255,.5), transparent 100%),
+    radial-gradient(1.1px 1.1px at 92px 142px, rgba(255,255,255,.4), transparent 100%),
+    radial-gradient(1.5px 1.5px at 44px 120px, rgba(255,255,255,.6), transparent 100%),
+    radial-gradient(1px 1px at 208px 60px, rgba(255,255,255,.5), transparent 100%),
+    radial-gradient(1.7px 1.7px at 132px 214px, rgba(255,235,205,.55), transparent 100%),
+    radial-gradient(760px 380px at 50% -120px, rgba(255,196,88,.12), transparent 66%),
+    radial-gradient(620px 420px at 50% 108%, rgba(139,92,246,.22), transparent 70%),
+    linear-gradient(180deg,#250f3d 0%,#2a1249 38%,#321659 72%,#3d1c6b 100%);
+  background-size:
+    214px 214px, 214px 214px, 214px 214px, 214px 214px,
+    214px 214px, 214px 214px, 214px 214px, 214px 214px, 214px 214px,
+    100% 100%, 100% 100%, 100% 100%;
+  background-repeat:
+    repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat,
+    no-repeat, no-repeat, no-repeat;
+  background-position:0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,50% 0,50% 100%,50% 50%;
 }
 /* 顶部粉金发光边，界定区块起点 */
 .service::before{
   content:"";position:absolute;left:0;right:0;top:0;height:5px;
   pointer-events:none;
-  background:linear-gradient(90deg,#ff5e8e,#ffb547 45%,#ff5e8e);
-  box-shadow:0 0 20px rgba(255,130,140,.75);
+  background:linear-gradient(90deg,rgba(255,94,142,.55),rgba(255,181,71,.75) 45%,rgba(255,94,142,.55));
+  box-shadow:0 0 22px rgba(255,150,120,.45);
 }
 /* 底部奶油扇形波浪边，与米色页脚衔接 */
 .service::after{
@@ -549,7 +567,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 /* 飘云 */
 .svc-cloud{
   position:absolute;width:74px;height:25px;border-radius:999px;
-  background:rgba(255,255,255,.20);pointer-events:none;
+  background:rgba(255,255,255,.14);pointer-events:none;
   animation:svcCloud 9s ease-in-out infinite;
 }
 .svc-cloud::before,.svc-cloud::after{content:"";position:absolute;border-radius:50%;background:inherit}
@@ -603,7 +621,8 @@ button{font-family:inherit;cursor:pointer;border:none}
   padding:202px 18px 26px;
   box-shadow:
     0 10px 0 rgba(255,186,214,.34),
-    0 30px 54px rgba(20,4,40,.46);
+    0 30px 54px rgba(20,4,40,.46),
+    0 0 44px rgba(168,120,255,.20);
 }
 /* 头像背后的夜空口袋：深色托出月亮光晕 */
 .svc-night{
