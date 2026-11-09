@@ -2391,7 +2391,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
   position:relative;overflow:hidden;
   display:grid;grid-template-columns:1.06fr .94fr;
   border-radius:30px;
-  background:radial-gradient(120% 100% at 12% 0%,#4A8CB2 0%,#3A7DA1 46%,#26597A 100%);
+  background:#3A7DA1;
   border:1px solid rgba(255,214,150,.26);
   box-shadow:0 26px 64px rgba(20,62,86,.34);
 }
@@ -2460,15 +2460,16 @@ html.poster-open,html.poster-open body{overflow:hidden}
 .lh-art{position:relative;min-height:100%;overflow:hidden}
 .lh-art img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
-  filter:hue-rotate(-16deg) saturate(.96) brightness(.9);
+  filter:saturate(.94) brightness(.97);
 }
 .lh-art::before{
   content:'';position:absolute;left:0;top:0;bottom:0;width:34%;z-index:2;pointer-events:none;
-  background:linear-gradient(to right,#26597A 0%,rgba(38,89,122,.86) 34%,rgba(38,89,122,.42) 68%,rgba(38,89,122,0) 100%);
+  width:52%;
+  background:linear-gradient(to right,#3A7DA1 0%,rgba(58,125,161,.86) 26%,rgba(58,125,161,.38) 62%,rgba(58,125,161,0) 100%);
 }
 .lh-art::after{
   content:'';position:absolute;inset:0;z-index:1;
-  background:linear-gradient(115deg,rgba(58,125,161,.30) 0%,rgba(39,91,124,.10) 40%,rgba(18,52,72,.32) 100%);
+  background:rgba(58,125,161,.14);
 }
 .luna-feats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:20px}
 .luna-feat{
@@ -2503,7 +2504,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
   .lh-art::before{display:none}
   .lh-art::after{
     z-index:2;
-    background:linear-gradient(180deg,rgba(24,58,80,.18) 0%,rgba(29,70,96,.42) 52%,#1E4A66 92%,#1E4A66 100%);
+    background:rgba(58,125,161,.16);
   }
   .lh-body{padding:16px 20px 28px}
   .lh-title{font-size:27px}
