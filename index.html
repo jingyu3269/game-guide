@@ -215,13 +215,14 @@ button{font-family:inherit;cursor:pointer;border:none}
   width:100%;height:100%;
   object-fit:cover;object-position:center;
   opacity:0;
-  animation:heroCycle 12s ease-in-out infinite;
+  animation:heroCycle 15s ease-in-out infinite;
   will-change:opacity,transform;
 }
 .hero-img-wrap .hero-slide:nth-child(1){animation-delay:0s}
 .hero-img-wrap .hero-slide:nth-child(2){animation-delay:3s}
 .hero-img-wrap .hero-slide:nth-child(3){animation-delay:6s}
 .hero-img-wrap .hero-slide:nth-child(4){animation-delay:9s}
+.hero-img-wrap .hero-slide:nth-child(5){animation-delay:12s}
 @keyframes heroCycle{
   0%{opacity:0;transform:scale(1.05)}
   4%,23%{opacity:1;transform:scale(1)}
@@ -2542,6 +2543,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
   <div class="hero-img-wrap" id="heroSlide">
     <div class="hero-track">
       <img class="hero-slide" src="assets/cover-taoyuan.webp" alt="桃园将帅录" fetchpriority="high" decoding="async">
+      <img class="hero-slide" data-src="assets/luna-cover.webp" alt="露娜2：拾光之约" decoding="async">
       <img class="hero-slide" data-src="assets/cover-jingling.webp" alt="精灵永恒" decoding="async">
       <img class="hero-slide" data-src="assets/cover-legend.webp" alt="小小屠龙·冰雪复古" decoding="async">
       <img class="hero-slide" data-src="assets/cover-jingling2.webp" alt="精灵永恒·法师" decoding="async">
@@ -4322,7 +4324,7 @@ window.addEventListener('scroll', function(){
       lazy[i].removeAttribute('data-src');
     }
   }
-  // 首图加载完再补后 3 张：既不抢首屏带宽，也不会在第一轮切换时出现空帧
+  // 首图加载完再补后 4 张：既不抢首屏带宽，也不会在第一轮切换时出现空帧
   var first = document.querySelector('.hero-slide');
   function schedule(){ setTimeout(loadRest, 200); }
   if(first && !first.complete){
