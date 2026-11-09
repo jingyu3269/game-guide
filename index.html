@@ -2383,6 +2383,143 @@ html.poster-open,html.poster-open body{overflow:hidden}
   .read-bar i{transition:none}
   .card-shine{display:none}
 }
+/* ===== 露娜2 推广 START ===== */
+.luna-wrap{max-width:1120px;margin:0 auto}
+.luna-hero{
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.06fr .94fr;
+  border-radius:30px;
+  background:radial-gradient(120% 100% at 12% 0%,#3d2a72 0%,#251547 46%,#140b25 100%);
+  border:1px solid rgba(255,214,150,.26);
+  box-shadow:0 26px 64px rgba(40,18,68,.34);
+}
+.luna-hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.85;
+  background-image:
+    radial-gradient(1.7px 1.7px at 18% 24%,rgba(255,255,255,.95),transparent 60%),
+    radial-gradient(1.4px 1.4px at 63% 12%,rgba(255,244,214,.9),transparent 60%),
+    radial-gradient(1.2px 1.2px at 42% 61%,rgba(255,255,255,.8),transparent 60%),
+    radial-gradient(1.6px 1.6px at 88% 44%,rgba(255,226,240,.85),transparent 60%),
+    radial-gradient(1.1px 1.1px at 8% 78%,rgba(255,255,255,.75),transparent 60%),
+    radial-gradient(1.3px 1.3px at 72% 84%,rgba(255,240,210,.8),transparent 60%),
+    radial-gradient(1.2px 1.2px at 30% 92%,rgba(255,255,255,.7),transparent 60%),
+    radial-gradient(1.5px 1.5px at 52% 34%,rgba(255,236,255,.7),transparent 60%);
+  background-size:320px 240px;
+}
+.luna-hero::after{
+  content:'';position:absolute;right:-90px;top:-120px;width:420px;height:420px;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,214,160,.28) 0%,rgba(255,190,220,.14) 42%,transparent 68%);
+}
+.lh-body{position:relative;z-index:3;padding:38px 26px 36px 36px;color:#fff}
+.lh-kicker{font-size:11px;letter-spacing:2.4px;font-weight:800;color:#FFD79E;opacity:.95}
+.lh-title{
+  margin-top:10px;font-size:36px;line-height:1.14;font-weight:800;letter-spacing:1px;
+  background:linear-gradient(180deg,#fff 20%,#FFE6F4 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.lh-title b{display:inline-block;margin-left:8px;vertical-align:middle;
+  font-size:15px;font-weight:800;letter-spacing:0;padding:5px 12px;border-radius:999px;
+  background:linear-gradient(135deg,#FFB547,#FF5F9E);color:#3A1030;
+  -webkit-text-fill-color:#3A1030;box-shadow:0 6px 16px rgba(255,95,158,.36);
+}
+.lh-desc{margin-top:14px;font-size:13.5px;line-height:1.8;color:rgba(255,255,255,.76)}
+.lh-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.lh-badges span{
+  font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:999px;
+  color:#FFE2B6;background:rgba(255,214,150,.1);border:1px solid rgba(255,214,150,.34);
+}
+.lh-cd-label{margin-top:20px;font-size:11.5px;font-weight:700;letter-spacing:1px;color:#FFC6E1}
+.lh-cd{display:flex;gap:8px;margin-top:8px}
+.lh-unit{
+  min-width:58px;padding:8px 6px 7px;text-align:center;border-radius:13px;
+  background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
+}
+.lh-unit b{display:block;font-size:23px;line-height:1.1;font-weight:800;color:#FFE9B8;
+  font-variant-numeric:tabular-nums;font-family:"DIN Alternate","PingFang SC",sans-serif}
+.lh-unit i{display:block;margin-top:2px;font-size:10px;font-style:normal;color:rgba(255,255,255,.55);letter-spacing:.6px}
+.lh-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.lh-btn{
+  font-size:14.5px;font-weight:800;padding:13px 24px;border-radius:26px;color:#fff;
+  background:linear-gradient(135deg,#FF9EC4,#FF5F9E);
+  box-shadow:0 10px 24px rgba(255,95,158,.42);
+  transition:transform .16s;
+}
+.lh-btn:active{transform:translateY(2px)}
+.lh-btn2{
+  font-size:14px;font-weight:700;padding:13px 20px;border-radius:26px;
+  color:#FFE9C6;background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,214,150,.42);
+  transition:transform .16s,background .2s;
+}
+.lh-btn2:active{transform:translateY(2px)}
+.lh-art{position:relative;min-height:100%;overflow:hidden}
+.lh-art img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+  filter:hue-rotate(-16deg) saturate(.96) brightness(.9);
+}
+.lh-art::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:34%;z-index:2;pointer-events:none;
+  background:linear-gradient(to right,#2A1850 0%,rgba(42,24,80,.86) 34%,rgba(42,24,80,.42) 68%,rgba(42,24,80,0) 100%);
+}
+.lh-art::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(115deg,rgba(61,42,114,.34) 0%,rgba(40,24,72,.1) 40%,rgba(20,11,37,.34) 100%);
+}
+.luna-feats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:20px}
+.luna-feat{
+  grid-column:span 3;position:relative;overflow:hidden;border-radius:18px;
+  background:#241443;border:1px solid rgba(120,70,40,.14);
+  box-shadow:0 12px 28px rgba(110,70,50,.16);
+  transition:transform .3s,box-shadow .3s;
+}
+.luna-feat img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
+.luna-feat:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(110,70,50,.24)}
+.luna-shots{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.luna-shot{position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(120,70,40,.16);background:#1a1024}
+.luna-shot img{width:100%;height:auto;display:block;aspect-ratio:4/3;object-fit:cover;object-position:center}
+.luna-shot span{
+  position:absolute;left:9px;bottom:9px;padding:4px 10px;border-radius:999px;
+  font-size:11px;font-weight:600;color:#fff;
+  background:rgba(20,8,30,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,.18);
+}
+.luna-note{margin-top:14px;text-align:center;font-size:11.5px;color:var(--ink-soft)}
+.luna-jump{
+  font-size:13.5px;font-weight:700;padding:13px 22px;border-radius:26px;color:#fff;
+  background:linear-gradient(135deg,#8A6BF0,#FF5F9E);
+  box-shadow:0 6px 18px rgba(138,107,240,.36);
+  display:flex;align-items:center;gap:7px;
+}
+.luna-jump:active{transform:translateY(2px)}
+@media (max-width:860px){
+  .luna-hero{grid-template-columns:1fr}
+  .lh-art{order:-1;min-height:190px}
+  .lh-art img{object-position:center 52%}
+  .lh-art::before{display:none}
+  .lh-art::after{
+    z-index:2;
+    background:linear-gradient(180deg,rgba(26,14,46,.18) 0%,rgba(30,16,52,.42) 52%,#241443 92%,#241443 100%);
+  }
+  .lh-body{padding:16px 20px 28px}
+  .lh-title{font-size:27px}
+  .lh-desc{font-size:12.5px}
+  .lh-unit{min-width:0;flex:1;padding:7px 2px 6px}
+  .lh-unit b{font-size:19px}
+  .lh-cd{gap:6px}
+  .lh-cta{display:grid;grid-template-columns:1fr;gap:9px}
+  .lh-btn{width:100%;text-align:center;padding:13px 14px;font-size:14px}
+  .lh-btn2{width:100%;text-align:center;padding:12px 14px;font-size:13px}
+  .lh-badges{gap:6px;margin-top:13px}
+  .lh-badges span:nth-child(n+5){display:none}
+  .luna-feats{grid-template-columns:repeat(2,1fr);gap:10px}
+  .luna-feat{grid-column:span 1}
+  .luna-shots{grid-template-columns:1fr;gap:10px}
+  .luna-shot img{aspect-ratio:16/10}
+}
+/* ===== 露娜2 推广 END ===== */
 </style>
 </head>
 <body>
@@ -2416,6 +2553,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
       复制客服微信
     </button>
     <button class="btn-ghost" onclick="document.getElementById('articles').scrollIntoView()">搜攻略</button>
+    <button class="btn-ghost luna-jump" onclick="document.getElementById('luna2').scrollIntoView()">🌙 露娜2 12.10 公测</button>
   </div>
   <div class="follow-card">
     <div class="follow-txt">
@@ -2523,6 +2661,79 @@ html.poster-open,html.poster-open body{overflow:hidden}
 
   </div>
 </section>
+
+<!--LUNA2-START-->
+<!-- ===== 露娜2：拾光之约 推广 ===== -->
+<section class="section" id="luna2">
+  <div class="section-title">
+    <div class="tag">新游预约</div>
+    <h2>露娜2：拾光之约</h2>
+    <p>经典萌系 MMO 归来 · PC 端游 · 12.10 公测</p>
+  </div>
+
+  <div class="luna-wrap">
+    <div class="luna-hero">
+      <div class="lh-body">
+        <div class="lh-kicker">LUNA ONLINE · 十六年之约</div>
+        <div class="lh-title">拾光之约<b>12.10 公测</b></div>
+        <p class="lh-desc">从阿克勒平原的风车下出发，人类与精灵两族、战士/魔法师/刺客三职业起步。副本、野外 BOSS、摆摊交易，再加上农场种菜、河边钓鱼、小屋装扮。不魔改、原汁原味，当年一起熬夜的那批人，该回来了。</p>
+        <div class="lh-badges">
+          <span>PC 端游</span><span>原汁原味</span><span>Q 萌画风</span><span>自由转职</span><span>生活玩法</span><span>约会配对</span>
+        </div>
+        <div class="lh-cd-label">距 12.10 公测（暂定）</div>
+        <div class="lh-cd" id="lunaCd">
+          <div class="lh-unit"><b id="lcdD">--</b><i>天</i></div>
+          <div class="lh-unit"><b id="lcdH">--</b><i>时</i></div>
+          <div class="lh-unit"><b id="lcdM">--</b><i>分</i></div>
+          <div class="lh-unit"><b id="lcdS">--</b><i>秒</i></div>
+        </div>
+        <div class="lh-cta">
+          <button class="lh-btn" onclick="copyWechat('露娜2：拾光之约')">预约公测 · 领预约礼包</button>
+          <button class="lh-btn2" onclick="document.getElementById('lunaShots').scrollIntoView({block:'center'})">先看游戏画面</button>
+        </div>
+      </div>
+      <div class="lh-art">
+        <img src="assets/luna-hero.webp" alt="露娜2：拾光之约 宣传图" loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <div class="luna-feats">
+      <div class="luna-feat"><img src="assets/luna-f1.webp" alt="社交满格：家族温暖、亲密配对、多重社交" loading="lazy" decoding="async"></div>
+      <div class="luna-feat"><img src="assets/luna-f2.webp" alt="自由转职：技能自由、转职丰富" loading="lazy" decoding="async"></div>
+      <div class="luna-feat"><img src="assets/luna-f3.webp" alt="超萌可爱：画风Q萌，重温青春印象" loading="lazy" decoding="async"></div>
+      <div class="luna-feat"><img src="assets/luna-f4.webp" alt="乐享欢闹：超多玩法自由选择" loading="lazy" decoding="async"></div>
+    </div>
+
+    <div class="luna-shots" id="lunaShots">
+      <div class="luna-shot"><img src="assets/luna-s1.webp" alt="阿克勒平原场景" loading="lazy" decoding="async"><span>阿克勒平原</span></div>
+      <div class="luna-shot"><img src="assets/luna-s2.webp" alt="技能学习与加点界面" loading="lazy" decoding="async"><span>技能加点 · 自由养成</span></div>
+      <div class="luna-shot"><img src="assets/luna-s3.webp" alt="约会配对界面" loading="lazy" decoding="async"><span>约会配对 · 1:1</span></div>
+    </div>
+
+    <p class="luna-note">游戏画面与宣传图来自官方素材；公测时间以官方最终公告为准，预约后客服第一时间通知开服。</p>
+  </div>
+
+  <script>
+  (function(){
+    var target = Date.parse('2026-12-10T00:00:00+08:00');
+    var dD = document.getElementById('lcdD'), dH = document.getElementById('lcdH'),
+        dM = document.getElementById('lcdM'), dS = document.getElementById('lcdS');
+    function pad(n){ return n < 10 ? '0' + n : '' + n; }
+    function tick(){
+      var left = target - Date.now();
+      if(left < 0) left = 0;
+      var s = Math.floor(left / 1000);
+      dD.textContent = Math.floor(s / 86400);
+      dH.textContent = pad(Math.floor(s % 86400 / 3600));
+      dM.textContent = pad(Math.floor(s % 3600 / 60));
+      dS.textContent = pad(s % 60);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+  </script>
+</section>
+<!--LUNA2-END-->
 
 <!--LUCK-START-->
 <!-- ===== 今日幸运游戏抽签 ===== -->
@@ -2653,6 +2864,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
     <button class="filter-chip" data-game="桃园将帅录" onclick="setGameFilter(this)">桃园将帅录</button>
     <button class="filter-chip" data-game="小小屠龙" onclick="setGameFilter(this)">小小屠龙</button>
     <button class="filter-chip" data-game="精灵永恒" onclick="setGameFilter(this)">精灵永恒</button>
+    <button class="filter-chip" data-game="露娜2" onclick="setGameFilter(this)">露娜2</button>
   </div>
   <div class="search-meta">
     <span id="resultCount"></span>
@@ -3079,6 +3291,19 @@ function openKuaishou(e){
 // ===== 攻略文章数据 =====
 // full: 展开全文的分节内容；src: 来源（公众号原文）
 var ARTICLES = [
+  // ---------- 11-09 新增：露娜2 公测 ----------
+  {game:'露娜2：拾光之约', tag:'新游', title:'12.10 公测｜十六年后重回蓝色大陆，露娜2 预约与新手上路', date:'2026-11-09',
+   summary:'老 LUNA 回来了：三职业起步、自由转职、摆摊交易，加上农场钓鱼小屋和约会配对。公测前先预约，开服第一天别乱花钱。',
+   full:[
+     {h:'一、这次回来的是什么', p:'《露娜2：拾光之约》是被老玩家叫作「露娜2」的那款 LUNA 端游的正统回归，PC 端作品，暂定 12 月 10 日公测。世界观还是那片蓝色大陆：从阿克勒平原出发，穿过阿克勒港口，一路到黑暗丛林。Q 萌画风、二头身角色、宠物与时装，这些标志性的东西都在——这次主打的就是「原汁原味」，不魔改、不重构成另一个游戏。'},
+     {h:'二、三职业起步，转职才是开始', p:'创建角色先选种族（人类 / 精灵），再选战士、魔法师、刺客三大基础职业。到等级后去职业管理人处接转职任务，进入更细分的成长线，比如法师可以走修士方向。技能点在前中期是紧的，别想着什么都点，先把一条主输出线拉满，剩下的点保命和机动。转职后等级不清零，已学技能保留，所以前期方向选错不用推倒重来，真正决定体验的是技能点怎么分配。'},
+     {h:'三、生活玩法才是这游戏的灵魂', p:'很多游戏把生活玩法当配菜，LUNA 是当主菜做的。农场可以开田、种菜、浇水、收获；河边找那只猫渔夫甩竿，钓上来的东西经常出人意料；小屋能布置，亲密度够了还有专属称号；主城摆摊可以挂货卖给别的玩家，价格自己定。再加上表情动作、社交互动和 1:1 约会配对，这些才是当年让人留在游戏里到天亮的原因。想打金的话，摆摊低买高卖是一条稳定路子。'},
+     {h:'四、PC 端的手感', p:'键鼠操作，技能栏、面板、背包都是端游那套熟悉的布局，挂机辅助也保留了——刷材料的时候不用一直盯着屏幕。画面按现在的分辨率做了高清化，但没动美术底子，老玩家一眼就能认出这是 LUNA。'},
+     {h:'五、12.10 之前该做的三件事', p:'第一，先把预约做掉。预约通道会发预约限定头饰、宠物礼包和一批养成资源，开服直接助力起步，这一步不花时间但收益最实在。第二，想好第一个号玩什么：想单刷效率高选刺客，想组队好找队选战士，想后期输出爆炸选法师。第三，找个固定队或行会，LUNA 的副本和野外 BOSS 都吃配合，散人开荒会明显吃力。'},
+     {h:'六、开服第一天别做的三件事', p:'别一上线就埋头刷怪——先把主线、转职、背包和摆摊功能开出来，这些是后面所有玩法的入口。别把初期资源全砸在第一把武器上，过渡装寿命很短，留着等真正的紫装。别急着追等级，这游戏的节奏本来就不卷，把生活玩法玩明白反而更接近它原本的调性。'},
+     {h:'写在最后', p:'十六年前那批在网咖里组队刷史莱姆的人，现在多半已经上班了。LUNA 这次回来，卖的其实不是数值，是那段时光。慢慢玩，别急。'}
+   ],
+   src:{name:'官方素材 · 露娜2：拾光之约'}},
   // ---------- 11-09 新增：冰雪 BOSS 场次 ----------
   {game:'小小屠龙·冰雪复古', tag:'冰雪', title:'蹲一晚 BOSS 空手而归？先分清三种场面', date:'2026-11-09',
    summary:'BOSS 是场合不是关卡：到场、出力、守规矩，三件做到了，装备差一点也能分到东西。',
