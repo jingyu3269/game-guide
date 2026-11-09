@@ -2460,16 +2460,20 @@ html.poster-open,html.poster-open body{overflow:hidden}
 .lh-art{position:relative;min-height:100%;overflow:hidden}
 .lh-art img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
-  filter:saturate(.94) brightness(.97);
 }
 .lh-art::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:34%;z-index:2;pointer-events:none;
-  width:52%;
-  background:linear-gradient(to right,#3A7DA1 0%,rgba(58,125,161,.86) 26%,rgba(58,125,161,.38) 62%,rgba(58,125,161,0) 100%);
+  content:'';position:absolute;left:0;top:0;bottom:0;z-index:2;pointer-events:none;
+  width:28%;
+  background:linear-gradient(to right,
+    #3A7DA1 0%,
+    rgba(74,138,170,.94) 26%,
+    rgba(104,164,192,.70) 52%,
+    rgba(150,200,222,.32) 78%,
+    rgba(186,222,238,0) 100%);
 }
 .lh-art::after{
   content:'';position:absolute;inset:0;z-index:1;
-  background:rgba(58,125,161,.14);
+  background:rgba(58,125,161,.05);
 }
 .luna-feats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:20px}
 .luna-feat{
@@ -2499,12 +2503,12 @@ html.poster-open,html.poster-open body{overflow:hidden}
 .luna-jump:active{transform:translateY(2px)}
 @media (max-width:860px){
   .luna-hero{grid-template-columns:1fr}
-  .lh-art{order:-1;min-height:190px}
-  .lh-art img{object-position:center 52%}
+  .lh-art{order:-1;min-height:0;aspect-ratio:940/764}
+  .lh-art img{object-position:center top}
   .lh-art::before{display:none}
   .lh-art::after{
     z-index:2;
-    background:rgba(58,125,161,.16);
+    background:linear-gradient(180deg,rgba(58,125,161,0) 0%,rgba(58,125,161,0) 52%,rgba(58,125,161,.55) 82%,#3A7DA1 100%);
   }
   .lh-body{padding:16px 20px 28px}
   .lh-title{font-size:27px}
@@ -2720,7 +2724,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
         </div>
       </div>
       <div class="lh-art">
-        <img src="assets/luna-hero.webp" alt="露娜2：拾光之约 宣传图" loading="lazy" decoding="async">
+        <img src="assets/luna-hero.webp" alt="露娜2：拾光之约 官方水彩宣传图" loading="lazy" decoding="async">
       </div>
     </div>
 
