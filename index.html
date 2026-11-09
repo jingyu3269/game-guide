@@ -2520,82 +2520,6 @@ html.poster-open,html.poster-open body{overflow:hidden}
   .luna-shot img{aspect-ratio:16/10}
 }
 /* ===== 露娜2 推广 END ===== */
-/* ===== VIEWS-TABS START ===== */
-/* 视图页签条 */
-.top-stick{position:sticky;top:0;z-index:100}
-.view-tabs{
-  display:flex;gap:8px;align-items:stretch;justify-content:center;
-  padding:9px 14px calc(9px);
-  background:rgba(255,246,233,.94);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
-.vt-btn{
-  flex:1;max-width:170px;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  padding:9px 6px;border-radius:999px;
-  border:1.5px solid var(--line);
-  background:#fff;color:#6b5a52;
-  font:inherit;font-size:13.5px;font-weight:700;letter-spacing:.5px;
-  cursor:pointer;transition:all .18s;
-  -webkit-tap-highlight-color:transparent;
-}
-.vt-btn .vt-dot{font-size:15px;line-height:1}
-.vt-btn.on{
-  background:linear-gradient(135deg,#ff5f9e,#ff8a4c);
-  border-color:transparent;color:#fff;
-  box-shadow:0 6px 16px rgba(255,95,158,.34);
-}
-.vt-btn:not(.on):active{transform:scale(.95)}
-/* 视图容器 */
-.view{display:none}
-.view.active{display:block;animation:viewIn .32s ease both}
-@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-/* 首页预约入口横条 */
-.luna-teaser{
-  position:relative;overflow:hidden;
-  border-radius:20px;
-  background:linear-gradient(120deg,#2A1850 0%,#3D2A72 55%,#1B0F2E 100%);
-  color:#fff;padding:18px 20px;
-  display:flex;align-items:center;gap:14px;
-  box-shadow:0 14px 34px rgba(42,24,80,.34);
-  cursor:pointer;transition:transform .2s;
-}
-.luna-teaser:active{transform:scale(.98)}
-.lt-star{font-size:30px;line-height:1;filter:drop-shadow(0 0 8px rgba(255,209,102,.5))}
-.lt-body{flex:1;min-width:0;display:block}
-.lt-t1{display:block;font-size:15.5px;font-weight:800;letter-spacing:.5px}
-.lt-t1 em{font-style:normal;color:#FFD166}
-.lt-t2{display:block;margin-top:5px;font-size:12px;color:rgba(255,255,255,.72)}
-.lt-go-mini{display:none}
-.lt-go{
-  flex:0 0 auto;padding:9px 14px;border-radius:999px;
-  background:linear-gradient(135deg,#FFD166,#FF9A3C);
-  color:#5a3200;font-size:13px;font-weight:800;white-space:nowrap;
-}
-/* 页脚页签链接 */
-.foot-map{
-  display:flex;justify-content:center;gap:6px;flex-wrap:wrap;
-  margin:2px 0 14px;
-}
-.foot-map button{
-  border:0;background:none;color:#a08b80;font:inherit;font-size:12.5px;font-weight:700;
-  cursor:pointer;padding:4px 8px;border-radius:8px;-webkit-tap-highlight-color:transparent;
-}
-.foot-map button:active{background:rgba(0,0,0,.06)}
-.foot-map i{color:#dccfc6;font-style:normal;font-size:11px;align-self:center}
-@media (max-width:560px){
-  .view-tabs{padding:8px 10px}
-  .vt-btn{font-size:12.5px;padding:8px 4px}
-  .luna-teaser{padding:14px 14px;border-radius:17px;gap:10px}
-  .lt-star{font-size:25px}
-  .lt-t1{font-size:14px}
-  .lt-t2{font-size:11.5px}
-  .lt-go{padding:8px 11px;font-size:12.5px}
-  .lt-go-full{display:none}
-  .lt-go-mini{display:inline}
-}
-/* ===== VIEWS-TABS END ===== */
 </style>
 </head>
 <body>
@@ -2628,8 +2552,8 @@ html.poster-open,html.poster-open body{overflow:hidden}
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
       复制客服微信
     </button>
-    <button class="btn-ghost" onclick="switchView('articles')">搜攻略</button>
-    <button class="btn-ghost luna-jump" onclick="switchView('yuyue')">🌙 露娜2 12.10 公测</button>
+    <button class="btn-ghost" onclick="document.getElementById('articles').scrollIntoView()">搜攻略</button>
+    <button class="btn-ghost luna-jump" onclick="document.getElementById('luna2').scrollIntoView()">🌙 露娜2 12.10 公测</button>
   </div>
   <div class="follow-card">
     <div class="follow-txt">
@@ -3962,7 +3886,7 @@ function initDeepLink(){
     markRead(articleKey(a), card);
     // 展开后卡片很高，从标题处开始读；减掉吸顶导航的高度。
     // 这里直接定位而不是平滑滚动：从分享链接进来时，让用户立刻停在文章上
-    var y = card.getBoundingClientRect().top + window.pageYOffset - 124;
+    var y = card.getBoundingClientRect().top + window.pageYOffset - 78;
     var root = document.documentElement;
     var oldBehavior = root.style.scrollBehavior;
     root.style.scrollBehavior = 'auto';
@@ -5373,129 +5297,5 @@ function hideWxShareTip(){
 }
 </script>
 <!--SHARE-SHEET-JS-END-->
-<!--VIEWS-START-->
-<script>
-/* ===== 三视图路由：首页 / 新游预约 / 攻略库 ===== */
-(function(){
-  var NAV_HTML = '' +
-    '<button class="vt-btn on" data-view="home" onclick="switchView(\'home\')"><span class="vt-dot">🏠</span>首页</button>' +
-    '<button class="vt-btn" data-view="yuyue" onclick="switchView(\'yuyue\')"><span class="vt-dot">🌙</span>新游预约</button>' +
-    '<button class="vt-btn" data-view="articles" onclick="switchView(\'articles\')"><span class="vt-dot">📚</span>攻略库</button>';
-
-  var TITLES = {
-    home:    '精品手游攻略站 - 海量攻略 · 客服直达',
-    yuyue:   '露娜2：拾光之约 · 12.10 公测预约 | 精品手游攻略站',
-    articles:'攻略文章库 | 精品手游攻略站'
-  };
-  var booting = true;
-
-  // 页签条包住原导航，一起吸顶
-  var nav = document.querySelector('.nav');
-  var stick = document.createElement('div');
-  stick.className = 'top-stick';
-  document.body.insertBefore(stick, nav);
-  stick.appendChild(nav);
-  var tabs = document.createElement('div');
-  tabs.className = 'view-tabs';
-  tabs.innerHTML = NAV_HTML;
-  stick.appendChild(tabs);
-
-  // 三个视图容器
-  var home = document.createElement('div');   home.className = 'view';   home.id = 'view-home';
-  var yuyue = document.createElement('div');  yuyue.className = 'view';  yuyue.id = 'view-yuyue';
-  var arts = document.createElement('div');   arts.className = 'view';   arts.id = 'view-articles';
-  var anchor = document.querySelector('.footer');
-  document.body.insertBefore(home, anchor);
-  document.body.insertBefore(yuyue, anchor);
-  document.body.insertBefore(arts, anchor);
-
-  // 分流各区块
-  var put = function(sel, box){
-    var el = document.querySelector(sel);
-    if(el) box.appendChild(el);
-  };
-  put('header.hero', home);
-  put('#games', home);
-  put('#luck', home);
-  put('#service', home);
-  put('#luna2', yuyue);
-  put('#articles', arts);
-  put('#faq', home);
-
-  // 首页：客服区前插预约入口横条
-  var teaser = document.createElement('section');
-  teaser.className = 'section';
-  teaser.innerHTML = '<div class="luna-teaser" onclick="switchView(\'yuyue\')" role="button" tabindex="0">' +
-    '<span class="lt-star">🌙</span>' +
-    '<span class="lt-body"><span class="lt-t1">《露娜2：拾光之约》 <em>12.10 公测预约中</em></span>' +
-    '<span class="lt-t2">十六年经典回归 · 预约领限定头饰 + 宠物礼包</span></span>' +
-    '<span class="lt-go"><span class="lt-go-full">进入预约页 →</span><span class="lt-go-mini">预约 →</span></span></div>';
-  var svcEl = document.getElementById('service');
-  if(svcEl) home.insertBefore(teaser, svcEl); else home.appendChild(teaser);
-
-  // 页脚页签链接
-  var foot = document.querySelector('.footer');
-  if(foot){
-    var fm = document.createElement('div');
-    fm.className = 'foot-map';
-    fm.innerHTML = '<button onclick="switchView(\'home\')">首页</button><i>·</i>' +
-      '<button onclick="switchView(\'yuyue\')">新游预约</button><i>·</i>' +
-      '<button onclick="switchView(\'articles\')">攻略库</button>';
-    foot.insertBefore(fm, foot.firstChild);
-  }
-
-  function viewFromHash(){
-    var m = location.hash.match(/^#\/(home|yuyue|articles)\b/);
-    return m ? m[1] : '';
-  }
-  function currentView(){
-    var v = viewFromHash();
-    if(v) return v;
-    // 文章深链 ?a=xxx 直达攻略库
-    if(location.search.match(/[?&]a=/)) return 'articles';
-    return 'home';
-  }
-  window.switchView = function(name, keepHash){
-    if(!TITLES[name]) name = 'home';
-    var boxes = {home:home, yuyue:yuyue, articles:arts};
-    Object.keys(boxes).forEach(function(k){
-      boxes[k].classList.toggle('active', k === name);
-    });
-    var btns = tabs.querySelectorAll('.vt-btn');
-    for(var i = 0; i < btns.length; i++){
-      btns[i].classList.toggle('on', btns[i].getAttribute('data-view') === name);
-    }
-    // 隐藏期间 IntersectionObserver 不会触发，切页时补一次强制浮现
-    // （首次加载不强制，保留原来的滚动浮现节奏，交给 sweep/IO 处理）
-    if(!booting){
-      var secs = boxes[name].querySelectorAll('section.section');
-      for(var j = 0; j < secs.length; j++) secs[j].classList.add('in');
-    }
-
-    window.scrollTo(0, 0);
-    document.title = TITLES[name];
-    if(!booting && !keepHash){
-      try{
-        var url = location.pathname + location.search +
-          (name === 'home' ? '' : '#/' + name);
-        history.replaceState(null, '', url);
-      }catch(e){}
-    }
-    if(window.SFX && SFX.tick) try{ SFX.tick(); }catch(e){}
-    if(window.sweep) try{ sweep(); }catch(e){}
-  };
-
-  window.addEventListener('hashchange', function(){
-    var v = viewFromHash();
-    if(v && !booting) switchView(v);
-  });
-
-  // 初始视图
-  var init = currentView();
-  switchView(init, true);
-  booting = false;
-})();
-</script>
-<!--VIEWS-END-->
 </body>
 </html>
