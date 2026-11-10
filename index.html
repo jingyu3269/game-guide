@@ -2528,6 +2528,73 @@ html.poster-open,html.poster-open body{overflow:hidden}
   .luna-shot img{aspect-ratio:16/10}
 }
 /* ===== 露娜2 推广 END ===== */
+
+/* ========== 大屏加宽（≥1200px） ========== */
+@media (min-width:1200px){
+  .hero-img-wrap{max-width:780px}
+  .game-grid{max-width:960px}
+  .svc-card{max-width:680px}
+  .article-list{max-width:900px}
+  .faq-list{max-width:840px}
+  .nr-search,.nr-chips{max-width:600px}
+}
+
+/* ========== 超宽屏再放宽（≥1500px） ========== */
+@media (min-width:1500px){
+  .hero-img-wrap{max-width:880px}
+  .game-grid{grid-template-columns:repeat(4,1fr);max-width:1280px;gap:22px}
+  .article-list{max-width:1000px}
+  .faq-list{max-width:900px}
+  .svc-card{max-width:740px}
+  .nr-search,.nr-chips{max-width:640px}
+  .luck-card{max-width:620px}
+}
+
+/* ========== 两侧装饰栏（≥1280px 显示） ========== */
+.side-rail{display:none}
+@media (min-width:1280px){
+  .side-rail{
+    display:flex;flex-direction:column;align-items:center;gap:16px;
+    position:fixed;top:50%;transform:translateY(-50%);
+    z-index:60;
+  }
+  .side-rail.left{left:24px}
+  .side-rail.right{right:24px}
+  .sr-brand{
+    writing-mode:vertical-rl;letter-spacing:5px;
+    font-weight:900;font-size:13px;color:#B85C8F;
+    background:rgba(255,255,255,.8);
+    border:2px dashed #FFB8D2;border-radius:999px;
+    padding:16px 9px;
+    box-shadow:0 6px 18px rgba(255,143,184,.18);
+  }
+  .sr-stickers{display:flex;flex-direction:column;gap:12px;font-size:22px}
+  .sr-stickers span{
+    display:block;
+    filter:drop-shadow(0 3px 5px rgba(0,0,0,.15));
+    animation:acFloat 3.2s ease-in-out infinite;
+  }
+  .sr-stickers span:nth-child(2){animation-delay:.8s;font-size:18px}
+  .sr-stickers span:nth-child(3){animation-delay:1.6s;font-size:25px}
+  .sr-nav{
+    display:flex;flex-direction:column;gap:4px;
+    background:rgba(255,255,255,.86);
+    border:2px solid #FFD3E2;border-radius:20px;padding:10px 8px;
+    box-shadow:0 6px 18px rgba(255,143,184,.16);
+  }
+  .sr-nav button{
+    border:none;background:none;cursor:pointer;
+    font-family:inherit;font-weight:800;font-size:13px;color:#8A5A72;
+    min-width:78px;padding:9px 10px;border-radius:13px;
+    white-space:nowrap;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    transition:background .15s,color .15s;
+  }
+  .sr-nav button .e{font-size:17px;line-height:1.2}
+  .sr-nav button:hover{background:#FFEAF2;color:#E0507F}
+  .sr-nav button:active{transform:scale(.94)}
+}
+
 </style>
 </head>
 <body>
@@ -3045,6 +3112,22 @@ html.poster-open,html.poster-open body{overflow:hidden}
 <!-- 花瓣飘落容器 -->
 <div class="petal-container" id="petalContainer"></div>
 
+<!-- 大屏两侧装饰/快捷导航（窄屏自动隐藏） -->
+<div class="side-rail left" aria-hidden="true">
+  <div class="sr-brand">精灵永恒攻略站</div>
+  <div class="sr-stickers"><span>🌸</span><span>🧚</span><span>🌙</span></div>
+</div>
+<div class="side-rail right">
+  <nav class="sr-nav" aria-label="快捷导航">
+    <button onclick="srGo('games')"><span class="e">🎮</span>手游库</button>
+    <button onclick="srGo('luna2')"><span class="e">🌙</span>新游预约</button>
+    <button onclick="srGo('articles')"><span class="e">📚</span>攻略库</button>
+    <button onclick="srGo('faq')"><span class="e">❓</span>常见问题</button>
+    <button onclick="srGo('service')"><span class="e">🎁</span>客服福利</button>
+  </nav>
+  <div class="sr-stickers"><span>🐉</span><span>🌸</span></div>
+</div>
+
 <!--SHARE-SHEET-START-->
 <div class="share-layer" id="shareLayer" aria-hidden="true" onclick="if(event.target===this)closeShareSheet()">
   <div class="share-card" role="dialog" aria-modal="true" aria-label="分享这个网站">
@@ -3145,6 +3228,12 @@ html.poster-open,html.poster-open body{overflow:hidden}
 <script>
 var WECHAT_ID = 'LYLOVEZLL1314999';
 
+function srGo(id){
+  var t = document.getElementById(id);
+  if(!t) return;
+  var y = t.getBoundingClientRect().top + window.pageYOffset - 78;
+  window.scrollTo({top: y > 0 ? y : 0, behavior:'smooth'});
+}
 function copyWechat(gameName){
   var text = WECHAT_ID;
   // 尝试写入剪贴板
