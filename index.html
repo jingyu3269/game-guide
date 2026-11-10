@@ -452,17 +452,32 @@ button{font-family:inherit;cursor:pointer;border:none}
 .gc-violet{--g1:#B388FF;--g2:#7C4DFF;--acc:#6A3CE8;--shadow:rgba(124,77,255,.42)}
 .gc-gold{--bullet:#7A3E00;--g1:#FFC61A;--g2:#F08500;--acc:#B85E00;--shadow:rgba(240,133,0,.45)}
 .gc-green{--g1:#4FE0B0;--g2:#0E9C74;--acc:#0B7A5B;--shadow:rgba(14,156,116,.42)}
+/* 封面：整张图完整显示（美术字+人物都不裁），多出来的空间用同图放大模糊垫底 */
 .game-cover{
-  height:118px;border-radius:16px;overflow:hidden;
-  position:relative;
+  aspect-ratio:2.2/1;border-radius:16px;overflow:hidden;
+  position:relative;background:#1B1526;
   border:3px solid rgba(255,255,255,.9);
   box-shadow:0 5px 14px rgba(0,0,0,.22);
 }
-.game-cover img{
-  width:100%;height:100%;object-fit:cover;object-position:center;display:block;
+.game-cover::before{
+  content:"";position:absolute;inset:-32px;z-index:0;
+  background-image:var(--cv,none);
+  background-size:cover;background-position:center;
+  filter:blur(30px) saturate(1.45) brightness(.95);
+  transform:scale(1.08);
+  pointer-events:none;
 }
-.game-card:nth-child(3) .game-cover img{object-position:center 16%}
-.game-card:nth-child(4) .game-cover img{object-position:center}
+.game-cover img{
+  position:relative;z-index:1;
+  width:100%;height:100%;object-fit:contain;object-position:center;display:block;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.32));
+}
+/* 模糊垫底取自本卡自己的封面图（顺序与 .game-grid 里的卡片一致） */
+.game-grid .game-card:nth-child(1) .game-cover{--cv:url('assets/cover-taoyuan.webp')}
+.game-grid .game-card:nth-child(2) .game-cover{--cv:url('assets/cover-legend.webp')}
+.game-grid .game-card:nth-child(3) .game-cover{--cv:url('assets/cover-jingling2.webp')}
+.game-grid .game-card:nth-child(4) .game-cover{--cv:url('assets/luna-card.webp')}
+.game-grid .game-card:nth-child(5) .game-cover{--cv:url('assets/cover-liancheng.webp')}
 .game-body{padding:12px 8px 4px;position:relative;z-index:1}
 .game-name{
   font-size:18px;font-weight:900;color:#fff;
