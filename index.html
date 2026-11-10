@@ -450,6 +450,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 .gc-blue{--g1:#54C7FF;--g2:#2E7BFF;--acc:#1E62E0;--shadow:rgba(46,123,255,.4)}
 .gc-violet{--g1:#B388FF;--g2:#7C4DFF;--acc:#6A3CE8;--shadow:rgba(124,77,255,.42)}
 .gc-gold{--bullet:#7A3E00;--g1:#FFC61A;--g2:#F08500;--acc:#B85E00;--shadow:rgba(240,133,0,.45)}
+.gc-green{--g1:#4FE0B0;--g2:#0E9C74;--acc:#0B7A5B;--shadow:rgba(14,156,116,.42)}
 .game-cover{
   height:118px;border-radius:16px;overflow:hidden;
   position:relative;
@@ -2532,7 +2533,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
 /* ========== 大屏加宽（≥1200px） ========== */
 @media (min-width:1200px){
   .hero-img-wrap{max-width:780px}
-  .game-grid{max-width:960px}
+  .game-grid{grid-template-columns:repeat(3,1fr);max-width:1100px}
   .svc-card{max-width:680px}
   .article-list{max-width:900px}
   .faq-list{max-width:840px}
@@ -2542,7 +2543,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
 /* ========== 超宽屏再放宽（≥1500px） ========== */
 @media (min-width:1500px){
   .hero-img-wrap{max-width:880px}
-  .game-grid{grid-template-columns:repeat(4,1fr);max-width:1280px;gap:22px}
+  .game-grid{grid-template-columns:repeat(5,1fr);max-width:1440px;gap:20px}
   .article-list{max-width:1000px}
   .faq-list{max-width:900px}
   .svc-card{max-width:740px}
@@ -2756,6 +2757,30 @@ html.poster-open,html.poster-open body{overflow:hidden}
           <li>公测专属礼包客服直接发，开服即领</li>
         </ul>
         <button class="game-btn" onclick="copyWechat('露娜2：拾光之约')">🎁 预约领公测福利</button>
+      </div>
+    </div>
+
+    <!-- 英雄连城 -->
+    <div class="game-card gc-green">
+      <span class="gc-sticker">🏹</span>
+      <div class="game-cover">
+        <img src="assets/cover-liancheng.webp" alt="英雄连城" loading="lazy" decoding="async">
+      </div>
+      <div class="game-body">
+        <div class="game-name">英雄连城</div>
+        <div class="game-tags">
+          <span class="game-tag hot">经典回归</span>
+          <span class="game-tag">奇迹情怀</span>
+          <span class="game-tag">打宝PK</span>
+        </div>
+        <p class="game-desc">情怀向经典回归，只为奇迹老玩家而生，装备靠打、自由交易、行会攻城。</p>
+        <ul class="game-tips">
+          <li>主线优先，等级决定进图与掉落门槛</li>
+          <li>装备以野外和副本掉落为主，先凑套装</li>
+          <li>交易行低买高卖，前期材料最抢手</li>
+          <li>攻城战跟行会走，散人别单挑硬冲</li>
+        </ul>
+        <button class="game-btn" onclick="copyWechat('英雄连城')">🎁 领取下载与攻略</button>
       </div>
     </div>
 
