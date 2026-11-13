@@ -2597,6 +2597,43 @@ html.poster-open,html.poster-open body{overflow:hidden}
   .sr-nav button:active{transform:scale(.94)}
 }
 
+/* ========== 页脚访问统计 ========== */
+.foot-stats{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:8px;margin:12px auto 10px;max-width:520px;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .45s ease,transform .45s ease;
+}
+.foot-stats.on{opacity:1;transform:none}
+.foot-stat{
+  display:inline-flex;align-items:baseline;gap:5px;
+  padding:5px 13px;border-radius:999px;
+  font-size:11.5px;font-weight:700;color:#9C8071;
+  background:rgba(255,255,255,.9);
+  border:2px solid #FFE3EE;
+  box-shadow:0 2px 0 #FFF0F6;
+  transition:transform .16s,box-shadow .16s;
+}
+.foot-stat b{
+  font-size:14px;font-weight:900;color:#F0578E;
+  letter-spacing:.4px;font-variant-numeric:tabular-nums;
+}
+.foot-stat i{font-style:normal;font-size:12px;line-height:1;opacity:.95}
+.foot-stats-link{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:2px;font-size:11px;color:#C0A99A;text-decoration:none;
+  border-bottom:1px dashed #E9D9CB;padding-bottom:1px;
+}
+.foot-stats-link:hover{color:#F0578E;border-bottom-color:#FFC2D9}
+/* 单篇阅读数 */
+.article-read{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-left:auto;font-size:11.5px;font-weight:800;
+  color:var(--acc);opacity:.72;letter-spacing:.3px;
+  font-variant-numeric:tabular-nums;
+}
+.article-read i{font-style:normal;font-size:11px;opacity:.85}
+
 </style>
 </head>
 <body>
@@ -3134,6 +3171,12 @@ html.poster-open,html.poster-open body{overflow:hidden}
     <svg class="fs-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5.4" r="2.9"/><circle cx="6" cy="12" r="2.9"/><circle cx="18" cy="18.6" r="2.9"/><path d="M8.7 10.6 15.3 7M8.7 13.4 15.3 17"/></svg>
     <span class="fs-text">分享这个网站</span>
   </button>
+  <div class="foot-stats" id="footStats" hidden aria-label="本站访问统计">
+    <span class="foot-stat"><i>👣</i>累计 <b id="stTotal">—</b> 次访问</span>
+    <span class="foot-stat"><i>🌤</i>今日 <b id="stToday">—</b> 次</span>
+    <span class="foot-stat"><i>💗</i>访客 <b id="stUv">—</b> 位</span>
+  </div>
+  <a class="foot-stats-link" href="stats.html">📊 站点数据</a>
   <p class="foot-note">本页面为推广信息聚合，游戏内容版权归各开发商所有</p>
 </footer>
 
@@ -4201,7 +4244,22 @@ function toggleArticle(btn){
   btn.querySelector('.toggle-text').textContent = open ? '收起全文' : '展开全文';
   btn.setAttribute('aria-expanded', open ? 'true' : 'false');
   // 点开就算读过：立刻打上「已读」标识并记住
-  if(open) markRead(key, card);
+  if(open){
+    markRead(key, card);
+    // 展开时给这篇记一次阅读，并把累计阅读数显示在按钮行
+    try{
+      var acts = card.querySelector('.article-actions');
+      if(acts && window.Stat){
+        var slot = acts.querySelector('.article-read');
+        if(!slot){
+          slot = document.createElement('span');
+          slot.className = 'article-read';
+          acts.appendChild(slot);
+        }
+        window.Stat.read(key, slot);
+      }
+    }catch(e){}
+  }
   // 手风琴：展开新的同时收起其它，避免整页被拉得过长
   if(open){
     var others = document.querySelectorAll('.article-card.open');
@@ -5526,5 +5584,120 @@ function hideWxShareTip(){
 }
 </script>
 <!--SHARE-SHEET-JS-END-->
+
+<!--STATS-START-->
+<script>
+/* ===== 访问统计：Abacus 公共计数 API =====
+   不写 Cookie、不采集 IP/设备/个人信息，只做「次数」累加。
+   计数命名空间用站点域名，避免和别人撞车。 */
+window.Stat = (function(){
+  var NS  = 'jingyu3269.github.io';
+  var API = 'https://abacus.jasoncameron.dev';
+  var TIMEOUT = 7000;
+  var cache = {};
+  var readDone = {};
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function todayKey(){
+    var d = new Date();
+    return 'd-' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+  }
+  // 和文章固定链接用的是同一套 hash（djb2 → base36）
+  function hashKey(s){
+    var h = 5381;
+    for (var i = 0; i < s.length; i++) h = (h * 33 + s.charCodeAt(i)) >>> 0;
+    return h.toString(36);
+  }
+  function fmt(n){
+    if (typeof n !== 'number') return '';
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  function req(kind, key){
+    var k = kind + '|' + key;
+    if (cache[k] !== undefined) return Promise.resolve(cache[k]);
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function(){ ctl.abort(); }, TIMEOUT) : null;
+    var url = API + '/' + kind + '/' + NS + '/' + encodeURIComponent(key);
+    return fetch(url, ctl ? { cache:'no-store', signal: ctl.signal } : { cache:'no-store' })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){
+        if (timer) clearTimeout(timer);
+        var v = (d && typeof d.value === 'number') ? d.value : null;
+        if (v !== null) cache[k] = v;
+        return v;
+      })
+      .catch(function(){
+        if (timer) clearTimeout(timer);
+        return null;
+      });
+  }
+  function countUp(el, to){
+    el.textContent = fmt(to);           // 先把真实数字写上，动画失败也不会显示 —
+    if (!window.requestAnimationFrame) return;
+    try{
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    }catch(e){}
+    var t0 = 0;
+    function step(ts){
+      if (!t0) t0 = ts;
+      var k = Math.min(1, (ts - t0) / 720);
+      el.textContent = fmt(Math.round(to * (1 - Math.pow(1 - k, 3))));
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function visitor(){
+    var seen = false;
+    try { seen = localStorage.getItem('jy_vid') === '1'; } catch(e){}
+    if (seen) return req('get', 'visitors');
+    return req('hit', 'visitors').then(function(v){
+      if (v !== null) { try { localStorage.setItem('jy_vid', '1'); } catch(e){} }
+      return v;
+    });
+  }
+
+  /* 页脚：累计访问 / 今日访问 / 独立访客 */
+  function initFoot(){
+    var box = document.getElementById('footStats');
+    if (!box || !window.fetch) return;
+    Promise.all([req('hit', 'views'), req('hit', todayKey()), visitor()]).then(function(r){
+      var pv = r[0], day = r[1], uv = r[2];
+      if (pv === null && day === null && uv === null) return;  // 接口挂了就保持隐藏，不留半截数字
+      var a = document.getElementById('stTotal'),
+          b = document.getElementById('stToday'),
+          c = document.getElementById('stUv');
+      if (pv !== null && a) countUp(a, pv);
+      if (day !== null && b) countUp(b, day);
+      if (uv !== null && c) countUp(c, uv);
+      box.hidden = false;
+      box.classList.add('on');
+    });
+  }
+
+  /* 单篇：展开时 +1，并把阅读数显示在按钮行右侧 */
+  function paintRead(slot, v){
+    if (!slot || typeof v !== 'number') return;
+    slot.innerHTML = '<i>👁</i>' + fmt(v) + ' 次阅读';
+  }
+  function readArticle(key, slot){
+    if (!key) return;
+    var id = 'a-' + hashKey(key);
+    if (readDone[id] !== undefined) return paintRead(slot, readDone[id]);
+    req('hit', id).then(function(v){
+      if (v === null) return;
+      readDone[id] = v;
+      paintRead(slot, v);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFoot);
+  } else {
+    initFoot();
+  }
+  return { read: readArticle, fmt: fmt, hash: hashKey, api: API, ns: NS, get: req };
+})();
+</script>
+<!--STATS-END-->
 </body>
 </html>
