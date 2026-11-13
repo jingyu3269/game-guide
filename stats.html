@@ -78,6 +78,13 @@ h1 span{color:var(--pink)}
   border-radius:14px;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer;
 }
 .more:hover{background:#FFF0F6}
+.refresh{
+  margin-left:auto;padding:3px 10px;border-radius:999px;cursor:pointer;
+  border:2px solid var(--line);background:#fff;color:var(--ink2);
+  font:inherit;font-size:11px;font-weight:700;
+}
+.refresh:hover{color:var(--pink);border-color:#FFD3E2}
+.tip{margin-top:8px;font-size:11px;color:#B7A597}
 .empty{padding:22px 0;text-align:center;color:#B7A597;font-size:12.5px}
 .foot{margin-top:18px;text-align:center;font-size:11.5px;color:#B7A597;line-height:1.9}
 @media (max-width:640px){
@@ -109,11 +116,12 @@ h1 span{color:var(--pink)}
   </section>
 
   <section class="panel">
-    <h2>文章阅读排行 <small id="rankNote"></small></h2>
+    <h2>文章阅读排行 <small id="rankNote"></small><button class="refresh" id="refresh" type="button">重新读取</button></h2>
     <ol class="rank" id="rank"><li class="empty">读取中…</li></ol>
     <button class="more" id="more" hidden></button>
   </section>
 
+  <p class="tip" id="tip">首次打开约 10~20 秒（接口限流），5 分钟内再打开直接走缓存</p>
   <p class="foot">
     最近刷新：<span id="ts">—</span><br>
     「阅读」统计的是展开全文的次数，同一篇重复展开会重复计入
@@ -137,7 +145,59 @@ function dayLabel(off){
   return (d.getMonth() + 1) + '/' + d.getDate();
 }
 
-/* 接口限流 30 次 / 10 秒 / IP：这里压到 ~3 次每秒，遇到 429 等 3.5 秒再试 */
+/* ---- DOM ---- */
+var days = [6, 5, 4, 3, 2, 1, 0];
+var total = ARTICLES.length;
+var rankEl = document.getElementById('rank');
+var moreEl = document.getElementById('more');
+var noteEl = document.getElementById('rankNote');
+var rows = [], shown = 12, done = 0;
+
+function renderRank(){
+  if (!rows.length) return;
+  var sorted = rows.slice().sort(function(a, b){ return b.v - a.v; });
+  var max = Math.max.apply(null, sorted.map(function(x){ return x.v; }).concat([1]));
+  var n = Math.min(shown, sorted.length);
+  var html = '';
+  for (var i = 0; i < n; i++){
+    var r = sorted[i];
+    var pct = Math.round(r.v / max * 100);
+    html += '<li class="row">' +
+      '<span class="no">' + (i + 1) + '</span>' +
+      '<div class="main">' +
+        '<div class="t"><span class="g" style="background:' + (COLORS[r.game] || '#8A7A6E') + '">' + r.game + '</span>' + r.title + '</div>' +
+        '<div class="track"><div class="fill" style="width:' + pct + '%"></div></div>' +
+      '</div>' +
+      '<span class="c">' + fmt(r.v) + '</span>' +
+    '</li>';
+  }
+  rankEl.innerHTML = html;
+  moreEl.hidden = sorted.length <= shown;
+  moreEl.textContent = '显示全部 ' + sorted.length + ' 篇';
+  noteEl.textContent = done < total ? '已读取 ' + done + '/' + total + ' 篇' : '共 ' + total + ' 篇';
+}
+moreEl.addEventListener('click', function(){ shown = total; renderRank(); });
+
+function drawOverview(views, visitors, vals){
+  document.getElementById('k-views').textContent = fmt(views);
+  document.getElementById('k-visitors').textContent = fmt(visitors);
+  document.getElementById('k-today').textContent = fmt(vals[6] || 0);
+  document.getElementById('k-yest').textContent = fmt(vals[5] || 0);
+  var max = Math.max.apply(null, vals.concat([1]));
+  var html = '';
+  for (var i = 0; i < days.length; i++){
+    var v = vals[i] || 0, h = v ? Math.max(6, Math.round(v / max * 106)) : 3;
+    var bs = v ? 'height:' + h + 'px' : 'height:3px;opacity:.35';
+    html += '<div class="bar' + (days[i] === 0 ? ' today' : '') + '">' +
+              '<span class="v" style="' + (v ? '' : 'opacity:.45') + '">' + fmt(v) + '</span>' +
+              '<span class="b" style="' + bs + '"></span>' +
+              '<span class="d">' + (days[i] === 0 ? '今天' : dayLabel(days[i])) + '</span>' +
+            '</div>';
+  }
+  document.getElementById('chart').innerHTML = html;
+}
+
+/* ---- 接口限流：30 次 / 10 秒 / IP，这里约 3 次每秒，遇 429 退避重试 ---- */
 var GAP = 620, MAXRUN = 2, running = 0, lastStart = 0, holding = false;
 var queue = [];
 function pump(){
@@ -150,9 +210,7 @@ function pump(){
   }
   running++; lastStart = Date.now();
   var job = queue.shift();
-  job.done.then(function(){
-    running--; pump();
-  });
+  job.done.then(function(){ running--; pump(); });
   job.run();
 }
 function get(key){
@@ -179,72 +237,60 @@ function get(key){
   });
 }
 
-/* ---- 概览 + 近 7 天 ---- */
-var days = [6, 5, 4, 3, 2, 1, 0];
-Promise.all([get('views'), get('visitors')].concat(
-  days.map(function(d){ return get(dayKey(d)); })
-)).then(function(res){
-  document.getElementById('k-views').textContent = fmt(res[0]);
-  document.getElementById('k-visitors').textContent = fmt(res[1]);
-  var vals = res.slice(2);
-  document.getElementById('k-today').textContent = fmt(vals[6]);
-  document.getElementById('k-yest').textContent = fmt(vals[5]);
-  var max = Math.max.apply(null, vals.concat([1]));
-  var html = '';
-  for (var i = 0; i < days.length; i++){
-    var v = vals[i], h = v ? Math.max(6, Math.round(v / max * 106)) : 3;
-    var bs = v ? 'height:' + h + 'px' : 'height:3px;opacity:.35';
-    html += '<div class="bar' + (days[i] === 0 ? ' today' : '') + '">' +
-              '<span class="v" style="' + (v ? '' : 'opacity:.45') + '">' + fmt(v) + '</span>' +
-              '<span class="b" style="' + bs + '"></span>' +
-              '<span class="d">' + (days[i] === 0 ? '今天' : dayLabel(days[i])) + '</span>' +
-            '</div>';
-  }
-  document.getElementById('chart').innerHTML = html;
-});
-
-/* ---- 文章阅读：逐条出，边算边排 ---- */
-var rows = [], shown = 12, done = 0;
-var rankEl = document.getElementById('rank');
-var moreEl = document.getElementById('more');
-var total = ARTICLES.length;
-var noteEl = document.getElementById('rankNote');
-
-function renderRank(){
-  if (!rows.length) return;
-  var sorted = rows.slice().sort(function(a, b){ return b.v - a.v; });
-  var max = Math.max.apply(null, sorted.map(function(x){ return x.v; }).concat([1]));
-  var n = Math.min(shown, sorted.length);
-  var html = '';
-  for (var i = 0; i < n; i++){
-    var r = sorted[i];
-    var pct = Math.round(r.v / max * 100);
-    html += '<li class="row">' +
-      '<span class="no">' + (i + 1) + '</span>' +
-      '<div class="main">' +
-        '<div class="t"><span class="g" style="background:' + (COLORS[r.game] || '#8A7A6E') + '">' + r.game + '</span>' + r.title + '</div>' +
-        '<div class="track"><div class="fill" style="width:' + pct + '%"></div></div>' +
-      '</div>' +
-      '<span class="c">' + fmt(r.v) + '</span>' +
-    '</li>';
-  }
-  rankEl.innerHTML = html;
-  moreEl.hidden = sorted.length <= shown;
-  moreEl.textContent = '显示全部 ' + sorted.length + ' 篇';
-  noteEl.textContent = done < total ? '已读取 ' + done + '/' + total + ' 篇' : '共 ' + total + ' 篇';
+/* ---- 本地缓存：5 分钟内不重复请求 ---- */
+var CK = 'jy_stats_v1', TTL = 5 * 60 * 1000;
+function readCache(){
+  try{
+    var o = JSON.parse(localStorage.getItem(CK) || 'null');
+    if (o && o.t && Date.now() - o.t < TTL) return o.d;
+  }catch(e){}
+  return null;
+}
+function writeCache(d){
+  try{ localStorage.setItem(CK, JSON.stringify({ t: Date.now(), d: d })); }catch(e){}
 }
 
-moreEl.addEventListener('click', function(){ shown = total; renderRank(); });
-
-ARTICLES.forEach(function(a){
-  get(a.id).then(function(v){
-    rows.push({ game: a.game, title: a.title, v: v });
-    done++;
-    renderRank();
-  });
+document.getElementById('refresh').addEventListener('click', function(){
+  try{ localStorage.removeItem(CK); }catch(e){}
+  location.reload();
 });
 
-document.getElementById('ts').textContent = new Date().toLocaleString('zh-CN', { hour12: false });
+/* ---- 启动 ---- */
+var cached = readCache();
+if (cached){
+  drawOverview(cached.views || 0, cached.visitors || 0, cached.days || []);
+  rows = ARTICLES.map(function(a){
+    return { game: a.game, title: a.title, v: (cached.arts && cached.arts[a.id]) || 0 };
+  });
+  done = total;
+  renderRank();
+  document.getElementById('tip').textContent = '显示的是 5 分钟内的缓存，点「重新读取」拉最新';
+  document.getElementById('ts').textContent = new Date(cached.t).toLocaleString('zh-CN', { hour12: false });
+} else {
+  var store = { views: 0, visitors: 0, days: [], arts: {} };
+  Promise.all([get('views'), get('visitors')].concat(
+    days.map(function(d){ return get(dayKey(d)); })
+  )).then(function(res){
+    store.views = res[0];
+    store.visitors = res[1];
+    store.days = res.slice(2);
+    drawOverview(store.views, store.visitors, store.days);
+  });
+
+  ARTICLES.forEach(function(a){
+    get(a.id).then(function(v){
+      rows.push({ game: a.game, title: a.title, v: v });
+      store.arts[a.id] = v;
+      done++;
+      renderRank();
+      if (done === total){
+        writeCache(store);
+        document.getElementById('tip').textContent = '已是最新数据，5 分钟内再打开直接走缓存';
+      }
+    });
+  });
+  document.getElementById('ts').textContent = new Date().toLocaleString('zh-CN', { hour12: false });
+}
 </script>
 </body>
 </html>
