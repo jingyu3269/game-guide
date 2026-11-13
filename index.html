@@ -2599,26 +2599,24 @@ html.poster-open,html.poster-open body{overflow:hidden}
 
 /* ========== 页脚访问统计 ========== */
 .foot-stats{
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
-  gap:8px;margin:12px auto 10px;max-width:520px;
+  display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;
+  gap:2px;margin:14px auto 8px;max-width:100%;padding:0 12px;
+  font-size:12px;font-weight:600;color:#8E7A6B;letter-spacing:.2px;
+  white-space:nowrap;
   opacity:0;transform:translateY(6px);
   transition:opacity .45s ease,transform .45s ease;
 }
 .foot-stats.on{opacity:1;transform:none}
-.foot-stat{
-  display:inline-flex;align-items:baseline;gap:5px;
-  padding:5px 13px;border-radius:999px;
-  font-size:11.5px;font-weight:700;color:#9C8071;
-  background:rgba(255,255,255,.9);
-  border:2px solid #FFE3EE;
-  box-shadow:0 2px 0 #FFF0F6;
-  transition:transform .16s,box-shadow .16s;
+.foot-stats .fs-eye{
+  width:13.5px;height:13.5px;flex:0 0 auto;
+  color:#B8A192;margin-right:4px;
 }
-.foot-stat b{
-  font-size:14px;font-weight:900;color:#F0578E;
+.foot-stats .fs-sep{color:#D6C3B4;margin:0 2px;font-weight:400}
+.foot-stats b{
+  font-size:13.5px;font-weight:900;color:#F0578E;
   letter-spacing:.4px;font-variant-numeric:tabular-nums;
+  margin:0 2px;
 }
-.foot-stat i{font-style:normal;font-size:12px;line-height:1;opacity:.95}
 .foot-stats-link{
   display:inline-flex;align-items:center;gap:4px;
   margin-top:2px;font-size:11px;color:#C0A99A;text-decoration:none;
@@ -3172,9 +3170,10 @@ html.poster-open,html.poster-open body{overflow:hidden}
     <span class="fs-text">分享这个网站</span>
   </button>
   <div class="foot-stats" id="footStats" hidden aria-label="本站访问统计">
-    <span class="foot-stat"><i>👣</i>累计 <b id="stTotal">—</b> 次访问</span>
-    <span class="foot-stat"><i>🌤</i>今日 <b id="stToday">—</b> 次</span>
-    <span class="foot-stat"><i>💗</i>访客 <b id="stUv">—</b> 位</span>
+    <svg class="fs-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.4 12S5.9 5.6 12 5.6 21.6 12 21.6 12 18.1 18.4 12 18.4 2.4 12 2.4 12Z"/><circle cx="12" cy="12" r="3.1"/></svg>
+    <span>本站总访问量</span><b id="stTotal">—</b><span>次</span>
+    <span class="fs-sep">·</span>
+    <span>访客</span><b id="stUv">—</b><span>人</span>
   </div>
   <a class="foot-stats-link" href="stats.html">📊 站点数据</a>
   <p class="foot-note">本页面为推广信息聚合，游戏内容版权归各开发商所有</p>
@@ -5664,10 +5663,8 @@ window.Stat = (function(){
       var pv = r[0], day = r[1], uv = r[2];
       if (pv === null && day === null && uv === null) return;  // 接口挂了就保持隐藏，不留半截数字
       var a = document.getElementById('stTotal'),
-          b = document.getElementById('stToday'),
           c = document.getElementById('stUv');
       if (pv !== null && a) countUp(a, pv);
-      if (day !== null && b) countUp(b, day);
       if (uv !== null && c) countUp(c, uv);
       box.hidden = false;
       box.classList.add('on');
