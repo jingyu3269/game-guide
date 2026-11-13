@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>露娜2：拾光之约攻略合集 · 精品手游攻略站</title>
+<meta name="description" content="露娜2：拾光之约攻略共 4 篇：经典露娜IP · 奇幻冒险。首款萌世代官方正版，经典露娜IP回归：自由转职、社交满格，情侣配对与家族玩法原汁原味。12 月 10 日公测——开服前把…">
+<meta name="robots" content="index,follow">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ac:#3A7DA1;--ac-soft:#E7F2F8;--ink:#2D3A2E;--ink2:#6B7A6C;--line:#F0E4D6;--paper:#FFFBF3}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
+  color:var(--ink);line-height:1.65;
+  background:
+    radial-gradient(circle at 10% 0%, #E7F2F8 0%, transparent 42%),
+    radial-gradient(circle at 94% 4%, #FFF3E2 0%, transparent 40%),
+    var(--paper);
+  min-height:100vh;padding:0 14px 56px;
+}
+.wrap{max-width:760px;margin:0 auto}
+/* 顶栏 */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 2px;margin:0 -14px 14px;padding:10px 16px;
+  background:rgba(255,251,243,.92);backdrop-filter:blur(8px);
+  border-bottom:1.5px solid var(--line);
+}
+.back{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:12.5px;color:var(--ink2);text-decoration:none;
+  background:#fff;border:2px solid var(--line);border-radius:999px;
+  padding:4px 12px;font-weight:700;
+}
+.back:hover{color:var(--ac);border-color:var(--ac)}
+.brand{font-size:13px;font-weight:900;color:var(--ink);letter-spacing:.5px}
+.brand i{font-style:normal;color:var(--ac)}
+/* 头图：按原图比例展示，不裁切，避免切头 */
+.hero{
+  position:relative;border-radius:22px;overflow:hidden;
+  background:#1B1526;
+  border:3px solid #fff;box-shadow:0 12px 26px -10px rgba(80,50,30,.35);
+}
+.hero img{width:100%;height:auto;display:block}
+.hero-head{padding:14px 4px 0}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.chip{
+  display:inline-flex;align-items:center;height:22px;padding:0 10px;
+  font-size:11.5px;font-weight:800;border-radius:999px;
+  background:var(--ac-soft);color:var(--ac);
+  border:1.5px solid rgba(0,0,0,.04);
+}
+.chip.hot{background:#FF4444;color:#fff;border-color:#FF4444}
+.hero-head h1{font-size:25px;font-weight:900;letter-spacing:.5px;line-height:1.3}
+.tagline{font-size:12.5px;color:var(--ink2);margin-top:4px}
+/* 简介 & 信息卡 */
+.intro{
+  margin:16px 2px 14px;font-size:13.5px;color:var(--ink2);
+  background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;
+}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
+.fact{
+  background:#fff;border:2px solid var(--line);border-radius:14px;padding:11px 13px;
+  box-shadow:0 6px 16px -12px rgba(80,50,30,.3);
+}
+.fk{display:block;font-size:11px;color:var(--ink2);letter-spacing:.4px}
+.fv{font-size:13px;font-weight:800;color:var(--ac)}
+/* 文章列表 */
+.list h2{font-size:16px;display:flex;align-items:baseline;gap:8px}
+.list h2 small{font-size:11.5px;color:var(--ink2);font-weight:400}
+.entries{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.entry{
+  display:flex;align-items:stretch;gap:12px;
+  background:#fff;border:2px solid var(--line);border-radius:16px;
+  padding:13px 14px;text-decoration:none;color:var(--ink);
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.entry:hover{transform:translateY(-3px);border-color:var(--ac);box-shadow:0 10px 22px -14px var(--ac)}
+.e-date{
+  flex:0 0 52px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--ac-soft);border-radius:12px;color:var(--ac);
+}
+.e-date i{font-style:normal;font-size:14.5px;font-weight:900;font-variant-numeric:tabular-nums}
+.e-date em{font-style:normal;font-size:10px;opacity:.75}
+.e-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.e-meta{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--ink2)}
+.e-tag{
+  display:inline-flex;align-items:center;height:17px;padding:0 7px;
+  background:var(--ac);color:#fff;border-radius:6px;
+  font-size:10.5px;font-weight:800;line-height:1;
+}
+.e-title{font-size:14.5px;font-weight:800;line-height:1.45}
+.e-dek{
+  font-size:12px;color:var(--ink2);line-height:1.55;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.e-foot{font-size:10.5px;color:#B7A597;margin-top:2px}
+.e-arrow{
+  flex:0 0 auto;align-self:center;color:var(--ac);
+  font-weight:900;font-size:16px;opacity:.55;transition:transform .18s,opacity .18s;
+}
+.entry:hover .e-arrow{transform:translateX(3px);opacity:1}
+/* 底部 CTA & 页脚 */
+.cta{margin:26px 0 8px;text-align:center}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(160deg,var(--ac),var(--ac));
+  color:#fff;text-decoration:none;font-weight:900;font-size:14px;
+  padding:12px 26px;border-radius:999px;
+  box-shadow:0 8px 18px -6px var(--ac);
+}
+.cta-btn:hover{filter:brightness(1.06)}
+.cta p{margin-top:10px;font-size:11.5px;color:var(--ink2)}
+.foot{margin-top:22px;text-align:center;font-size:11.5px;color:#B7A597;line-height:1.9}
+.foot a{color:#B7A597;text-decoration:none;border-bottom:1px dashed #E0D2C4}
+.foot a:hover{color:var(--ac)}
+@media (max-width:560px){
+  .hero-head h1{font-size:21px}
+  .facts{grid-template-columns:1fr 1fr;gap:8px}
+  .fact{padding:9px 11px}
+  .fv{font-size:12px}
+  .e-dek{-webkit-line-clamp:2}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="back" href="../../">← 返回首页</a>
+  <span class="brand">精品<i>手游</i>攻略站</span>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <img src="../../assets/luna-card.webp" alt="露娜2：拾光之约" fetchpriority="high">
+  </section>
+  <div class="hero-head">
+    <div class="chips"><span class="chip hot">12.10 公测</span><span class="chip">PC端游</span><span class="chip">萌系MMO</span></div>
+    <h1>露娜2：拾光之约</h1>
+    <p class="tagline">经典露娜IP · 奇幻冒险 · 收录 4 篇攻略</p>
+  </div>
+
+  <p class="intro">首款萌世代官方正版，经典露娜IP回归：自由转职、社交满格，情侣配对与家族玩法原汁原味。12 月 10 日公测——开服前把魔附、摆摊、挂机与转职加点先看明白，上线直接照着做。</p>
+
+  <section class="facts"><div class="fact"><span class="fk">平台</span><span class="fv">PC 端游</span></div><div class="fact"><span class="fk">公测</span><span class="fv">2026.12.10（以官方公告为准）</span></div><div class="fact"><span class="fk">核心特色</span><span class="fv">自由转职 · 社交满格</span></div><div class="fact"><span class="fk">IP 背景</span><span class="fv">经典露娜正统续作</span></div></section>
+
+  <section class="list">
+    <h2>露娜2：拾光之约 · 全部 4 篇<small>点开任意一篇直接展开全文</small></h2>
+    <div class="entries">
+<a class="entry" href="../../index.html?a=a-15mhmlp">
+      <span class="e-date"><i>11.13</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">露娜2</span><span>2026-11-13</span></span>
+        <span class="e-title">那天晚上十二点，我还站在阿克勒港口</span>
+        <span class="e-dek">开服日的第一天：打史莱姆、钓一条鱼、收半块地的菜、副本打两趟、认识三个陌生人。12 月 10 日，蓝色大陆见。</span>
+        <span class="e-foot">约 2 分钟 · 7 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-1tdraei">
+      <span class="e-date"><i>11.12</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">露娜2</span><span>2026-11-12</span></span>
+        <span class="e-title">12 月 10 日进蓝色大陆前，先把这四笔账算清楚</span>
+        <span class="e-dek">时间账、选择账、情怀账、队友账——四笔算完再决定要不要回去。想找回一整块的晚上，就值得。</span>
+        <span class="e-foot">约 2 分钟 · 6 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-gbj5v3">
+      <span class="e-date"><i>11.10</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">露娜2</span><span>2026-11-10</span></span>
+        <span class="e-title">以为再也找不回来的东西，12 月 10 日原样还给你</span>
+        <span class="e-dek">蓝色大陆真的又开了：老地方一处没少，老玩法一条没丢，自由转职、40 级三转都在。12 月 10 日公测，这次不用再说&quot;你们先打&quot;。</span>
+        <span class="e-foot">约 2 分钟 · 6 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-tuppnk">
+      <span class="e-date"><i>11.10</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">露娜2</span><span>2026-11-10</span></span>
+        <span class="e-title">最近有人在悄悄清电脑硬盘，原因和《露娜 2：拾光之约》有关</span>
+        <span class="e-dek">十年没说话的公会群突然活了：有人问&quot;你当年哪个服&quot;，有人翻旧硬盘找截图，有人开始腾地方装游戏——答案在 12 月 10 日。</span>
+        <span class="e-foot">约 2 分钟 · 6 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+    </div>
+  </section>
+
+  <section class="cta">
+    <a class="cta-btn" href="../../">← 回首页看全部游戏与攻略</a>
+    <p>客服一对一发下载链接与专属礼包 · 本页已被逛过 <b id="subHits" hidden>—</b> 次</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <a href="../../">精品手游攻略站</a> · <a href="../../stats.html">站点数据</a><br>
+  本页面为推广信息聚合，游戏内容版权归各开发商所有
+</footer>
+
+<script>
+/* 分站浏览计数：失败静默 */
+try{
+  fetch('https://abacus.jasoncameron.dev/hit/jingyu3269.github.io/g-luna2', {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (d && typeof d.value === 'number'){
+        var el = document.getElementById('subHits');
+        if (el){ el.textContent = d.value; el.hidden = false; }
+      }
+    }).catch(function(){});
+}catch(e){}
+</script>
+</body>
+</html>
