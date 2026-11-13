@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>精灵永恒攻略合集 · 精品手游攻略站</title>
+<meta name="description" content="精灵永恒攻略共 12 篇：怀旧精灵 · 3D MMO。怀旧精灵3D MMO：精灵切换配队、技能把控定胜负，摆摊打金、圣物养成，三端互通。第二赛季圣物系统解锁后战力大幅提升，开…">
+<meta name="robots" content="index,follow">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ac:#7B5BD6;--ac-soft:#F0EAFE;--ink:#2D3A2E;--ink2:#6B7A6C;--line:#F0E4D6;--paper:#FFFBF3}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
+  color:var(--ink);line-height:1.65;
+  background:
+    radial-gradient(circle at 10% 0%, #F0EAFE 0%, transparent 42%),
+    radial-gradient(circle at 94% 4%, #FFF3E2 0%, transparent 40%),
+    var(--paper);
+  min-height:100vh;padding:0 14px 56px;
+}
+.wrap{max-width:760px;margin:0 auto}
+/* 顶栏 */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 2px;margin:0 -14px 14px;padding:10px 16px;
+  background:rgba(255,251,243,.92);backdrop-filter:blur(8px);
+  border-bottom:1.5px solid var(--line);
+}
+.back{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:12.5px;color:var(--ink2);text-decoration:none;
+  background:#fff;border:2px solid var(--line);border-radius:999px;
+  padding:4px 12px;font-weight:700;
+}
+.back:hover{color:var(--ac);border-color:var(--ac)}
+.brand{font-size:13px;font-weight:900;color:var(--ink);letter-spacing:.5px}
+.brand i{font-style:normal;color:var(--ac)}
+/* 头图：按原图比例展示，不裁切，避免切头 */
+.hero{
+  position:relative;border-radius:22px;overflow:hidden;
+  background:#1B1526;
+  border:3px solid #fff;box-shadow:0 12px 26px -10px rgba(80,50,30,.35);
+}
+.hero img{width:100%;height:auto;display:block}
+.hero-head{padding:14px 4px 0}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.chip{
+  display:inline-flex;align-items:center;height:22px;padding:0 10px;
+  font-size:11.5px;font-weight:800;border-radius:999px;
+  background:var(--ac-soft);color:var(--ac);
+  border:1.5px solid rgba(0,0,0,.04);
+}
+.chip.hot{background:#FF4444;color:#fff;border-color:#FF4444}
+.hero-head h1{font-size:25px;font-weight:900;letter-spacing:.5px;line-height:1.3}
+.tagline{font-size:12.5px;color:var(--ink2);margin-top:4px}
+/* 简介 & 信息卡 */
+.intro{
+  margin:16px 2px 14px;font-size:13.5px;color:var(--ink2);
+  background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;
+}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
+.fact{
+  background:#fff;border:2px solid var(--line);border-radius:14px;padding:11px 13px;
+  box-shadow:0 6px 16px -12px rgba(80,50,30,.3);
+}
+.fk{display:block;font-size:11px;color:var(--ink2);letter-spacing:.4px}
+.fv{font-size:13px;font-weight:800;color:var(--ac)}
+/* 文章列表 */
+.list h2{font-size:16px;display:flex;align-items:baseline;gap:8px}
+.list h2 small{font-size:11.5px;color:var(--ink2);font-weight:400}
+.entries{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.entry{
+  display:flex;align-items:stretch;gap:12px;
+  background:#fff;border:2px solid var(--line);border-radius:16px;
+  padding:13px 14px;text-decoration:none;color:var(--ink);
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.entry:hover{transform:translateY(-3px);border-color:var(--ac);box-shadow:0 10px 22px -14px var(--ac)}
+.e-date{
+  flex:0 0 52px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--ac-soft);border-radius:12px;color:var(--ac);
+}
+.e-date i{font-style:normal;font-size:14.5px;font-weight:900;font-variant-numeric:tabular-nums}
+.e-date em{font-style:normal;font-size:10px;opacity:.75}
+.e-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.e-meta{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--ink2)}
+.e-tag{
+  display:inline-flex;align-items:center;height:17px;padding:0 7px;
+  background:var(--ac);color:#fff;border-radius:6px;
+  font-size:10.5px;font-weight:800;line-height:1;
+}
+.e-title{font-size:14.5px;font-weight:800;line-height:1.45}
+.e-dek{
+  font-size:12px;color:var(--ink2);line-height:1.55;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.e-foot{font-size:10.5px;color:#B7A597;margin-top:2px}
+.e-arrow{
+  flex:0 0 auto;align-self:center;color:var(--ac);
+  font-weight:900;font-size:16px;opacity:.55;transition:transform .18s,opacity .18s;
+}
+.entry:hover .e-arrow{transform:translateX(3px);opacity:1}
+/* 底部 CTA & 页脚 */
+.cta{margin:26px 0 8px;text-align:center}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(160deg,var(--ac),var(--ac));
+  color:#fff;text-decoration:none;font-weight:900;font-size:14px;
+  padding:12px 26px;border-radius:999px;
+  box-shadow:0 8px 18px -6px var(--ac);
+}
+.cta-btn:hover{filter:brightness(1.06)}
+.cta p{margin-top:10px;font-size:11.5px;color:var(--ink2)}
+.foot{margin-top:22px;text-align:center;font-size:11.5px;color:#B7A597;line-height:1.9}
+.foot a{color:#B7A597;text-decoration:none;border-bottom:1px dashed #E0D2C4}
+.foot a:hover{color:var(--ac)}
+@media (max-width:560px){
+  .hero-head h1{font-size:21px}
+  .facts{grid-template-columns:1fr 1fr;gap:8px}
+  .fact{padding:9px 11px}
+  .fv{font-size:12px}
+  .e-dek{-webkit-line-clamp:2}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="back" href="../../">← 返回首页</a>
+  <span class="brand">精品<i>手游</i>攻略站</span>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <img src="../../assets/cover-jingling2.webp" alt="精灵永恒" fetchpriority="high">
+  </section>
+  <div class="hero-head">
+    <div class="chips"><span class="chip hot">热门</span><span class="chip">3D精灵</span><span class="chip">MMO打宝</span></div>
+    <h1>精灵永恒</h1>
+    <p class="tagline">怀旧精灵 · 3D MMO · 收录 12 篇攻略</p>
+  </div>
+
+  <p class="intro">怀旧精灵3D MMO：精灵切换配队、技能把控定胜负，摆摊打金、圣物养成，三端互通。第二赛季圣物系统解锁后战力大幅提升，开荒期基础材料最值钱。</p>
+
+  <section class="facts"><div class="fact"><span class="fk">游戏类型</span><span class="fv">3D精灵 · MMO</span></div><div class="fact"><span class="fk">平台</span><span class="fv">安卓 / iOS / PC 三端互通</span></div><div class="fact"><span class="fk">核心特色</span><span class="fv">精灵切换 · 圣物养成</span></div><div class="fact"><span class="fk">重点玩法</span><span class="fv">摆摊打金 · 赛季玩法</span></div></section>
+
+  <section class="list">
+    <h2>精灵永恒 · 全部 12 篇<small>点开任意一篇直接展开全文</small></h2>
+    <div class="entries">
+<a class="entry" href="../../index.html?a=a-1ples8v">
+      <span class="e-date"><i>10.22</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-22</span></span>
+        <span class="e-title">新手入门避坑指南，少走弯路</span>
+        <span class="e-dek">经济曲线跟随服务器进度，开荒期基础材料最值钱，别乱花前期资源。</span>
+        <span class="e-foot">约 1 分钟 · 5 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-xnxp7k">
+      <span class="e-date"><i>10.22</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-22</span></span>
+        <span class="e-title">前期升级全攻略：光速度过开荒期</span>
+        <span class="e-dek">1-30级主线无脑冲，30级后解锁副本和日常，升级节奏与等级压制关系。</span>
+        <span class="e-foot">约 1 分钟 · 5 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-e4ahl9">
+      <span class="e-date"><i>10.21</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-21</span></span>
+        <span class="e-title">战斗进阶：精灵切换+技能把控</span>
+        <span class="e-dek">战斗不是站桩输出，配队站位很重要，切换精灵打连招，技能释放时机。</span>
+        <span class="e-foot">约 1 分钟 · 5 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-1ga4n6m">
+      <span class="e-date"><i>10.23</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-23</span></span>
+        <span class="e-title">第二赛季圣物系统解锁，战力飞跃</span>
+        <span class="e-dek">圣物系统全新上线，圣物获取途径与养成路线，战力大幅提升方法。</span>
+        <span class="e-foot">约 1 分钟 · 5 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-i674cw">
+      <span class="e-date"><i>11.03</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-11-03</span></span>
+        <span class="e-title">精灵养成攻略：少走弯路，稳步提升</span>
+        <span class="e-dek">精灵分破坏/回复/经验三类，开荒别死磕SSR，集中资源养一到两只主力，按场景切换才是正解。</span>
+        <span class="e-foot">约 1 分钟 · 6 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-66f9df">
+      <span class="e-date"><i>10.18</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-18</span></span>
+        <span class="e-title">转职试炼通关攻略：不是拉高战力就能过</span>
+        <span class="e-dek">试炼分小怪与首领两阶段，先清召唤物再打BOSS；血量25%进狂暴，技能留到这时候用才是通关关键。</span>
+        <span class="e-foot">约 1 分钟 · 6 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-1iift60">
+      <span class="e-date"><i>11.02</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-11-02</span></span>
+        <span class="e-title">萌新入门：赛季玩法详解（上篇）</span>
+        <span class="e-dek">领地最多占两块、榜单季中季末各结算一次；新赛季战功军衔天赋全清零，被低军衔击败扣战功更多。</span>
+        <span class="e-foot">约 2 分钟 · 7 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-8ni93d">
+      <span class="e-date"><i>10.21</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-21</span></span>
+        <span class="e-title">日常周常怎么清最快，奖励还能拿满</span>
+        <span class="e-dek">登录+世界聊天+补药水就拿一半活跃，再2次组队副本+8次悬赏即满；精灵神殿和遗忘之塔可以不做。</span>
+        <span class="e-foot">约 1 分钟 · 6 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-pnenb">
+      <span class="e-date"><i>11.01</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-11-01</span></span>
+        <span class="e-title">八大职业怎么选，开荒选错真的会难受</span>
+        <span class="e-dek">坦普物理、魔灵法系两大种族八个职业：武士抗揍、弓箭手安全、魔法师清怪最快、祭司组队刚需，影刺要等第二赛季。</span>
+        <span class="e-foot">约 1 分钟 · 7 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-1gjsg93">
+      <span class="e-date"><i>10.26</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-26</span></span>
+        <span class="e-title">0-30 级开荒路线：主线、悬赏、加点一次讲清</span>
+        <span class="e-dek">开局别泡野外刷怪，主线才解锁仓库、强化、副本、精灵、转职；卡级去支线+五星悬赏，加点先满足装备门槛。</span>
+        <span class="e-foot">约 1 分钟 · 6 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-1347bay">
+      <span class="e-date"><i>10.30</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-30</span></span>
+        <span class="e-title">散人打宝与摆摊变现：哪些东西真能换钱</span>
+        <span class="e-dek">紫装看遗忘之塔，橙装看组队副本，顶级货看世界BOSS最后一击；摆摊不抽税、交易行30分钟自动下架，宝石不能交易。</span>
+        <span class="e-foot">约 1 分钟 · 6 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+<a class="entry" href="../../index.html?a=a-h93ozb">
+      <span class="e-date"><i>10.25</i><em>2026</em></span>
+      <span class="e-body">
+        <span class="e-meta"><span class="e-tag">精灵</span><span>2026-10-25</span></span>
+        <span class="e-title">遗忘之塔与副本：每天该刷哪几个</span>
+        <span class="e-dek">遗忘之塔免费次数必打，稳定出宝石与精灵碎片；诅咒神殿、没落都市才是高阶装备产地，别硬冲高层。</span>
+        <span class="e-foot">约 1 分钟 · 5 节 · 点击展开全文</span>
+      </span>
+      <span class="e-arrow" aria-hidden="true">→</span>
+    </a>
+    </div>
+  </section>
+
+  <section class="cta">
+    <a class="cta-btn" href="../../">← 回首页看全部游戏与攻略</a>
+    <p>客服一对一发下载链接与专属礼包 · 本页已被逛过 <b id="subHits" hidden>—</b> 次</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <a href="../../">精品手游攻略站</a> · <a href="../../stats.html">站点数据</a><br>
+  本页面为推广信息聚合，游戏内容版权归各开发商所有
+</footer>
+
+<script>
+/* 分站浏览计数：失败静默 */
+try{
+  fetch('https://abacus.jasoncameron.dev/hit/jingyu3269.github.io/g-jingling', {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (d && typeof d.value === 'number'){
+        var el = document.getElementById('subHits');
+        if (el){ el.textContent = d.value; el.hidden = false; }
+      }
+    }).catch(function(){});
+}catch(e){}
+</script>
+</body>
+</html>
