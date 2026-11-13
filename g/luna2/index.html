@@ -115,6 +115,143 @@ body{
 .foot{margin-top:22px;text-align:center;font-size:11.5px;color:#B7A597;line-height:1.9}
 .foot a{color:#B7A597;text-decoration:none;border-bottom:1px dashed #E0D2C4}
 .foot a:hover{color:var(--ac)}
+
+/* ===== 官网式头图 ===== */
+.lhero{
+  position:relative;overflow:hidden;border-radius:24px;color:#fff;
+  background:linear-gradient(135deg,#5E9BBC 0%,#8CC0D6 42%,#CBE8F0 100%);
+  border:3px solid #fff;box-shadow:0 16px 34px -14px rgba(40,92,120,.55);
+}
+.lhero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 82% 6%,rgba(255,255,255,.55),transparent 44%),
+    radial-gradient(circle at 12% 94%,rgba(255,255,255,.30),transparent 42%);
+}
+.lhero-in{position:relative;display:flex;align-items:stretch}
+.lhero-txt{position:relative;z-index:2;flex:1 1 58%;min-width:0;padding:24px 10px 26px 24px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2.2px;color:rgba(255,255,255,.86);margin-bottom:10px}
+.lhero h1{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:31px;font-weight:900;letter-spacing:1.5px;line-height:1.2;
+  text-shadow:0 3px 10px rgba(18,60,84,.38);
+}
+.ld-badge{
+  display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:7px;
+  background:linear-gradient(160deg,#FFB84D,#FF7F26);
+  font-size:12px;font-weight:900;letter-spacing:.5px;text-shadow:none;
+  box-shadow:0 4px 12px -3px rgba(208,96,10,.65);
+}
+.ldesc{margin-top:12px;max-width:430px;font-size:12.8px;line-height:1.85;color:rgba(255,255,255,.94)}
+.ltags{display:flex;flex-wrap:wrap;gap:5px;margin-top:13px;list-style:none}
+.ltags li{
+  display:inline-flex;align-items:center;height:23px;padding:0 8px;border-radius:999px;
+  font-size:10.5px;font-weight:700;color:#fff;letter-spacing:0;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.42);
+  backdrop-filter:blur(2px);
+}
+.cd{margin-top:16px}
+.cd-label{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.3px}
+.cd-label b{font-weight:900;color:#fff}
+.cd-nums{display:flex;gap:8px;margin-top:8px}
+.cd-u{
+  width:50px;height:54px;border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.4);
+  backdrop-filter:blur(3px);
+  box-shadow:0 5px 14px -8px rgba(20,60,84,.6),inset 0 1px 0 rgba(255,255,255,.35);
+}
+.cd-u em{
+  font-style:normal;font-size:20px;font-weight:900;line-height:1;
+  letter-spacing:.5px;font-variant-numeric:tabular-nums;
+  text-shadow:0 2px 6px rgba(20,60,84,.32);
+}
+.cd-u i{font-style:normal;font-size:10px;margin-top:5px;opacity:.85}
+.cd-open{
+  margin-top:10px;font-size:13.5px;font-weight:800;
+  background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.45);
+  border-radius:12px;padding:10px 14px;display:inline-block;
+}
+.lbtn{
+  margin-top:18px;display:inline-flex;align-items:center;gap:7px;
+  border:0;cursor:pointer;padding:12px 26px;border-radius:999px;
+  font-family:inherit;font-size:14px;font-weight:900;letter-spacing:.4px;color:#fff;
+  background:linear-gradient(135deg,#FF7FB0,#F0437C);
+  box-shadow:0 12px 24px -10px rgba(232,52,112,.9),inset 0 1px 0 rgba(255,255,255,.42);
+  transition:transform .16s,filter .16s;
+}
+.lbtn:hover{filter:brightness(1.05)}
+.lbtn:active{transform:scale(.97)}
+.lbtn i{font-style:normal;font-size:13px}
+.lhero-art{position:relative;z-index:1;flex:0 0 44%;align-self:stretch;min-width:0}
+.lhero-art img{
+  width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 16%);
+  mask-image:linear-gradient(to right,transparent 0,#000 16%);
+}
+.lfeat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.lfeat img{
+  width:100%;height:auto;display:block;border-radius:16px;
+  border:3px solid #fff;box-shadow:0 10px 24px -16px rgba(40,92,120,.9);
+}
+/* 预约弹层 */
+.bk{
+  position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:rgba(16,32,46,.52);backdrop-filter:blur(5px);
+}
+.bk[hidden]{display:none}
+.bk-card{
+  position:relative;width:100%;max-width:352px;background:#fff;
+  border-radius:22px;padding:22px 20px 6px;
+  box-shadow:0 26px 60px -20px rgba(8,28,42,.75);
+  animation:bkIn .22s ease-out;
+}
+@keyframes bkIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.bk-x{
+  position:absolute;right:8px;top:6px;width:32px;height:32px;border:0;background:none;
+  font-size:20px;line-height:1;color:#BFAFA2;cursor:pointer;border-radius:50%;
+}
+.bk-x:focus{outline:none}
+.bk-x:focus-visible{outline:2px solid #2C7A9E;outline-offset:2px}
+.bk-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#9FB3C0}
+.bk-card h3{margin-top:6px;font-size:19px;font-weight:900;color:#2D3A2E}
+.bk-desc{margin-top:8px;font-size:12.5px;line-height:1.75;color:#6B7A6C}
+.bk-id{
+  margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:#F4FAFD;border:1.5px dashed #B7D8E8;border-radius:14px;padding:9px 12px;
+}
+.bk-id span{
+  font-size:14.5px;font-weight:900;color:#2C7A9E;letter-spacing:.6px;
+  font-variant-numeric:tabular-nums;
+}
+.bk-id button{
+  border:0;background:#2C7A9E;color:#fff;font-size:12px;font-weight:800;
+  border-radius:999px;padding:6px 14px;cursor:pointer;font-family:inherit;
+}
+.bk-tip{margin-top:8px;font-size:11.5px;color:#B7A597;text-align:center}
+.bk-link{
+  display:block;margin-top:12px;padding:11px 0 14px;text-align:center;
+  font-size:12px;font-weight:700;color:#2C7A9E;text-decoration:none;
+  border-top:1.5px solid #F0E4D6;
+}
+@media (max-width:620px){
+  .lhero{border-radius:20px}
+  .lhero-in{flex-direction:column-reverse}
+  .lhero-art{flex:0 0 auto;height:auto}
+  .lhero-art img{
+    height:auto;object-fit:fill;
+    -webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);
+  }
+  .lhero-txt{padding:14px 16px 20px}
+  .lhero h1{font-size:26px}
+  .ldesc{font-size:12.5px;line-height:1.8}
+  .cd-u{width:46px;height:50px}
+  .cd-u em{font-size:18px}
+  .lbtn{width:100%;justify-content:center;padding:12px 18px}
+  .lfeat{gap:8px}
+}
+
 @media (max-width:560px){
   .hero-head h1{font-size:21px}
   .facts{grid-template-columns:1fr 1fr;gap:8px}
@@ -131,14 +268,30 @@ body{
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <img src="../../assets/luna-card.webp" alt="露娜2：拾光之约" fetchpriority="high">
-  </section>
-  <div class="hero-head">
-    <div class="chips"><span class="chip hot">12.10 公测</span><span class="chip">PC端游</span><span class="chip">萌系MMO</span></div>
-    <h1>露娜2：拾光之约</h1>
-    <p class="tagline">经典露娜IP · 奇幻冒险 · 收录 4 篇攻略</p>
+  <section class="lhero">
+  <div class="lhero-in">
+    <div class="lhero-txt">
+      <p class="eyebrow">LUNA2 ONLINE · 十六年之约</p>
+      <h1>拾光之约<span class="ld-badge">12.10 公测</span></h1>
+      <p class="ldesc">从阿克勒平原的风车下出发，人类与精灵两族、战士 / 魔法师 / 刺客三职业起步。副本、野外 BOSS、摆摊交易，再加上农场种菜、河边钓鱼、小屋装扮。不改版、原汁原味，当年一起熬夜的那批人，该回来了。</p>
+      <ul class="ltags"><li>PC 端游</li><li>原汁原味</li><li>Q 萌画风</li><li>自由转职</li><li>生活玩法</li><li>约会配对</li></ul>
+      <div class="cd" id="cdBox">
+        <p class="cd-label">距 <b>12.10</b> 公测（暂定）</p>
+        <div class="cd-nums">
+          <div class="cd-u"><em id="cdD">--</em><i>天</i></div>
+          <div class="cd-u"><em id="cdH">--</em><i>时</i></div>
+          <div class="cd-u"><em id="cdM">--</em><i>分</i></div>
+          <div class="cd-u"><em id="cdS">--</em><i>秒</i></div>
+        </div>
+      </div>
+      <button class="lbtn" type="button" onclick="openBooking()"><i>🎁</i>预约公测 · 领预约礼包</button>
+    </div>
+    <div class="lhero-art">
+      <img src="../../assets/luna-hero.webp" alt="露娜2：拾光之约 主视觉" fetchpriority="high">
+    </div>
   </div>
+</section>
+<section class="lfeat"><img src="../../assets/luna-f1.webp" alt="露娜2 社交满格：家族温暖 亲密配对" loading="lazy" decoding="async"><img src="../../assets/luna-f2.webp" alt="露娜2 自由转职：技能自由 转职丰富" loading="lazy" decoding="async"></section>
 
   <p class="intro">首款萌世代官方正版，经典露娜IP回归：自由转职、社交满格，情侣配对与家族玩法原汁原味。12 月 10 日公测——开服前把魔附、摆摊、挂机与转职加点先看明白，上线直接照着做。</p>
 
@@ -195,7 +348,17 @@ body{
     <p>客服一对一发下载链接与专属礼包 · 本页已被逛过 <b id="subHits" hidden>—</b> 次</p>
   </section>
 </main>
-
+<div class="bk" id="bkModal" hidden onclick="if(event.target===this)closeBooking()">
+  <div class="bk-card" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+    <button class="bk-x" type="button" onclick="closeBooking()" aria-label="关闭">×</button>
+    <p class="bk-eyebrow">PRE-REGISTER</p>
+    <h3 id="bkTitle">预约公测 · 领预约礼包</h3>
+    <p class="bk-desc">加客服微信，发送「露娜2」即可登记预约、领取预约礼包，12.10 开服当天还会收到上线提醒。</p>
+    <div class="bk-id"><span>LYLOVEZLL1314999</span><button type="button" onclick="copyWx(this)">复制</button></div>
+    <p class="bk-tip" id="bkTip">点「复制」后到微信搜索添加</p>
+    <a class="bk-link" href="https://luna2.8zy.com" target="_blank" rel="noopener noreferrer">或前往官网预约页 →</a>
+  </div>
+</div>
 <footer class="foot">
   <a href="../../">精品手游攻略站</a> · <a href="../../stats.html">站点数据</a><br>
   本页面为推广信息聚合，游戏内容版权归各开发商所有
@@ -213,6 +376,72 @@ try{
       }
     }).catch(function(){});
 }catch(e){}
+</script>
+<script>
+(function(){
+  var box = document.getElementById('cdBox');
+  if (!box) return;
+  var target = new Date('2026-12-10T00:00:00+08:00').getTime();
+  var D = document.getElementById('cdD'), H = document.getElementById('cdH'),
+      M = document.getElementById('cdM'), S = document.getElementById('cdS');
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function tick(){
+    var diff = target - Date.now();
+    if (diff <= 0){
+      box.innerHTML = '<p class="cd-open">公测已开启，进游戏见 🎉</p>';
+      return;
+    }
+    var t = Math.floor(diff / 1000);
+    D.textContent = Math.floor(t / 86400);
+    H.textContent = pad(Math.floor(t % 86400 / 3600));
+    M.textContent = pad(Math.floor(t % 3600 / 60));
+    S.textContent = pad(t % 60);
+    setTimeout(tick, 1000 - (Date.now() % 1000) + 10);
+  }
+  tick();
+})();
+
+function openBooking(){
+  var m = document.getElementById('bkModal');
+  if (!m) return;
+  m.hidden = false;
+  document.body.style.overflow = 'hidden';
+  var b = m.querySelector('.bk-x');
+  if (b) b.focus();
+}
+function closeBooking(){
+  var m = document.getElementById('bkModal');
+  if (!m) return;
+  m.hidden = true;
+  document.body.style.overflow = '';
+}
+function copyWx(btn){
+  var id = "LYLOVEZLL1314999";
+  function ok(){
+    var tip = document.getElementById('bkTip');
+    if (tip) tip.textContent = '已复制：' + id + ' · 打开微信搜索添加';
+    if (btn) btn.textContent = '已复制 ✓';
+  }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = id;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    ok();
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(id).then(ok).catch(fallback);
+  } else {
+    fallback();
+  }
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeBooking();
+});
 </script>
 </body>
 </html>
