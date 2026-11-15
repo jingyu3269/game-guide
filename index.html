@@ -2470,7 +2470,26 @@ html.poster-open,html.poster-open body{overflow:hidden}
     border:2px dashed #FFB8D2;border-radius:999px;
     padding:16px 9px;
     box-shadow:0 6px 18px rgba(255,143,184,.18);
+    text-decoration:none;
+    position:relative;
+    transition:transform .16s ease,box-shadow .16s ease,background .16s ease,color .16s ease,border-color .16s ease;
   }
+  .sr-brand::after{
+    content:"进";position:absolute;right:-8px;top:-8px;
+    width:16px;height:16px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:9.5px;font-weight:800;letter-spacing:0;line-height:1;
+    color:#fff;background:#FF8FBB;border:1.5px solid #fff;border-radius:999px;
+    box-shadow:0 2px 6px rgba(255,143,184,.45);
+    writing-mode:horizontal-tb;
+  }
+  .sr-brand:hover{
+    background:#fff;color:#E0507F;border-color:#FF8FBB;
+    transform:translateY(-2px) scale(1.03);
+    box-shadow:0 10px 26px rgba(255,143,184,.42);
+  }
+  .sr-brand:active{transform:translateY(0) scale(.97)}
+  .sr-brand:focus-visible{outline:2px solid #FF8FBB;outline-offset:3px}
   .sr-stickers{display:flex;flex-direction:column;gap:12px;font-size:22px}
   .sr-stickers span{
     display:block;
@@ -3027,15 +3046,14 @@ html.poster-open,html.poster-open body{overflow:hidden}
 <div class="petal-container" id="petalContainer"></div>
 
 <!-- 大屏两侧装饰/快捷导航（窄屏自动隐藏） -->
-<div class="side-rail left" aria-hidden="true">
-  <div class="sr-brand">露娜2：拾光之约</div>
-  <div class="sr-brand">英雄连城</div>
-  <div class="sr-stickers"><span>🌸</span><span>🧚</span><span>🌙</span></div>
+<div class="side-rail left">
+  <a class="sr-brand" href="g/luna2/" title="进入 露娜2：拾光之约 分站">露娜2：拾光之约</a>
+  <a class="sr-brand" href="g/liancheng/" title="进入 英雄连城 分站">英雄连城</a>
+  <div class="sr-stickers" aria-hidden="true"><span>🌸</span><span>🧚</span><span>🌙</span></div>
 </div>
 <div class="side-rail right">
   <nav class="sr-nav" aria-label="快捷导航">
     <button onclick="srGo('games')"><span class="e">🎮</span>手游库</button>
-    <button onclick="location.href='g/luna2/'"><span class="e">🌙</span>露娜2分站</button>
     <button onclick="srGo('articles')"><span class="e">📚</span>攻略库</button>
     <button onclick="srGo('faq')"><span class="e">❓</span>常见问题</button>
     <button onclick="srGo('service')"><span class="e">🎁</span>客服福利</button>
