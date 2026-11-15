@@ -536,6 +536,28 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 .game-sub:hover{background:rgba(255,255,255,.42)}
 .game-sub:active{transform:scale(.96)}
+/* 开服倒计时条 */
+.game-cd{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  margin:10px 0 2px;padding:8px 12px;border-radius:12px;
+  background:rgba(6,32,24,.34);border:1.5px solid rgba(255,255,255,.42);
+  font-size:11.5px;font-weight:700;color:rgba(255,255,255,.92);
+  backdrop-filter:blur(3px);
+}
+.game-cd .gc-time{
+  display:inline-flex;align-items:baseline;gap:1px;
+  font-variant-numeric:tabular-nums;letter-spacing:.5px;
+}
+.game-cd .gc-time b{
+  font-size:14px;font-weight:900;color:#FFF;
+  text-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+.game-cd .gc-time i{font-style:normal;font-size:10px;opacity:.8;margin:0 3px 0 1px}
+.game-cd .gc-time s{text-decoration:none;opacity:.55;margin:0 1px}
+@media (max-width:420px){
+  .game-cd{font-size:10.5px;padding:7px 10px}
+  .game-cd .gc-time b{font-size:12.5px}
+}
 
 /* ========== 客服福利区（卡通糖果风） ========== */
 .service{
@@ -2807,7 +2829,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
           <li>公测专属礼包客服直接发，开服即领</li>
         </ul>
         <button class="game-btn" onclick="copyWechat('露娜2：拾光之约')">🎁 预约领公测福利</button>
-        <a class="game-sub" href="g/luna2/">📖 进入分站 · 4 篇攻略</a>
+        <a class="game-sub" href="g/luna2/">📖 进入分站 · 5 篇攻略</a>
       </div>
     </div>
 
@@ -2825,6 +2847,10 @@ html.poster-open,html.poster-open body{overflow:hidden}
           <span class="game-tag">打宝PK</span>
         </div>
         <p class="game-desc">情怀向经典回归，只为奇迹老玩家而生，装备靠打、自由交易、行会攻城。</p>
+        <div class="game-cd" id="lcCd">
+          <span>距 11.20 正式开服</span>
+          <span class="gc-time"><b id="lcD">--</b><i>天</i><b id="lcH">--</b><s>:</s><b id="lcM">--</b><s>:</s><b id="lcS">--</b></span>
+        </div>
         <ul class="game-tips">
           <li>主线优先，等级决定进图与掉落门槛</li>
           <li>装备以野外和副本掉落为主，先凑套装</li>
@@ -2832,7 +2858,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
           <li>攻城战跟行会走，散人别单挑硬冲</li>
         </ul>
         <button class="game-btn" onclick="copyWechat('英雄连城')">🎁 领取下载与攻略</button>
-        <a class="game-sub" href="g/liancheng/">📖 进入分站 · 4 篇攻略</a>
+        <a class="game-sub" href="g/liancheng/">📖 进入分站 · 5 篇攻略</a>
       </div>
     </div>
 
@@ -5736,5 +5762,30 @@ window.Stat = (function(){
 })();
 </script>
 <!--STATS-END-->
+<script>
+/* 英雄连城：11.20 正式开服倒计时 */
+(function(){
+  var box = document.getElementById('lcCd');
+  if (!box) return;
+  var target = new Date('2026-11-20T00:00:00+08:00').getTime();
+  var D = document.getElementById('lcD'), H = document.getElementById('lcH'),
+      M = document.getElementById('lcM'), S = document.getElementById('lcS');
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function tick(){
+    var diff = target - Date.now();
+    if (diff <= 0){
+      box.innerHTML = '<span>正式服已开启，进游戏见 🗡️</span>';
+      return;
+    }
+    var t = Math.floor(diff / 1000);
+    D.textContent = Math.floor(t / 86400);
+    H.textContent = pad(Math.floor(t % 86400 / 3600));
+    M.textContent = pad(Math.floor(t % 3600 / 60));
+    S.textContent = pad(t % 60);
+    setTimeout(tick, 1000 - (Date.now() % 1000) + 10);
+  }
+  tick();
+})();
+</script>
 </body>
 </html>
