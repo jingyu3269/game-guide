@@ -116,6 +116,176 @@ body{
 .foot a{color:#B7A597;text-decoration:none;border-bottom:1px dashed #E0D2C4}
 .foot a:hover{color:var(--ac)}
 
+/* ===== 官网式头图 ===== */
+.lhero{
+  position:relative;overflow:hidden;border-radius:24px;color:#fff;
+  background:linear-gradient(135deg,var(--hg1,#5E9BBC) 0%,var(--hg2,#8CC0D6) 42%,var(--hg3,#CBE8F0) 100%);
+  border:3px solid #fff;box-shadow:0 16px 34px -14px rgba(40,92,120,.55);
+}
+.lhero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 82% 6%,rgba(255,255,255,.42),transparent 44%),
+    radial-gradient(circle at 12% 94%,rgba(255,255,255,.22),transparent 42%);
+}
+.lhero-in{position:relative;display:flex;align-items:stretch}
+.lhero-txt{position:relative;z-index:2;flex:1 1 58%;min-width:0;padding:24px 10px 26px 24px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2.2px;color:rgba(255,255,255,.86);margin-bottom:10px}
+.lhero h1{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:31px;font-weight:900;letter-spacing:1.5px;line-height:1.2;
+  text-shadow:0 3px 10px rgba(18,60,84,.38);
+}
+.ld-badge{
+  display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:7px;
+  background:linear-gradient(160deg,var(--hl1,#FFB84D),var(--hl2,#FF7F26));
+  font-size:12px;font-weight:900;letter-spacing:.5px;text-shadow:none;
+  box-shadow:0 4px 12px -3px rgba(208,96,10,.65);
+}
+.ldesc{margin-top:12px;max-width:430px;font-size:12.8px;line-height:1.85;color:rgba(255,255,255,.94)}
+.ltags{display:flex;flex-wrap:wrap;gap:5px;margin-top:13px;list-style:none}
+.ltags li{
+  display:inline-flex;align-items:center;height:23px;padding:0 8px;border-radius:999px;
+  font-size:10.5px;font-weight:700;color:#fff;letter-spacing:0;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.42);
+  backdrop-filter:blur(2px);
+}
+.cd{margin-top:16px}
+.cd-label{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.3px}
+.cd-label b{font-weight:900;color:#fff}
+.cd-nums{display:flex;gap:8px;margin-top:8px}
+.cd-u{
+  width:50px;height:54px;border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.4);
+  backdrop-filter:blur(3px);
+  box-shadow:0 5px 14px -8px rgba(20,60,84,.6),inset 0 1px 0 rgba(255,255,255,.35);
+}
+.cd-u em{
+  font-style:normal;font-size:20px;font-weight:900;line-height:1;
+  letter-spacing:.5px;font-variant-numeric:tabular-nums;
+  text-shadow:0 2px 6px rgba(20,60,84,.32);
+}
+.cd-u i{font-style:normal;font-size:10px;margin-top:5px;opacity:.85}
+.cd-open{
+  margin-top:10px;font-size:13.5px;font-weight:800;
+  background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.45);
+  border-radius:12px;padding:10px 14px;display:inline-block;
+}
+.lbtn{
+  margin-top:18px;display:inline-flex;align-items:center;gap:7px;
+  border:0;cursor:pointer;padding:12px 26px;border-radius:999px;
+  font-family:inherit;font-size:14px;font-weight:900;letter-spacing:.4px;color:#fff;
+  background:linear-gradient(135deg,var(--hb1,#FF7FB0),var(--hb2,#F0437C));
+  box-shadow:0 12px 24px -10px var(--hbs,rgba(232,52,112,.9)),inset 0 1px 0 rgba(255,255,255,.42);
+  transition:transform .16s,filter .16s;
+}
+.lbtn:hover{filter:brightness(1.05)}
+.lbtn:active{transform:scale(.97)}
+.lbtn i{font-style:normal;font-size:13px}
+.lhero-art{position:relative;z-index:1;flex:0 0 44%;align-self:stretch;min-width:0}
+.lhero-art img{
+  width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 30%);
+  mask-image:linear-gradient(to right,transparent 0,#000 30%);
+}
+.lfeat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.lfeat img{
+  width:100%;height:auto;display:block;border-radius:16px;
+  border:3px solid #fff;box-shadow:0 10px 24px -16px rgba(40,92,120,.9);
+}
+/* 职业一览 */
+.ljobs{margin:22px 0 6px}
+.ljobs-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.ljobs-h h2{font-size:16px;font-weight:900}
+.ljobs-h span{font-size:11.5px;color:var(--ink2)}
+.jgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.jcard{
+  background:#fff;border:2px solid var(--line);border-radius:16px;overflow:hidden;
+  box-shadow:0 8px 20px -16px rgba(80,50,30,.45);
+}
+.jcard img{width:100%;height:auto;display:block;aspect-ratio:1.51/1;object-fit:cover;object-position:center top}
+.jbody{padding:9px 11px 11px}
+.jbody b{display:block;font-size:13.5px;font-weight:900}
+.jbody em{display:block;font-style:normal;font-size:11px;color:var(--ink2);margin-top:2px;line-height:1.5}
+.jbody i{
+  display:inline-block;font-style:normal;margin-top:6px;
+  font-size:10px;font-weight:800;color:var(--ac);
+  background:var(--ac-soft);border-radius:6px;padding:2px 7px;
+  font-variant-numeric:tabular-nums;
+}
+/* 登录界面实拍 */
+.lshot{margin:18px 0 4px}
+.lshot img{
+  width:100%;height:auto;display:block;border-radius:18px;
+  border:3px solid #fff;box-shadow:0 12px 26px -18px rgba(40,60,90,.9);
+}
+.lshot figcaption{margin-top:8px;text-align:center;font-size:11.5px;color:var(--ink2)}
+/* 预约弹层 */
+.bk{
+  position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:rgba(16,32,46,.52);backdrop-filter:blur(5px);
+}
+.bk[hidden]{display:none}
+.bk-card{
+  position:relative;width:100%;max-width:352px;background:#fff;
+  border-radius:22px;padding:22px 20px 6px;
+  box-shadow:0 26px 60px -20px rgba(8,28,42,.75);
+  animation:bkIn .22s ease-out;
+}
+@keyframes bkIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.bk-x{
+  position:absolute;right:8px;top:6px;width:32px;height:32px;border:0;background:none;
+  font-size:20px;line-height:1;color:#BFAFA2;cursor:pointer;border-radius:50%;
+}
+.bk-x:focus{outline:none}
+.bk-x:focus-visible{outline:2px solid #2C7A9E;outline-offset:2px}
+.bk-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#9FB3C0}
+.bk-card h3{margin-top:6px;font-size:19px;font-weight:900;color:#2D3A2E}
+.bk-desc{margin-top:8px;font-size:12.5px;line-height:1.75;color:#6B7A6C}
+.bk-id{
+  margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:#F4FAFD;border:1.5px dashed #B7D8E8;border-radius:14px;padding:9px 12px;
+}
+.bk-id span{
+  font-size:14.5px;font-weight:900;color:#2C7A9E;letter-spacing:.6px;
+  font-variant-numeric:tabular-nums;
+}
+.bk-id button{
+  border:0;background:#2C7A9E;color:#fff;font-size:12px;font-weight:800;
+  border-radius:999px;padding:6px 14px;cursor:pointer;font-family:inherit;
+}
+.bk-tip{margin-top:8px;font-size:11.5px;color:#B7A597;text-align:center}
+.bk-link{
+  display:block;margin-top:12px;padding:11px 0 14px;text-align:center;
+  font-size:12px;font-weight:700;color:#2C7A9E;text-decoration:none;
+  border-top:1.5px solid #F0E4D6;
+}
+@media (max-width:620px){
+  .lhero{border-radius:20px}
+  .lhero-in{flex-direction:column-reverse}
+  .lhero-art{flex:0 0 auto;height:auto}
+  .lhero-art img{
+    height:auto;object-fit:fill;
+    -webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);
+  }
+  .lhero-txt{padding:14px 16px 20px}
+  .lhero h1{font-size:26px}
+  .ldesc{font-size:12.5px;line-height:1.8}
+  .cd-u{width:46px;height:50px}
+  .cd-u em{font-size:18px}
+  .lbtn{width:100%;justify-content:center;padding:12px 18px}
+  .lfeat{gap:8px}
+  .jgrid{grid-template-columns:1fr 1fr;gap:8px}
+  .jbody{padding:8px 9px 10px}
+  .jbody b{font-size:12.5px}
+  .jbody em{font-size:10.5px;margin-top:1px}
+  .jbody i{font-size:9.5px;margin-top:5px}
+  .ljobs-h h2{font-size:15px}
+  .lshot img{border-radius:14px}
+}
+
 @media (max-width:560px){
   .hero-head h1{font-size:21px}
   .facts{grid-template-columns:1fr 1fr;gap:8px}
@@ -132,18 +302,59 @@ body{
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <img src="../../assets/cover-liancheng-wide.webp" alt="英雄连城" fetchpriority="high">
-  </section>
-  <div class="hero-head">
-    <div class="chips"><span class="chip hot">经典回归</span><span class="chip">奇迹情怀</span><span class="chip">打宝PK</span></div>
-    <h1>英雄连城</h1>
-    <p class="tagline">奇迹MU情怀 · 怀旧打宝 · 收录 5 篇攻略</p>
+  <section class="lhero" style="--hg1:#131A2C;--hg2:#2A3B5E;--hg3:#7B8FB0;--hl1:#FFC24D;--hl2:#EE7D24;--hb1:#F5BE4A;--hb2:#D07E16;--hbs:rgba(200,130,20,.85)">
+  <div class="lhero-in">
+    <div class="lhero-txt">
+      <p class="eyebrow">HEROES FORTRESS · 奇迹 MU 情怀</p>
+      <h1>英雄连城<span class="ld-badge">11.20 正式服</span></h1>
+      <p class="ldesc">从勇者大陆出发，六个职业、卓越套装、行会攻城。装备靠打、全部位强化继承，换装不清零；11 月 20 日正式服开放，进度握在自己手里。</p>
+      <ul class="ltags"><li>经典回归</li><li>奇迹情怀</li><li>装备靠打</li><li>自由交易</li><li>强化继承</li><li>行会攻城</li></ul>
+      <div class="cd" id="cdBox">
+        <p class="cd-label">距 <b>11.20</b> 正式开服</p>
+        <div class="cd-nums">
+          <div class="cd-u"><em id="cdD">--</em><i>天</i></div>
+          <div class="cd-u"><em id="cdH">--</em><i>时</i></div>
+          <div class="cd-u"><em id="cdM">--</em><i>分</i></div>
+          <div class="cd-u"><em id="cdS">--</em><i>秒</i></div>
+        </div>
+      </div>
+      <button class="lbtn" type="button" onclick="openBooking()"><i>🎁</i>领取下载与攻略</button>
+    </div>
+    <div class="lhero-art">
+      <img src="../../assets/heroes-ship.webp" alt="英雄连城 主视觉" fetchpriority="high">
+    </div>
   </div>
+</section>
+<section class="lfeat"></section>
 
   <p class="intro">情怀向经典回归，只为奇迹老玩家而生：装备靠打、自由交易、行会攻城。全部位强化继承，换装不清零；卓越与套装可攒碎片合成，进度回到自己手里。</p>
 
   <section class="facts"><div class="fact"><span class="fk">平台</span><span class="fv">安卓 / iOS 双端互通</span></div><div class="fact"><span class="fk">开服</span><span class="fv">2026.11.20 正式服</span></div><div class="fact"><span class="fk">核心特色</span><span class="fv">装备靠打 · 强化继承</span></div><div class="fact"><span class="fk">重点玩法</span><span class="fv">行会攻城 · 卓越套装</span></div></section>
+<section class="ljobs">
+    <div class="ljobs-h"><h2>六大职业 · 创建界面实拍</h2><span>数值为创建角色时的初始属性，进阶职业需角色卡片解锁</span></div>
+    <div class="jgrid"><div class="jcard">
+      <img src="../../assets/heroes-job-1.webp" alt="剑士 创建界面" loading="lazy" decoding="async">
+      <div class="jbody"><b>剑士</b><em>战士的王国 · 近战物理，剑 / 斧 / 杖</em><i>力 28 · 敏 20 · 智 10 · 体 25</i></div>
+    </div><div class="jcard">
+      <img src="../../assets/heroes-job-2.webp" alt="魔法师 创建界面" loading="lazy" decoding="async">
+      <div class="jbody"><b>魔法师</b><em>阿尔卡的后台 · 自由施放攻击魔法</em><i>力 18 · 敏 18 · 智 30 · 体 15</i></div>
+    </div><div class="jcard">
+      <img src="../../assets/heroes-job-3.webp" alt="弓箭手 创建界面" loading="lazy" decoding="async">
+      <div class="jbody"><b>弓箭手</b><em>精灵的王国 · 弓弩 + 辅助 / 召唤魔法</em><i>力 22 · 敏 25 · 智 15 · 体 20</i></div>
+    </div><div class="jcard">
+      <img src="../../assets/heroes-job-4.webp" alt="魔剑士 创建界面" loading="lazy" decoding="async">
+      <div class="jbody"><b>魔剑士</b><em>复合型角色 · 近战攻击 + 自由施法</em><i>力 26 · 敏 26 · 智 26 · 体 26</i></div>
+    </div><div class="jcard">
+      <img src="../../assets/heroes-job-5.webp" alt="圣导师 创建界面" loading="lazy" decoding="async">
+      <div class="jbody"><b>圣导师</b><em>君主型角色 · 统率团队，天鹰与黑王马为宠</em><i>力 26 · 敏 20 · 智 15 · 体 20</i></div>
+    </div><div class="jcard">
+      <img src="../../assets/heroes-job-6.webp" alt="召唤师 创建界面" loading="lazy" decoding="async">
+      <div class="jbody"><b>召唤师</b><em>诅咒魔法 + 召唤异界召唤兽</em><i>力 21 · 敏 21 · 智 23 · 体 18</i></div>
+    </div></div>
+  </section><figure class="lshot">
+    <img src="../../assets/heroes-login.webp" alt="登录界面实拍 · 英雄 1 区（测试服）" loading="lazy" decoding="async">
+    <figcaption>登录界面实拍 · 英雄 1 区（测试服）</figcaption>
+  </figure>
 
   <section class="list">
     <h2>英雄连城 · 全部 5 篇<small>点开任意一篇直接展开全文</small></h2>
@@ -206,7 +417,17 @@ body{
     <p>客服一对一发下载链接与专属礼包 · 本页已被逛过 <b id="subHits" hidden>—</b> 次</p>
   </section>
 </main>
-
+<div class="bk" id="bkModal" hidden onclick="if(event.target===this)closeBooking()">
+  <div class="bk-card" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+    <button class="bk-x" type="button" onclick="closeBooking()" aria-label="关闭">×</button>
+    <p class="bk-eyebrow">PRE-REGISTER</p>
+    <h3 id="bkTitle">领取下载与攻略</h3>
+    <p class="bk-desc">加客服微信，发送「英雄连城」即可领取下载链接、开服礼包与开局攻略，11.20 开服当天还会收到上线提醒。</p>
+    <div class="bk-id"><span>LYLOVEZLL1314999</span><button type="button" onclick="copyWx(this)">复制</button></div>
+    <p class="bk-tip" id="bkTip">点「复制」后到微信搜索添加</p>
+    
+  </div>
+</div>
 <footer class="foot">
   <a href="../../">精品手游攻略站</a> · <a href="../../stats.html">站点数据</a><br>
   本页面为推广信息聚合，游戏内容版权归各开发商所有
@@ -225,6 +446,71 @@ try{
     }).catch(function(){});
 }catch(e){}
 </script>
+<script>
+(function(){
+  var box = document.getElementById('cdBox');
+  if (!box) return;
+  var target = new Date('2026-11-20T00:00:00+08:00').getTime();
+  var D = document.getElementById('cdD'), H = document.getElementById('cdH'),
+      M = document.getElementById('cdM'), S = document.getElementById('cdS');
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function tick(){
+    var diff = target - Date.now();
+    if (diff <= 0){
+      box.innerHTML = '<p class="cd-open">正式服已开启，进游戏见 🗡️</p>';
+      return;
+    }
+    var t = Math.floor(diff / 1000);
+    D.textContent = Math.floor(t / 86400);
+    H.textContent = pad(Math.floor(t % 86400 / 3600));
+    M.textContent = pad(Math.floor(t % 3600 / 60));
+    S.textContent = pad(t % 60);
+    setTimeout(tick, 1000 - (Date.now() % 1000) + 10);
+  }
+  tick();
+})();
 
+function openBooking(){
+  var m = document.getElementById('bkModal');
+  if (!m) return;
+  m.hidden = false;
+  document.body.style.overflow = 'hidden';
+  var b = m.querySelector('.bk-x');
+  if (b) b.focus();
+}
+function closeBooking(){
+  var m = document.getElementById('bkModal');
+  if (!m) return;
+  m.hidden = true;
+  document.body.style.overflow = '';
+}
+function copyWx(btn){
+  var id = "LYLOVEZLL1314999";
+  function ok(){
+    var tip = document.getElementById('bkTip');
+    if (tip) tip.textContent = '已复制：' + id + ' · 打开微信搜索添加';
+    if (btn) btn.textContent = '已复制 ✓';
+  }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = id;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    ok();
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(id).then(ok).catch(fallback);
+  } else {
+    fallback();
+  }
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeBooking();
+});
+</script>
 </body>
 </html>
