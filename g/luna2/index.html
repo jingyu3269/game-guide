@@ -119,14 +119,14 @@ body{
 /* ===== 官网式头图 ===== */
 .lhero{
   position:relative;overflow:hidden;border-radius:24px;color:#fff;
-  background:linear-gradient(135deg,#5E9BBC 0%,#8CC0D6 42%,#CBE8F0 100%);
+  background:linear-gradient(135deg,var(--hg1,#5E9BBC) 0%,var(--hg2,#8CC0D6) 42%,var(--hg3,#CBE8F0) 100%);
   border:3px solid #fff;box-shadow:0 16px 34px -14px rgba(40,92,120,.55);
 }
 .lhero::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(circle at 82% 6%,rgba(255,255,255,.55),transparent 44%),
-    radial-gradient(circle at 12% 94%,rgba(255,255,255,.30),transparent 42%);
+    radial-gradient(circle at 82% 6%,rgba(255,255,255,.42),transparent 44%),
+    radial-gradient(circle at 12% 94%,rgba(255,255,255,.22),transparent 42%);
 }
 .lhero-in{position:relative;display:flex;align-items:stretch}
 .lhero-txt{position:relative;z-index:2;flex:1 1 58%;min-width:0;padding:24px 10px 26px 24px}
@@ -138,7 +138,7 @@ body{
 }
 .ld-badge{
   display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:7px;
-  background:linear-gradient(160deg,#FFB84D,#FF7F26);
+  background:linear-gradient(160deg,var(--hl1,#FFB84D),var(--hl2,#FF7F26));
   font-size:12px;font-weight:900;letter-spacing:.5px;text-shadow:none;
   box-shadow:0 4px 12px -3px rgba(208,96,10,.65);
 }
@@ -176,8 +176,8 @@ body{
   margin-top:18px;display:inline-flex;align-items:center;gap:7px;
   border:0;cursor:pointer;padding:12px 26px;border-radius:999px;
   font-family:inherit;font-size:14px;font-weight:900;letter-spacing:.4px;color:#fff;
-  background:linear-gradient(135deg,#FF7FB0,#F0437C);
-  box-shadow:0 12px 24px -10px rgba(232,52,112,.9),inset 0 1px 0 rgba(255,255,255,.42);
+  background:linear-gradient(135deg,var(--hb1,#FF7FB0),var(--hb2,#F0437C));
+  box-shadow:0 12px 24px -10px var(--hbs,rgba(232,52,112,.9)),inset 0 1px 0 rgba(255,255,255,.42);
   transition:transform .16s,filter .16s;
 }
 .lbtn:hover{filter:brightness(1.05)}
@@ -194,6 +194,33 @@ body{
   width:100%;height:auto;display:block;border-radius:16px;
   border:3px solid #fff;box-shadow:0 10px 24px -16px rgba(40,92,120,.9);
 }
+/* 职业一览 */
+.ljobs{margin:22px 0 6px}
+.ljobs-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.ljobs-h h2{font-size:16px;font-weight:900}
+.ljobs-h span{font-size:11.5px;color:var(--ink2)}
+.jgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.jcard{
+  background:#fff;border:2px solid var(--line);border-radius:16px;overflow:hidden;
+  box-shadow:0 8px 20px -16px rgba(80,50,30,.45);
+}
+.jcard img{width:100%;height:auto;display:block;aspect-ratio:1.51/1;object-fit:cover;object-position:center top}
+.jbody{padding:9px 11px 11px}
+.jbody b{display:block;font-size:13.5px;font-weight:900}
+.jbody em{display:block;font-style:normal;font-size:11px;color:var(--ink2);margin-top:2px;line-height:1.5}
+.jbody i{
+  display:inline-block;font-style:normal;margin-top:6px;
+  font-size:10px;font-weight:800;color:var(--ac);
+  background:var(--ac-soft);border-radius:6px;padding:2px 7px;
+  font-variant-numeric:tabular-nums;
+}
+/* 登录界面实拍 */
+.lshot{margin:18px 0 4px}
+.lshot img{
+  width:100%;height:auto;display:block;border-radius:18px;
+  border:3px solid #fff;box-shadow:0 12px 26px -18px rgba(40,60,90,.9);
+}
+.lshot figcaption{margin-top:8px;text-align:center;font-size:11.5px;color:var(--ink2)}
 /* 预约弹层 */
 .bk{
   position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:20px;
@@ -250,6 +277,13 @@ body{
   .cd-u em{font-size:18px}
   .lbtn{width:100%;justify-content:center;padding:12px 18px}
   .lfeat{gap:8px}
+  .jgrid{grid-template-columns:1fr 1fr;gap:8px}
+  .jbody{padding:8px 9px 10px}
+  .jbody b{font-size:12.5px}
+  .jbody em{font-size:10.5px;margin-top:1px}
+  .jbody i{font-size:9.5px;margin-top:5px}
+  .ljobs-h h2{font-size:15px}
+  .lshot img{border-radius:14px}
 }
 
 @media (max-width:560px){
@@ -296,6 +330,7 @@ body{
   <p class="intro">首款萌世代官方正版，经典露娜IP回归：自由转职、社交满格，情侣配对与家族玩法原汁原味。12 月 10 日公测——开服前把魔附、摆摊、挂机与转职加点先看明白，上线直接照着做。</p>
 
   <section class="facts"><div class="fact"><span class="fk">平台</span><span class="fv">PC 端游</span></div><div class="fact"><span class="fk">公测</span><span class="fv">2026.12.10（以官方公告为准）</span></div><div class="fact"><span class="fk">核心特色</span><span class="fv">自由转职 · 社交满格</span></div><div class="fact"><span class="fk">IP 背景</span><span class="fv">经典露娜正统续作</span></div></section>
+
 
   <section class="list">
     <h2>露娜2：拾光之约 · 全部 5 篇<small>点开任意一篇直接展开全文</small></h2>
@@ -363,7 +398,7 @@ body{
     <button class="bk-x" type="button" onclick="closeBooking()" aria-label="关闭">×</button>
     <p class="bk-eyebrow">PRE-REGISTER</p>
     <h3 id="bkTitle">预约公测 · 领预约礼包</h3>
-    <p class="bk-desc">加客服微信，发送「露娜2」即可登记预约、领取预约礼包，12.10 开服当天还会收到上线提醒。</p>
+    <p class="bk-desc">加客服微信，发送「拾光之约」即可领取礼包，开服当天还会收到上线提醒。</p>
     <div class="bk-id"><span>LYLOVEZLL1314999</span><button type="button" onclick="copyWx(this)">复制</button></div>
     <p class="bk-tip" id="bkTip">点「复制」后到微信搜索添加</p>
     <a class="bk-link" href="https://luna2.8zy.com" target="_blank" rel="noopener noreferrer">或前往官网预约页 →</a>
