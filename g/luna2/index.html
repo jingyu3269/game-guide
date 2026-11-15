@@ -245,22 +245,27 @@ body{
 .bk-desc{margin-top:8px;font-size:12.5px;line-height:1.75;color:#6B7A6C}
 .bk-id{
   margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:8px;
-  background:#F4FAFD;border:1.5px dashed #B7D8E8;border-radius:14px;padding:9px 12px;
+  width:100%;box-sizing:border-box;font-family:inherit;text-align:left;
+  background:#F4FAFD;border:1.5px dashed #B7D8E8;border-radius:14px;padding:10px 12px;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:background .16s,border-color .16s,transform .12s;
 }
+.bk-id:hover{background:#EAF5FB;border-color:#8FC7E0}
+.bk-id:active{transform:scale(.985)}
+.bk-id:focus{outline:none}
+.bk-id:focus-visible{outline:2px solid #2C7A9E;outline-offset:2px}
+.bk-id.done{background:#EAF9F1;border-color:#9FDCBB}
 .bk-id span{
   font-size:14.5px;font-weight:900;color:#2C7A9E;letter-spacing:.6px;
-  font-variant-numeric:tabular-nums;
+  font-variant-numeric:tabular-nums;word-break:break-all;
 }
-.bk-id button{
-  border:0;background:#2C7A9E;color:#fff;font-size:12px;font-weight:800;
-  border-radius:999px;padding:6px 14px;cursor:pointer;font-family:inherit;
+.bk-id em{
+  flex:0 0 auto;font-style:normal;font-size:11.5px;font-weight:800;color:#2C7A9E;
+  background:#fff;border:1.5px solid #B7D8E8;border-radius:999px;padding:5px 12px;
+  white-space:nowrap;
 }
-.bk-tip{margin-top:8px;font-size:11.5px;color:#B7A597;text-align:center}
-.bk-link{
-  display:block;margin-top:12px;padding:11px 0 14px;text-align:center;
-  font-size:12px;font-weight:700;color:#2C7A9E;text-decoration:none;
-  border-top:1.5px solid #F0E4D6;
-}
+.bk-id.done em{color:#1E9A63;border-color:#9FDCBB}
+.bk-tip{margin:10px 0 16px;font-size:11.5px;color:#B7A597;text-align:center;line-height:1.6}
 @media (max-width:620px){
   .lhero{border-radius:20px}
   .lhero-in{flex-direction:column-reverse}
@@ -399,9 +404,8 @@ body{
     <p class="bk-eyebrow">PRE-REGISTER</p>
     <h3 id="bkTitle">预约公测 · 领预约礼包</h3>
     <p class="bk-desc">加客服微信，发送「拾光之约」即可领取礼包，开服当天还会收到上线提醒。</p>
-    <div class="bk-id"><span>LYLOVEZLL1314999</span><button type="button" onclick="copyWx(this)">复制</button></div>
-    <p class="bk-tip" id="bkTip">点「复制」后到微信搜索添加</p>
-    <a class="bk-link" href="https://luna2.8zy.com" target="_blank" rel="noopener noreferrer">或前往官网预约页 →</a>
+    <button class="bk-id" type="button" onclick="copyWx(this)"><span>LYLOVEZLL1314999</span><em class="bk-copy">点击复制</em></button>
+    <p class="bk-tip" id="bkTip">点一下上面的微信号即可复制，再到微信搜索添加</p>
   </div>
 </div>
 <footer class="foot">
@@ -462,10 +466,12 @@ function closeBooking(){
 }
 function copyWx(btn){
   var id = "LYLOVEZLL1314999";
+  var label = btn ? btn.querySelector('.bk-copy') : null;
   function ok(){
     var tip = document.getElementById('bkTip');
     if (tip) tip.textContent = '已复制：' + id + ' · 打开微信搜索添加';
-    if (btn) btn.textContent = '已复制 ✓';
+    if (label) label.textContent = '已复制 ✓';
+    if (btn && btn.classList) btn.classList.add('done');
   }
   function fallback(){
     var ta = document.createElement('textarea');
