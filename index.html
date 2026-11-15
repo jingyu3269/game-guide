@@ -2519,10 +2519,9 @@ html.poster-open,html.poster-open body{overflow:hidden}
 
 /* ========== 页脚访问统计 ========== */
 .foot-stats{
-  display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;
-  gap:2px;margin:14px auto 8px;max-width:100%;padding:0 12px;
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:2px 2px;margin:15px auto 6px;max-width:100%;padding:0 12px;
   font-size:12px;font-weight:600;color:#8E7A6B;letter-spacing:.2px;
-  white-space:nowrap;
   opacity:0;transform:translateY(6px);
   transition:opacity .45s ease,transform .45s ease;
 }
@@ -2531,11 +2530,22 @@ html.poster-open,html.poster-open body{overflow:hidden}
   width:13.5px;height:13.5px;flex:0 0 auto;
   color:#B8A192;margin-right:4px;
 }
-.foot-stats .fs-sep{color:#D6C3B4;margin:0 2px;font-weight:400}
+.foot-stats .fs-sep{color:#D6C3B4;margin:0 4px;font-weight:400}
 .foot-stats b{
   font-size:13.5px;font-weight:900;color:#F0578E;
   letter-spacing:.4px;font-variant-numeric:tabular-nums;
   margin:0 2px;
+}
+.foot-stats-link{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:2px;font-size:11px;color:#C0A99A;text-decoration:none;
+  border-bottom:1px dashed #E9D9CB;padding-bottom:1px;
+}
+.foot-stats-link:hover{color:#F0578E;border-bottom-color:#FFC2D9}
+@media (max-width:400px){
+  .foot-stats{font-size:11px;padding:0 6px}
+  .foot-stats b{font-size:12.5px}
+  .foot-stats .fs-sep{margin:0 2px}
 }
 .foot-stats-link{
   display:inline-flex;align-items:center;gap:4px;
@@ -3038,7 +3048,6 @@ html.poster-open,html.poster-open body{overflow:hidden}
     <span class="fs-sep">·</span>
     <span>访客</span><b id="stUv">—</b><span>人</span>
   </div>
-  <a class="foot-stats-link" href="stats.html">📊 站点数据</a>
   <p class="foot-note">本页面为推广信息聚合，游戏内容版权归各开发商所有</p>
 </footer>
 
@@ -5502,21 +5511,28 @@ window.Stat = (function(){
   function req(kind, key){
     var k = kind + '|' + key;
     if (cache[k] !== undefined) return Promise.resolve(cache[k]);
-    var ctl = window.AbortController ? new AbortController() : null;
-    var timer = ctl ? setTimeout(function(){ ctl.abort(); }, TIMEOUT) : null;
-    var url = API + '/' + kind + '/' + NS + '/' + encodeURIComponent(key);
-    return fetch(url, ctl ? { cache:'no-store', signal: ctl.signal } : { cache:'no-store' })
-      .then(function(r){ return r.ok ? r.json() : null; })
-      .then(function(d){
-        if (timer) clearTimeout(timer);
-        var v = (d && typeof d.value === 'number') ? d.value : null;
-        if (v !== null) cache[k] = v;
-        return v;
-      })
-      .catch(function(){
-        if (timer) clearTimeout(timer);
-        return null;
-      });
+    function once(){
+      var ctl = window.AbortController ? new AbortController() : null;
+      var timer = ctl ? setTimeout(function(){ ctl.abort(); }, TIMEOUT) : null;
+      var url = API + '/' + kind + '/' + NS + '/' + encodeURIComponent(key);
+      return fetch(url, ctl ? { cache:'no-store', signal: ctl.signal } : { cache:'no-store' })
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (timer) clearTimeout(timer);
+          var v = (d && typeof d.value === 'number') ? d.value : null;
+          if (v !== null) cache[k] = v;
+          return v;
+        })
+        .catch(function(){
+          if (timer) clearTimeout(timer);
+          return null;
+        });
+    }
+    return once().then(function(v){
+      // 只对「读」重试一次，hit 会自增，重试可能重复计数
+      if (v !== null || kind !== 'get') return v;
+      return new Promise(function(res){ setTimeout(res, 800); }).then(once);
+    });
   }
   function countUp(el, to){
     el.textContent = fmt(to);           // 先把真实数字写上，动画失败也不会显示 —
@@ -5543,17 +5559,32 @@ window.Stat = (function(){
     });
   }
 
-  /* 页脚：累计访问 / 今日访问 / 独立访客 */
+  /* 本地缓存：接口偶尔抽风时，先把上次的数字垫上，不留空白 */
+  function lsGet(k){
+    try { var v = localStorage.getItem('jy_st_' + k); return v === null ? null : Number(v); } catch(e){ return null; }
+  }
+  function lsSet(k, v){
+    try { localStorage.setItem('jy_st_' + k, String(v)); } catch(e){}
+  }
+
+  /* 页脚：本站总访问量 / 访客 */
   function initFoot(){
     var box = document.getElementById('footStats');
     if (!box || !window.fetch) return;
+    var a = document.getElementById('stTotal'),
+        c = document.getElementById('stUv');
+    var cv = lsGet('views'), cu = lsGet('visitors');
+    if (cv !== null && a) a.textContent = fmt(cv);
+    if (cu !== null && c) c.textContent = fmt(cu);
+    if (cv !== null || cu !== null){
+      box.hidden = false;
+      box.classList.add('on');
+    }
     Promise.all([req('hit', 'views'), req('hit', todayKey()), visitor()]).then(function(r){
-      var pv = r[0], day = r[1], uv = r[2];
-      if (pv === null && day === null && uv === null) return;  // 接口挂了就保持隐藏，不留半截数字
-      var a = document.getElementById('stTotal'),
-          c = document.getElementById('stUv');
-      if (pv !== null && a) countUp(a, pv);
-      if (uv !== null && c) countUp(c, uv);
+      var pv = r[0], uv = r[2];
+      if (pv === null && uv === null && cv === null && cu === null) return;  // 全挂了又没缓存，保持隐藏
+      if (pv !== null && a){ countUp(a, pv); lsSet('views', pv); }
+      if (uv !== null && c){ countUp(c, uv); lsSet('visitors', uv); }
       box.hidden = false;
       box.classList.add('on');
     });
