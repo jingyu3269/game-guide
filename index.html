@@ -2420,148 +2420,17 @@ html.poster-open,html.poster-open body{overflow:hidden}
   .read-bar i{transition:none}
   .card-shine{display:none}
 }
-/* ===== 露娜2 推广 START ===== */
-.luna-wrap{max-width:1120px;margin:0 auto}
-.luna-hero{
-  position:relative;overflow:hidden;
-  display:grid;grid-template-columns:1.06fr .94fr;
-  border-radius:30px;
-  background:#3A7DA1;
-  border:1px solid rgba(255,214,150,.26);
-  box-shadow:0 26px 64px rgba(20,62,86,.34);
-}
-.luna-hero::before{
-  content:'';position:absolute;inset:0;pointer-events:none;opacity:.85;
-  background-image:
-    radial-gradient(1.7px 1.7px at 18% 24%,rgba(255,255,255,.95),transparent 60%),
-    radial-gradient(1.4px 1.4px at 63% 12%,rgba(255,244,214,.9),transparent 60%),
-    radial-gradient(1.2px 1.2px at 42% 61%,rgba(255,255,255,.8),transparent 60%),
-    radial-gradient(1.6px 1.6px at 88% 44%,rgba(255,226,240,.85),transparent 60%),
-    radial-gradient(1.1px 1.1px at 8% 78%,rgba(255,255,255,.75),transparent 60%),
-    radial-gradient(1.3px 1.3px at 72% 84%,rgba(255,240,210,.8),transparent 60%),
-    radial-gradient(1.2px 1.2px at 30% 92%,rgba(255,255,255,.7),transparent 60%),
-    radial-gradient(1.5px 1.5px at 52% 34%,rgba(255,236,255,.7),transparent 60%);
-  background-size:320px 240px;
-}
-.luna-hero::after{
-  content:'';position:absolute;right:-90px;top:-120px;width:420px;height:420px;pointer-events:none;
-  background:radial-gradient(circle,rgba(255,214,160,.28) 0%,rgba(255,190,220,.14) 42%,transparent 68%);
-}
-.lh-body{position:relative;z-index:3;padding:38px 26px 36px 36px;color:#fff}
-.lh-kicker{font-size:11px;letter-spacing:2.4px;font-weight:800;color:#FFD79E;opacity:.95}
-.lh-title{
-  margin-top:10px;font-size:36px;line-height:1.14;font-weight:800;letter-spacing:1px;
-  background:linear-gradient(180deg,#fff 20%,#FFE6F4 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-}
-.lh-title b{display:inline-block;margin-left:8px;vertical-align:middle;
-  font-size:15px;font-weight:800;letter-spacing:0;padding:5px 12px;border-radius:999px;
-  background:linear-gradient(135deg,#FFB547,#FF5F9E);color:#3A1030;
-  -webkit-text-fill-color:#3A1030;box-shadow:0 6px 16px rgba(255,95,158,.36);
-}
-.lh-desc{margin-top:14px;font-size:13.5px;line-height:1.8;color:rgba(255,255,255,.76)}
-.lh-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
-.lh-badges span{
-  font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:999px;
-  color:#FFE2B6;background:rgba(255,214,150,.1);border:1px solid rgba(255,214,150,.34);
-}
-.lh-cd-label{margin-top:20px;font-size:11.5px;font-weight:700;letter-spacing:1px;color:#FFC6E1}
-.lh-cd{display:flex;gap:8px;margin-top:8px}
-.lh-unit{
-  min-width:58px;padding:8px 6px 7px;text-align:center;border-radius:13px;
-  background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.05));
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
-}
-.lh-unit b{display:block;font-size:23px;line-height:1.1;font-weight:800;color:#FFE9B8;
-  font-variant-numeric:tabular-nums;font-family:"DIN Alternate","PingFang SC",sans-serif}
-.lh-unit i{display:block;margin-top:2px;font-size:10px;font-style:normal;color:rgba(255,255,255,.55);letter-spacing:.6px}
-.lh-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.lh-btn{
-  font-size:14.5px;font-weight:800;padding:13px 24px;border-radius:26px;color:#fff;
-  background:linear-gradient(135deg,#FF9EC4,#FF5F9E);
-  box-shadow:0 10px 24px rgba(255,95,158,.42);
-  transition:transform .16s;
-}
-.lh-btn:active{transform:translateY(2px)}
-.lh-btn2{
-  font-size:14px;font-weight:700;padding:13px 20px;border-radius:26px;
-  color:#FFE9C6;background:rgba(255,255,255,.09);
-  border:1px solid rgba(255,214,150,.42);
-  transition:transform .16s,background .2s;
-}
-.lh-btn2:active{transform:translateY(2px)}
-.lh-art{position:relative;min-height:100%;overflow:hidden}
-.lh-art img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
-}
-.lh-art::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;z-index:2;pointer-events:none;
-  width:28%;
-  background:linear-gradient(to right,
-    #3A7DA1 0%,
-    rgba(74,138,170,.94) 26%,
-    rgba(104,164,192,.70) 52%,
-    rgba(150,200,222,.32) 78%,
-    rgba(186,222,238,0) 100%);
-}
-.lh-art::after{
-  content:'';position:absolute;inset:0;z-index:1;
-  background:rgba(58,125,161,.05);
-}
-.luna-feats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:20px}
-.luna-feat{
-  grid-column:span 3;position:relative;overflow:hidden;border-radius:18px;
-  background:#1B4055;border:1px solid rgba(120,70,40,.14);
-  box-shadow:0 12px 28px rgba(110,70,50,.16);
-  transition:transform .3s,box-shadow .3s;
-}
-.luna-feat img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
-.luna-feat:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(110,70,50,.24)}
-.luna-shots{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-.luna-shot{position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(120,70,40,.16);background:#1a1024}
-.luna-shot img{width:100%;height:auto;display:block;aspect-ratio:4/3;object-fit:cover;object-position:center}
-.luna-shot span{
-  position:absolute;left:9px;bottom:9px;padding:4px 10px;border-radius:999px;
-  font-size:11px;font-weight:600;color:#fff;
-  background:rgba(20,8,30,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
-  border:1px solid rgba(255,255,255,.18);
-}
-.luna-note{margin-top:14px;text-align:center;font-size:11.5px;color:var(--ink-soft)}
+/* ===== 露娜2 分站入口胶囊 ===== */
 .luna-jump{
   font-size:13.5px;font-weight:700;padding:13px 22px;border-radius:26px;color:#fff;
   background:linear-gradient(135deg,#8A6BF0,#FF5F9E);
   box-shadow:0 6px 18px rgba(138,107,240,.36);
-  display:flex;align-items:center;gap:7px;
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  text-decoration:none;cursor:pointer;font-family:inherit;
+  transition:transform .16s,filter .16s,box-shadow .16s;
 }
+.luna-jump:hover{filter:brightness(1.05);box-shadow:0 8px 22px rgba(138,107,240,.46)}
 .luna-jump:active{transform:translateY(2px)}
-@media (max-width:860px){
-  .luna-hero{grid-template-columns:1fr}
-  .lh-art{order:-1;min-height:0;aspect-ratio:940/764}
-  .lh-art img{object-position:center top}
-  .lh-art::before{display:none}
-  .lh-art::after{
-    z-index:2;
-    background:linear-gradient(180deg,rgba(58,125,161,0) 0%,rgba(58,125,161,0) 52%,rgba(58,125,161,.55) 82%,#3A7DA1 100%);
-  }
-  .lh-body{padding:16px 20px 28px}
-  .lh-title{font-size:27px}
-  .lh-desc{font-size:12.5px}
-  .lh-unit{min-width:0;flex:1;padding:7px 2px 6px}
-  .lh-unit b{font-size:19px}
-  .lh-cd{gap:6px}
-  .lh-cta{display:grid;grid-template-columns:1fr;gap:9px}
-  .lh-btn{width:100%;text-align:center;padding:13px 14px;font-size:14px}
-  .lh-btn2{width:100%;text-align:center;padding:12px 14px;font-size:13px}
-  .lh-badges{gap:6px;margin-top:13px}
-  .lh-badges span:nth-child(n+5){display:none}
-  .luna-feats{grid-template-columns:repeat(2,1fr);gap:10px}
-  .luna-feat{grid-column:span 1}
-  .luna-shots{grid-template-columns:1fr;gap:10px}
-  .luna-shot img{aspect-ratio:16/10}
-}
-/* ===== 露娜2 推广 END ===== */
 
 /* ========== 大屏加宽（≥1200px） ========== */
 @media (min-width:1200px){
@@ -2699,7 +2568,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
       复制客服微信
     </button>
     <button class="btn-ghost" onclick="document.getElementById('articles').scrollIntoView()">搜攻略</button>
-    <button class="btn-ghost luna-jump" onclick="document.getElementById('luna2').scrollIntoView()">🌙 露娜2 12.10 公测</button>
+    <a class="btn-ghost luna-jump" href="g/luna2/">🌙 露娜2 12.10 公测</a>
   </div>
   <div class="follow-card">
     <div class="follow-txt">
@@ -2864,72 +2733,6 @@ html.poster-open,html.poster-open body{overflow:hidden}
 
   </div>
 </section>
-
-<!--LUNA2-START-->
-<!-- ===== 露娜2：拾光之约 推广 ===== -->
-<section class="section" id="luna2">
-  <div class="section-title">
-    <div class="tag">新游预约</div>
-    <h2>露娜2：拾光之约</h2>
-    <p>经典萌系 MMO 归来 · PC 端游 · 12.10 公测</p>
-  </div>
-
-  <div class="luna-wrap">
-    <div class="luna-hero">
-      <div class="lh-body">
-        <div class="lh-kicker">LUNA ONLINE · 十六年之约</div>
-        <div class="lh-title">拾光之约<b>12.10 公测</b></div>
-        <p class="lh-desc">从阿克勒平原的风车下出发，人类与精灵两族、战士/魔法师/刺客三职业起步。副本、野外 BOSS、摆摊交易，再加上农场种菜、河边钓鱼、小屋装扮。不魔改、原汁原味，当年一起熬夜的那批人，该回来了。</p>
-        <div class="lh-badges">
-          <span>PC 端游</span><span>原汁原味</span><span>Q 萌画风</span><span>自由转职</span><span>生活玩法</span><span>约会配对</span>
-        </div>
-        <div class="lh-cd-label">距 12.10 公测（暂定）</div>
-        <div class="lh-cd" id="lunaCd">
-          <div class="lh-unit"><b id="lcdD">--</b><i>天</i></div>
-          <div class="lh-unit"><b id="lcdH">--</b><i>时</i></div>
-          <div class="lh-unit"><b id="lcdM">--</b><i>分</i></div>
-          <div class="lh-unit"><b id="lcdS">--</b><i>秒</i></div>
-        </div>
-        <div class="lh-cta">
-          <button class="lh-btn" onclick="copyWechat('露娜2：拾光之约')">预约公测 · 领预约礼包</button>
-        </div>
-      </div>
-      <div class="lh-art">
-        <img src="assets/luna-hero.webp" alt="露娜2：拾光之约 官方水彩宣传图" loading="lazy" decoding="async">
-      </div>
-    </div>
-
-    <div class="luna-feats">
-      <div class="luna-feat"><img src="assets/luna-f1.webp" alt="社交满格：家族温暖、亲密配对、多重社交" loading="lazy" decoding="async"></div>
-      <div class="luna-feat"><img src="assets/luna-f2.webp" alt="自由转职：技能自由、转职丰富" loading="lazy" decoding="async"></div>
-      <div class="luna-feat"><img src="assets/luna-f3.webp" alt="超萌可爱：画风Q萌，重温青春印象" loading="lazy" decoding="async"></div>
-      <div class="luna-feat"><img src="assets/luna-f4.webp" alt="乐享欢闹：超多玩法自由选择" loading="lazy" decoding="async"></div>
-    </div>
-
-    <p class="luna-note">游戏画面与宣传图来自官方素材；公测时间以官方最终公告为准，预约后客服第一时间通知开服。</p>
-  </div>
-
-  <script>
-  (function(){
-    var target = Date.parse('2026-12-10T00:00:00+08:00');
-    var dD = document.getElementById('lcdD'), dH = document.getElementById('lcdH'),
-        dM = document.getElementById('lcdM'), dS = document.getElementById('lcdS');
-    function pad(n){ return n < 10 ? '0' + n : '' + n; }
-    function tick(){
-      var left = target - Date.now();
-      if(left < 0) left = 0;
-      var s = Math.floor(left / 1000);
-      dD.textContent = Math.floor(s / 86400);
-      dH.textContent = pad(Math.floor(s % 86400 / 3600));
-      dM.textContent = pad(Math.floor(s % 3600 / 60));
-      dS.textContent = pad(s % 60);
-    }
-    tick();
-    setInterval(tick, 1000);
-  })();
-  </script>
-</section>
-<!--LUNA2-END-->
 
 <!--LUCK-START-->
 <!-- ===== 今日幸运游戏抽签 ===== -->
@@ -3231,7 +3034,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
 <div class="side-rail right">
   <nav class="sr-nav" aria-label="快捷导航">
     <button onclick="srGo('games')"><span class="e">🎮</span>手游库</button>
-    <button onclick="srGo('luna2')"><span class="e">🌙</span>新游预约</button>
+    <button onclick="location.href='g/luna2/'"><span class="e">🌙</span>露娜2分站</button>
     <button onclick="srGo('articles')"><span class="e">📚</span>攻略库</button>
     <button onclick="srGo('faq')"><span class="e">❓</span>常见问题</button>
     <button onclick="srGo('service')"><span class="e">🎁</span>客服福利</button>
