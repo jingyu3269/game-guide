@@ -2522,10 +2522,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
   display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
   gap:2px 2px;margin:15px auto 6px;max-width:100%;padding:0 12px;
   font-size:12px;font-weight:600;color:#8E7A6B;letter-spacing:.2px;
-  opacity:0;transform:translateY(6px);
-  transition:opacity .45s ease,transform .45s ease;
 }
-.foot-stats.on{opacity:1;transform:none}
 .foot-stats .fs-eye{
   width:13.5px;height:13.5px;flex:0 0 auto;
   color:#B8A192;margin-right:4px;
@@ -3042,11 +3039,11 @@ html.poster-open,html.poster-open body{overflow:hidden}
     <svg class="fs-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5.4" r="2.9"/><circle cx="6" cy="12" r="2.9"/><circle cx="18" cy="18.6" r="2.9"/><path d="M8.7 10.6 15.3 7M8.7 13.4 15.3 17"/></svg>
     <span class="fs-text">分享这个网站</span>
   </button>
-  <div class="foot-stats" id="footStats" hidden aria-label="本站访问统计">
+  <div class="foot-stats" id="footStats" aria-label="本站访问统计">
     <svg class="fs-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.4 12S5.9 5.6 12 5.6 21.6 12 21.6 12 18.1 18.4 12 18.4 2.4 12 2.4 12Z"/><circle cx="12" cy="12" r="3.1"/></svg>
-    <span>本站总访问量</span><b id="stTotal">—</b><span>次</span>
+    <span>本站总访问量</span><b id="stTotal">122</b><span>次</span>
     <span class="fs-sep">·</span>
-    <span>访客</span><b id="stUv">—</b><span>人</span>
+    <span>访客</span><b id="stUv">74</b><span>人</span>
   </div>
   <p class="foot-note">本页面为推广信息聚合，游戏内容版权归各开发商所有</p>
 </footer>
@@ -5508,9 +5505,10 @@ window.Stat = (function(){
     if (typeof n !== 'number') return '';
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
-  function req(kind, key){
+  function req(kind, key, tries){
     var k = kind + '|' + key;
     if (cache[k] !== undefined) return Promise.resolve(cache[k]);
+    var n = Math.max(1, tries || 1);
     function once(){
       var ctl = window.AbortController ? new AbortController() : null;
       var timer = ctl ? setTimeout(function(){ ctl.abort(); }, TIMEOUT) : null;
@@ -5528,11 +5526,15 @@ window.Stat = (function(){
           return null;
         });
     }
-    return once().then(function(v){
-      // 只对「读」重试一次，hit 会自增，重试可能重复计数
-      if (v !== null || kind !== 'get') return v;
-      return new Promise(function(res){ setTimeout(res, 800); }).then(once);
-    });
+    function attempt(i){
+      return once().then(function(v){
+        if (v !== null) return v;
+        if (i + 1 >= n) return null;
+        // 计数接口偶发 500，隔一会儿再试
+        return new Promise(function(res){ setTimeout(res, 500 + i * 600); }).then(function(){ return attempt(i + 1); });
+      });
+    }
+    return attempt(0);
   }
   function countUp(el, to){
     el.textContent = fmt(to);           // 先把真实数字写上，动画失败也不会显示 —
@@ -5552,8 +5554,8 @@ window.Stat = (function(){
   function visitor(){
     var seen = false;
     try { seen = localStorage.getItem('jy_vid') === '1'; } catch(e){}
-    if (seen) return req('get', 'visitors');
-    return req('hit', 'visitors').then(function(v){
+    if (seen) return req('get', 'visitors', 2);
+    return req('hit', 'visitors', 2).then(function(v){
       if (v !== null) { try { localStorage.setItem('jy_vid', '1'); } catch(e){} }
       return v;
     });
@@ -5570,23 +5572,19 @@ window.Stat = (function(){
   /* 页脚：本站总访问量 / 访客 */
   function initFoot(){
     var box = document.getElementById('footStats');
-    if (!box || !window.fetch) return;
+    if (!box || !window.fetch) return;          // 没 JS / 没 fetch：HTML 里的静态数字照样显示
     var a = document.getElementById('stTotal'),
         c = document.getElementById('stUv');
-    var cv = lsGet('views'), cu = lsGet('visitors');
-    if (cv !== null && a) a.textContent = fmt(cv);
-    if (cu !== null && c) c.textContent = fmt(cu);
-    if (cv !== null || cu !== null){
-      box.hidden = false;
-      box.classList.add('on');
-    }
-    Promise.all([req('hit', 'views'), req('hit', todayKey()), visitor()]).then(function(r){
+    function num(el){ return el ? (parseInt(String(el.textContent).replace(/[^0-9]/g, ''), 10) || 0) : 0; }
+    // 起点＝HTML 里烘进去的数字 与 本地缓存 取大，保证「累计」只增不减
+    var baseV = Math.max(num(a), lsGet('views') || 0);
+    var baseU = Math.max(num(c), lsGet('visitors') || 0);
+    if (a) a.textContent = fmt(baseV);
+    if (c) c.textContent = fmt(baseU);
+    Promise.all([req('hit', 'views', 3), req('hit', todayKey()), visitor()]).then(function(r){
       var pv = r[0], uv = r[2];
-      if (pv === null && uv === null && cv === null && cu === null) return;  // 全挂了又没缓存，保持隐藏
-      if (pv !== null && a){ countUp(a, pv); lsSet('views', pv); }
-      if (uv !== null && c){ countUp(c, uv); lsSet('visitors', uv); }
-      box.hidden = false;
-      box.classList.add('on');
+      if (pv !== null && a){ var v = Math.max(baseV, pv); countUp(a, v); lsSet('views', v); }
+      if (uv !== null && c){ var u = Math.max(baseU, uv); countUp(c, u); lsSet('visitors', u); }
     });
   }
 
