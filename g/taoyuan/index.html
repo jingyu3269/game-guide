@@ -116,10 +116,17 @@ body{
 .foot a{color:#B7A597;text-decoration:none;border-bottom:1px dashed #E0D2C4}
 .foot a:hover{color:var(--ac)}
 
+@media (max-width:560px){
+  .hero-head h1{font-size:21px}
+  .facts{grid-template-columns:1fr 1fr;gap:8px}
+  .fact{padding:9px 11px}
+  .fv{font-size:12px}
+  .e-dek{-webkit-line-clamp:2}
+}
 /*JOBS-CSS-START*/
 /* 职业图鉴 */
 .jobs{margin:4px 0 22px}
-.jobs-head h2{font-size:16px;display:flex;align-items:baseline;gap:8px}
+.jobs-head h2{font-size:16px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .jobs-head h2 small{font-size:11.5px;color:var(--ink2);font-weight:400}
 .jobs-head p{font-size:11.5px;color:var(--ink2);margin-top:3px}
 .jv-group{margin-top:14px}
@@ -131,7 +138,7 @@ body{
   background:#fff;border:2px solid var(--line);border-radius:16px;padding:9px;
   transition:border-color .16s,box-shadow .16s,transform .16s;
 }
-.jv-card:hover{border-color:#F6B9CB;box-shadow:0 10px 22px -16px rgba(224,69,123,.5);transform:translateY(-2px)}
+.jv-card:hover{border-color:var(--ac);box-shadow:0 10px 22px -16px rgba(0,0,0,.35);transform:translateY(-2px)}
 .jv-shot{
   position:relative;display:block;border-radius:10px;overflow:hidden;
   background:#1B1526;border:1.5px solid #fff;
@@ -159,6 +166,18 @@ body{
 .jv-desc{font-size:11px;color:var(--ink2);line-height:1.6;margin-top:7px}
 .jv-adv{font-size:10px;color:#B7A597;margin-top:6px}
 .jv-adv b{color:var(--ac);font-weight:800}
+/* 五维数值条（精灵永恒） */
+.jv-nums{margin:8px 0 0}
+.jv-nums li{display:grid;grid-template-columns:34px 1fr 26px;align-items:center;gap:7px;padding:2px 0}
+.jv-nums .k{font-size:10.5px;color:var(--ink2)}
+.jv-nums .bar{height:5px;border-radius:99px;background:var(--ac-soft);overflow:hidden}
+.jv-nums .bar i{display:block;height:100%;border-radius:99px;background:var(--ac);opacity:.85}
+.jv-nums .v{font-size:11px;font-weight:900;color:var(--ac);font-variant-numeric:tabular-nums;text-align:right}
+.jv-skills{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.jv-skills span{
+  font-size:9.5px;font-weight:800;color:var(--ink2);
+  background:#F7F3EC;border-radius:6px;padding:2px 6px;
+}
 
 @media (max-width:560px){
   .hero-head h1{font-size:21px}
@@ -191,6 +210,7 @@ body{
 
   <section class="facts"><div class="fact"><span class="fk">游戏类型</span><span class="fv">Q版三国 · 回合策略</span></div><div class="fact"><span class="fk">平台</span><span class="fv">安卓 / iOS / PC 三端互通</span></div><div class="fact"><span class="fk">核心特色</span><span class="fv">云职业转职 · 将星收集</span></div><div class="fact"><span class="fk">重点玩法</span><span class="fv">赛季沙盘 · 联盟攻城</span></div></section>
 
+
   <!--JOBS-SECTION-START-->
   <section class="jobs">
     <div class="jobs-head">
@@ -215,7 +235,7 @@ body{
       <li><span>辅助能力</span><i class="jv-stars">★★</i></li>
       </ul>
       <p class="jv-desc">精近战物理攻击，并能在关键时刻保护同伴不受伤害。</p>
-    <p class="jv-adv">后续可转 <b>虎卫 · 禁卫 · 骠骑</b></p>
+      <p class="jv-adv">后续可转 <b>虎卫 · 禁卫 · 骠骑</b></p>
     </article>
     <article class="jv-card">
       <a class="jv-shot" href="../../assets/taoyuan-job-xiake.webp" target="_blank" rel="noopener">
@@ -232,7 +252,7 @@ body{
       <li><span>辅助能力</span><i class="jv-stars">½</i></li>
       </ul>
       <p class="jv-desc">精近战物理攻击，以速度和闪避能力取胜。</p>
-    <p class="jv-adv">后续可转 <b>刺客 · 剑客 · 先登死士</b></p>
+      <p class="jv-adv">后续可转 <b>刺客 · 剑客 · 先登死士</b></p>
     </article>
     <article class="jv-card">
       <a class="jv-shot" href="../../assets/taoyuan-job-kongxian.webp" target="_blank" rel="noopener">
@@ -249,7 +269,7 @@ body{
       <li><span>辅助能力</span><i class="jv-stars">½</i></li>
       </ul>
       <p class="jv-desc">精远程物理攻击，可以直接攻击敌方后排单位。</p>
-    <p class="jv-adv">后续可转 <b>强弓 · 劲弩 · 白马义从</b></p>
+      <p class="jv-adv">后续可转 <b>强弓 · 劲弩 · 白马义从</b></p>
     </article>
     <article class="jv-card">
       <a class="jv-shot" href="../../assets/taoyuan-job-baijia.webp" target="_blank" rel="noopener">
@@ -266,7 +286,7 @@ body{
       <li><span>辅助能力</span><i class="jv-stars">★★★</i></li>
       </ul>
       <p class="jv-desc">精远程计策攻击，同时还能为团队提供足够的治疗。</p>
-    <p class="jv-adv">后续可转 <b>学士 · 策士 · 道士</b></p>
+      <p class="jv-adv">后续可转 <b>学士 · 策士 · 道士</b></p>
     </article>
       </div>
     </div>
