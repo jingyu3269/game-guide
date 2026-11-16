@@ -2575,15 +2575,23 @@ html.poster-open,html.poster-open body{overflow:hidden}
 /* 用 @property 注册角度，才能让 conic-gradient 的起始角连续插值 → 光带真的在转 */
 @property --flA{syntax:'<angle>';inherits:false;initial-value:0deg}
 @keyframes flowBorder{to{--flA:360deg}}
-.btn-ghost,.game-cover,.article-share,.faq-cta,.svc-ticket,.game-sub,.game-cd,.game-tips,.filter-chip,.article-game,.rel-link,.sr-brand,.sound-toggle,.luck-btn,.search-box,.faq-item,.luck-card,.hero-img-wrap{position:relative}
+.btn-ghost,.btn-primary,.game-cover,.article-share,.faq-cta,.svc-ticket,.game-sub,.game-cd,.game-tips,.filter-chip,.article-game,.rel-link,.sr-brand,.sound-toggle,.luck-btn,.search-box,.faq-item,.luck-card,.hero-img-wrap,
+.nav-cta,.article-toggle,.load-more,.sr-nav,.foot-chip,.no-result,.sc-cancel,.svc-btn,.foot-share,.share-card{position:relative}
 /* 注意：伪元素 inset:0 是对齐到内边距盒的，所以要向外扩出「边框宽度」才能盖住原边框 */
 .btn-ghost::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.faq-item::after,
+.foot-chip::after,.no-result::after,.sc-cancel::after,.sr-nav::after,
 .sr-brand::before{inset:-2px;padding:2.2px}
 .search-box::after{inset:0;padding:2.8px}
+.btn-primary::after{inset:0;padding:2.6px}
+.nav-cta::after,.article-toggle::after,.load-more::after{inset:0;padding:2.4px}
+.foot-share::after{inset:0;padding:2.6px}
+.share-card::after{inset:0;padding:2.4px}
+.svc-btn::before{inset:0;padding:2.6px}
 .game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after{inset:-1.5px;padding:1.7px}
 .sound-toggle::before,.luck-btn::before,.luck-card::after{inset:-3px;padding:3.2px}
-.btn-ghost::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after,
+.btn-ghost::after,.btn-primary::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after,
 .search-box::after,.faq-item::after,.luck-card::after,
+.nav-cta::after,.article-toggle::after,.load-more::after,.sr-nav::after,.foot-chip::after,.no-result::after,.sc-cancel::after,.svc-btn::before,.foot-share::after,.share-card::after,
 .sr-brand::before,.sound-toggle::before,.luck-btn::before{
   content:"";position:absolute;border-radius:inherit;
   --flA:0deg;
@@ -2611,7 +2619,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
   pointer-events:none;
 }
 /* 悬停时光带加速（同参考站） */
-.btn-ghost:hover::after,.article-share:hover::after,.faq-cta:hover::after,.svc-ticket:hover::after,
+.btn-ghost:hover::after,.btn-primary:hover::after,.nav-cta:hover::after,.article-toggle:hover::after,.load-more:hover::after,.svc-btn:hover::before,.sr-nav:hover::after,.article-share:hover::after,.faq-cta:hover::after,.svc-ticket:hover::after,
 .filter-chip:hover::after,.game-sub:hover::after,.rel-link:hover::after,.faq-item:hover::after,
 .sound-toggle:hover::before,.luck-btn:hover::before{animation-duration:2s}
 /* 文章卡 / 关注卡：本身就是渐变框，把边框那一层换成会转的光带（保留各游戏配色） */
@@ -2654,8 +2662,9 @@ html.poster-open,html.poster-open body{overflow:hidden}
 }
 @media (prefers-reduced-motion:reduce){
   .game-card,.article-card,.follow-card,.hero-img-wrap,.game-cover,
-  .btn-ghost::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after,
+  .btn-ghost::after,.btn-primary::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after,
   .search-box::after,.faq-item::after,.luck-card::after,
+  .nav-cta::after,.article-toggle::after,.load-more::after,.sr-nav::after,.foot-chip::after,.no-result::after,.sc-cancel::after,.svc-btn::before,.foot-share::after,.share-card::after,
   .sr-brand::before,.sound-toggle::before,.luck-btn::before{animation:none}
 }
 
