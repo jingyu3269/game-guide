@@ -115,6 +115,7 @@ body{
 .foot{margin-top:22px;text-align:center;font-size:11.5px;color:#B7A597;line-height:1.9}
 .foot a{color:#B7A597;text-decoration:none;border-bottom:1px dashed #E0D2C4}
 .foot a:hover{color:var(--ac)}
+
 @media (max-width:560px){
   .hero-head h1{font-size:21px}
   .facts{grid-template-columns:1fr 1fr;gap:8px}
@@ -122,6 +123,71 @@ body{
   .fv{font-size:12px}
   .e-dek{-webkit-line-clamp:2}
 }
+/*JOBS-CSS-START*/
+/* 职业图鉴 */
+.jobs{margin:4px 0 22px}
+.jobs-head h2{font-size:16px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.jobs-head h2 small{font-size:11.5px;color:var(--ink2);font-weight:400}
+.jobs-head p{font-size:11.5px;color:var(--ink2);margin-top:3px}
+.jv-group{margin-top:14px}
+.jv-glabel{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:900;letter-spacing:.4px;margin-bottom:9px}
+.jv-glabel::before{content:"";width:4px;height:13px;border-radius:2px;background:var(--ac)}
+.jv-glabel em{font-style:normal;font-weight:400;color:var(--ink2);font-size:11px}
+.jv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.jv-card{
+  background:#fff;border:2px solid var(--line);border-radius:16px;padding:9px;
+  transition:border-color .16s,box-shadow .16s,transform .16s;
+}
+.jv-card:hover{border-color:var(--ac);box-shadow:0 10px 22px -16px rgba(0,0,0,.35);transform:translateY(-2px)}
+.jv-shot{
+  position:relative;display:block;border-radius:10px;overflow:hidden;
+  background:#1B1526;border:1.5px solid #fff;
+  box-shadow:0 4px 12px -8px rgba(0,0,0,.5);
+}
+.jv-shot img{width:100%;height:auto;display:block}
+.jv-zoom{
+  position:absolute;right:6px;bottom:6px;
+  font-size:9.5px;font-weight:800;color:#fff;
+  background:rgba(0,0,0,.42);border-radius:999px;padding:2px 7px;
+  pointer-events:none;
+}
+.jv-cname{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.jv-cname b{font-size:15px;font-weight:900;letter-spacing:.5px}
+.jv-cname span{
+  font-size:10px;font-weight:800;color:var(--ac);
+  background:var(--ac-soft);border-radius:999px;padding:2px 7px;
+}
+.jv-stats{list-style:none;margin:7px 0 0}
+.jv-stats li{
+  display:flex;align-items:center;justify-content:space-between;gap:6px;
+  padding:2.5px 0;font-size:11px;color:var(--ink2);
+}
+.jv-stars{font-style:normal;color:var(--ac);font-size:11px;letter-spacing:.8px;white-space:nowrap}
+.jv-desc{font-size:11px;color:var(--ink2);line-height:1.6;margin-top:7px}
+.jv-adv{font-size:10px;color:#B7A597;margin-top:6px}
+.jv-adv b{color:var(--ac);font-weight:800}
+/* 五维数值条（精灵永恒） */
+.jv-nums{margin:8px 0 0}
+.jv-nums li{display:grid;grid-template-columns:34px 1fr 26px;align-items:center;gap:7px;padding:2px 0}
+.jv-nums .k{font-size:10.5px;color:var(--ink2)}
+.jv-nums .bar{height:5px;border-radius:99px;background:var(--ac-soft);overflow:hidden}
+.jv-nums .bar i{display:block;height:100%;border-radius:99px;background:var(--ac);opacity:.85}
+.jv-nums .v{font-size:11px;font-weight:900;color:var(--ac);font-variant-numeric:tabular-nums;text-align:right}
+.jv-skills{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.jv-skills span{
+  font-size:9.5px;font-weight:800;color:var(--ink2);
+  background:#F7F3EC;border-radius:6px;padding:2px 6px;
+}
+
+@media (max-width:560px){
+  .hero-head h1{font-size:21px}
+  .facts{grid-template-columns:1fr 1fr;gap:8px}
+  .fact{padding:9px 11px}
+  .fv{font-size:12px}
+  .e-dek{-webkit-line-clamp:2}
+  .jv-grid{grid-template-columns:1fr}
+}
+/*JOBS-CSS-END*/
 </style>
 </head>
 <body>
@@ -143,6 +209,149 @@ body{
   <p class="intro">怀旧精灵3D MMO：精灵切换配队、技能把控定胜负，摆摊打金、圣物养成，三端互通。第二赛季圣物系统解锁后战力大幅提升，开荒期基础材料最值钱。</p>
 
   <section class="facts"><div class="fact"><span class="fk">游戏类型</span><span class="fv">3D精灵 · MMO</span></div><div class="fact"><span class="fk">平台</span><span class="fv">安卓 / iOS / PC 三端互通</span></div><div class="fact"><span class="fk">核心特色</span><span class="fv">精灵切换 · 圣物养成</span></div><div class="fact"><span class="fk">重点玩法</span><span class="fv">摆摊打金 · 赛季玩法</span></div></section>
+
+
+  <!--JOBS-SECTION-START-->
+  <section class="jobs">
+    <div class="jobs-head">
+      <h2>职业图鉴<small>八大职业 · 创建角色面板实测</small></h2>
+      <p>五维数值取自游戏内「创建角色」的职业面板（满分 10）；点截图可看大图</p>
+    </div>
+    <div class="jv-group">
+      <div class="jv-glabel">职业一览<em>下面按登录界面职业栏从上到下的顺序排列</em></div>
+      <div class="jv-grid">
+    <article class="jv-card">
+      <a class="jv-shot" href="../../assets/jingling-job-wushi.webp" target="_blank" rel="noopener">
+        <img src="../../assets/jingling-job-wushi.webp" alt="精灵永恒 武士 职业面板截图" loading="lazy" width="1400" height="788">
+        <span class="jv-zoom">放大</span>
+      </a>
+      <div class="jv-cname"><b>武士</b><span>近战 · 全能输出</span></div>
+      <ul class="jv-nums">
+      <li><span class="k">爆发</span><span class="bar"><i style="width:96%"></i></span><span class="v">9.6</span></li>
+      <li><span class="k">群攻</span><span class="bar"><i style="width:87%"></i></span><span class="v">8.7</span></li>
+      <li><span class="k">暴击</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      <li><span class="k">生存</span><span class="bar"><i style="width:90%"></i></span><span class="v">9.0</span></li>
+      <li><span class="k">机动</span><span class="bar"><i style="width:90%"></i></span><span class="v">9.0</span></li>
+      </ul>
+      <p class="jv-desc">作为武士的身心经过严格的战斗训练，在近战中展现出强大的威力。经过长时间的锻炼，身体变得异常强壮，极大地提升了战斗能力。</p>
+      <div class="jv-skills"><span>一段</span><span>二段</span><span>群攻</span></div>
+    </article>
+    <article class="jv-card">
+      <a class="jv-shot" href="../../assets/jingling-job-qiangbing.webp" target="_blank" rel="noopener">
+        <img src="../../assets/jingling-job-qiangbing.webp" alt="精灵永恒 枪兵 职业面板截图" loading="lazy" width="1400" height="788">
+        <span class="jv-zoom">放大</span>
+      </a>
+      <div class="jv-cname"><b>枪兵</b><span>近战 · 长兵突刺</span></div>
+      <ul class="jv-nums">
+      <li><span class="k">爆发</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      <li><span class="k">群攻</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      <li><span class="k">暴击</span><span class="bar"><i style="width:95%"></i></span><span class="v">9.5</span></li>
+      <li><span class="k">生存</span><span class="bar"><i style="width:90%"></i></span><span class="v">9.0</span></li>
+      <li><span class="k">机动</span><span class="bar"><i style="width:87%"></i></span><span class="v">8.7</span></li>
+      </ul>
+      <p class="jv-desc">枪兵偏爱华丽而强力的技术，尽管这些大幅度的动作容易暴露他们的弱点，但其手中的长矛总能给予敌人致命一击。</p>
+      <div class="jv-skills"><span>两段</span><span>群攻</span><span>群攻</span></div>
+    </article>
+    <article class="jv-card">
+      <a class="jv-shot" href="../../assets/jingling-job-gongjian.webp" target="_blank" rel="noopener">
+        <img src="../../assets/jingling-job-gongjian.webp" alt="精灵永恒 弓箭手 职业面板截图" loading="lazy" width="1400" height="788">
+        <span class="jv-zoom">放大</span>
+      </a>
+      <div class="jv-cname"><b>弓箭手</b><span>远程 · 高暴击</span></div>
+      <ul class="jv-nums">
+      <li><span class="k">爆发</span><span class="bar"><i style="width:91%"></i></span><span class="v">9.1</span></li>
+      <li><span class="k">群攻</span><span class="bar"><i style="width:93%"></i></span><span class="v">9.3</span></li>
+      <li><span class="k">暴击</span><span class="bar"><i style="width:96%"></i></span><span class="v">9.6</span></li>
+      <li><span class="k">生存</span><span class="bar"><i style="width:87%"></i></span><span class="v">8.7</span></li>
+      <li><span class="k">机动</span><span class="bar"><i style="width:91%"></i></span><span class="v">9.1</span></li>
+      </ul>
+      <p class="jv-desc">作为传说中弓手迪恩的后裔，弓箭手以其广阔的视野和卓越的远程攻击能力，在战场上对敌人构成了巨大威胁。</p>
+      <div class="jv-skills"><span>一段</span><span>二段</span><span>群攻</span></div>
+    </article>
+    <article class="jv-card">
+      <a class="jv-shot" href="../../assets/jingling-job-jixie.webp" target="_blank" rel="noopener">
+        <img src="../../assets/jingling-job-jixie.webp" alt="精灵永恒 机械兵 职业面板截图" loading="lazy" width="1400" height="788">
+        <span class="jv-zoom">放大</span>
+      </a>
+      <div class="jv-cname"><b>机械兵</b><span>近战 · 高生存</span></div>
+      <ul class="jv-nums">
+      <li><span class="k">爆发</span><span class="bar"><i style="width:90%"></i></span><span class="v">9.0</span></li>
+      <li><span class="k">群攻</span><span class="bar"><i style="width:91%"></i></span><span class="v">9.1</span></li>
+      <li><span class="k">暴击</span><span class="bar"><i style="width:90%"></i></span><span class="v">9.0</span></li>
+      <li><span class="k">生存</span><span class="bar"><i style="width:97%"></i></span><span class="v">9.7</span></li>
+      <li><span class="k">机动</span><span class="bar"><i style="width:87%"></i></span><span class="v">8.7</span></li>
+      </ul>
+      <p class="jv-desc">机械兵是一个独具特色的职业。他们虽不能自行制造机器，但对古代匠人所打造的装备却有着深入的理解和精湛的操作技巧。</p>
+      <div class="jv-skills"><span>一段</span><span>连击</span><span>群攻</span></div>
+    </article>
+    <article class="jv-card">
+      <a class="jv-shot" href="../../assets/jingling-job-yingci.webp" target="_blank" rel="noopener">
+        <img src="../../assets/jingling-job-yingci.webp" alt="精灵永恒 影刺 职业面板截图" loading="lazy" width="1400" height="788">
+        <span class="jv-zoom">放大</span>
+      </a>
+      <div class="jv-cname"><b>影刺</b><span>近战 · 双持刺客 · 第 2 赛季</span></div>
+      <ul class="jv-nums">
+      <li><span class="k">爆发</span><span class="bar"><i style="width:96%"></i></span><span class="v">9.6</span></li>
+      <li><span class="k">群攻</span><span class="bar"><i style="width:91%"></i></span><span class="v">9.1</span></li>
+      <li><span class="k">暴击</span><span class="bar"><i style="width:96%"></i></span><span class="v">9.6</span></li>
+      <li><span class="k">生存</span><span class="bar"><i style="width:88%"></i></span><span class="v">8.8</span></li>
+      <li><span class="k">机动</span><span class="bar"><i style="width:95%"></i></span><span class="v">9.5</span></li>
+      </ul>
+      <p class="jv-desc">作为坦普种族中独一无二的女战士，她不仅外表与柔弱形象截然相反，更具备双手持械作战的非凡能力。在关键时刻，她能够运用多种手段对敌人构成威胁。</p>
+      <div class="jv-skills"><span>两段</span><span>三段</span><span>群攻</span></div>
+    </article>
+    <article class="jv-card">
+      <a class="jv-shot" href="../../assets/jingling-job-jisi.webp" target="_blank" rel="noopener">
+        <img src="../../assets/jingling-job-jisi.webp" alt="精灵永恒 祭司 职业面板截图" loading="lazy" width="1400" height="788">
+        <span class="jv-zoom">放大</span>
+      </a>
+      <div class="jv-cname"><b>祭司</b><span>远程 · 治疗辅助</span></div>
+      <ul class="jv-nums">
+      <li><span class="k">爆发</span><span class="bar"><i style="width:88%"></i></span><span class="v">8.8</span></li>
+      <li><span class="k">群攻</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      <li><span class="k">暴击</span><span class="bar"><i style="width:88%"></i></span><span class="v">8.8</span></li>
+      <li><span class="k">生存</span><span class="bar"><i style="width:99%"></i></span><span class="v">9.9</span></li>
+      <li><span class="k">机动</span><span class="bar"><i style="width:89%"></i></span><span class="v">8.9</span></li>
+      </ul>
+      <p class="jv-desc">踏入了与神最接近的领域，始终过着追求神圣的生活。相较于直接参与战斗，她更擅长在后方支援队友。</p>
+      <div class="jv-skills"><span>二段</span><span>辅助</span><span>群体回血</span></div>
+    </article>
+    <article class="jv-card">
+      <a class="jv-shot" href="../../assets/jingling-job-mofa.webp" target="_blank" rel="noopener">
+        <img src="../../assets/jingling-job-mofa.webp" alt="精灵永恒 魔法师 职业面板截图" loading="lazy" width="1400" height="788">
+        <span class="jv-zoom">放大</span>
+      </a>
+      <div class="jv-cname"><b>魔法师</b><span>远程 · 群体爆发</span></div>
+      <ul class="jv-nums">
+      <li><span class="k">爆发</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      <li><span class="k">群攻</span><span class="bar"><i style="width:98%"></i></span><span class="v">9.8</span></li>
+      <li><span class="k">暴击</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      <li><span class="k">生存</span><span class="bar"><i style="width:88%"></i></span><span class="v">8.8</span></li>
+      <li><span class="k">机动</span><span class="bar"><i style="width:89%"></i></span><span class="v">8.9</span></li>
+      </ul>
+      <p class="jv-desc">对真理和知识充满热情的魔法师们，凭借强大的精神力量拥有非凡的魔力。一旦决定施法，便能以强大的魔法瞬间击倒敌人。</p>
+      <div class="jv-skills"><span>两段</span><span>群体</span><span>群攻</span></div>
+    </article>
+    <article class="jv-card">
+      <a class="jv-shot" href="../../assets/jingling-job-youxia.webp" target="_blank" rel="noopener">
+        <img src="../../assets/jingling-job-youxia.webp" alt="精灵永恒 游侠 职业面板截图" loading="lazy" width="1400" height="788">
+        <span class="jv-zoom">放大</span>
+      </a>
+      <div class="jv-cname"><b>游侠</b><span>近战 · 均衡</span></div>
+      <ul class="jv-nums">
+      <li><span class="k">爆发</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      <li><span class="k">群攻</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      <li><span class="k">暴击</span><span class="bar"><i style="width:91%"></i></span><span class="v">9.1</span></li>
+      <li><span class="k">生存</span><span class="bar"><i style="width:95%"></i></span><span class="v">9.5</span></li>
+      <li><span class="k">机动</span><span class="bar"><i style="width:92%"></i></span><span class="v">9.2</span></li>
+      </ul>
+      <p class="jv-desc">神赐予他们的身体是最纯粹的礼物，在修炼过程中，他们比任何人更加精进。当他们挥舞长剑时，展现出最强大的威力。</p>
+      <div class="jv-skills"><span>一段</span><span>三段</span><span>群攻</span></div>
+    </article>
+      </div>
+    </div>
+  </section>
+<!--JOBS-SECTION-END-->
 
   <section class="list">
     <h2>精灵永恒 · 全部 12 篇<small>点开任意一篇直接展开全文</small></h2>
@@ -294,5 +503,6 @@ try{
     }).catch(function(){});
 }catch(e){}
 </script>
+
 </body>
 </html>
