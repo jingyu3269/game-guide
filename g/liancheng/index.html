@@ -291,6 +291,54 @@ body{
   .lshot img{border-radius:14px}
 }
 
+/* ===== 官网式头图里的各个框：流光 ===== */
+.lhero{--flA:0deg;border-color:transparent;
+  background-image:linear-gradient(135deg,var(--hg1,#5E9BBC) 0%,var(--hg2,#8CC0D6) 42%,var(--hg3,#CBE8F0) 100%),
+    conic-gradient(from var(--flA),
+      #FF7FB2 0deg,#FF5FA2 30deg,#fff 46deg,#FFC178 64deg,#FF7FB2 82deg,
+      #FF7FB2 212deg,#FF5FA2 242deg,#fff 258deg,#FFC178 276deg,#FF7FB2 294deg,#FF7FB2 360deg);
+  background-origin:padding-box,border-box;
+  background-clip:padding-box,border-box;
+  animation:flowBorder 5s linear infinite;
+}
+.ltags li,.cd-u,.cd-open,.lbtn{position:relative}
+.ltags li::after,.cd-u::after,.cd-open::after,.lbtn::after{
+  content:"";position:absolute;border-radius:inherit;
+  --flA:0deg;
+  background:conic-gradient(from var(--flA),
+    rgba(255,150,192,.9) 0deg,rgba(255,150,192,.9) 26deg,
+    #FF2E85 42deg,#FF7FB8 50deg,#FFFFFF 58deg,#FFB05C 68deg,rgba(255,150,192,.9) 86deg,
+    rgba(255,150,192,.9) 206deg,
+    #FF2E85 222deg,#FF7FB8 230deg,#FFFFFF 238deg,#FFB05C 248deg,rgba(255,150,192,.9) 266deg,
+    rgba(255,150,192,.9) 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+          mask-composite:exclude;
+  animation:flowBorder 5s linear infinite;pointer-events:none;
+}
+.ltags li::after{inset:-1px;padding:1.2px}
+.cd-u::after,.cd-open::after{inset:-1.5px;padding:1.7px}
+.lbtn::after{inset:-2.4px;padding:2.6px}
+/* 图片外的框：图片本身没有伪元素，靠外层 .lframe 画环 */
+.lframe{position:relative;border-radius:18px;line-height:0}
+.lframe img{border:0;border-radius:18px}
+.lframe::after{
+  content:"";position:absolute;inset:-1px;border-radius:inherit;padding:3px;
+  --flA:0deg;
+  background:conic-gradient(from var(--flA),
+    #FF7FB2 0deg,#FF5FA2 30deg,#fff 46deg,#FFC178 64deg,#FF7FB2 82deg,
+    #FF7FB2 212deg,#FF5FA2 242deg,#fff 258deg,#FFC178 276deg,#FF7FB2 294deg,#FF7FB2 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+          mask-composite:exclude;
+  animation:flowBorder 5s linear infinite;pointer-events:none;
+}
+@media (prefers-reduced-motion:reduce){
+  .lhero,.lframe::after,.ltags li::after,.cd-u::after,.cd-open::after,.lbtn::after{animation:none}
+}
+
 @media (max-width:560px){
   .hero-head h1{font-size:21px}
   .facts{grid-template-columns:1fr 1fr;gap:8px}
@@ -400,7 +448,7 @@ body{
       <div class="jbody"><b>召唤师</b><em>诅咒魔法 + 召唤异界召唤兽</em><i>力 21 · 敏 21 · 智 23 · 体 18</i></div>
     </div></div>
   </section><figure class="lshot">
-    <img src="../../assets/heroes-login.webp" alt="登录界面实拍 · 英雄 1 区（测试服）" loading="lazy" decoding="async">
+    <div class="lframe"><img src="../../assets/heroes-login.webp" alt="登录界面实拍 · 英雄 1 区（测试服）" loading="lazy" decoding="async"></div>
     <figcaption>登录界面实拍 · 英雄 1 区（测试服）</figcaption>
   </figure>
 
