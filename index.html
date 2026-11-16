@@ -411,7 +411,17 @@ button{font-family:inherit;cursor:pointer;border:none}
 .game-card{
   --g1:#FF8FB8;--g2:#FF4D94;--acc:#F5297F;--shadow:rgba(255,77,148,.42);
   position:relative;
-  background:linear-gradient(160deg,var(--g1) 0%,var(--g2) 100%);
+  /* 最外层边框：底色层走 padding-box，流光带画在 3px 的 border-box 上 */
+  border:3px solid transparent;
+  --flA:0deg;
+  background:linear-gradient(160deg,var(--g1) 0%,var(--g2) 100%) padding-box,
+             conic-gradient(from var(--flA),
+               rgba(255,255,255,.86) 0deg,rgba(255,255,255,.86) 22deg,
+               #FF2E85 40deg,#FF5FA2 50deg,#FFD08A 62deg,#FF8FC0 72deg,rgba(255,255,255,.86) 92deg,
+               rgba(255,255,255,.86) 206deg,
+               #FF2E85 224deg,#FF5FA2 234deg,#FFD08A 246deg,#FF8FC0 256deg,rgba(255,255,255,.86) 276deg,
+               rgba(255,255,255,.86) 360deg) border-box;
+  animation:flowBorder 6s linear infinite;
   border-radius:24px;
   padding:8px 8px 10px;
   box-shadow:0 12px 26px -8px var(--shadow),inset 0 0 0 2px rgba(255,255,255,.35);
@@ -1502,6 +1512,8 @@ html.share-open,html.share-open body{overflow:hidden}
 #articles .search-box input{
   border:2.5px dashed #FFB0CD;border-radius:999px;background:#fff;
 }
+.search-box{border-radius:999px}
+#articles .search-box input{border-color:transparent}
 #articles .search-box input:focus{border-color:#FF6FA8;box-shadow:0 0 0 5px rgba(255,111,168,.18)}
 #articles .search-box svg{color:#FF6FA8}
 #articles .filter-chip{
@@ -2559,60 +2571,89 @@ html.poster-open,html.poster-open body{overflow:hidden}
 }
 .article-read i{font-style:normal;font-size:11px;opacity:.85}
 
-/* ========== 全站方框 · 流光渐变边框 ========== */
-@keyframes flowBorder{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+/* ========== 全站方框 · 流光边框（光带绕框旋转，同 wgame 的做法） ========== */
+/* 用 @property 注册角度，才能让 conic-gradient 的起始角连续插值 → 光带真的在转 */
+@property --flA{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes flowBorder{to{--flA:360deg}}
 .btn-ghost,.game-cover,.article-share,.faq-cta,.svc-ticket,.game-sub,.game-cd,.game-tips,.filter-chip,.article-game,.rel-link,.sr-brand,.sound-toggle,.luck-btn,.search-box,.faq-item,.luck-card,.hero-img-wrap{position:relative}
 /* 注意：伪元素 inset:0 是对齐到内边距盒的，所以要向外扩出「边框宽度」才能盖住原边框 */
-.btn-ghost::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.search-box::after,.faq-item::after,
+.btn-ghost::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.faq-item::after,
 .sr-brand::before{inset:-2px;padding:2.2px}
+.search-box::after{inset:0;padding:2.8px}
 .game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after{inset:-1.5px;padding:1.7px}
 .sound-toggle::before,.luck-btn::before,.luck-card::after{inset:-3px;padding:3.2px}
 .btn-ghost::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after,
 .search-box::after,.faq-item::after,.luck-card::after,
 .sr-brand::before,.sound-toggle::before,.luck-btn::before{
   content:"";position:absolute;border-radius:inherit;
-  background:linear-gradient(115deg,#FFB0CE 0%,#FFD98E 20%,#FFF6D8 30%,#A5E6C8 46%,#A9CFFF 64%,#FFC2DE 80%,#FFB0CE 100%);
-  background-size:300% 100%;
+  --flA:0deg;
+  /* 底环淡粉打底，两道光带（粉→白→金）相隔 180° 绕圈 */
+  background:conic-gradient(from var(--flA),
+    rgba(255,150,192,.9) 0deg,
+    rgba(255,150,192,.9) 26deg,
+    #FF2E85 42deg,
+    #FF7FB8 50deg,
+    #FFFFFF 58deg,
+    #FFB05C 68deg,
+    rgba(255,150,192,.9) 86deg,
+    rgba(255,150,192,.9) 206deg,
+    #FF2E85 222deg,
+    #FF7FB8 230deg,
+    #FFFFFF 238deg,
+    #FFB05C 248deg,
+    rgba(255,150,192,.9) 266deg,
+    rgba(255,150,192,.9) 360deg);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;
           mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
           mask-composite:exclude;
-  animation:flowBorder 4s linear infinite;
+  animation:flowBorder 5s linear infinite;
   pointer-events:none;
 }
-/* 文章卡 / 关注卡：本身就是渐变框，直接让渐变流动起来 */
+/* 悬停时光带加速（同参考站） */
+.btn-ghost:hover::after,.article-share:hover::after,.faq-cta:hover::after,.svc-ticket:hover::after,
+.filter-chip:hover::after,.game-sub:hover::after,.rel-link:hover::after,.faq-item:hover::after,
+.sound-toggle:hover::before,.luck-btn:hover::before{animation-duration:2s}
+/* 文章卡 / 关注卡：本身就是渐变框，把边框那一层换成会转的光带（保留各游戏配色） */
 .article-card{
-  background-size:220% 100%;
-  animation:flowBorder 9s linear infinite;
-}
-.follow-card{
-  border-color:transparent;
-  background:linear-gradient(rgba(255,255,255,.85),rgba(255,255,255,.85)) padding-box,
-             linear-gradient(115deg,#FFB0CE 0%,#FFD98E 24%,#A5E6C8 48%,#A9CFFF 72%,#FFB0CE 100%) border-box;
-  background-size:220% 100%;
+  background:linear-gradient(rgba(255,255,255,.97),rgba(255,255,255,.97)) padding-box,
+             conic-gradient(from var(--flA),
+               var(--ag1) 0deg,var(--ag2) 34deg,#fff 50deg,var(--ag1) 70deg,
+               var(--ag1) 214deg,var(--ag2) 248deg,#fff 264deg,var(--ag1) 284deg,var(--ag1) 360deg) border-box;
+  --flA:0deg;
   animation:flowBorder 7s linear infinite;
 }
-/* 内部裁切的框（头图、游戏封面）：overflow:hidden 会裁掉外扩描边，改用 border-box 渐变 */
+.follow-card{
+  --flA:0deg;
+  background:linear-gradient(rgba(255,255,255,.85),rgba(255,255,255,.85)) padding-box,
+             conic-gradient(from var(--flA),
+               #FF9BC4 0deg,#FF5FA2 30deg,#fff 46deg,#FFC178 64deg,#FF9BC4 82deg,
+               #FF9BC4 212deg,#FF5FA2 242deg,#fff 258deg,#FFC178 276deg,#FF9BC4 294deg,#FF9BC4 360deg) border-box;
+  animation:flowBorder 6s linear infinite;
+}
+/* 内部裁切的框（头图、游戏封面）：overflow:hidden 会裁掉外扩描边，改用 border-box 光带 */
 .hero-img-wrap{
-  border-color:transparent;
+  --flA:0deg;border-color:transparent;
   background-image:linear-gradient(#120b1e,#120b1e),
-                   linear-gradient(115deg,#FFB0CE 0%,#FFD98E 20%,#FFF6D8 30%,#A5E6C8 46%,#A9CFFF 64%,#FFC2DE 80%,#FFB0CE 100%);
+    conic-gradient(from var(--flA),
+      #FF7FB2 0deg,#FF5FA2 30deg,#fff 46deg,#FFC178 64deg,#FF7FB2 82deg,
+      #FF7FB2 212deg,#FF5FA2 242deg,#fff 258deg,#FFC178 276deg,#FF7FB2 294deg,#FF7FB2 360deg);
   background-origin:padding-box,border-box;
   background-clip:padding-box,border-box;
-  background-size:100% 100%,300% 100%;
-  animation:flowBorder 4s linear infinite;
+  animation:flowBorder 5s linear infinite;
 }
 .game-cover{
-  border-color:transparent;
+  --flA:0deg;border-color:transparent;
   background-image:linear-gradient(#1B1526,#1B1526),
-                   linear-gradient(115deg,#FFB0CE 0%,#FFD98E 20%,#FFF6D8 30%,#A5E6C8 46%,#A9CFFF 64%,#FFC2DE 80%,#FFB0CE 100%);
+    conic-gradient(from var(--flA),
+      #FF7FB2 0deg,#FF5FA2 30deg,#fff 46deg,#FFC178 64deg,#FF7FB2 82deg,
+      #FF7FB2 212deg,#FF5FA2 242deg,#fff 258deg,#FFC178 276deg,#FF7FB2 294deg,#FF7FB2 360deg);
   background-origin:padding-box,border-box;
   background-clip:padding-box,border-box;
-  background-size:100% 100%,300% 100%;
-  animation:flowBorder 4s linear infinite;
+  animation:flowBorder 5s linear infinite;
 }
 @media (prefers-reduced-motion:reduce){
-  .article-card,.follow-card,.hero-img-wrap,.game-cover,
+  .game-card,.article-card,.follow-card,.hero-img-wrap,.game-cover,
   .btn-ghost::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after,
   .search-box::after,.faq-item::after,.luck-card::after,
   .sr-brand::before,.sound-toggle::before,.luck-btn::before{animation:none}
