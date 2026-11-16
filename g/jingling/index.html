@@ -126,10 +126,12 @@ body{
 /* ========== 方框 · 流光边框（光带绕框旋转，与首页一致） ========== */
 @property --flA{syntax:'<angle>';inherits:false;initial-value:0deg}
 @keyframes flowBorder{to{--flA:360deg}}
-.back,.chip,.intro,.fact,.entry,.jv-card{position:relative}
+.back,.chip,.intro,.fact,.entry,.jv-card,.bk-card,.cta-btn{position:relative}
 .back::after,.intro::after,.fact::after,.entry::after,.jv-card::after{inset:-2px;padding:2.2px}
-.chip::after{inset:-1.5px;padding:1.7px}
-.back::after,.chip::after,.intro::after,.fact::after,.entry::after,.jv-card::after{
+.chip::after,.bk-id::after{inset:-1.5px;padding:1.7px}
+.cta-btn::after{inset:0;padding:2.4px}
+.bk-card::after{inset:0;padding:2.2px}
+.back::after,.chip::after,.intro::after,.fact::after,.entry::after,.jv-card::after,.bk-id::after,.cta-btn::after,.bk-card::after{
   content:"";position:absolute;border-radius:inherit;
   --flA:0deg;
   background:conic-gradient(from var(--flA),
@@ -162,7 +164,7 @@ body{
       #FF7FB2 212deg,#FF5FA2 242deg,#fff 258deg,#FFC178 276deg,#FF7FB2 294deg,#FF7FB2 360deg);
 }
 @media (prefers-reduced-motion:reduce){
-  .hero,.jcard,.back::after,.chip::after,.intro::after,.fact::after,.entry::after,.jv-card::after{animation:none}
+  .hero,.jcard,.back::after,.chip::after,.intro::after,.fact::after,.entry::after,.jv-card::after,.bk-id::after,.cta-btn::after,.bk-card::after{animation:none}
 }
 /*JOBS-CSS-START*/
 /* 职业图鉴 */
