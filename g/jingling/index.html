@@ -123,33 +123,43 @@ body{
   .fv{font-size:12px}
   .e-dek{-webkit-line-clamp:2}
 }
-/* ========== 方框 · 流光渐变边框（与首页一致） ========== */
-@keyframes flowBorder{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+/* ========== 方框 · 流光边框（光带绕框旋转，与首页一致） ========== */
+@property --flA{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes flowBorder{to{--flA:360deg}}
 .back,.chip,.intro,.fact,.entry,.jv-card{position:relative}
 .back::after,.intro::after,.fact::after,.entry::after,.jv-card::after{inset:-2px;padding:2.2px}
 .chip::after{inset:-1.5px;padding:1.7px}
 .back::after,.chip::after,.intro::after,.fact::after,.entry::after,.jv-card::after{
   content:"";position:absolute;border-radius:inherit;
-  background:linear-gradient(115deg,#FFB0CE 0%,#FFD98E 20%,#FFF6D8 30%,#A5E6C8 46%,#A9CFFF 64%,#FFC2DE 80%,#FFB0CE 100%);
-  background-size:300% 100%;
+  --flA:0deg;
+  background:conic-gradient(from var(--flA),
+    rgba(255,150,192,.9) 0deg,rgba(255,150,192,.9) 26deg,
+    #FF2E85 42deg,#FF7FB8 50deg,#FFFFFF 58deg,#FFB05C 68deg,rgba(255,150,192,.9) 86deg,
+    rgba(255,150,192,.9) 206deg,
+    #FF2E85 222deg,#FF7FB8 230deg,#FFFFFF 238deg,#FFB05C 248deg,rgba(255,150,192,.9) 266deg,
+    rgba(255,150,192,.9) 360deg);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;
           mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
           mask-composite:exclude;
-  animation:flowBorder 4s linear infinite;pointer-events:none;
+  animation:flowBorder 5s linear infinite;pointer-events:none;
 }
+.back:hover::after,.chip:hover::after,.entry:hover::after{animation-duration:2s}
 .hero,.jcard{
-  border-color:transparent;
+  --flA:0deg;border-color:transparent;
   background-image:linear-gradient(#1B1526,#1B1526),
-                   linear-gradient(115deg,#FFB0CE 0%,#FFD98E 20%,#FFF6D8 30%,#A5E6C8 46%,#A9CFFF 64%,#FFC2DE 80%,#FFB0CE 100%);
+    conic-gradient(from var(--flA),
+      #FF7FB2 0deg,#FF5FA2 30deg,#fff 46deg,#FFC178 64deg,#FF7FB2 82deg,
+      #FF7FB2 212deg,#FF5FA2 242deg,#fff 258deg,#FFC178 276deg,#FF7FB2 294deg,#FF7FB2 360deg);
   background-origin:padding-box,border-box;
   background-clip:padding-box,border-box;
-  background-size:100% 100%,300% 100%;
-  animation:flowBorder 4s linear infinite;
+  animation:flowBorder 5s linear infinite;
 }
 .jcard{
   background-image:linear-gradient(#fff,#fff),
-                   linear-gradient(115deg,#FFB0CE 0%,#FFD98E 20%,#FFF6D8 30%,#A5E6C8 46%,#A9CFFF 64%,#FFC2DE 80%,#FFB0CE 100%);
+    conic-gradient(from var(--flA),
+      #FF7FB2 0deg,#FF5FA2 30deg,#fff 46deg,#FFC178 64deg,#FF7FB2 82deg,
+      #FF7FB2 212deg,#FF5FA2 242deg,#fff 258deg,#FFC178 276deg,#FF7FB2 294deg,#FF7FB2 360deg);
 }
 @media (prefers-reduced-motion:reduce){
   .hero,.jcard,.back::after,.chip::after,.intro::after,.fact::after,.entry::after,.jv-card::after{animation:none}
