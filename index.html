@@ -3149,7 +3149,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
   </button>
   <div class="foot-stats" id="footStats" aria-label="本站访问统计">
     <svg class="fs-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.4 12S5.9 5.6 12 5.6 21.6 12 21.6 12 18.1 18.4 12 18.4 2.4 12 2.4 12Z"/><circle cx="12" cy="12" r="3.1"/></svg>
-    <span>本站总访问量</span><b id="stTotal">269</b><span>次</span>
+    <span>本站总访问量</span><b id="stTotal">273</b><span>次</span>
     <span class="fs-sep">·</span>
     <span>访客</span><b id="stUv">168</b><span>人</span>
   </div>
@@ -5733,21 +5733,28 @@ window.Stat = (function(){
     try { localStorage.setItem('jy_st_' + k, String(v)); } catch(e){}
   }
 
-  /* 页脚：本站总访问量 / 访客 */
+  /* 页脚：本站总访问量 / 访客
+     访问量：每次刷新先本地立即 +1（保证刷新一次涨一次），
+             再后台请求服务器真实值，取大者合并（兼容跨设备 / 清缓存） */
   function initFoot(){
     var box = document.getElementById('footStats');
     if (!box || !window.fetch) return;          // 没 JS / 没 fetch：HTML 里的静态数字照样显示
     var a = document.getElementById('stTotal'),
         c = document.getElementById('stUv');
     function num(el){ return el ? (parseInt(String(el.textContent).replace(/[^0-9]/g, ''), 10) || 0) : 0; }
-    // 起点＝HTML 里烘进去的数字 与 本地缓存 取大，保证「累计」只增不减
+    // ---- 访问量：本地优先，刷新即 +1 ----
     var baseV = Math.max(num(a), lsGet('views') || 0);
+    var showV = baseV + 1;
+    if (a) a.textContent = fmt(showV);
+    lsSet('views', showV);
+    req('hit', 'views', 3).then(function(pv){
+      if (pv !== null && pv > showV && a){ countUp(a, pv); lsSet('views', pv); }
+    });
+    req('hit', todayKey());                     // 每日计数照常累加，不在页脚显示
+    // ---- 访客：同一浏览器只记一次 ----
     var baseU = Math.max(num(c), lsGet('visitors') || 0);
-    if (a) a.textContent = fmt(baseV);
     if (c) c.textContent = fmt(baseU);
-    Promise.all([req('hit', 'views', 3), req('hit', todayKey()), visitor()]).then(function(r){
-      var pv = r[0], uv = r[2];
-      if (pv !== null && a){ var v = Math.max(baseV, pv); countUp(a, v); lsSet('views', v); }
+    visitor().then(function(uv){
       if (uv !== null && c){ var u = Math.max(baseU, uv); countUp(c, u); lsSet('visitors', u); }
     });
   }
