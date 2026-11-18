@@ -3172,9 +3172,9 @@ html.poster-open,html.poster-open body{overflow:hidden}
   </button>
   <div class="foot-stats" id="footStats" aria-label="本站访问统计">
     <svg class="fs-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.4 12S5.9 5.6 12 5.6 21.6 12 21.6 12 18.1 18.4 12 18.4 2.4 12 2.4 12Z"/><circle cx="12" cy="12" r="3.1"/></svg>
-    <span>本站总访问量</span><b id="stTotal">324</b><span>次</span>
+    <span>本站总访问量</span><b id="stTotal">328</b><span>次</span>
     <span class="fs-sep">·</span>
-    <span>访客</span><b id="stUv">191</b><span>人</span>
+    <span>访客</span><b id="stUv">192</b><span>人</span>
   </div>
   <p class="foot-note">本页面为推广信息聚合，游戏内容版权归各开发商所有</p>
 </footer>
@@ -4325,7 +4325,7 @@ function renderArticles(list, kw){
   for(var i = 0; i < shown.length; i++){
     var a = shown[i];
     var key = articleKey(a);
-    var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : (a.game.indexOf('露娜') >= 0 ? 'luna' : (a.game.indexOf('连城') >= 0 ? 'liancheng' : (a.game.indexOf('传奇3D') >= 0 ? 'cq3d' : '')));
+    var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : (a.game.indexOf('露娜') >= 0 ? 'luna' : (a.game.indexOf('连城') >= 0 ? 'liancheng' : (a.game.indexOf('传奇3D') >= 0 ? 'cq3d' : ''))));
     var isOpen = !!expanded[key] || !!(kw && autoOpen[key]);
     var isRead = !!readSet[key];
     html += '<div class="article-card ' + cls + (isOpen ? ' open' : '') + (isRead ? ' read' : '') + '" data-key="' + esc(key) + '">';
