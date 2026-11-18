@@ -1542,6 +1542,7 @@ html.share-open,html.share-open body{overflow:hidden}
 .article-card.jingling{--ag1:#B388FF;--ag2:#7C4DFF;--acc:#6A3CE8;--ashadow:rgba(124,77,255,.4);--awash:rgba(179,136,255,.16);--sticker:"🧚"}
 .article-card.luna{--ag1:#5FA8D3;--ag2:#3A7DA1;--acc:#1F5E8C;--ashadow:rgba(58,125,161,.4);--awash:rgba(95,168,211,.16);--sticker:"🌙"}
 .article-card.liancheng{--ag1:#4FE0B0;--ag2:#0E9C74;--acc:#0B7A5B;--ashadow:rgba(14,156,116,.42);--awash:rgba(79,224,176,.16);--sticker:"🏹"}
+.article-card.cq3d{--ag1:#FFB25C;--ag2:#D25A1E;--acc:#A8430F;--ashadow:rgba(210,90,30,.42);--awash:rgba(255,178,92,.18);--sticker:"⚔️"}
 .article-card::before{
   content:"";position:absolute;inset:3px;border-radius:19px;
   background:radial-gradient(140% 105% at 0% 0%,var(--awash) 0%,transparent 62%);
@@ -3171,7 +3172,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
   </button>
   <div class="foot-stats" id="footStats" aria-label="本站访问统计">
     <svg class="fs-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.4 12S5.9 5.6 12 5.6 21.6 12 21.6 12 18.1 18.4 12 18.4 2.4 12 2.4 12Z"/><circle cx="12" cy="12" r="3.1"/></svg>
-    <span>本站总访问量</span><b id="stTotal">320</b><span>次</span>
+    <span>本站总访问量</span><b id="stTotal">324</b><span>次</span>
     <span class="fs-sep">·</span>
     <span>访客</span><b id="stUv">191</b><span>人</span>
   </div>
@@ -4096,7 +4097,8 @@ var GAME_ICONS = {
   luna: 'assets/icon-luna.webp',
   jingling: 'assets/icon-jingling.webp',
   liancheng: 'assets/icon-liancheng.webp',
-  taoyuan: 'assets/icon-taoyuan.webp'
+  taoyuan: 'assets/icon-taoyuan.webp',
+  cq3d: 'assets/icon-cq3d.webp'
 };
 function iconOf(cls){ return GAME_ICONS[cls] || GAME_ICONS.taoyuan; }
 
@@ -4323,7 +4325,7 @@ function renderArticles(list, kw){
   for(var i = 0; i < shown.length; i++){
     var a = shown[i];
     var key = articleKey(a);
-    var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : (a.game.indexOf('露娜') >= 0 ? 'luna' : (a.game.indexOf('连城') >= 0 ? 'liancheng' : '')));
+    var cls = a.game.indexOf('小小') >= 0 ? 'tulong' : (a.game.indexOf('精灵') >= 0 ? 'jingling' : (a.game.indexOf('露娜') >= 0 ? 'luna' : (a.game.indexOf('连城') >= 0 ? 'liancheng' : (a.game.indexOf('传奇3D') >= 0 ? 'cq3d' : '')));
     var isOpen = !!expanded[key] || !!(kw && autoOpen[key]);
     var isRead = !!readSet[key];
     html += '<div class="article-card ' + cls + (isOpen ? ' open' : '') + (isRead ? ' read' : '') + '" data-key="' + esc(key) + '">';
