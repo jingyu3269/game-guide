@@ -2692,7 +2692,7 @@ html.poster-open,html.poster-open body{overflow:hidden}
       <img class="hero-slide" src="assets/cover-taoyuan-wide.webp" alt="桃园将帅录" fetchpriority="high" decoding="async">
       <img class="hero-slide" data-src="assets/luna-cover.webp" alt="露娜2：拾光之约" decoding="async">
       <a class="hero-slide" href="https://231515.youxin75.com/qudao.php?s=/Download/f/WzUxOTEsNTE5MCwyMzE1MTVd" target="_blank" rel="noopener" aria-label="下载小小屠龙·冰雪复古"><img data-src="assets/cover-legend.webp" alt="小小屠龙·冰雪复古" decoding="async"></a>
-      <img class="hero-slide" data-src="assets/cq3d-slide.jpg" alt="传奇3D点卡版" decoding="async">
+      <img class="hero-slide" data-src="assets/cssj-slide.jpg" alt="传奇盛世移动版-3D点卡" decoding="async">
     </div>
   </div>
   <div class="hero-cta-row">
@@ -2832,31 +2832,6 @@ html.poster-open,html.poster-open body{overflow:hidden}
         </ul>
         <button class="game-btn" onclick="copyWechat('露娜2：拾光之约')">🎁 预约领公测福利</button>
         <a class="game-sub" href="g/luna2/">📖 进入分站 · 5 篇攻略</a>
-      </div>
-    </div>
-
-    <!-- 传奇3D点卡版 -->
-    <div class="game-card gc-gold">
-      <span class="gc-sticker">⚔️</span>
-      <div class="game-cover">
-        <img src="assets/cover-cq3d.webp" alt="传奇3D点卡版" loading="lazy" decoding="async">
-      </div>
-      <div class="game-body">
-        <div class="game-name">传奇3D点卡版</div>
-        <div class="game-tags">
-          <span class="game-tag hot">点卡计时</span>
-          <span class="game-tag">1.76 复古</span>
-          <span class="game-tag">自由交易</span>
-        </div>
-        <p class="game-desc">义战龙城点卡服：1 元 = 10 点卡 = 60 分钟，离线也计时——钱买时长不买强度。金币行玩家定价，掉落概率全公开。</p>
-        <ul class="game-tips">
-          <li>上线先看时长余额，人不在就下线，离线也计费</li>
-          <li>15 级自动传送土城，骷髅洞起步，装备成型再进矿区</li>
-          <li>非绑定装备死亡会掉落，出门先掂量装备成本</li>
-          <li>晚进服不用慌，等级补领免费追到世界等级 -3</li>
-        </ul>
-        <button class="game-btn" onclick="copyWechat('传奇3D点卡版')">🎁 领取下载与攻略</button>
-        <a class="game-sub" href="g/cq3d/">📖 进入分站 · 6 篇攻略</a>
       </div>
     </div>
 
@@ -3046,7 +3021,6 @@ html.poster-open,html.poster-open body{overflow:hidden}
     <button class="filter-chip" data-game="小小屠龙" onclick="setGameFilter(this)">小小屠龙</button>
     <button class="filter-chip" data-game="精灵永恒" onclick="setGameFilter(this)" style="display:none">精灵永恒</button>
     <button class="filter-chip" data-game="露娜2" onclick="setGameFilter(this)">露娜2</button>
-    <button class="filter-chip" data-game="传奇3D点卡版" onclick="setGameFilter(this)">传奇3D点卡版</button>
     <button class="filter-chip" data-game="英雄连城" onclick="setGameFilter(this)" style="display:none">英雄连城</button>
   </div>
   <div class="search-meta">
@@ -3211,7 +3185,6 @@ html.poster-open,html.poster-open body{overflow:hidden}
 <!-- 大屏两侧装饰/快捷导航（窄屏自动隐藏） -->
 <div class="side-rail left">
   <a class="sr-brand" href="g/luna2/" title="进入 露娜2：拾光之约 分站">露娜2：拾光之约</a>
-  <a class="sr-brand" href="g/cq3d/" title="进入 传奇3D点卡版 分站">传奇3D点卡版</a>
   <a class="sr-brand" href="g/liancheng/" title="进入 英雄连城 分站" style="display:none">英雄连城</a>
   <div class="sr-stickers" aria-hidden="true"><span>🌸</span><span>🧚</span><span>🌙</span></div>
 </div>
@@ -4844,8 +4817,6 @@ window.addEventListener('scroll', function(){
     // { name:'精灵永恒', icon:'assets/icon-jingling.webp', tips:[...] },  // 11-17 临时隐藏
     { name:'露娜2：拾光之约', icon:'assets/icon-luna.webp',
       tips:['宜冲级跑转职任务，路线一次选对不返工','宜囤药水，阿克勒港口补给正当时','开荒手感在线，组队练级效率翻倍'] },
-    { name:'传奇3D点卡版', icon:'assets/icon-cq3d.webp',
-      tips:['点卡余额先看再上线，时长花在刀刃上','骷髅洞练级手感在线，装备成型再进矿区','卖币先查金币行现价，把税算进报价不吃亏'] },
     // { name:'英雄连城', icon:'assets/icon-liancheng.webp', tips:[...] }  // 11-17 临时隐藏
   ];
   var card = document.getElementById('luckCard');
