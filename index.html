@@ -2660,12 +2660,64 @@ html.poster-open,html.poster-open body{overflow:hidden}
   background-clip:padding-box,border-box;
   animation:flowBorder 5s linear infinite;
 }
+/* ===== 游戏官方下载专区（轮播下方） ===== */
+.dlzone{
+  margin:20px auto 0;max-width:880px;padding:15px 18px 17px;border-radius:20px;
+  background:rgba(255,255,255,.93);border:2px solid transparent;position:relative;
+  box-shadow:0 14px 34px rgba(45,58,46,.10);
+}
+.dz-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.dz-title{font-size:17px;font-weight:900;letter-spacing:.4px;color:#1f242a}
+.dz-title i{
+  font-style:normal;margin-right:6px;
+  background:linear-gradient(120deg,#FF2E85,#FF8A3D);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.dz-tip{font-size:12.5px;color:#8b9199}
+.dz-tip b{color:#FF2E85;font-weight:800}
+.dz-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:12px}
+.dz-item{
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  padding:12px 10px 11px;border-radius:16px;text-decoration:none;
+  background:linear-gradient(180deg,#FFFFFF,#FFF7FB);
+  border:1px solid rgba(255,120,170,.22);
+  transition:transform .2s,box-shadow .2s;
+}
+.dz-item:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(255,46,133,.20)}
+.dz-icon{width:72px;height:72px;border-radius:16px;overflow:hidden;background:#0B1A2A;
+  box-shadow:0 6px 14px rgba(0,0,0,.24)}
+.dz-icon img{width:100%;height:100%;object-fit:cover;display:block}
+.dz-name{font-size:14px;font-weight:800;color:#23282e;text-align:center;line-height:1.3}
+.dz-cta{
+  display:inline-flex;align-items:center;gap:4px;padding:7px 16px;border-radius:999px;
+  background:linear-gradient(180deg,#FF5FA2,#FF2E85);color:#fff;font-size:13px;font-weight:900;letter-spacing:.4px;
+  box-shadow:0 4px 0 #C81A63,0 8px 16px rgba(255,46,133,.30);transition:transform .15s;
+}
+.dz-item:hover .dz-cta{transform:translateY(-1px)}
+.dlzone::after{
+  content:"";position:absolute;inset:-2px;border-radius:inherit;padding:2.2px;
+  background:conic-gradient(from var(--flA),
+    rgba(255,150,192,.9) 0deg,rgba(255,150,192,.9) 26deg,#FF2E85 42deg,#FF7FB8 50deg,#FFFFFF 58deg,#FFB05C 68deg,
+    rgba(255,150,192,.9) 86deg,rgba(255,150,192,.9) 206deg,#FF2E85 222deg,#FF7FB8 230deg,#FFFFFF 238deg,#FFB05C 248deg,
+    rgba(255,150,192,.9) 266deg,rgba(255,150,192,.9) 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+          mask-composite:exclude;
+  --flA:0deg;animation:flowBorder 5s linear infinite;pointer-events:none;
+}
+.dlzone:hover::after{animation-duration:2s}
+@media (max-width:520px){
+  .dlzone{padding:13px 13px 15px}
+  .dz-list{grid-template-columns:1fr 1fr;gap:10px}
+  .dz-icon{width:60px;height:60px;border-radius:14px}
+}
 @media (prefers-reduced-motion:reduce){
   .game-card,.article-card,.follow-card,.hero-img-wrap,.game-cover,
   .btn-ghost::after,.btn-primary::after,.article-share::after,.faq-cta::after,.svc-ticket::after,.game-sub::after,.game-cd::after,.game-tips::after,.filter-chip::after,.article-game::after,.rel-link::after,
   .search-box::after,.faq-item::after,.luck-card::after,
   .nav-cta::after,.article-toggle::after,.load-more::after,.sr-nav::after,.foot-chip::after,.no-result::after,.sc-cancel::after,.svc-btn::before,.foot-share::after,.share-card::after,
-  .sr-brand::before,.sound-toggle::before,.luck-btn::before{animation:none}
+  .sr-brand::before,.sound-toggle::before,.luck-btn::before,.dlzone::after{animation:none}
 }
 
 </style>
@@ -2703,6 +2755,20 @@ html.poster-open,html.poster-open body{overflow:hidden}
     <button class="btn-ghost" onclick="document.getElementById('articles').scrollIntoView()">搜攻略</button>
     <a class="btn-ghost luna-jump" href="g/luna2/">🌙 露娜2 12.10 公测</a>
   </div>
+  <!-- ===== 游戏官方下载专区 ===== -->
+  <section class="dlzone" aria-labelledby="dzTitle">
+    <div class="dz-head">
+      <div class="dz-title" id="dzTitle"><i>⬇</i>游戏官方下载专区</div>
+      <div class="dz-tip">官方渠道 · <b>点图标直接下载安装包</b></div>
+    </div>
+    <div class="dz-list">
+      <a class="dz-item" href="https://231515.youxin75.com/qudao.php?s=/Download/f/WzUxOTEsNTE5MCwyMzE1MTVd" target="_blank" rel="noopener" aria-label="点击立即下载 小小屠龙-冰雪复古">
+        <span class="dz-icon"><img src="assets/dl-tulong.webp" alt="小小屠龙-冰雪复古" width="72" height="72" loading="lazy" decoding="async"></span>
+        <span class="dz-name">小小屠龙-冰雪复古</span>
+        <span class="dz-cta">点击立即下载</span>
+      </a>
+    </div>
+  </section>
   <div class="follow-card">
     <div class="follow-txt">
       <div class="follow-t1"><span class="flame" aria-hidden="true"><svg viewBox="0 0 24 30"><defs><linearGradient id="fgOut" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe66b"/><stop offset=".38" stop-color="#ffa72e"/><stop offset=".72" stop-color="#ff6a00"/><stop offset="1" stop-color="#f03200"/></linearGradient><linearGradient id="fgIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#ffe066"/><stop offset="1" stop-color="#ffab00"/></linearGradient><radialGradient id="fgHalo"><stop offset="0" stop-color="#ffb03a" stop-opacity=".8"/><stop offset="1" stop-color="#ff7a00" stop-opacity="0"/></radialGradient></defs><ellipse class="f-halo" cx="12" cy="25.6" rx="7.6" ry="3.4" fill="url(#fgHalo)"/><g class="f-sway"><path class="f-outer" fill="url(#fgOut)" d="M13 1c.6 4.4 3.4 6.2 4.9 9.6 1.5 3.4 1.7 7-.3 10.6-1.5 2.8-3.7 5-5.6 5.4-1.9-.4-4.1-2.6-5.6-5.4-2-3.6-1.8-7.2-.3-10.6.8-1.8 1.5-2.6 2.3-3.7.6 1.5 1.5 2.4 2.5 3-.3-2.9.3-6.3 2.1-8.9z"/><path class="f-core" fill="url(#fgIn)" d="M12 14.9c.5 2.4 2.3 3.4 2.6 5.8.3 2.4-1.1 4.7-2.6 4.7s-2.9-2.3-2.6-4.7c.3-2.4 2.1-3.4 2.6-5.8z"/></g><circle class="f-em" cx="12.4" cy="8" r="1.35" fill="#ffd166"/><circle class="f-em e2" cx="9.2" cy="12" r="1.05" fill="#ffb347" style="--ex:-2.8px"/><circle class="f-em e3" cx="15" cy="11" r=".95" fill="#ffe894" style="--ex:3px"/></svg></span>关注我 <em>解锁超多游戏解说视频</em></div>
