@@ -462,6 +462,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 .gc-violet{--g1:#B388FF;--g2:#7C4DFF;--acc:#6A3CE8;--shadow:rgba(124,77,255,.42)}
 .gc-gold{--bullet:#7A3E00;--g1:#FFC61A;--g2:#F08500;--acc:#B85E00;--shadow:rgba(240,133,0,.45)}
 .gc-green{--g1:#4FE0B0;--g2:#0E9C74;--acc:#0B7A5B;--shadow:rgba(14,156,116,.42)}
+.gc-jade{--g1:#7FE3A8;--g2:#1F9E63;--acc:#157A4A;--shadow:rgba(31,158,99,.42)}
 /* 封面：整幅铺满卡片顶部（不留任何模糊横条），高度按 1.7:1 */
 .game-cover{
   aspect-ratio:1.7/1;border-radius:16px;overflow:hidden;
@@ -536,6 +537,14 @@ button{font-family:inherit;cursor:pointer;border:none}
   50%{transform:scale(1.035)}
 }
 .game-btn:active{transform:scale(.95)}
+/* 双端下载按钮（安卓 + 苹果并排） */
+.game-btns{display:flex;gap:8px}
+.game-btns .game-btn{
+  flex:1 1 0;display:block;width:auto;padding:10px 4px;
+  font-size:13px;letter-spacing:0;text-align:center;text-decoration:none;
+  animation:none;white-space:nowrap;
+}
+.game-btns .game-btn:hover{transform:translateY(-1px)}
 /* 进入分站入口 */
 .game-sub{
   display:flex;align-items:center;justify-content:center;gap:5px;
@@ -2938,6 +2947,33 @@ html.poster-open,html.poster-open body{overflow:hidden}
         </ul>
         <a class="game-btn" href="https://231515.youxin75.com/qudao.php?s=/Download/f/WzUyMjEsNTIyMCwyMzE1MTVd" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none">⬇️ 立即下载游戏</a>
         <a class="game-sub" href="g/cq3d/">📖 进入分站 · 6 篇攻略</a>
+      </div>
+    </div>
+
+    <!-- 武林外传：十年之约 -->
+    <div class="game-card gc-jade">
+      <span class="gc-sticker">🏮</span>
+      <div class="game-cover">
+        <img src="assets/cover-wulin.webp" alt="武林外传：十年之约" loading="lazy" decoding="async">
+      </div>
+      <div class="game-body">
+        <div class="game-name">武林外传：十年之约</div>
+        <div class="game-tags">
+          <span class="game-tag hot">绿色版</span>
+          <span class="game-tag">武侠MMO</span>
+          <span class="game-tag">十年情怀</span>
+        </div>
+        <p class="game-desc">经典同福客栈 IP 正版武侠 MMO，十年之约全员回归，绿色版轻量不肝，三端同服。</p>
+        <ul class="game-tips">
+          <li>主线跟着客栈剧情走，越往后玩法解锁越多</li>
+          <li>绿色版不卖属性，等级与装备全靠日常积累</li>
+          <li>帮派结义是核心，组队刷本收益远高于单干</li>
+          <li>活跃度攒坐骑与外观，元宝先别急着花</li>
+        </ul>
+        <div class="game-btns">
+          <a class="game-btn" href="https://sdkn-ldy.zhangyu39.com/?app_id=7669&amp;promote_id=2038" target="_blank" rel="noopener">🤖 安卓下载</a>
+          <a class="game-btn" href="https://sdkn-ldy.zhangyu39.com/?app_id=7672&amp;promote_id=2038" target="_blank" rel="noopener"> 苹果下载</a>
+        </div>
       </div>
     </div>
 
